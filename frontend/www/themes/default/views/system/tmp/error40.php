@@ -1,0 +1,2 @@
+<?php
+echo 'eror404';?>

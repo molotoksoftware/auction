@@ -1,0 +1,4 @@
+* html #wrapper,
+* html #footer {
+	width: expression((documentElement.clientWidth||document.body.clientWidth)<984?'984px':'');
+}
