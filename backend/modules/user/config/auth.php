@@ -72,18 +72,6 @@ return array(
         'data' => null,
         'bizRule' => null
     ),
-    'finance' => array(
-        'type' => CAuthItem::TYPE_TASK,
-        'description' => 'Управления финансами',
-        'data' => null,
-        'bizRule' => null
-    ),
-    'agents' => array(
-        'type' => CAuthItem::TYPE_TASK,
-        'description' => 'Управление агентами',
-        'data' => null,
-        'bizRule' => null
-    ),
     'deleteSim' => array(
         'type' => CAuthItem::TYPE_TASK,
         'description' => '',

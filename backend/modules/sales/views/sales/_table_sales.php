@@ -58,7 +58,6 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
           'headerHtmlOptions' => ['width'=>'50%'],
         ],
         [
-
           'header' => 'Покупатель',
           'name' => 'buyer',
           'value' => '$data->buyer',
@@ -86,7 +85,5 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
             'sortable' => false,
             'headerHtmlOptions' => ['width'=>'1%'],
         ],
-        
-
     )
 ));

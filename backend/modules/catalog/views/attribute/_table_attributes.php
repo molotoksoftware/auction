@@ -111,7 +111,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
                 'width' => '25px',
                 'style' => 'text-align:center'
             )
-        ),
+        ),/*
         array(
             'header' => '<i class="icon-info-sign"></i>',
             'type' => 'raw',
@@ -123,7 +123,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
                 'width' => '25px',
                 'style' => 'text-align:center'
             )
-        ),
+        ),*/
         array(
             'header' => '<i class="icon-info-sign"></i>',
             'type' => 'raw',

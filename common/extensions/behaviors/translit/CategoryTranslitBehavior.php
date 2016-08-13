@@ -149,7 +149,7 @@ class CategoryTranslitBehavior extends CActiveRecordBehavior
             ->update(
                 'category',
                 array(
-                    'alias' => $alias . '-014' . $owner->category_id
+                    'alias' => $alias . '-' . $owner->category_id
                 ),
                 'category_id=:category_id',
                 array(':category_id' => $owner->category_id)

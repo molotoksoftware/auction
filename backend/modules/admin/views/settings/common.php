@@ -42,7 +42,6 @@ $this->header_info = array(
         <div class="span12">
             <div class="box">
                 <div class="box-header">
-                    
                     <span class="title"><i class="icon-pencil"></i> <?=$title;?></span>
                     <ul class="nav nav-tabs nav-tabs-right">
                         <li>
@@ -55,8 +54,7 @@ $this->header_info = array(
 
                 <div class="box-content">
                     <div class="padded">
-                        
-                        
+
                         <? $this->widget('backend.modules.admin.widgets.menuSettingWidget'); ?>
 
                         <div class="alert">
@@ -101,7 +99,6 @@ $this->header_info = array(
 
 
                     </div>
-
 
                     <div class="form-actions">
                         <div class="pull-right">

@@ -115,7 +115,7 @@ class SettingsController extends BackController
 
     public function actionCommon()
     {
-        
+
         if ($configs = Yii::app()->request->getParam('Setting')) {
 
             foreach ($configs as $name => $value) {

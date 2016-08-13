@@ -193,7 +193,7 @@ SQL;
             if ($refresh === true) {$model->viewed = 0;}
 
             $model->duration = $_POST[$type]['duration'];
-//------------------------------------------------------------------
+
             if ($type == 'Auction') {
                 $model->type = BaseAuction::TYPE_AUCTION;
                 $model->quantity = $_POST[$type]['quantity'];
@@ -376,7 +376,7 @@ SQL;
                     $transaction->rollBack();
                     throw $e;
                 }
-                
+
                 // Обновляем счетчик изображений
                 $img_count = Yii::app()->db->createCommand()->select('COUNT(*)')->from('images')
 				    ->where('item_id=:item_id', array(':item_id' => $model->auction_id))->queryScalar();
@@ -392,10 +392,6 @@ SQL;
                     $this->refresh();
                 }
             }
-//            else {
-//                print_r($model->getErrors());
-//                die();
-//            }
         }
     }
 

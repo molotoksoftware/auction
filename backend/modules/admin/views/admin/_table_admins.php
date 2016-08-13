@@ -44,12 +44,12 @@ Yii::app()->clientScript->registerScript('multidelete', '
         dataType:"json",
         type:"POST",
         success:function(data){
-            if (data.response.status=="success"){        
+            if (data.response.status=="success"){
                 $.fn.yiiGridView.update(\'user-list\');
                     $(".top-right").notify({
                         type:"bangTidy",
                         fadeOut:{enabled: true, delay: 3000 },
-                        transition:"fade",                                                                                 
+                        transition:"fade",
                         message: { text: data.response.data.messages }
                     }).show();
 
@@ -57,7 +57,7 @@ Yii::app()->clientScript->registerScript('multidelete', '
                     $(".top-right").notify({
                         type:"bangTidy",
                         fadeOut:{enabled: true, delay: 3000 },
-                        transition:"fade",                                                                                 
+                        transition:"fade",
                         message: { text: data.response.data.messages }
                     }).show();
                 }

@@ -35,7 +35,7 @@ class HVUser
     {
         if (is_null($user))
             return;
-        
+
         return $user->login;
     }
 

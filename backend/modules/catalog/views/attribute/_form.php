@@ -63,23 +63,24 @@
      (! isset($_POST['create_root'])?CController::createUrl($this->id.'/createnode'):CController::createUrl($this->id.'/createRoot')):
     CController::createUrl($this->id.'/updatenode');
 
-    $form = $this->beginWidget('CActiveForm', array(
-                                                   'id' => $formId,
-                                                   //  'htmlOptions' => array('enctype' => 'multipart/form-data'),
-                                                   'action' => $actionUrl,
-                                                   // 'enableAjaxValidation'=>true,
-                                                   'enableClientValidation' => true,
-                                                   'focus' => array($model, 'name'),
-                                                   'errorMessageCssClass' => 'alert alert-error',
-                                                   'clientOptions' => array(
-                                                       'validateOnSubmit' => true,
-                                                       'validateOnType' => false,
-                                                       'inputContainer' => '.control-group',
-                                                       'errorCssClass' => 'error',
-                                                       'successCssClass' => 'success',
-                                                       'afterValidate' => 'js:function(form,data,hasError){$.js_afterValidate(form,data,hasError);  }',
-                                                   ),
-                                              ));
+    $form = $this->beginWidget('CActiveForm', 
+            array(
+               'id' => $formId,
+               //  'htmlOptions' => array('enctype' => 'multipart/form-data'),
+               'action' => $actionUrl,
+               // 'enableAjaxValidation'=>true,
+               'enableClientValidation' => true,
+               'focus' => array($model, 'name'),
+               'errorMessageCssClass' => 'alert alert-error',
+               'clientOptions' => array(
+                   'validateOnSubmit' => true,
+                   'validateOnType' => false,
+                   'inputContainer' => '.control-group',
+                   'errorCssClass' => 'error',
+                   'successCssClass' => 'success',
+                   'afterValidate' => 'js:function(form,data,hasError){$.js_afterValidate(form,data,hasError);  }',
+               ),
+            ));
     ?>
 
     <?php
@@ -91,10 +92,6 @@
     <p class="note">Fields with <span class="required">*</span> are required.</p>
     <fieldset>
 
-
-        <!--
-        Modify the input fields according to your model.
-        -->
         <div class="control-group">
             <?php echo $form->labelEx($model, 'name', array('class' => 'control-label')); ?>
             <div class="controls">

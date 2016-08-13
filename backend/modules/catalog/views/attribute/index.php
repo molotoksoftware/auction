@@ -62,13 +62,13 @@ $this->breadcrumbs = array(
                         <i class="icon-exchange"></i> Атрибут</a>
                 </li>
 
-                <li>
+             <!--   <li>
                     <a href="<?php echo Yii::app()->createUrl(
                         '/catalog/attribute/create',
                         array('type' => 'dependet')
                     ); ?>">
                         <i class="icon-random"></i> Зависимый атрибут</a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

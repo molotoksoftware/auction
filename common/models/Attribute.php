@@ -200,9 +200,9 @@ class Attribute extends CActiveRecord
                 self::TYPE_TEXT_AREA => 'Текстовая область',
                 self::TYPE_TEXT_RANGE => 'Диапазон',
             ),
-            'Другое' => array(
+         /*   'Другое' => array(
                 self::TYPE_CHILD_ELEMENT => 'Использовать как дочерний атрибут'
-            )
+            )*/
         );
     }
 

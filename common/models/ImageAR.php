@@ -76,7 +76,7 @@ class ImageAR extends CActiveRecord
     }
 
 
-    public function deleteAndUnlink($user_id, $i2_images)
+    public function deleteAndUnlink($user_id)
     {
         $thumb_keys = array_keys(Auction::$versions);
         $res = @unlink(ImageAR::getImageSavePath($user_id, false, $this->image));
@@ -110,7 +110,7 @@ class ImageAR extends CActiveRecord
         return $name;
     }
 
-    public function saveThumbs($user_id, $i2_images = 1)
+    public function saveThumbs($user_id)
     {
         $versions = $this->getVersions();
 

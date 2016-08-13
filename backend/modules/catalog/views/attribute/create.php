@@ -150,7 +150,7 @@ Yii::app()->clientScript
                                     'name',
                                     array(
                                         'class' => 'span8',
-                                        'hint' => 'Назва которая отображается на сайте'
+                                        'hint' => 'Название которое отображается на сайте'
                                     )
                                 );
                                 ?>
@@ -184,9 +184,9 @@ Yii::app()->clientScript
                                     )
                                 );
                                 ?>
-                                <?=$form->checkBoxRow($model, 'show_expanded')?>
+                                <?php // $form->checkBoxRow($model, 'show_expanded')?>
                                 <?php echo $form->toggleButtonRow($model, 'mandatory'); ?>
-                                <?php echo $form->toggleButtonRow($model, 'display_preview_page'); ?>
+                                <?php // echo $form->toggleButtonRow($model, 'display_preview_page'); ?>
                                 <?php echo $form->toggleButtonRow($model, 'display_filter'); ?>
                             </div>
                             <div id="options" class="tab-pane">

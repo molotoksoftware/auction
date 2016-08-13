@@ -45,7 +45,6 @@ class UserIdentity extends CUserIdentity
         } else {
             Yii::app()->user->clearStates();
 
-            //генерируем ключ
             $this->setState('code', md5(uniqid(mt_rand(), true) . time()));
             $this->_id = $record->id_admin;
             $this->errorCode = self::ERROR_NONE;

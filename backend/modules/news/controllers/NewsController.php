@@ -183,21 +183,4 @@ class NewsController extends BackController
             RAjax::success(array('messages' => 'Успешно удалено'));
         }
     }
-
-//    public function actionGetCommentsForNotifier() {
-//        $data = Yii::app()->db->createCommand()
-//                ->select('*')
-//                ->from('comments')
-//                ->where('reply=:reply and id_user>0', array(':reply' => 0))
-//                ->order('date DESC')
-//                ->queryAll();
-//
-////        if (count($data) < 0) {
-////            return false;
-////        }
-////        
-//        $this->renderPartial('notif_comments', array(
-//            'data' => $data
-//        ));
-//    }
 }

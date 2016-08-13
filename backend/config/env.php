@@ -9,7 +9,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 return array(
-    'preload' => array('debug'),
+  //  'preload' => array('debug'),
     'modules' => array(
         'gii' => array(
             'class' => 'system.gii.GiiModule',
@@ -18,9 +18,9 @@ return array(
         ),
     ),
     'components' => array(
-        'debug' => array(
+    /*    'debug' => array(
             'class' => 'common.extensions.yii2-debug.Yii2Debug',
-        ),
+        ), */
     ),
     'params' => array(
         'yii.handleErrors' => true,

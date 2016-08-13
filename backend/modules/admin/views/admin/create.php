@@ -51,7 +51,7 @@ $this->breadcrumbs = array(
                     <span class="title"><i class="icon-plus"></i> Добавить</span>
 
                     <ul class="box-toolbar">
-                        <li>                            
+                        <li>
                             <a rel="tooltip" data-original-title="Вернуться" href="<?= Yii::app()->createUrl('/admin/admin/index'); ?>"><i class="icon-reply"></i></a>
                         </li>
                     </ul>

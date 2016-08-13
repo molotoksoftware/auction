@@ -35,7 +35,7 @@ class EUserIdentity extends CUserIdentity {
     private $_id;
 
     public function authenticate() {
-        
+
         $record = Admins::model()->find('LOWER(login)=?', array($this->username));
 
         if (is_null($record)) {

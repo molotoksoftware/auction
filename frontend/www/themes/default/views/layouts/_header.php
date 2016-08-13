@@ -85,13 +85,13 @@
     <div class="top_menu">
         <div class="row">
             
-            <div class="header_cat but"><a href="/auctions/transport-014197">Авто<br><span class="small_t">и мото</span></a></div>
-            <div class="header_cat but"><a href="/auctions/telefony-svyaz-i-navigaciya-0141285">Телефоны<br><span class="small_t">и смартфоны</span></a></div>
-            <div class="header_cat but"><a href="/auctions/kompyutery-orgtehnika-i-kanctovary-0141175">Ноутбуки<br><span class="small_t">ПК и планшеты</span></a></div>
-            <div class="header_cat but"><a href="/auctions/kollekcionirovanie-014970">Коллекции</a></div>
-            <div class="header_cat but"><a href="/auctions/antikvariat-014971">Искусство<br><span class="small_t">и антиквариат</span></a></div>
-            <div class="header_cat but"><a href="/auctions/detskiy-mir-014648">Детский<br><span class="small_t">мир</span></a></div>
-            <div class="header_cat but"><a href="/auctions/krasota-i-zdorove-014572">Мода<br><span class="small_t">и красота</span></a></div>
+            <div class="header_cat but"><a href="/auctions/transport-197">Авто<br><span class="small_t">и мото</span></a></div>
+            <div class="header_cat but"><a href="/auctions/telefony-svyaz-i-navigaciya-1285">Телефоны<br><span class="small_t">и смартфоны</span></a></div>
+            <div class="header_cat but"><a href="/auctions/kompyutery-orgtehnika-i-kanctovary-1175">Ноутбуки<br><span class="small_t">ПК и планшеты</span></a></div>
+            <div class="header_cat but"><a href="/auctions/kollekcionirovanie-970">Коллекции</a></div>
+            <div class="header_cat but"><a href="/auctions/antikvariat-971">Искусство<br><span class="small_t">и антиквариат</span></a></div>
+            <div class="header_cat but"><a href="/auctions/detskiy-mir-648">Детский<br><span class="small_t">мир</span></a></div>
+            <div class="header_cat but"><a href="/auctions/krasota-i-zdorove-572">Мода<br><span class="small_t">и красота</span></a></div>
             <div class="header_cat but"><a href="/auction/">Все<br><span class="small_t">категории</span></a></div>
 
         </div>

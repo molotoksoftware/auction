@@ -34,9 +34,6 @@ class WebUser extends CWebUser
     private $_model = null;
     public $cabinetUrl;
 
-
-
-
     public function afterLogout()
     {
     }

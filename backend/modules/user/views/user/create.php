@@ -49,7 +49,7 @@ $this->breadcrumbs = array(
                 <div class="box-header">
                     <span class="title"><i class="icon-plus"></i> Добавить нового пользователя </span>
                     <ul class="box-toolbar">
-                        <li>                            
+                        <li>
                             <a rel="tooltip" data-original-title="Вернуться" href="<?= Yii::app()->createUrl('/user/user/index'); ?>"><i class="icon-reply"></i></a>
                         </li>
                     </ul>
@@ -87,9 +87,9 @@ $this->breadcrumbs = array(
                             'attribute' => 'avatar'
                         ));
                         ?>
-                        
+
                         <?php echo $form->toggleButtonRow($model, 'certified'); ?>
-                        
+
                         <div class="control-group ">
                             <?php echo CHtml::activeLabel($model, 'birthday', array('class' => 'control-label')); ?>
                             <div class="controls">

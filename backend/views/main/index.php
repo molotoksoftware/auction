@@ -42,12 +42,44 @@ $this->header_info = array(
     <div class="action-nav-normal">
 
           <div class="row-fluid">
-          <div class="span2 action-nav-button">
-          <a title="Верификация" href="<?= Yii::app()->createUrl('/certifed/certifed/index'); ?>">
-          <i class="icon-star icon-2x"></i>
-          <span>Верификация</span>
-          </a>
-          </div>
+            <div class="span2 action-nav-button">
+                <a title="Пользователи" href="<?= Yii::app()->createUrl('/user/user/index'); ?>">
+                <i class="icon-user icon-2x"></i>
+                <span>Пользователи</span>
+                </a>
+            </div>
+
+            <div class="span2 action-nav-button">
+                <a title="Лоты" href="<?= Yii::app()->createUrl('/catalog/auction/index'); ?>">
+                <i class="icon-legal icon-2x"></i>
+                <span>Лоты</span>
+                </a>
+            </div>
+
+            <div class="span2 action-nav-button">
+                <a title="Страницы" href="<?= Yii::app()->createUrl('/page/page/index'); ?>">
+                <i class="icon-file-alt icon-2x"></i>
+                <span>Страницы</span>
+                </a>
+            </div>
+            <div class="span2 action-nav-button">
+                <a title="Новости" href="<?= Yii::app()->createUrl('/news/news/index'); ?>">
+                <i class="icon-leaf icon-2x"></i>
+                <span>Новости</span>
+                </a>
+            </div>
+            <div class="span2 action-nav-button">
+                <a title="Платежи" href="<?= Yii::app()->createUrl('/money/history/recharge'); ?>">
+                <i class="icon-money icon-2x"></i>
+                <span>Платежи</span>
+                </a>
+            </div>
+            <div class="span2 action-nav-button">
+                <a title="Настройки" href="<?= Yii::app()->createUrl('/admin/settings/common'); ?>">
+                <i class="icon-cog icon-2x"></i>
+                <span>Настройки</span>
+                </a>
+            </div>
           </div>
 
 

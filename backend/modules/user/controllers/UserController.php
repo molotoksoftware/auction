@@ -88,7 +88,7 @@ class UserController extends BackController
         if (!Yii::app()->request->isAjaxRequest)
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
     }
-    
+
     // Бан пользователя
     public function actionBan($id, $attribute)
     {
@@ -143,15 +143,9 @@ class UserController extends BackController
     public function actionUpdate($id)
     {
         $model = $this->_loadModel($id);
-        //event
-        //$e_user = new EUser();
-        //$model->onUpdatePassword = array($e_user, 'changePasswords');
-
 
         $model->scenario = "update";
         $this->performAjaxValidation($model, 'form-user');
-
-
 
         if (Yii::app()->request->isPostRequest && $_POST['User']) {
             $model->attributes = $_POST['User'];

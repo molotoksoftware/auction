@@ -386,7 +386,6 @@ class AttributeController extends BackController
                         }
                     }
                 } else {
-                    //delete
                     AttributeValues::model()->deleteAll(
                         'attribute_id=:attribute_id',
                         array(':attribute_id' => $model->attribute_id)
