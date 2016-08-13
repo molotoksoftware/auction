@@ -7,7 +7,6 @@ _delete/*
 .DS_Store
 composer.lock
 composer.phar
-common/config/env.php
 /backend/runtime/*
 /backend/www/assets/*
 /backend/www/webstat/*
