@@ -69,13 +69,12 @@
 </tr>
 <tr bgcolor="white">
 <td align="center" colspan="2" style="padding-left:30px;padding-right:30px;height:42px;border-top:4px solid #c3c3c3;">
-    <a href="<?=Yii::app()->params["siteUrl"]?>" style="white-space:nowrap;font-family:sans-serif;font-size:12px;color:#1b6178;" target="_blank" rel="noopener"><?=Yii::app()->params["siteUrl"]?></a><span style="white-space:nowrap;font-family:sans-serif;font-size:12px;color:#1b6178;"> - крупнейший интернет-аукцион</a>
+    <a href="<?=Yii::app()->params["siteUrl"]?>" style="white-space:nowrap;font-family:sans-serif;font-size:12px;color:#1b6178;" target="_blank" rel="noopener"><?=Yii::app()->params["siteUrl"]?></a><span style="white-space:nowrap;font-family:sans-serif;font-size:12px;color:#1b6178;"> - торговая площадка</a>
 </td>
 </tr>
 <tr>
 <td align="center" colspan="2" style="padding:0; color:gray;font-size:80%">
     <p>Отписаться от уведомлений можно <a href="<?=Yii::app()->params["siteUrl"]?>/user/settings/notifications">здесь</a>.</p>
-    <p style="font-size:88%;color:gray"><strong>Внимание!</strong> Администрация ресурса никогда не запрашивает пароль для доступа к Вашему аккаунту.</p>
 </td>
 </tr>
 </tbody></table>

@@ -74,7 +74,7 @@ class UploadController extends FrontController
         }
 
         $dir = Yii::app()->basePath . '/www/tmp/' . $_POST['identifier'];
-        
+
         if (!is_dir($dir)) {
             mkdir($dir);
         }
@@ -87,7 +87,7 @@ class UploadController extends FrontController
         if (!$model->validate()) {
             RAjax::error($model->getErrors());
         }
-        
+
         if (isset($type) && $type == 1)
         {
             $name = md5(microtime());
@@ -150,7 +150,7 @@ class UploadController extends FrontController
     public function actionDelete()
     {
         if (isset($_POST['storage']) && isset($_POST['identifier']) && isset($_POST['id'])) {
-            
+
             if ($_POST['storage'] == 'tmp') 
             {
                 if (@unlink(Yii::app()->basePath . '/www/tmp/' . $_POST['identifier'] . '/' . $_POST['id'])) {

@@ -57,12 +57,12 @@ class BuyController extends FrontController
     {
         $transaction = Yii::app()->db->beginTransaction();
         try {
-            
+
             $userModel = Getter::userModel();
             if ($userModel['pro']==1) {
                 $paidServices = PaidServices::model()->findByAttributes(['user_id' => $userModel['user_id'], 'status' => 1]);
                 $paidServices->updateProAccount(Yii::app()->user->getModel(), (int)$id);
-                
+
                 if ($paidServices->update()) {
                     $transaction->commit();
 
@@ -72,7 +72,7 @@ class BuyController extends FrontController
                     );
                     Yii::app()->controller->redirect('/user/pro/index');
                 }
-                
+
             } elseif ($userModel['pro']==0) {
                 $paidServices = new PaidServices();
                 $paidServices->createProAccount(Yii::app()->user->getModel(), (int)$id);
@@ -86,8 +86,6 @@ class BuyController extends FrontController
                     Yii::app()->controller->redirect('/user/pro/index');
                 }
             }
-
-
 
         } catch (Exception $e) {
             $transaction->rollBack();

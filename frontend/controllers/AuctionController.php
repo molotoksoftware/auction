@@ -554,7 +554,6 @@ SQL;
                 'dataProvider'             => $dataProvider,
                 'users'                    => $users,
                 'cities'                   => $cities,
-       //         'auctionAttributes'        => $auctionAttributes,
                 'filter'                   => $filter,
                 'options'                  => $options,
                 'active_search'            => $active_search,
@@ -673,7 +672,7 @@ SQL;
         $this->addMetaTag(['itemprop' => 'image', 'content' => $socialAuctionImageUrl]);
 
         $questionForm = new FormQuestion();
-        
+
         $this->render(
             'view',
             [

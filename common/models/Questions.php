@@ -56,8 +56,7 @@ class Questions extends CActiveRecord
             array('text', 'length', 'max'=>2048),
             );
     }
-    
-    
+
     public function behaviors()
     {
         return array(
@@ -114,7 +113,8 @@ class Questions extends CActiveRecord
      * *************************************************************************
      */
 
-    public function getListUserQiestions() {
+    public function getListUserQiestions() 
+    {
 
         $listQuestions = self::model()->findAll('owner_id = :owner_id AND status = :status', [
             ':owner_id' => Yii::app()->user->id,
@@ -122,7 +122,7 @@ class Questions extends CActiveRecord
 
         return $listQuestions;
     }
-    
+
     public function byUserId($id)
     {
         $this->getDbCriteria()->mergeWith(

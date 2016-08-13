@@ -27,7 +27,7 @@
  */
 
 
-if($this->beginCache("bidscache_".$auction_id,[
+if ($this->beginCache("bidscache_".$auction_id,[
                         'dependency' => [
                             'class' => 'system.caching.dependencies.CDbCacheDependency',
                             'sql' => "SELECT MAX(`created`) FROM bids WHERE lot_id='".$auction_id."'",
@@ -124,8 +124,5 @@ $this->widget(
         )
     )
 ); 
-?>
 
-                <?php 
-                        $this->endCache(); 
-                        endif;  ?>
+$this->endCache(); endif; 

@@ -47,10 +47,6 @@ $gridId = 'sold-items-table';
 
 $this->renderPartial('//user/_popups/_delete_purchase');
 
-// echo "<div style='height:300px;overflow:auto'><pre>";
-// print_r($request);
-// echo "</pre></div>";
-
 $params = [
     ':owner' => Yii::app()->user->id,
 ];
@@ -100,8 +96,6 @@ $pageSize = $limit;
 // Фильтр по периоду.
 GridLotFilter::appendQueryToCommand($sqlHistoryBuyers);
 
-
-// поиск по названию.
 
 if (isset($auction)) {
     $sqlHistoryBuyers->andWhere('a.name LIKE :name');

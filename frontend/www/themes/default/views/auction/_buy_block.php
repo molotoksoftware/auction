@@ -351,13 +351,3 @@ if (!empty($sales)) {
 </div>
 
 
-
-
-
-
-    
-
-
-         <?php // дата размещения лота, если нужно echo date('d.m.Y в H:i', strtotime($base['created'])); ?>
-
-

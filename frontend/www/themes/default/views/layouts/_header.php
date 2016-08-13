@@ -84,7 +84,6 @@
     </div>
     <div class="top_menu">
         <div class="row">
-            
             <div class="header_cat but"><a href="/auctions/transport-197">Авто<br><span class="small_t">и мото</span></a></div>
             <div class="header_cat but"><a href="/auctions/telefony-svyaz-i-navigaciya-1285">Телефоны<br><span class="small_t">и смартфоны</span></a></div>
             <div class="header_cat but"><a href="/auctions/kompyutery-orgtehnika-i-kanctovary-1175">Ноутбуки<br><span class="small_t">ПК и планшеты</span></a></div>
@@ -97,78 +96,3 @@
         </div>
     </div>
 </div>
-
-<?php if (Getter::webUser()->hasFlash('success')): ?>
-    <?php cs()->registerScript(
-        'show-success-flash',
-        "frontend.popupMessage.showSuccess('" . Getter::webUser()->getFlash('success') . "');",
-        CClientScript::POS_LOAD
-    ); ?>
-<?php endif; ?>
-
-<?php if (Getter::webUser()->hasFlash('info')): ?>
-    <?php cs()->registerScript(
-        'show-info-flash',
-        "frontend.popupMessage.showInfo('" . Getter::webUser()->getFlash('info') . "');",
-        CClientScript::POS_LOAD
-    ); ?>
-<?php endif; ?>
-
-<?php if (Getter::webUser()->hasFlash('error')): ?>
-    <?php cs()->registerScript(
-        'show-error-flash',
-        "frontend.popupMessage.showError('" . Getter::webUser()->getFlash('error') . "');",
-        CClientScript::POS_LOAD
-    ); ?>
-<?php endif; ?>
-
-<?php $this->beginWidget('zii.widgets.jui.CJuiDialog', [
-    'id'      => 'success-alert',
-    'options' => [
-        'title'     => '',
-        'autoOpen'  => false,
-        'modal'     => true,
-        'resizable' => false,
-        'draggable' => false,
-        'open'      => "js:function(event, ui) {
-            $('.ui-widget-overlay').bind('click', function(){
-                $(\"#success-alert\").dialog('close');
-            });
-        }",
-    ],
-]); ?>
-<?php $this->endWidget('zii.widgets.jui.CJuiDialog'); ?>
-
-<?php $this->beginWidget('zii.widgets.jui.CJuiDialog', [
-    'id'      => 'error-alert',
-    'options' => [
-        'title'     => '',
-        'autoOpen'  => false,
-        'modal'     => true,
-        'resizable' => false,
-        'draggable' => false,
-        'open'      => "js:function(event, ui) {
-            $('.ui-widget-overlay').bind('click', function(){
-                $(\"#error-alert\").dialog('close');
-            });
-        }",
-    ],
-]); ?>
-<?php $this->endWidget('zii.widgets.jui.CJuiDialog'); ?>
-
-<?php $this->beginWidget('zii.widgets.jui.CJuiDialog', [
-    'id'      => 'info-alert',
-    'options' => [
-        'title'     => '',
-        'autoOpen'  => false,
-        'modal'     => true,
-        'resizable' => false,
-        'draggable' => false,
-        'open'      => "js:function(event, ui) {
-            $('.ui-widget-overlay').bind('click', function(){
-                $(\"#info-alert\").dialog('close');
-            });
-        }",
-    ],
-]); ?>
-<?php $this->endWidget('zii.widgets.jui.CJuiDialog'); ?>

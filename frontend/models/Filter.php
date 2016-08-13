@@ -54,23 +54,4 @@ class Filter extends CFormModel
         $this->filters[$name] = $value;
     }
 
-    /**
-     * Filter input array by key value pairs
-     * @param array $data rawData
-     * @return array filtered data array
-     */
-//    public function filters(array $data)
-//    {
-//        foreach ($data AS $rowIndex => $row) {
-//            foreach ($this->filters AS $key => $value) {
-//                // unset if filter is set, but doesn't match
-//                if (array_key_exists($key, $row) AND !empty($value)) {
-//                    if (stripos($row[$key], $value) === false)
-//                        unset($data[$rowIndex]);
-//                }
-//            }
-//        }
-//        return $data;
-//    }
-
 }

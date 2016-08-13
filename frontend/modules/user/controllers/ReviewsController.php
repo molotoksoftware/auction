@@ -64,10 +64,9 @@ class ReviewsController extends FrontController
     {
         $this->layout = '//layouts/cabinet';
         $this->pageTitle = 'Отзывы';
-        
+
         $user = User::model()->findByPk(Yii::app()->user->id);
-        
-        
+
         if ($route == 'from_me') {
             $sqlCountRiveiws = 'SELECT COUNT(*) FROM reviews WHERE user_from='.$user->user_id;
         } else {
@@ -256,7 +255,7 @@ class ReviewsController extends FrontController
      */
 
     private function querySalesData ($arraySales, $role) {
-        
+
         $query = Yii::app()->db->createCommand()
                     ->select('s.*, a.auction_id, a.name, u.login')
                     ->from('sales s')
@@ -266,7 +265,6 @@ class ReviewsController extends FrontController
 
         if ($role == Reviews::ROLE_BUYER) {
             $query->andWhere('review_about_my_buyer = 0 AND buyer = :user', [':user' => Yii::app()->user->id]);
-            
         } else {
             $query->andWhere('review_my_about_saller = 0 AND seller_id = :user', [':user' => Yii::app()->user->id]);
         }

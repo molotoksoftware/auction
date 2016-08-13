@@ -39,12 +39,11 @@ class BanController extends FrontController
             array('deny'),
         );
     }
-    
+
     // Вывод информации о бане пользователя
     public function actionIndex()
     {
         $this->pageTitle = 'Бан';
-        
         $this->render('index');
     }
 }

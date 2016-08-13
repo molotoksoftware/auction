@@ -47,7 +47,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
       <h4>На Вашем счету: <?= Getter::webUser()->getModel()->getBalance(); ?> руб.</h4>
-      <a href="<?= Yii::app()->createUrl('/user/balance/payment'); ?>">Пополнить</a>
+      <a href="">Пополнить</a>
   </div>
 </div>
 

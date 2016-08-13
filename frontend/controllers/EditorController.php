@@ -305,8 +305,6 @@ SQL;
 				    ->where('item_id=:item_id', array(':item_id' => $model->auction_id))->queryScalar();
                 Yii::app()->db->createCommand()
 				    ->update('auction', array('image_count' => $img_count), 'auction_id=:auction_id', array(':auction_id' => $model->auction_id));
-                //BaseAuction::recache_byId($model->auction_id);
-
 
                // Yii::app()->user->setFlash('success', 'Ваш лот успешно сохранен и будет опубликован');
                 $this->redirect(array('/auction/view', 'id' => $model->auction_id));
@@ -340,9 +338,6 @@ SQL;
 
     public function imageSave($model)
     {
-//        if (!$model->isNewRecord) {
-//            $this->removeImageByItem($model->auction_id);
-//        }
 
         /** ---------- IMAGES ------------------* */
         if (isset($_POST['identifier'])) {
@@ -550,7 +545,6 @@ SQL;
                             )
                         );
 
-                    //bids
                     Yii::app()->db->createCommand()
                         ->delete(
                             'bids',
@@ -559,8 +553,6 @@ SQL;
                                 ':lot_id' => (int)$id
                             )
                         );
-
-                    //BaseAuction::recache_byId((int)$id);
 
                     if ($item['type'] == BaseAuction::TYPE_AUCTION && $item['current_bid'] != 0) {
                         $user = User::model()->findByPk($item['owner']);

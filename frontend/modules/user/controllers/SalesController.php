@@ -232,7 +232,7 @@ class SalesController extends FrontController
                 $_GET['sort'] = $cookies['u_sold_items_sort']->value;
             }
         }
-        
+
         if ($request->getQuery('size')) {
             $this->saveCookieInf('u_sold_items_page_size', $request->getQuery('size'));
         } else {
@@ -242,7 +242,7 @@ class SalesController extends FrontController
         }
 
         $this->pageTitle = 'Проданные лоты';
-        
+
         $auction = $request->getParam('Auction');
         $gridPageSize = GridView::pageSizeDropDown();
 

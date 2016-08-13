@@ -72,8 +72,6 @@ class CreatorController extends FrontController
 
     }
 
-
-
     /**
      * @param FormCreateLot $form
      * @param               $type
@@ -145,7 +143,6 @@ class CreatorController extends FrontController
 
                 $model->text = $text_item;
 
-                
                 $model->id_country = $form->id_country;
                 $model->id_region = $form->id_region;
                 $model->id_city = $form->id_city;
@@ -162,7 +159,6 @@ class CreatorController extends FrontController
 
                 $model->created = date('Y-m-d H:i:s', time());
 
-                
                 $model->type_transaction = $form->type_transaction;
                 $model->starting_price = $form->starting_price;
 
@@ -172,7 +168,6 @@ class CreatorController extends FrontController
                 $interval_spec = Auction::getDateSpecForDuration($model->duration);
                 $date->add(new DateInterval($interval_spec));
                 $model->bidding_date = $date->format('Y-m-d H:i:s');
-                
 
                 $model->price = $form->price;
 
@@ -242,16 +237,12 @@ class CreatorController extends FrontController
                         ->where('item_id=:item_id', array(':item_id' => $model->auction_id))->queryScalar();
                     Yii::app()->db->createCommand()
                         ->update('auction', array('image_count' => $img_count), 'auction_id=:auction_id', array(':auction_id' => $model->auction_id));
-                    //BaseAuction::recache_byId($model->auction_id);
 
 
                     // Yii::app()->user->setFlash('success', 'Ваш лот успешно сохранен и будет опубликован');
                     $this->redirect(array('/auction/view', 'id' => $model->auction_id));
                 }
-                //else {
-                //  print_r($model->getErrors());
-                //die();
-                //}
+
             }
         }
     }
@@ -471,7 +462,6 @@ SQL;
             $new_auction->status = 7;
             $new_auction->bidding_date = $auction->bidding_date;
             $new_auction->type = $auction->type;
-
 
             if ($new_auction->price == $new_auction->starting_price) {
                 $new_auction->price += 1;

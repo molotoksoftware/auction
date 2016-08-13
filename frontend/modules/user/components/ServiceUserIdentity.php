@@ -41,28 +41,24 @@ class ServiceUserIdentity extends UserIdentity
 
     public function authenticate() 
     {
-        if ($this->service->isAuthenticated) 
-        {
+        if ($this->service->isAuthenticated) {
             $user_service = UsersService::model()->find('service=:service AND service_id=:service_id', array(':service' => $this->service->serviceName, ':service_id' => $this->service->id));
-	            	
-            if (isset($user_service->id_users_service))
-            {
+
+            if (isset($user_service->id_users_service)) {
                 $user = User::model()->findByPk($user_service->id);
-                
+
                 $this->_id = $user->user_id;
                 $this->setState('name', $user->login);        
             }
-            
+
             $this->errorCode = self::ERROR_NONE;  
-        }
-        else 
-        {
+        } else {
             $this->errorCode = self::ERROR_NOT_AUTHENTICATED;
         }
-        
+
         return !$this->errorCode;
     }
-    
+
     public function getId()
     {
         return $this->_id;

@@ -83,4 +83,4 @@ $this->widget('ImperaviRedactorWidget', array(
 
                 <input type="submit" name="name" class="btn btn-default margint_top_30" value="Сохранить"/>
 
-        <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>

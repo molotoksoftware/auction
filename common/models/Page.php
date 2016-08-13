@@ -156,7 +156,4 @@ class Page extends CActiveRecord
 
     }
 
-
-
-
 }

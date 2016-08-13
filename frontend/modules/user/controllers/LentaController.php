@@ -79,10 +79,10 @@ class LentaController extends FrontController
 
         // получаем список отслеживаемых продавцов
         $prod_all = TrackOwners::getListUserForOwner();
-        
+
         // считаем количество лотов у отслеживаемых продавцов
         $all_count = TrackOwners::getCountAuctionsFromTrackUsers($params);
-        
+
         $this->render('index', [
             'num_page_size' => $num_page_size,
             'prod_all' => $prod_all,
@@ -92,8 +92,8 @@ class LentaController extends FrontController
             'sql_fav' => TrackOwners::getLotData(),
             ]);
     }
-    
-    // Удалить подписку на продавца
+
+
     public function actionDel($owner)
     {
         TrackOwners::model()->deleteAll('owner=:owner AND id_user=:id_user', array(':owner' => $owner, ':id_user' => Yii::app()->user->id));

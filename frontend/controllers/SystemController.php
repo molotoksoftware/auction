@@ -34,7 +34,7 @@ class SystemController extends FrontController
         if (Yii::app()->hasComponent('cache')) {
             Yii::app()->cache->flush();
         }
-        
+
         $directory = Yii::getPathOfAlias('webroot.assets') . DIRECTORY_SEPARATOR;
         $items = glob($directory . DIRECTORY_SEPARATOR . '{,.}*', GLOB_MARK | GLOB_BRACE);
         foreach ($items as $item) {

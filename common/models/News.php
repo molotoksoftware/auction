@@ -148,23 +148,6 @@ class News extends CActiveRecord
         return isset($data[$this->status]) ? $data[$this->status] : '*';
     }
 
-//    public function relations()
-//    {
-//        return array(
-//            'comments' => array(self::HAS_MANY, 'Comments', 'id_model', 'with' => array('user')),
-//            'counts_comments' => array(self::STAT, 'Comments', 'id_model'),
-//        );
-//    }
-//    public function getTotalCountCommments()
-//    {
-//        if ($this->counts_comments > 0) {
-//            return 'комментарии (' . $this->counts_comments . ')';
-//        } else {
-//            return 'комментарии отсутствуют';
-//        }
-//    }
-
-
     public function last($num = 3)
     {
         $this->getDbCriteria()->mergeWith(
@@ -216,30 +199,6 @@ class News extends CActiveRecord
         $cache->delete(COutputCache::CACHE_KEY_PREFIX . 'widget-last-news');
 
         return parent::afterDelete();
-    }
-
-    public function getCountCommentForAdminTable()
-    {
-        $countsComments = Yii::app()->db->createCommand()
-            ->select('count(*)')
-            ->from('questions q')
-            ->where(
-                'q.item_id=:id and type=:type and parent_id=0',
-                array(
-                    ':id' => $this->news_id,
-                    ':type' => QuestionModel::TYPE_NEWS
-                )
-            )
-            ->queryScalar();
-
-        if ($countsComments > 0) {
-            return "<a href='" . Yii::app()->createUrl(
-                '/news/news/view',
-                array('id' => $this->news_id)
-            ) . "'> " . $countsComments . " <i class='icon-comments'></i></a>";
-        } else {
-            return "0 <i class='icon-comments'></i>";
-        }
     }
 
     public function getUrl()

@@ -240,7 +240,7 @@ class ImageAR extends CActiveRecord
 
     public static function getImageURI($user_id, $thumb = false, $filename = '')
     {
-        
+
         $res = Yii::app()->baseUrl . '/i2/';
         $res = $res . $user_id . '/';
         if ($thumb) $res = $res . 'thumbs/';

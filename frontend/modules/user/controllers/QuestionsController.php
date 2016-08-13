@@ -31,7 +31,7 @@ class QuestionsController extends FrontController
 {
 
     public $layout = '//layouts/cabinet';
-    
+
     const COUNT_PER_QUESTIONS = 10;
 
     public function filters()
@@ -78,10 +78,10 @@ class QuestionsController extends FrontController
 
         $jsonData = array();
         foreach ($dataProvider->getData() as $key => $value) {
-            
+
             $owner_name = $value->owner->nick?$value->owner->nick:$value->owner->login;
             $owner_telephone = !empty($value->owner->telephone)?$value->owner->telephone:'нет';
-            
+
             $jsonData[] = array(
                 'id' => $value->id,
                 'item_id' => $value->item_id,
@@ -165,7 +165,7 @@ class QuestionsController extends FrontController
     public function actionCreate() {
 
         if ($request = Yii::app()->getRequest()->getPost('FormQuestion')) {
-            
+
             if ($request['owner_id'] == Yii::app()->user->id) 
                 RAjax::error();
 

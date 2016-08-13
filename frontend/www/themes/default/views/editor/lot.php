@@ -88,12 +88,7 @@ function changeTransaction(e) {
             //$('#Auction_price').parent().parent().show();
             //$('#Auction_starting_price').parent().parent().show();
             $('#Auction_starting_price').val(parseInt($('#Auction_starting_price').val()));
-            
-            //fix
-//            if($('#Auction_starting_price').val()==1) {
-//                $('#Auction_starting_price').val(0);
-//            }
-//
+
             break;
         case '1'://Фиксированная цена
             $('label[for="Auction_price"]').html('Цена').append(' <span class="required">*</span>').addClass('required');

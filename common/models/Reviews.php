@@ -307,7 +307,7 @@ class Reviews extends CActiveRecord
         }
         return $this;
     }
-    
+
     public function getValue($value)
     {
         $allowedValues = self::getValueList();
@@ -399,7 +399,7 @@ class Reviews extends CActiveRecord
             ->from('auction a')
             ->where('a.auction_id=:auction_id', array(':auction_id' => (int)$item))
             ->queryRow();
-        
+
         $review->sale_id = $sale_id;
         $review->item = $item;
         $review->text = $text;

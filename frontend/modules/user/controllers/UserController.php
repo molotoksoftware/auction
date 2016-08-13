@@ -521,9 +521,6 @@ class UserController extends FrontController
 		$this->render('landing', array('model' => $user));
 	}
 
-	//==========================================================================
-
-
 	public function actionAddFavorite($id, $type)
 	{
 		if (!Favorite::hasFavorite($id, $type, Yii::app()->user->id)) {

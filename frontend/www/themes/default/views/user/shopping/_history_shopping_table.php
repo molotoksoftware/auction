@@ -273,11 +273,7 @@ $this->widget(
                         ),
                         'url' => 'Yii::app()->createUrl("/user/reviews/preCreate", ["role" => Reviews::ROLE_BUYER, "id" => $data["sale_id"]])'
                         
-                    ),
-                  /*  'contact_seller' => array(
-                        'label' => 'Связаться с продавцом',
-                        'url' => 'Yii::app()->createUrl("/dialogs/message", array("recipient" => $data["owner"]))'
-                    ),
+                    ),/*
                     'other_items_seller' => array(
                         'label' => 'Другие лоты продавца',
                         'url' => 'Yii::app()->createUrl("/user/user/page", array("login" => $data["owner_login"]))'

@@ -108,14 +108,15 @@ class TrackOwners extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-        
+
     /**
      * ************************************************************************* 
      * API
      * *************************************************************************
      */
 
-    public static function getListUserForOwner() {
+    public static function getListUserForOwner() 
+    {
 
         return Yii::app()->db->createCommand()
         ->select('a.*, b.*')
@@ -125,7 +126,8 @@ class TrackOwners extends CActiveRecord
         ->queryAll();
     }
 
-    public static function getCountAuctionsFromTrackUsers($params) {
+    public static function getCountAuctionsFromTrackUsers($params) 
+    {
 
         $all_item = Yii::app()->db->createCommand()
             ->select('*')
@@ -137,7 +139,8 @@ class TrackOwners extends CActiveRecord
         return count($all_item);
     }
 
-    public static function getLotData() {
+    public static function getLotData() 
+    {
 
         return Yii::app()->db->createCommand()
             ->select('a.*, b.*, bid.price as current_bid')

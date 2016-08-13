@@ -34,7 +34,6 @@ Yii::import('zii.widgets.grid.CButtonColumn');
 class ButtonColumn extends CButtonColumn {
 
 
-    
     protected function renderButton($id, $button, $row, $data) {
         /*
          * Если у нас есть свойство raw_text, то мы просто выводим это значение в template
@@ -49,14 +48,13 @@ class ButtonColumn extends CButtonColumn {
         $label = isset($button['label']) ? $button['label'] : $id;
         $url = isset($button['url']) ? $this->evaluateExpression($button['url'], array('data' => $data, 'row' => $row)) : '#';
         $options = isset($button['options']) ? $button['options'] : array();
-        
+
         if (isset($button['dataExpression'])) {
             foreach ($button['dataExpression'] as $key => $value) {
              $options[$key] = $this->evaluateExpression($value, array('row' => $row, 'data' => $data));        
             }
         }
-        
-                
+
         if (!isset($options['title']))
             $options['title'] = $label;
         if (isset($button['imageUrl']) && is_string($button['imageUrl']))

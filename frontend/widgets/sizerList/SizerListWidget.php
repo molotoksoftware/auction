@@ -63,7 +63,6 @@ class SizerListWidget extends CWidget
 
 
         echo CHtml::openTag('ul', array('class' => $this->sizerCssClass));
-     //   echo CHtml::tag('li', array(), $this->sizerHeader);
 
         foreach ($this->sizerVariants as $i => $count) {
             $params = array_replace($_GET, array($this->sizerAttribute => $count));

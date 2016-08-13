@@ -321,10 +321,6 @@ class PaidServices extends CActiveRecord
         return $this;
     }
 
-
-
-
-
     public function successRedirect()
     {
         switch ($this->services_type) {
@@ -336,8 +332,6 @@ class PaidServices extends CActiveRecord
                 break;
         }
     }
-
-
 
     public static function hasActivePro($userId = null)
     {

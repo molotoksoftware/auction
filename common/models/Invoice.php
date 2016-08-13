@@ -71,7 +71,7 @@ class Invoice extends CActiveRecord {
     public $user_params = NULL;
     /**
      *
-     * @var string Идентификатор платежной системы в SimplePay 
+     * @var string Идентификатор платежной системы 
      */
     public $payment_system = NULL;
     /**

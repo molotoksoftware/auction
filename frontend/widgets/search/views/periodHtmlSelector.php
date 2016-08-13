@@ -51,8 +51,7 @@ cs()->registerScript(
      <span class="caret"></span>
 </button>
 <ul class="dropdown-menu">
-    
-    
+
     <?php foreach ($periods as $period => $title): ?>
 
     <li class="<?= $period == $currentPeriod ? 'active' : '' ?>">

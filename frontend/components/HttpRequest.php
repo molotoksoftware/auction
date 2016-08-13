@@ -47,4 +47,3 @@ class HttpRequest extends CHttpRequest
         }
     }
 }
-?>

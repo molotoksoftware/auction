@@ -30,23 +30,27 @@
 class RecalcAuctionCountCommand extends CConsoleCommand
 {
 
+     /**
+     * Пересчет количества лотов.
+     * Вызов из консоли:
+     * php yiic.php RecalcAuctionCount
+     *
+     */
+
     public function run($args)
     {
         $sql = 'UPDATE category SET auction_count = 0';
         $command= Yii::app()->db->createCommand($sql);
         $command->query(); // execute a query SQL
         echo "Очистили категории \n";
-         
-        $categories = Category::model()->findAll(['order'=>'level DESC']);
-       
-        
-        foreach($categories as $k => $v) {
 
+        $categories = Category::model()->findAll(['order'=>'level DESC']);
+
+        foreach($categories as $k => $v) {
             Category::recalcAuctionCount($v->category_id);
            // echo "Category \"" . $v->name . "\"[".$v->category_id."] has been recalculated.\n";
-        
         }
-         
+
     }
 
 }

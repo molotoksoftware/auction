@@ -68,7 +68,5 @@ $form = $this->beginWidget(
     <?php echo CHtml::submitButton('Сохранить', ['class' => 'btn btn-default']); ?>
  </div>
 
-
-                
 <?php $this->endWidget(); ?>
 

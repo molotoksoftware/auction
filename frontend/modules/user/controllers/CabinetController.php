@@ -59,7 +59,7 @@ class CabinetController extends FrontController
 
         $this->render('index');
     }
-    
+
     // Вывод статистики просомтров лотов и тендеров
     public function actionViewed($type, $id)
     {
@@ -69,25 +69,25 @@ class CabinetController extends FrontController
         $url = '/auction/'.$model->auction_id;
 
         $this->pageTitle = 'Статистика просмотров: "'.$model->name.'"';
-        
+
         $max_viewed = Yii::app()->db->createCommand()
             ->select('day_viewed')
             ->from('viewed_count')
             ->where('type=:type and auction_id=:auction_id', array(':type' => $type, ':auction_id' => $id))
             ->order('day_viewed DESC')
             ->queryRow();
-        
+
         $sql = Yii::app()->db->createCommand()
             ->select('*')
             ->from('viewed_count')
             ->where('type=:type and auction_id=:auction_id', array(':type' => $type, ':auction_id' => $id));
-            
+
         $count = Yii::app()->db->createCommand()
             ->select('COUNT(*)')
             ->from('viewed_count')
             ->where('type=:type and auction_id=:auction_id', array(':type' => $type, ':auction_id' => $id))
             ->queryScalar();
-        
+
         $dataProvider = new CSqlDataProvider($sql, array(
             'totalItemCount' => $count,
             'keyField' => 'viewed_count_id',
@@ -98,7 +98,7 @@ class CabinetController extends FrontController
                 'pageSize' => 30
             ),
         ));
-        
+
         $this->render('viewed', array(
             'model' => $model, 
             'dataProvider' => $dataProvider, 

@@ -41,7 +41,7 @@ class FrontController extends BaseController
     public $categories;
 
     public $userSelectedCategory = 0;
-    
+
     public $active_search = false;
 
     public function behaviors()
@@ -313,7 +313,7 @@ class FrontController extends BaseController
             }
         }
     }
-    
+
     public function prepareSearchCategoriesTreeData($auctionIds, $selectedCategoryId = null, $d)
     {
         /** @var HttpRequest $request */

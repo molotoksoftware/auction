@@ -32,53 +32,53 @@
 <div class="list-group main_cat">
 
 
-<?php 
-$category_name = '';
-if ($path != 'all') {
+    <?php 
+    $category_name = '';
+    if ($path != 'all') {
 
-    $categories = explode('/', $path);
-    $category_name = array_pop($categories);
-    $current_cat = Category::model()->find('alias=:alias', [':alias' => $category_name]);
-    $categories = $current_cat->children()->findAll();
-    $ancestors = $current_cat->ancestors()->findAll($current_cat->category_id);
-
-    if (count($categories) == 0 && $current_cat->level != 2) {
-        $parent_current_cat = $current_cat->parent;
-        $current_cat = Category::model()->findByPk($parent_current_cat->category_id);
+        $categories = explode('/', $path);
+        $category_name = array_pop($categories);
+        $current_cat = Category::model()->find('alias=:alias', [':alias' => $category_name]);
         $categories = $current_cat->children()->findAll();
+        $ancestors = $current_cat->ancestors()->findAll($current_cat->category_id);
+
+        if (count($categories) == 0 && $current_cat->level != 2) {
+            $parent_current_cat = $current_cat->parent;
+            $current_cat = Category::model()->findByPk($parent_current_cat->category_id);
+            $categories = $current_cat->children()->findAll();
 
 
+        }
+        $parent = $current_cat->parent;
+        $cat_alias = ($parent->alias == 'root')?'auction':'auctions/'.$parent->alias;
+        $cat_name = ($parent->name == 'root')?'Все категории':$parent->name;
+
+
+        echo '<a class="maincat list-group-item" href="/'.$cat_alias.'"><b>'.$cat_name.'</b></a>';
+        echo '<a class="list-group-item" href="/auctions/'.$current_cat->alias.'"><b>'.$current_cat->name.'</b></a>';
+    } else {
+
+        $current_cat = Category::model()->findByPk(Category::DEFAULT_CATEGORY);
+        $categories = $current_cat->children()->findAll();
     }
-    $parent = $current_cat->parent;
-    $cat_alias = ($parent->alias == 'root')?'auction':'auctions/'.$parent->alias;
-    $cat_name = ($parent->name == 'root')?'Все категории':$parent->name;
 
+    if (isset($parent_current_cat->alias)) {
+        $category_alias = $parent_current_cat->alias.'/';
+    }
 
-    echo '<a class="maincat list-group-item" href="/'.$cat_alias.'"><b>'.$cat_name.'</b></a>';
-    echo '<a class="list-group-item" href="/auctions/'.$current_cat->alias.'"><b>'.$current_cat->name.'</b></a>';
-} else {
-
-    $current_cat = Category::model()->findByPk(Category::DEFAULT_CATEGORY);
-    $categories = $current_cat->children()->findAll();
-}
-
-if (isset($parent_current_cat->alias)) {
-    $category_alias = $parent_current_cat->alias.'/';
-}
-
-/* */
+    /* */
 
 
 
-?>
+    ?>
 
-<?php foreach ($categories as $item): ?>
+    <?php foreach ($categories as $item): ?>
 
- <a class="subcat list-group-item<?=$category_name==$item->alias?' bold':''?>" href="/auctions/<?=$item->getPath(); ?>">
+        <a class="subcat list-group-item<?=$category_name==$item->alias?' bold':''?>" href="/auctions/<?=$item->getPath(); ?>">
 
-<?=$item->name?><span class="main_badge"> (<?=$item->auction_count?>)</span></a>
+    <?=$item->name?><span class="main_badge"> (<?=$item->auction_count?>)</span></a>
 
 
 
-<?php endforeach; ?>
+    <?php endforeach; ?>
 </div>

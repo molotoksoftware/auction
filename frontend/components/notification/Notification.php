@@ -41,7 +41,6 @@ class Notification
     const TYPE_REVIEW = 24; // Уведомления об оставленном отзыве на один лот.
     const TYPE_REVIEW_MULTIPLE = 25; // Уведомления об оставленном отзыве на неколько лотов.
 
-    
     protected $userId;
     public $text;
     public $type;
@@ -114,7 +113,7 @@ class Notification
                 $params = array_merge($params, array('userName' => $user->login));
             }
         }
-        
+
         $message = new EmailMessage();
         $message->setView('common');
         $message->setSubject($this->getSubject());
@@ -210,7 +209,7 @@ class Notification
         }
     }
 
-    // Формируем тему сообщения
+
     public function getSubject()
     {
         $lotName = '';

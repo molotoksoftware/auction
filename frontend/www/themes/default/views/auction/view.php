@@ -93,10 +93,6 @@ $cs->registerScript(
       });
 
 
-        
-    
-
-
 ',
     CClientScript::POS_END
 );
@@ -391,8 +387,8 @@ $user = Getter::userModel();
     
     
     
-    <div class="row">
-        <div class="col-12-lg text-right small" style="padding-right:20px;">
-            Просмотры: <? echo $base['viewed']; ?>
-        </div>
+<div class="row">
+    <div class="col-12-lg text-right small" style="padding-right:20px;">
+        Просмотры: <? echo $base['viewed']; ?>
     </div>
+</div>

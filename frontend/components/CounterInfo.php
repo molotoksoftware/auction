@@ -42,7 +42,6 @@ class CounterInfo
     private static $quantity_my_otsl;
     private static $quantity_questions_for_me;
     private static $quantity_reviews;
-    
 
     public static function quantityCompletedItems()
     {
@@ -105,7 +104,7 @@ class CounterInfo
         }
         return self::$quantity_my_otsl;
     }
-    
+
     public static function quantityQuestionsForMe()
     {
         $params = array(
@@ -113,8 +112,6 @@ class CounterInfo
             ':owner_id' => Yii::app()->user->id,
             ':read' => Questions::UNREAD_STATUS,
         );
-
-      //  if (empty(self::$quantity_questions_for_me)) {
 
             $questions = Yii::app()->db->createCommand()
                 ->select('COUNT(*)')
@@ -125,7 +122,7 @@ class CounterInfo
                 ->queryScalar();
 
             self::$quantity_questions_for_me = $questions;
-     //   }
+
         return (self::$quantity_questions_for_me == false) ? 0 : self::$quantity_questions_for_me;
     }
 
@@ -193,7 +190,7 @@ class CounterInfo
                 ->from('auction a')
                 ->join('sales s', 's.item_id=a.auction_id and s.buyer=:buyer')
                 ->where('s.del_status_buyer=0');
-            
+
             if ($withFilters) {
                 $search = GridLotFilter::getSearchQuery();
                 if (strlen($search)) {
@@ -318,7 +315,7 @@ class CounterInfo
             }
         }
     }
-    
+
     public static function quantityReviews ($role)
     {
         $params = array(
@@ -337,7 +334,6 @@ class CounterInfo
         }
 
         self::$quantity_reviews = $query->queryScalar();
-
 
         return (self::$quantity_reviews == false) ? 0 : self::$quantity_reviews;
     }

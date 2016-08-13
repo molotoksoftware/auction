@@ -47,8 +47,6 @@
 </div>
 <?php endif; ?>
 
-
-        
 <?php
 
 $dataProvider = new CSqlDataProvider($sql_fav->text, array(

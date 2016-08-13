@@ -108,13 +108,12 @@ class BidBlitzAction extends CAction
                 //увеличить счетчик события "Проданные лоты" продавцу
                 $ce = new HistorySales();
                 $ce->inc($lot->owner, $lotId);
-                
+
                 // Возьмем комиссию если в настройках установлен флг
                 if (Yii::app()->params['comission'] == 1) {
                     $commissionService = new CommissionService();
                     $commissionService->onLotSale($sellerModel, $lot, $lot->price * $quantity);
                 }
-
 
                 if ($lot->quantity <= 1) {
 

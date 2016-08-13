@@ -63,10 +63,10 @@ class ShoppingController extends FrontController
     public function actionHistoryShopping()
     {
         $this->pageTitle = 'История покупок';
-        
+
         $request = Yii::app()->getRequest();
         $cookies = $request->getCookies();
-        
+
         if ($request->getQuery('size')) {
             $this->saveCookieInf('u_history_shopping_page_size', $request->getQuery('size'));
         } else {

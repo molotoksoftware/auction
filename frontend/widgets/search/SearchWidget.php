@@ -47,9 +47,7 @@ class SearchWidget extends CWidget
 
     public function run()
     {
-//        if (in_array(Yii::app()->controller->id, $this->allowed)) {
             $this->render('search', array('formModel' => $this->formModel));
-//        }
     }
 
 }

@@ -34,12 +34,12 @@ class UPhpAuthManager extends CPhpAuthManager{
             $this->authFile = Yii::app()->getController()->module->getBasePath() .'/config/auth.php';
 
         }
-        
+
         parent::init();
 
         if (!Yii::app()->user->isGuest) {
             $this->assign(Yii::app()->user->role, Yii::app()->user->id);
-     
+
         }
 
     }

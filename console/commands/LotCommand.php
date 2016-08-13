@@ -45,6 +45,9 @@ Yii::import('console.components.cli.LockScriptTrait');
  *
  * Class LotCommand
  */
+
+
+
 class LotCommand extends CConsoleCommand
 {
     use ConsoleCommandTrait;
@@ -329,7 +332,7 @@ class LotCommand extends CConsoleCommand
             $commissionService = new CommissionService();
             $commissionService->onLotSale($sellerModel, $lot, $price);
         }
-        
+
         //проверить были ли ставки на лот
         $sql = <<<EOD
         SELECT *
@@ -375,7 +378,6 @@ EOD;
 
         //BaseAuction::recache_byId((int)$lot->auction_id);
     }
-
 
     /**
      * @param $item
@@ -508,10 +510,6 @@ EOD;
                 ]
             );
 
-        //BaseAuction::recache_byId((int)$item['auction_id']);
-        /* remove tables */
-
-        //bids
         Yii::app()->db->createCommand()
             ->delete(
                 'bids',

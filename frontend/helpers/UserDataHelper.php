@@ -28,7 +28,8 @@
 
 class UserDataHelper {
 
-    public static function issetLot ($user_id) {
+    public static function issetLot ($user_id) 
+    {
 
         $sql = Yii::app()->db
              ->cache(1800)
@@ -41,8 +42,9 @@ class UserDataHelper {
 
         return $sql;
     }
-    
-    public static function countLot ($user_id) {
+
+    public static function countLot ($user_id) 
+    {
 
         $sql = Yii::app()->db
              ->cache(3600)
@@ -55,7 +57,8 @@ class UserDataHelper {
         return $sql;
     }
 
-    public static function getCountReviews ($user_id) {
+    public static function getCountReviews ($user_id) 
+    {
 
         $condition = new CDbCacheDependency('SELECT MAX(`update`) FROM reviews WHERE user_to='.$user_id);
 
@@ -99,8 +102,9 @@ class UserDataHelper {
         ];
 
     }
-    
-    public static function getSummaryCountReviews ($user_id) {
+
+    public static function getSummaryCountReviews ($user_id) 
+    {
         $reviews = self::getCountReviews($user_id);
         return $reviews['positive'] + $reviews['negative'];
     }
@@ -120,7 +124,8 @@ class UserDataHelper {
         return $value;
     }
 
-    public static function getCityCountryUser($city, $country) {
+    public static function getCityCountryUser($city, $country) 
+    {
 
         $sqlCity = Yii::app()->db
                 ->cache(18000)
@@ -146,7 +151,8 @@ class UserDataHelper {
 
     }
 
-   public static function getUserData ($userId) {
+   public static function getUserData ($userId) 
+   {
 
         return Yii::app()->db->createCommand()
                 ->select('login, nick, email, telephone, certified, rating')
@@ -154,17 +160,18 @@ class UserDataHelper {
                 ->where('user_id=:user_id', array(':user_id' => $userId))
                 ->queryRow();
     }
-    
-    public static function getUserAllstatus ($userId) {
+
+    public static function getUserAllstatus ($userId) 
+    {
         return Yii::app()->db->createCommand()
                 ->select('pro, ban')
                 ->from('users')
                 ->where('user_id=:user_id', array(':user_id' => $userId))
                 ->queryRow();
     }
-    
 
-    public static function getStarColor($rating) {
+    public static function getStarColor($rating) 
+    {
         switch ($rating) {
             case $rating<15:
                     $class = 'star_ver green';
@@ -182,7 +189,7 @@ class UserDataHelper {
                     $class = 'star_ver violet';
                     break;
         }
-        
+
         return '<span class="'.$class.'" title="Верифицированный участник"></span>';
     }
 }

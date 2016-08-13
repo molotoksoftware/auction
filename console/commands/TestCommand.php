@@ -30,10 +30,10 @@
 class TestCommand extends CConsoleCommand
 {
     /**
-     * Проверка компонента mail2
+     * Проверка компонента mail
      *
      * Вызов:
-     * php yiic.php test mail2Component
+     * php yiic.php test mailComponent
      */
     public function actionMailComponent()
     {

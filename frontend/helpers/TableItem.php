@@ -168,7 +168,7 @@ class TableItem
         }
         return $html;
     }
-  
+
     public static function getAuctionBidLeaderLink($item)
     {
         $html = '';

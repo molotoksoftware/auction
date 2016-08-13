@@ -238,7 +238,7 @@ class Item
     public static function getPriceBlock($item)
     {
         $result = '';
-        
+
             $s_p = $item['starting_price'];
             if (!is_null($item['current_bid'])) {
                 $s_p = $item['current_bid'];
@@ -266,7 +266,7 @@ class Item
                 $price = FrontBillingHelper::getUserPriceWithCurrency($item['price'], ['rurCurrencySign' => false]);
                 $result .= "\n" . '<span class="' . $class . ' price_2"><span title="Блиц-цена"><nobr>' . $price . "</nobr></span></span>";
             }
-        
+
         return $result;
     }
 
@@ -307,7 +307,9 @@ class Item
             ->queryScalar();
         return ($count == false) ? 0 : $count;
     }
-    public static function searchHelper($keyword) {
+
+    public static function searchHelper($keyword) 
+    {
         $db = Yii::app()->db->createCommand();
         $db->select('auction_id, category_id');
         $db->from('auction');
