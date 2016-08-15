@@ -46,6 +46,13 @@ class ReviewsController extends FrontController
             [
                 'allow',
                 'actions' => [
+                            'view',
+                ],
+                'users'   => ['*'],
+            ],
+            [
+                'allow',
+                'actions' => [
                     'get',
                     'create',
                     'preCreate',
