@@ -30,25 +30,33 @@
  * Основные действия
  * - Автоматический бан пользователя с низким рейтингом
  */
-class BanCommand extends CConsoleCommand
-{
+class BanCommand extends CConsoleCommand {
+
     /**
      * @param array $args
      *
      * Вызов из консоли:
      * php yiic.php ban
      */
-    public function run($args)
-    {
+    public function run($args) {
         echo "Начинаем устанавливать флаг ban=1 юзерам с плохим рейтингом" . "\n";
+
         $r = Yii::app()
-            ->getDb()
-            ->createCommand()
-            ->update(
-                'users',
-                ['ban' => 1],
-                'rating < -1 AND ban = 0'
-            );
+                ->getDb()
+                ->createCommand()
+                ->update(
+                'users', ['ban' => 1], 'rating <= :rating AND ban = 0', [':rating' => (int)Yii::app()->params['banRating']]
+        );
+        echo sprintf("Обработно %s юзеров", $r) . "\n";
+
+        echo "И обратная операция" . "\n";
+
+        $r = Yii::app()
+                ->getDb()
+                ->createCommand()
+                ->update(
+                'users', ['ban' => 0], 'rating > :rating AND ban = 1', [':rating' => (int)Yii::app()->params['banRating']]
+        );
         echo sprintf("Обработно %s юзеров", $r) . "\n";
     }
 }

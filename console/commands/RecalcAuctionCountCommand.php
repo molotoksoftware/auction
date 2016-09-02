@@ -26,32 +26,26 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+class RecalcAuctionCountCommand extends CConsoleCommand {
 
-class RecalcAuctionCountCommand extends CConsoleCommand
-{
-
-     /**
+    /**
      * Пересчет количества лотов.
      * Вызов из консоли:
      * php yiic.php RecalcAuctionCount
      *
      */
-
-    public function run($args)
-    {
+    public function run($args) {
         $sql = 'UPDATE category SET auction_count = 0';
-        $command= Yii::app()->db->createCommand($sql);
+        $command = Yii::app()->db->createCommand($sql);
         $command->query(); // execute a query SQL
         echo "Очистили категории \n";
 
-        $categories = Category::model()->findAll(['order'=>'level DESC']);
+        $categories = Category::model()->findAll(['order' => 'level DESC']);
 
-        foreach($categories as $k => $v) {
+        foreach ($categories as $k => $v) {
             Category::recalcAuctionCount($v->category_id);
-           // echo "Category \"" . $v->name . "\"[".$v->category_id."] has been recalculated.\n";
+            // echo "Category \"" . $v->name . "\"[".$v->category_id."] has been recalculated.\n";
         }
-
     }
 
 }
-

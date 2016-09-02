@@ -35,15 +35,13 @@
             <a href="/"><img style="width:100px" src="/bootstrap/img/logo.png"></a>
         </div>
         <div class="col-xs-3"></div>
-        <div class="col-xs-2 text-right"><a href="/pages/rules">Правила</a></div>
-        <div class="col-xs-2 text-right"><a href="/pages/about">О компании</a></div>
-        <div class="col-xs-2 text-right"><a href="/pages/support">Центр помощи</a></div>
+        <div class="col-xs-2 text-right"><a href="/pages/rules"><?= Yii::t('basic', 'Terms and Conditions');?></a></div>
+        <div class="col-xs-2 text-right"><a href="/pages/about"><?= Yii::t('basic', 'About us');?></a></div>
+        <div class="col-xs-2 text-right"><a href="/pages/support"><?= Yii::t('basic', 'Support');?></a></div>
     </div>
     <div class="row end">
         <div class="col-xs-12 text-center">
-            Торговая площадка демонстрирует возможности програмного обеспечения Molotok, 
-            предназначенного для создания собственного интернет-аукциона. <br>Перейдите на сайт molotoksoftware.com 
-            для того чтобы ознакомиться подробнее с возможностями.
+            <?= Yii::t('basic', 'Molotok Software (a php-script for online auctions) represents a solution for the arrangement of your own trading platform with multiple functions.');?> <br><?= Yii::t('basic', 'Please visit the website molotoksoftware.com');?>
         </div>
     </div>
     <div class="row end">

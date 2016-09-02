@@ -30,7 +30,7 @@
 
 
 
-<h4 class="margint_top_30">Последние новости</h4>
+<h4 class="margint_top_30"><?= Yii::t('basic', 'Last news'); ?></h4>
 
 
 <?php foreach ($news as $key => $item): ?>

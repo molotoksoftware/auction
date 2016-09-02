@@ -57,18 +57,6 @@
 
         <small>Зарегистрирован: <b><?php echo date('d.m.Y', strtotime($user->createtime)); ?></b></small>
 
-        <?php
-        // Последнее посещение
-        $visit = strtotime($user->lastvisit);
-        $min5 = time() - 300;
-        $today = strtotime(date('d-m-Y'));
-        $yesterday = $today - 3600*24;
-        $time_text = date('d.m.Y H:i', $visit);
-
-        if ($visit >= $min5) {$time_text = '<span style="color: green;">на сайте</span>';}
-        if ($visit >= $today && $visit < $min5) {$time_text = 'сегодня в '.date('H:i', $visit);}
-        if ($visit >= $yesterday && $visit < $today && $visit < $min5) {$time_text = 'вчера в '.date('H:i', $visit);}
-        ?>
-        <small>Последнее посещение: <b><?php echo $time_text; ?></b></small>
+        <small>Последнее посещение: <b><?= $user->getTimeLastVisit(); ?></b></small>
      </div>
 </div>

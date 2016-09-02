@@ -17,10 +17,6 @@ return [
     'id'                => 'auction',
     'basePath'          => realPath(__DIR__ . '/..'),
     'defaultController' => 'site',
-    //исходный язык приложения
-    'sourceLanguage'    => 'en',
-    //язык приложения
-    'language'          => 'ru',
     //тема приложения
     'theme'             => 'default',
     //основной Layout

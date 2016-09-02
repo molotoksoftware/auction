@@ -7,7 +7,6 @@
  * @copyright 2016 MolotokSoftware
  * @license GNU General Public License, version 3
  */
-
 /**
  * 
  * This file is part of MolotokSoftware.
@@ -59,8 +58,8 @@
  *
 
  */
-class User extends CActiveRecord
-{
+class User extends CActiveRecord {
+
     public $is_change_balance;
     public $balance_comment;
     public $changeBalance;
@@ -70,29 +69,28 @@ class User extends CActiveRecord
     const STANDARD_ACCOUNT = 0;
 
     private static $unreadNotificationsCount;
-
     public static $thumbs = [
         'avatar_mini' => [
             'centeredpreview' => [
-                'width'  => 38,
+                'width' => 38,
                 'height' => 38,
             ],
         ],
-        'preview'     => [
+        'preview' => [
             'centeredpreview' => [
-                'width'  => 120,
+                'width' => 120,
                 'height' => 120,
             ],
         ],
-        'medium'      => [
+        'medium' => [
             'centeredpreview' => [
-                'width'  => 400,
+                'width' => 400,
                 'height' => 400,
             ],
         ],
-        'avatar'      => [
+        'avatar' => [
             'centeredpreview' => [
-                'width'  => 208,
+                'width' => 208,
                 'height' => 208,
             ],
         ]
@@ -101,16 +99,14 @@ class User extends CActiveRecord
     /**
      * @return string the associated database table name
      */
-    public function tableName()
-    {
+    public function tableName() {
         return 'users';
     }
 
     /**
      * @return array validation rules for model attributes.
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             ['login', 'required'],
             ['status, rating, id_country, id_region, id_city', 'numerical', 'integerOnly' => true],
@@ -135,7 +131,7 @@ class User extends CActiveRecord
                 'balance_comment',
                 'required',
                 'message' => 'При изменении баланса необходимо написать комментарий',
-                'on'      => 'changeBalance'
+                'on' => 'changeBalance'
             ],
             ['changeBalance', 'numerical'],
             ['is_change_balance', 'boolean'],
@@ -149,26 +145,23 @@ class User extends CActiveRecord
         ];
     }
 
-
     /**
      * @return array relational rules.
      */
-    public function relations()
-    {
+    public function relations() {
         return [
-            'count_lots'         => [self::STAT, 'BaseAuction', 'owner'],
-            'userCommon'         => [self::HAS_ONE, 'UserCommon', 'user_id'],
+            'count_lots' => [self::STAT, 'BaseAuction', 'owner'],
+            'userCommon' => [self::HAS_ONE, 'UserCommon', 'user_id'],
         ];
     }
 
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'uploadedFile' => [
-                'class'         => 'backend.extensions.simpleImageUpload.SimpleImageUploadBehavior',
+                'class' => 'backend.extensions.simpleImageUpload.SimpleImageUploadBehavior',
                 'attributeName' => 'avatar',
                 'savePathAlias' => self::SAVE_PATH,
-                'versions'      => self::$thumbs
+                'versions' => self::$thumbs
             ]
         ];
     }
@@ -176,33 +169,31 @@ class User extends CActiveRecord
     /**
      * @return array customized attribute labels (name=>label)
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'login'           => 'Ник',
-            'firstname'       => 'Имя',
-            'lastname'        => 'Фамилия',
-            'birthday'        => 'Дата рождения',
-            'avatar'          => 'Аватар',
-            'about'           => 'Краткая информация о себе',
-            'email'           => 'E-mail',
-            'telephone'       => 'Telephone',
-            'password'        => 'Password',
-            'status'          => 'Статус',
-            'createtime'      => 'Дата регистрации',
-            'rating'          => 'Рейтинг',
-            'changeBalance'   => 'Значения',
+            'login' => 'Ник',
+            'firstname' => 'Имя',
+            'lastname' => 'Фамилия',
+            'birthday' => 'Дата рождения',
+            'avatar' => 'Аватар',
+            'about' => 'Краткая информация о себе',
+            'email' => 'E-mail',
+            'telephone' => 'Telephone',
+            'password' => 'Password',
+            'status' => 'Статус',
+            'createtime' => 'Дата регистрации',
+            'rating' => 'Рейтинг',
+            'changeBalance' => 'Значения',
             'balance_comment' => 'Комментарий',
-            'certified'       => 'Проверенный продавец',
-            'ban'             => 'Бан',
+            'certified' => 'Проверенный продавец',
+            'ban' => 'Бан',
         ];
     }
 
     /**
      * @return CActiveDataProvider the data provider that can return the models
      */
-    public function search()
-    {
+    public function search() {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
@@ -225,31 +216,26 @@ class User extends CActiveRecord
         $criteria->compare('certified', $this->certified, true);
 
         return new CActiveDataProvider($this, [
-            'criteria'   => $criteria,
+            'criteria' => $criteria,
             'pagination' => [
                 'pageSize' => 20,
             ],
         ]);
     }
 
-    public static function model($className = __CLASS__)
-    {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
-    public function validatePassword($password)
-    {
+    public function validatePassword($password) {
         return CPasswordHelper::verifyPassword($password, $this->password);
     }
 
-    public function hashPassword($password)
-    {
+    public function hashPassword($password) {
         return CPasswordHelper::hashPassword($password);
     }
 
-
-    public function beforeValidate()
-    {
+    public function beforeValidate() {
         //при изменении баланса
         if ($this->is_change_balance == 1) {
             $this->setScenario('changeBalance');
@@ -258,8 +244,7 @@ class User extends CActiveRecord
         return parent::beforeValidate();
     }
 
-    public function beforeSave()
-    {
+    public function beforeSave() {
         if (!$this->isNewRecord) {
             if ($this->is_change_balance == 1) {
                 if ($this->changeBalance != 0) {
@@ -284,8 +269,7 @@ class User extends CActiveRecord
     /**
      * @return string
      */
-    public function getFullName()
-    {
+    public function getFullName() {
         $data = [];
         $separator = ' ';
         $data[] = $this->firstname;
@@ -294,8 +278,7 @@ class User extends CActiveRecord
         return implode($separator, $data);
     }
 
-    public function getNameForEmail()
-    {
+    public function getNameForEmail() {
         if (empty($this->firstname) || empty($this->lastname)) {
             return $this->login;
         } else {
@@ -308,40 +291,31 @@ class User extends CActiveRecord
      *
      * @return string
      */
-    public function getLink($htmlOptions = [])
-    {
+    public function getLink($htmlOptions = []) {
         return CHtml::link(
-            $this->nick ? $this->nick : $this->login,
-            Yii::app()->createAbsoluteUrl('/'.$this->login),
-            $htmlOptions
+                        $this->nick ? $this->nick : $this->login, Yii::app()->createAbsoluteUrl('/' . $this->login), $htmlOptions
         );
     }
 
-    public function getNickOrLogin()
-    {
+    public function getNickOrLogin() {
         return $this->nick ? $this->nick : $this->login;
     }
 
-    public function getUrl()
-    {
-        return Yii::app()->createAbsoluteUrl('/'.$this->login);
-
+    public function getUrl() {
+        return Yii::app()->createAbsoluteUrl('/' . $this->login);
     }
 
-
-    public static function getByEmail($email)
-    {
+    public static function getByEmail($email) {
         return User::model()->find('email=:email', [':email' => $email]);
     }
 
-    public function outName()
-    {
+    public function outName() {
         return self::outUName($this->nick, $this->login);
     }
 
-    public static function outUName($nick, $login)
-    {
-        if ($nick) return CHtml::encode($nick);
+    public static function outUName($nick, $login) {
+        if ($nick)
+            return CHtml::encode($nick);
         return CHtml::encode($login);
     }
 
@@ -351,13 +325,11 @@ class User extends CActiveRecord
      * @return User
      * @throws CHttpException
      */
-    public static function getByLogin($login)
-    {
+    public static function getByLogin($login) {
         $user = self::model()->find(
-            'login=:login',
-            [
-                ':login' => $login
-            ]
+                'login=:login', [
+            ':login' => $login
+                ]
         );
 
         if ($user == false) {
@@ -372,73 +344,65 @@ class User extends CActiveRecord
      * @return array
      * возвращает всех неактивных(по истечению определенного времени) пользователей
      */
-    public static function getNoActives($minutes)
-    {
+    public static function getNoActives($minutes) {
         $dateB = new DateTime('now');
-        $interval = new DateInterval('PT' . (int)$minutes . 'M');
+        $interval = new DateInterval('PT' . (int) $minutes . 'M');
         $dateA = $dateB->sub($interval);
 
         return Yii::app()->db->createCommand()
-            ->select('user_id')
-            ->from('users')
-            ->where(
-                'DATE_FORMAT(lastvisit, "%Y-%m-%d %H:%i:%s")<=:check_date and online=1',
-                [':check_date' => $dateA->format('Y-m-d H:i:s')]
-            )
-            ->queryAll();
+                        ->select('user_id')
+                        ->from('users')
+                        ->where(
+                                'DATE_FORMAT(lastvisit, "%Y-%m-%d %H:%i:%s")<=:check_date and online=1', [':check_date' => $dateA->format('Y-m-d H:i:s')]
+                        )
+                        ->queryAll();
     }
 
     /**
      * @return boolean
      */
-    public function isOnline()
-    {
+    public function isOnline() {
         return ($this->online) ? true : false;
     }
 
-    public function getBalance($decimals = 0)
-    {
+    public function getBalance($decimals = 0) {
         $currencyCode = BillingCurrency::CODE_RUR;
         $webUser = Getter::webUser();
         if (method_exists($webUser, 'getCurrencyCode')) {
             $currencyCode = $webUser->getCurrencyCode();
         }
         return CommonBillingHelper::getPriceWithCurrency($this->balance, $currencyCode, [
-            'rurCurrencySign' => '<span class="rubl"></span>',
-            'lrcDecimals'     => $decimals,
+                    'rurCurrencySign' => '<span class="rubl"></span>',
+                    'lrcDecimals' => $decimals,
         ]);
     }
-
 
     /**
      * @param float|int $amount
      * @param string    $description
      * @param string    $type
      */
-    public function moneyAdd($amount, $description, $type)
-    {
-        $this->balance += (float)$amount;
+    public function moneyAdd($amount, $description, $type) {
+        $this->balance += (float) $amount;
         /**
          * @var $balance_history BalanceHistory
          */
         $balance_history = new BalanceHistory();
         $balance_history->user_id = $this->user_id;
         $balance_history->description = $description;
-        $balance_history->type = (int)$type;
-        $balance_history->summa = (float)$amount;
+        $balance_history->type = (int) $type;
+        $balance_history->summa = (float) $amount;
         $balance_history->save(false);
 
-      //  Yii::log('add balance on ' . $amount . ' user id' . $this->user_id);
+        //  Yii::log('add balance on ' . $amount . ' user id' . $this->user_id);
     }
-
 
     /**
      * @param float|int $amount
      * @param string    $message
      * @param int       $type
      */
-    public function moneySub($amount, $message, $type = BalanceHistory::STATUS_SUB)
-    {
+    public function moneySub($amount, $message, $type = BalanceHistory::STATUS_SUB) {
         $this->balance -= $amount;
         /**
          * @var $balance_history BalanceHistory
@@ -459,13 +423,11 @@ class User extends CActiveRecord
     /**
      * @return bool
      */
-    public function getIsPro()
-    {
+    public function getIsPro() {
         return $this->pro == self::PRO_ACCOUNT;
     }
 
-    public function getTelephone()
-    {
+    public function getTelephone() {
         return $this->telephone;
     }
 
@@ -474,8 +436,7 @@ class User extends CActiveRecord
      *
      * @return UserCommon|null
      */
-    public function getCommonData($createIfNotExist = true)
-    {
+    public function getCommonData($createIfNotExist = true) {
         $userCommon = $this->userCommon;
         if (!$userCommon && $createIfNotExist && !$this->getIsNewRecord()) {
             $userCommon = new UserCommon();
@@ -494,8 +455,7 @@ class User extends CActiveRecord
      * @return string
      * @throws CException
      */
-    public function getImagesPath()
-    {
+    public function getImagesPath() {
         $pk = $this->getPrimaryKey();
         if (empty($pk)) {
             throw new CException('Primary key must be filled! Use $this->getPrimaryKey().');
@@ -508,8 +468,7 @@ class User extends CActiveRecord
      * @return string
      * @throws CException
      */
-    public function getImageThumbsPath()
-    {
+    public function getImageThumbsPath() {
         return $this->getImagesPath() . '/thumbs';
     }
 
@@ -522,15 +481,9 @@ class User extends CActiveRecord
      * @return array
      * @throws CDbException
      */
-    public static function getByIds($ids, $columns = '*', $indexBy = null, $asArray = true)
-    {
+    public static function getByIds($ids, $columns = '*', $indexBy = null, $asArray = true) {
         return ActiveRecord::findAllByIds(
-            self::model()->tableName(),
-            'user_id',
-            $ids,
-            $columns,
-            $indexBy,
-            $asArray
+                        self::model()->tableName(), 'user_id', $ids, $columns, $indexBy, $asArray
         );
     }
 
@@ -539,13 +492,12 @@ class User extends CActiveRecord
      *
      * @return string
      */
-    public function getUnreadNotificationsCount($refresh = false)
-    {
+    public function getUnreadNotificationsCount($refresh = false) {
         if (self::$unreadNotificationsCount === null || $refresh) {
             self::$unreadNotificationsCount = SystemNotification::model()
-                ->byUserId($this->getPrimaryKey())
-                ->getByStatus(0)
-                ->count();
+                    ->byUserId($this->getPrimaryKey())
+                    ->getByStatus(0)
+                    ->count();
         }
         return self::$unreadNotificationsCount;
     }
@@ -557,8 +509,7 @@ class User extends CActiveRecord
      *
      * @return mixed|string
      */
-    public static function getCurrencyCodeByUserId($userId)
-    {
+    public static function getCurrencyCodeByUserId($userId) {
         $defaultCurrency = BillingCurrency::CODE_RUR;
 
         $cache = Yii::app()->getCache();
@@ -566,13 +517,13 @@ class User extends CActiveRecord
         $currencyCode = $cache->get($cacheKey);
         if ($currencyCode === false) {
             $currencyCode = Yii::app()
-                ->getDb()
-                ->createCommand()
-                ->select('bc.code')
-                ->from(UserCommon::model()->tableName() . ' uc')
-                ->join(BillingCurrency::model()->tableName() . ' bc', 'bc.id = uc.currency_id')
-                ->where('uc.user_id = :user_id', [':user_id' => $userId])
-                ->queryScalar();
+                    ->getDb()
+                    ->createCommand()
+                    ->select('bc.code')
+                    ->from(UserCommon::model()->tableName() . ' uc')
+                    ->join(BillingCurrency::model()->tableName() . ' bc', 'bc.id = uc.currency_id')
+                    ->where('uc.user_id = :user_id', [':user_id' => $userId])
+                    ->queryScalar();
             $cache->set($cacheKey, $currencyCode, 60);
         }
 
@@ -582,4 +533,25 @@ class User extends CActiveRecord
 
         return $currencyCode;
     }
+
+    public function getTimeLastVisit() {
+        $visit = strtotime($this->lastvisit);
+        $min5 = time() - 300;
+        $today = strtotime(date('d-m-Y'));
+        $yesterday = $today - 3600 * 24;
+        $time_text = date('d.m.Y H:i', $visit);
+
+        if ($visit >= $min5) {
+            $time_text = '<span class="label label-success">на сайте</span>';
+        }
+        if ($visit >= $today && $visit < $min5) {
+            $time_text = 'сегодня в ' . date('H:i', $visit);
+        }
+        if ($visit >= $yesterday && $visit < $today && $visit < $min5) {
+            $time_text = 'вчера в ' . date('H:i', $visit);
+        }
+
+        return $time_text;
+    }
+
 }

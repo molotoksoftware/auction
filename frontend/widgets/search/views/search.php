@@ -41,22 +41,22 @@
     <div class="input-group search_form">
         <div class="input-group-btn search-panel">
             <?php
-            $value = CHtml::encode((isset($_GET['search'])) ? $_GET['search'] : 'Введите фразу для поиска');
+            $value = CHtml::encode((isset($_GET['search'])) ? $_GET['search'] : Yii::t('basic', 'Enter search keywords here'));
             ?>
 
             <input class="form-control input_text" name="search" autocomplete="off" type="text" value="<?= $value; ?>"
-                   onclick="if($(this).val()=='Введите фразу для поиска') $(this).val('');"
-                   onblur="if($(this).val()=='') $(this).val('Введите фразу для поиска');"/>
+                   onclick="if($(this).val()=='<?=Yii::t('basic', 'Enter search keywords here')?>') $(this).val('');"
+                   onblur="if($(this).val()=='') $(this).val(<?=Yii::t('basic', 'Enter search keywords here')?>);"/>
 
                     <?php
                     $main = Category::model()->findByPk(Category::DEFAULT_CATEGORY);
                     $categories = $main->children()->findAll();
 
                     $data_cat_search = CHtml::listData($categories, 'category_id', 'name');
-                    $data_cat_search = CMap::mergeArray(array(''=>'Все категории'),$data_cat_search);
+                    $data_cat_search = CMap::mergeArray(array(''=>Yii::t('basic', 'All categories')),$data_cat_search);
                     $data_cat_search['-'] = '------------------------------';
-                    $data_cat_search['users'] = 'Пользователи';
-                    $data_cat_search['auction'] = 'По номеру лота';
+                    $data_cat_search['users'] = Yii::t('basic', 'By Username');
+                    $data_cat_search['auction'] = Yii::t('basic', 'By Lot number');
 
                     $select_cat = (isset($_GET['cat'])) ? $_GET['cat'] : '';
                     echo CHtml::dropDownList(
@@ -72,7 +72,7 @@
                     ?>
 
             <div class="input-group-btn">
-                <input type="submit" class="btn btn-default" value="Найти"/>
+                <input type="submit" class="btn btn-default" value="<?=Yii::t('basic', 'Search')?>"/>
             </div>
         </div>
     </div>

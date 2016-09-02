@@ -29,63 +29,67 @@
 /**
  * Class ServiceProCommand
  */
-class ServiceProCommand extends CConsoleCommand
-{
+class ServiceProCommand extends CConsoleCommand {
+    
+    
+    
+    public function actionReminderExpiryPro() {
 
+        $date = new DateTime('now');
+        $interval = new DateInterval('P1D');
+        $completed = $date->add($interval);
+        $items = $this->findEnding($completed->format('Y-m-d'));
 
-    public function run($args)
-    {
+        foreach ($items as $item) {
+
+            $params = array(
+                'completionDate' => date('Y-m-d', strtotime($item['completion_date'])),
+            );
+            $ntf = new Notification($item['id_user'], $params, Notification::TYPE_REM_EXPIRY_PRO);
+            $ntf->send();
+        }
+    }
+
+    public function actionComplete() {
         $items = $this->findCompleted(date('Y-m-d H'));
         foreach ($items as $item) {
             Yii::app()->db->createCommand()
-                ->update(
-                    'paid_service_order',
-                    array('status' => PaidServices::STATUS_SERVICE_UNACTIVE),
-                    'services_id=:services_id AND services_type=:services_type',
-                    array(
+                    ->update('paid_service_order', ['status' => PaidServices::STATUS_SERVICE_UNACTIVE], 'services_id=:services_id AND services_type=:services_type', [
                         ':services_id' => $item['id'],
-                        ':services_type' => PaidServices::TYPE_SERVICE_PRO_ACCOUNT,
-                    )
-                );
+                        ':services_type' => PaidServices::TYPE_SERVICE_PRO_ACCOUNT]);
 
             Yii::app()->db->createCommand()
-                ->update(
-                    'service_pro_accounts',
-                    array('status' => PaidServices::STATUS_SERVICE_EXPIRY),
-                    'id=:id',
-                    array(':id' => $item['id'])
-                );
+                    ->update('service_pro_accounts', ['status' => PaidServices::STATUS_SERVICE_EXPIRY], 'id=:id', [':id' => $item['id']]);
 
             Yii::app()->db->createCommand()
-                ->update(
-                    'users',
-                    array('pro' => 0),
-                    'user_id=:user_id',
-                    array(':user_id' => $item['id_user'])
-                );
+                    ->update('users', ['pro' => 0], 'user_id=:user_id', [':user_id' => $item['id_user']]);
 
             Yii::log('истек срок сервиса id=' . $item['id'], CLogger::LEVEL_INFO, 'service');
         }
     }
 
-
-    /**
-     *
-     * @param string $dateTimeCompleted
-     * @return array
-     */
-    public function findCompleted($dateTimeCompleted)
-    {
+    public function findCompleted($dateTimeCompleted) {
         return Yii::app()->db->createCommand()
-            ->select('*')
-            ->from('service_pro_accounts')
-            ->where(
-                '(DATE_FORMAT(completion_date, "%Y-%m-%d %H")<=:completion_date) and status=:status',
-                array(
-                    ':completion_date' => $dateTimeCompleted,
-                    ':status' => PaidServices::STATUS_SERVICE_ACTIVE
-                )
-            )
-            ->queryAll();
+                        ->select('*')
+                        ->from('service_pro_accounts')
+                        ->where(
+                                '(DATE_FORMAT(completion_date, "%Y-%m-%d %H")<=:completion_date) and status=:status', [
+                            ':completion_date' => $dateTimeCompleted,
+                            ':status' => PaidServices::STATUS_SERVICE_ACTIVE
+                                ])
+                        ->queryAll();
     }
+
+    public function findEnding($dateTimeCompleted) {
+        return Yii::app()->db->createCommand()
+                        ->select('*')
+                        ->from('service_pro_accounts')
+                        ->where(
+                                'DATE_FORMAT(completion_date, "%Y-%m-%d")=:date_ending and status=:status', [
+                            ':date_ending' => $dateTimeCompleted,
+                            ':status' => PaidServices::STATUS_SERVICE_ACTIVE
+                                ])
+                        ->queryAll();
+    }
+
 }

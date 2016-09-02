@@ -123,17 +123,6 @@ $userPlace = false;
 if ($model->id_city)
     $userPlace = UserDataHelper::getCityCountryUser($model->id_city, $model->id_country);
 
-// Последнее посещение
-$visit = strtotime($model->lastvisit);
-$min5 = time() - 300;
-$today = strtotime(date('d-m-Y'));
-$yesterday = $today - 3600*24;
-$time_text = date('d.m.Y H:i', $visit);
-
-if ($visit >= $min5) {$time_text = '<span class="label label-success">на сайте</span>';}
-if ($visit >= $today && $visit < $min5) {$time_text = 'сегодня в '.date('H:i', $visit);}
-if ($visit >= $yesterday && $visit < $today && $visit < $min5) {$time_text = 'вчера в '.date('H:i', $visit);}
-
 function getCurrentPrice ($item) {
     if ($item['current_cost']) {
         echo round($item['current_cost'], 0, PHP_ROUND_HALF_UP);
@@ -192,7 +181,7 @@ $webUser = Getter::webUser();
                             </div>
                             <div class="col-xs-8 span_town">
                                 Зарегистрировался на Auction: <?=Yii::app()->dateFormatter->format("d MMMM yyyy", strtotime($model->createtime));?> г.<br />
-                                Последний визит: <b><?=$time_text; ?></b><br>
+                                Последний визит: <b><?=$model->getTimeLastVisit(); ?></b><br>
                                 <i style="color:gray;">
                                 <?php
                                  if ($userPlace) {
