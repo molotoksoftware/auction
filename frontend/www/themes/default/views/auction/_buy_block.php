@@ -189,7 +189,7 @@ if (!empty($sales)) {
                         <input type="text" name="price" id="value_stap" value="<?= str_replace(' ', '', $nextStep); ?>" class="bet_text form-control" <?=($base['owner'] == Yii::app()->user->id OR $base['status'] != BaseAuction::ST_ACTIVE)?'disabled':''?>/>
                     </div>
                     <div class="col-xs-7">
-                        <input type="submit" name="submit" onclick="<? echo $js_1; ?>" class="bet_sub btn btn-primary but_lot" value="Сделать ставку" <?=($base['owner'] == Yii::app()->user->id OR $base['status'] != BaseAuction::ST_ACTIVE)?'disabled':''?>/>
+                        <input type="submit" name="submit" onclick="<? echo Yii::app()->user->isGuest?'':$js_1; ?>" class="bet_sub btn btn-primary but_lot" value="Сделать ставку" <?=($base['owner'] == Yii::app()->user->id OR $base['status'] != BaseAuction::ST_ACTIVE)?'disabled':''?>/>
                     </div>
                     </form>
                 </div>
@@ -212,7 +212,7 @@ if (!empty($sales)) {
                         </span>
                     </div>
                     <div class="col-xs-7">
-                        <input type="submit" name="name" class="btn btn-primary but_lot" onclick="<? echo $js_2; ?>" value="Купить сейчас" <?=($base['owner'] == Yii::app()->user->id OR $base['status'] != BaseAuction::ST_ACTIVE)?'disabled':''?>/>
+                        <input type="submit" name="name" class="btn btn-primary but_lot" onclick="<? echo Yii::app()->user->isGuest?'':$js_2; ?>" value="Купить сейчас" <?=($base['owner'] == Yii::app()->user->id OR $base['status'] != BaseAuction::ST_ACTIVE)?'disabled':''?>/>
                     </div>
                     </form>
                 </div>

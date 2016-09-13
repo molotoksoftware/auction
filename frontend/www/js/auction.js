@@ -54,9 +54,7 @@ var Auction = function(options) {
                         if (data.status == 'error') {
                             if (data.data != null) {
                                 if (data.data.type == 'NOT_AUTHORIZED') {
-                                    // window.location = data.data.returnUrl;
-                                    $('a.login').trigger('click');
-                                    $(window).scrollTop(0);
+                                    window.location = data.data.returnUrl;
                                 }
 
                                 if (data.data.type == 'COMMON_ERROR') {
@@ -126,9 +124,7 @@ var Auction = function(options) {
 
                             if (data.data != null)
                                 if (data.data.type == 'NOT_AUTHORIZED') {
-//                                window.location = data.data.returnUrl;
-                                    $('a.login').trigger('click');
-                                    $(window).scrollTop(0);
+                                    window.location = data.data.returnUrl;
                                 }
                         } else {
                             window.location.reload();
