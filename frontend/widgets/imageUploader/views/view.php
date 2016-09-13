@@ -40,12 +40,12 @@
     <input type="hidden" name="model" value="<?php echo get_class($model); ?>"/>
 
     <div class="col-xs-3 left_col">
-        <p>Фотографии:</p>
+        <p><?= Yii::t('basic', 'Photo Gallery')?>:</p>
         <span>
-            <strong>Требования к файлам:</strong><br>
-            - формат jpg, gif, bmp и png<br>
-            - размер не более 8 Мб<br><br>
-            Макс. количество фотографий - <strong><?=$quantityUploadPhoto ?></strong><br>
+            <strong><?= Yii::t('basic', 'File requirements')?>:</strong><br>
+            - <?= Yii::t('basic', 'Image file formats')?>: jpg, gif, bmp, png<br>
+            - Max 8 Mb<br><br>
+           <?= Yii::t('basic', 'You can upload up to {photos} photos', ['{photos}' => $quantityUploadPhoto])?><br>
         </span>
     </div>
     <div class="col-xs-9 right_col photo_fl_r">
@@ -90,7 +90,7 @@
                 <label>
                     <div class="lot-photo-wrp">
                         <div class="men-ico"></div>
-                        <p>Добавить <br> фото</p>
+                        <p><?= Yii::t('basic', 'Add <br /> Photo')?></p>
                         <div style="display: none;" class="loader-progresbar-wrp">
                             <div class="loader-progresbar" style="width:2%"></div>
                         </div>
@@ -102,7 +102,7 @@
         <div class="sorted-container"></div>
         <div style="clear:both"></div>
         <div>
-             <a href="javascript:void(0);" class="del-all-photos">Удалить все изображения</a>
+             <a href="javascript:void(0);" class="del-all-photos"><?= Yii::t('basic', 'Delete all photos')?></a>
         </div>
     </div>
 </div>

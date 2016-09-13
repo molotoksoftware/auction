@@ -41,14 +41,14 @@
 <div class="city-selector">
     <? if($model->hasErrors('id_city') || $model->hasErrors('id_region') || $model->hasErrors('id_country')) { ?>
         <div>
-            <small><span style="color: red;">Укажите местоположение с точностью до города</span></small>
+            <small><span style="color: red;"><?= Yii::t('basic', 'Select a location')?></span></small>
         </div>
         <div class="clear"></div>
     <? } ?>
 
     <?php if ($scope == CitySelectorWidget::SCOPE_CATEGORY): ?>
         <label for="<?= CHtml::activeId($model, 'id_country') ?>">
-            Местоположение лотов
+            <?= Yii::t('basic', 'Location of items')?>
         </label>
     <?php endif; ?>
 
@@ -57,7 +57,7 @@
             $model,
             'id_country',
             CHtml::listData(Country::getAllCountries(), 'id_country', 'name'),
-            array('empty' => '- выберите страну -', 'class' => 'country-select form-control country_select_style')
+            array('empty' => '- '.Yii::t('basic', 'select a country').' -', 'class' => 'country-select form-control country_select_style')
         ); ?>
     </div>
 
@@ -67,7 +67,7 @@
                 $model,
                 'id_region',
                 CHtml::listData(Region::getRegionsByCountry($model->id_country), 'id_region', 'name'),
-                array('empty' => '- выберите регион -', 'class' => 'region-select form-control country_select_style')
+                array('empty' => '- '.Yii::t('basic', 'select a region').' -', 'class' => 'region-select form-control country_select_style')
             ); ?>
         </div>
 
@@ -77,7 +77,7 @@
                     $model,
                     'id_city',
                     CHtml::listData(City::getCitiesByRegion($model->id_region), 'id_city', 'name'),
-                    array('empty' => '- выберите город -', 'class' => 'city-select form-control country_select_style')
+                    array('empty' => '- '.Yii::t('basic', 'select a city').' -', 'class' => 'city-select form-control country_select_style')
                 ); ?>
             </div>
         <? } ?>

@@ -99,7 +99,7 @@ class Auction extends BaseAuction
         return array_merge(
             parent::attributeLabels(),
             array(
-                'quantity' => 'В наличии'
+                'quantity' => Yii::t('Items quantity')
             )
         );
     }
@@ -112,14 +112,14 @@ class Auction extends BaseAuction
     public static function getDurationList()
     {
         return array(
-            self::ONE_DAY => '1 день',
-            self::TWO_DAY => '2 дня',
-            self::THREE_DAY => '3 дня',
-            self::FIVE_DAY => '5 дней',
-            self::WEEK => 'Неделя',
-            self::TEN_DAY => '10 дней',
-            self::TWO_WEEK => '2 недели',
-            self::THREE_WEEK => '3 недели',
+            self::ONE_DAY => Yii::t('basic', '1 day'),
+            self::TWO_DAY => Yii::t('basic', '2 days'),
+            self::THREE_DAY => Yii::t('basic', '3 days'),
+            self::FIVE_DAY => Yii::t('basic', '5 days'),
+            self::WEEK => Yii::t('basic', '1 week'),
+            self::TEN_DAY => Yii::t('basic', '10 days'),
+            self::TWO_WEEK => Yii::t('basic', '2 weeks'),
+            self::THREE_WEEK => Yii::t('basic', '3 weeks'),
         );
     }
 

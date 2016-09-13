@@ -50,7 +50,7 @@ cs()->registerScript(
 );
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?= Yii::app()->language ?>">
 <head>
     <meta charset="utf-8"/>
 

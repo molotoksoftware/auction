@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @author Ivan Teleshun <teleshun.ivan@gmail.com>
@@ -7,7 +6,6 @@
  * @copyright 2016 MolotokSoftware
  * @license GNU General Public License, version 3
  */
-
 /**
  * 
  * This file is part of MolotokSoftware.
@@ -26,22 +24,17 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
  * @var $model BalanceHistory
  */
-
-
-function getDateFormat($date)
-{
+function getDateFormat($date) {
     $time = strtotime($date);
     $str = '<p>' . date('d.m.Y', $time) . '</p>';
     $str .= '<p>' . date('H:i', $time) . '</p>';
     return $str;
 }
 
-function getSuma(BalanceHistory $data)
-{
+function getSuma(BalanceHistory $data) {
     if ($data->type == BalanceHistory::STATUS_ADD or $data->type == BalanceHistory::STATUS_RETURN) {
         $ico = '+';
         $style = 'green';
@@ -53,71 +46,66 @@ function getSuma(BalanceHistory $data)
     }
 
     $price = FrontBillingHelper::getUserPriceWithCurrency($data->summa, [
-        'rurCurrencySign' => '<span class="rubl">руб.</span>',
-        'lrcDecimals'     => 2,
+                'rurCurrencySign' => '<span class="rubl">руб.</span>',
+                'lrcDecimals' => 2,
     ]);
 
     return '<p><span style="font-weight:bold;color:' . $style . '">' . $ico . '' . $price . '</span></p>';
 }
 
-function getDescription($data)
-{
-    $isCommission = strstr($data->description, "Комиссия");
+function getDescription($data) {
+    $isCommission = strstr($data->description, Yii::t('basic', 'Comission'));
     if ($isCommission) {
         $lot = preg_replace("/[^0-9]/", '', $data->description);
         return CHtml::link($data->description, "/auction/" . $lot);
-    }
-    else
+    } else
         return CHtml::tag('p', array(), $data->description);
 }
-
-
-
 ?>
 <table align="right" style="margin:10px 0;color:#242424">
     <tr>
         <td align="right">
-<?$this->widget('CLinkPager', array(
-    'pages' => $pages,
-    'header' => '',
-    'prevPageLabel' => '&laquo; назад',
-    'nextPageLabel' => 'далее &raquo;',
-    'maxButtonCount' => 5,
-))?>
+            <?php
+            $this->widget('CLinkPager', array(
+                'pages' => $pages,
+                'header' => '',
+                'prevPageLabel' => '&laquo; ' . Yii::t('basic', 'Newer'),
+                'nextPageLabel' => Yii::t('basic', 'Older') . ' &raquo;',
+                'maxButtonCount' => 5,
+            ))
+            ?>
         </td>
     </tr>
 </table>
 
 <table class="table table-hover t_reviews" width="100%">
     <thead>
-    <tr>
-        <th width="25%"><strong>Дата</strong>
-        </th>
-        <th width="25%"><strong>Сумма</strong>
-        </th>
-        <th width="50%"><strong>Основание</strong>
-        </th>
-    </tr>
+        <tr>
+            <th width="25%"><strong><?= Yii::t('basic', 'Date')?></strong>
+            </th>
+            <th width="25%"><strong><?= Yii::t('basic', 'Amount')?></strong>
+            </th>
+            <th width="50%"><strong><?= Yii::t('basic', 'Description')?></strong>
+            </th>
+        </tr>
     </thead>
-<?php foreach ($balance as $item): ?>
+    <?php foreach ($balance as $item): ?>
 
-<tr>
-    <td>
-<?=getDateFormat($item['created_on']);?>
-    </td>
-    <td>
-<?=getSuma($item);?>
-    </td>
-    <td>
-<?=getDescription($item);?>
-    </td>
+        <tr>
+            <td>
+                <?= getDateFormat($item['created_on']); ?>
+            </td>
+            <td>
+                <?= getSuma($item); ?>
+            </td>
+            <td>
+                <?= getDescription($item); ?>
+            </td>
 
-</tr>
+        </tr>
 
-<?php endforeach; 
-
-
-?>
+    <?php endforeach;
+    ?>
 </table>
 
 <table align="right" style="margin:10px 0;color:#242424">
@@ -125,13 +113,15 @@ function getDescription($data)
         <td>
         </td>
         <td align="right">
-<?$this->widget('CLinkPager', array(
-    'pages' => $pages,
-    'header' => '',
-    'prevPageLabel' => '&laquo; назад',
-    'nextPageLabel' => 'далее &raquo;',
-    'maxButtonCount' => 5,
-))?>
+            <?php
+            $this->widget('CLinkPager', array(
+                'pages' => $pages,
+                'header' => '',
+                'prevPageLabel' => '&laquo; ' . Yii::t('basic', 'Newer'),
+                'nextPageLabel' => Yii::t('basic', 'Older') . ' &raquo;',
+                'maxButtonCount' => 5,
+            ))
+            ?>
         </td>
     </tr>
 </table>

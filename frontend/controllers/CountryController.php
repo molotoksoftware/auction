@@ -30,11 +30,11 @@
 class CountryController extends FrontController {
     public function actionRegions_select($id_country) {
         echo CHtml::dropDownList('', '', CHtml::listData(Region::getRegionsByCountry($id_country), 'id_region', 'name'),
-            array('empty' => '- выберите регион -', 'class' => 'region-select form-control country_select_style'));
+            array('empty' => '- '.Yii::t('basic', 'select a region').' -', 'class' => 'region-select form-control country_select_style'));
     }
 
     public function actionCities_select($id_region) {
         echo CHtml::dropDownList('', '', CHtml::listData(City::getCitiesByRegion($id_region), 'id_city', 'name'),
-            array('empty' => '- выберите город -', 'class' => 'city-select form-control country_select_style'));
+            array('empty' => '- '.Yii::t('basic', 'select a city').' -', 'class' => 'city-select form-control country_select_style'));
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @author Ivan Teleshun <teleshun.ivan@gmail.com>
@@ -7,7 +6,6 @@
  * @copyright 2016 MolotokSoftware
  * @license GNU General Public License, version 3
  */
-
 /**
  * 
  * This file is part of MolotokSoftware.
@@ -25,45 +23,44 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** @var $this FrontController */
-
 ?>
 
 
-<h3>Личный счет</h3>
+<h3><?= Yii::t('basic', 'Payments')?></h3>
 
 <?php if (Yii::app()->user->hasFlash('failure_pay')): ?>
     <div class='alert alert-success'>
-        <?=Yii::app()->user->getFlash('failure_pay');?>
+        <?= Yii::app()->user->getFlash('failure_pay'); ?>
     </div>
 <?php elseif (Yii::app()->user->hasFlash('global')): ?>
     <div class='alert alert-danger'>
-        <?=Yii::app()->user->getFlash('global'); ?>
+        <?= Yii::app()->user->getFlash('global'); ?>
     </div>
 <?php endif; ?>
 
 
 <div class="panel panel-default">
-  <div class="panel-body">
-      <h4>На Вашем счету: <?= Getter::webUser()->getModel()->getBalance(); ?> руб.</h4>
-      <a href="">Пополнить</a>
-  </div>
+    <div class="panel-body">
+        <h4><?= Yii::t('basic', 'Credit remaining')?>: <?= Yii::t('basic', '${amount}', ['{amount}' => Getter::webUser()->getModel()->getBalance()]) ?></h4>
+        <a href=""><?= Yii::t('basic', 'Make a payment')?></a>
+    </div>
 </div>
 
 
 <?php if (($textInfo = Setting::getByName('textInformationBalance')) != ''): ?>
-<div class="panel panel-default">
-  <div class="panel-heading">Информация</div>
-  <div class="panel-body">
-    <?php echo $textInfo; ?>
-  </div>
-</div>
-<?php endif;?>
+    <div class="panel panel-default">
+        <div class="panel-heading"><?= Yii::t('basic', 'Information')?></div>
+        <div class="panel-body">
+            <?php echo $textInfo; ?>
+        </div>
+    </div>
+<?php endif; ?>
 
 
 
-<h4 class="margint_top_30">История пополнений</h4>
-        <?php $this->renderPartial('//user/balance/_table_history_recharge_user',
-                ['balance'=>$balance,
-                    'pages'=>$pages]); ?>
+<h4 class="margint_top_30"><?= Yii::t('basic', 'Transaction history')?></h4>
+<?php
+$this->renderPartial('//user/balance/_table_history_recharge_user', ['balance' => $balance,
+    'pages' => $pages]);
+?>

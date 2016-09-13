@@ -53,12 +53,12 @@ class FormCreateLot extends CFormModel
     public function rules()
     {
         return array(
-            array('id_country, id_region, id_city', 'required', 'message' => 'Заполните место с точностью до города', 'on' => 'main'),
+            array('id_country, id_region, id_city', 'required', 'message' => Yii::t('basic', 'Select a location'), 'on' => 'main'),
             array('id_country, id_region, id_city', 'numerical', 'integerOnly' => true),
-            array('name', 'required', 'message' => 'Введите название лота', 'on' => 'main'),
-            array('category_id', 'required', 'message' => 'Не закончен выбор категории', 'on' => 'main'),
-            array('description', 'required', 'message' => 'Введите описание лота', 'on' => 'main'),
-            array('duration', 'required', 'message' => 'Укажите продолжительность торгов', 'on' => 'main'),
+            array('name', 'required', 'message' => Yii::t('basic', 'Enter the name of the item'), 'on' => 'main'),
+            array('category_id', 'required', 'message' => Yii::t('basic', 'Choice of category is not finished'), 'on' => 'main'),
+            array('description', 'required', 'message' => Yii::t('basic', 'Enter the description of the item'), 'on' => 'main'),
+            array('duration', 'required', 'message' => Yii::t('basic', 'Select the duration'), 'on' => 'main'),
 			array('contacts', 'length'),
             array('conditions_transfer, contacts, category_id, location, duration, name', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
             array('description', 'descValidator'),
@@ -67,8 +67,8 @@ class FormCreateLot extends CFormModel
                 'numerical',
                 'min' => 0,
                 'max' => 99999999,
-                'tooBig' => 'Цена слишком большая',
-                'tooSmall' => 'Укажите цену'
+                'tooBig' => Yii::t('basic', 'Price too high'),
+                'tooSmall' => Yii::t('basic', 'Specify price'),
             ),
             array('conditions_transfer, add_contact_info', 'length'),
             array('is_auto_republish', 'boolean'),
@@ -103,7 +103,7 @@ class FormCreateLot extends CFormModel
         if ($this->type_transaction == Auction::TP_TR_SALE) {
             $this->starting_price = 0;
             if (((int)$this->price) <= 0 && $this->scenario != 'nomain') {
-                $this->addError('price', 'Укажите цену');
+                $this->addError('price', Yii::t('basic', 'Specify price'));
             }
         }
 
@@ -113,19 +113,19 @@ class FormCreateLot extends CFormModel
             if (!$this->hasErrors()) {
                 /* Стандартный */
                 if (((int)$this->starting_price) <= 0 && $this->scenario != 'nomain') {
-                    $this->addError('starting_price', 'Укажите начальную цену');
+                    $this->addError('starting_price', Yii::t('basic', 'Specify the starting price'));
                 }
             }
 
             if (!$this->hasErrors()) {
                 if (($this->price > 0) && ($this->starting_price > $this->price)) {
-                    $this->addError('starting_price', 'Начальная цена не может быть больше Блиц-цены');
+                    $this->addError('starting_price', Yii::t('basic', 'Starting price may not be more than buy now price'));
                 }
             }
 
             if (!$this->hasErrors()) {
                 if (($this->price > 0) && ($this->starting_price == $this->price)) {
-                    $this->addError('starting_price', 'Начальная цена не может равняться Блиц-цены');
+                    $this->addError('starting_price', Yii::t('basic', 'Starting price may not be equal to the buy now price'));
                 }
             }
         }
@@ -138,9 +138,9 @@ class FormCreateLot extends CFormModel
     public function attributeLabels()
     {
         return [
-            'price'                 => 'Блиц-цена',
-            'starting_price'        => 'Начальная цена',
-            'quantity'              => 'Количество',
+            'price'                 => Yii::t('basic', 'Buy Now'),
+            'starting_price'        => Yii::t('basic', 'Specify price'),
+            'quantity'              => Yii::t('basic', 'Йгфтешен'),
         ];
     }
 }

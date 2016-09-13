@@ -27,21 +27,17 @@
  */
 
 
-class BalanceController extends FrontController
-{
+class BalanceController extends FrontController {
 
     public $layout = '//layouts/settings';
 
-
-    public function filters()
-    {
+    public function filters() {
         return array(
             'accessControl'
         );
     }
 
-    public function accessRules()
-    {
+    public function accessRules() {
         return array(
             array(
                 'allow',
@@ -52,27 +48,26 @@ class BalanceController extends FrontController
         );
     }
 
-    public function actionIndex($payment = false)
-    {
-        $this->pageTitle = 'Баланс';
+    public function actionIndex($payment = false) {
+        $this->pageTitle = Yii::t('basic', 'Payments');
         $this->layout = '//layouts/settings';
-        
+
         if ($payment == 'fail') {
-            Yii::app()->user->setFlash('failure_pay', 'Платеж отклонен');
+            Yii::app()->user->setFlash('failure_pay', Yii::t('basic', 'Payment received!'));
             Yii::app()->controller->redirect('/user/balance/index');
         }
         if ($payment == 'success') {
-            Yii::app()->user->setFlash('global', 'Ваш счет пополнен');
+            Yii::app()->user->setFlash('global', Yii::t('basic', 'Payment is not received!'));
             Yii::app()->controller->redirect('/user/balance/index');
         }
 
-        $count = BalanceHistory::model()->findAllByAttributes(['user_id'=>Yii::app()->user->id]);
+        $count = BalanceHistory::model()->findAllByAttributes(['user_id' => Yii::app()->user->id]);
 
         $criteria = new CDbCriteria();
         $criteria->condition = 'user_id=:user_id';
         $criteria->params = [':user_id' => Yii::app()->user->id];
         $criteria->order = '`created_on` DESC';
-        $pages= new CPagination(count($count));
+        $pages = new CPagination(count($count));
         $pages->pageSize = 25;
         $pages->applyLimit($criteria);
 
@@ -80,16 +75,14 @@ class BalanceController extends FrontController
 
         $payment = new FormPayment();
 
-        $this->render('//user/balance/index', ['balance'=>$balance_history, 'pages' => $pages, 'payment'=>$payment]);
-
+        $this->render('//user/balance/index', ['balance' => $balance_history, 'pages' => $pages, 'payment' => $payment]);
     }
 
-    public function actionRecharge()
-    {
+    public function actionRecharge() {
         $this->render('//user/balance/recharge');
     }
-    public function actionPayment()
-    {
+
+    public function actionPayment() {
         $this->pageTitle = 'Баланс';
         $this->layout = '//layouts/settings';
 

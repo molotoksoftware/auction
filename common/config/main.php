@@ -3,7 +3,6 @@
 return [
     'preload'        => ['settings'],
     'sourceLanguage' => 'en',
-    'language'       => 'ru',
     'aliases'        => [
         'frontend' => dirname(__FILE__) . '/../..' . '/frontend',
         'common'   => dirname(__FILE__) . '/../..' . '/common',

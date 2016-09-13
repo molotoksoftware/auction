@@ -35,7 +35,7 @@ class SettingsController extends FrontController
         return [
             'accessControl',
             'postOnly + registration',
-            'ajaxOnly + hideNotification',
+            'ajaxOnly + registration',
         ];
     }
 
@@ -45,8 +45,7 @@ class SettingsController extends FrontController
             ['allow',
                 'actions' => [
                     'common', 'uploadAvatar', 'update_info', 'certified',
-                    'aboutMe', 'notifications', 'access', 'bulkUpdates', 'protectionDeals',
-                    'proComission', 'hideNotification',
+                    'aboutMe', 'notifications', 'access', 'bulkUpdates',
                 ],
                 'users'   => ['@'],
             ],
@@ -57,7 +56,7 @@ class SettingsController extends FrontController
 
     public function actionCommon()
     {
-        $this->pageTitle = 'Настройки';
+        $this->pageTitle = Yii::t('basic', 'Settings');
 
         $this->layout = '//layouts/settings';
         /** @var User $user */
@@ -81,11 +80,11 @@ class SettingsController extends FrontController
                     if ($user->nick && $oldNick != $user->nick) {
                         $this->onAfterNickUpdate($user);
                     }
-                    Yii::app()->user->setFlash('success-edit-profile', 'Данные успешно обновлены');
+                    Yii::app()->user->setFlash('success-edit-profile', Yii::t('basic', 'Successfully updated'));
                     $this->refresh();
                 } else {
                     if ($user->getError('email')) {
-                        $form->addError('email', 'Email занят другим пользователем');
+                        $form->addError('email', Yii::t('basic', 'E-mail is not available'));
                     }
                 }
             }
@@ -107,7 +106,7 @@ class SettingsController extends FrontController
     {
         /** @var CHttpRequest $request */
         $request = Yii::app()->getRequest();
-        $this->pageTitle = 'Краткая информация';
+        $this->pageTitle = Yii::t('basic', 'About me');
         $this->layout = '//layouts/settings';
 
         /** @var User $user */
@@ -117,7 +116,7 @@ class SettingsController extends FrontController
             $userData = $request->getPost('User');
             $user->setAttribute('about', $userData['about']);
             if ($user->save(true, ['about'])) {
-                Yii::app()->user->setFlash('success-edit-profile', 'Данные успешно обновлены');
+                Yii::app()->user->setFlash('success-edit-profile', Yii::t('basic', 'Successfully updated'));
                 $this->refresh();
             }
         }
@@ -131,7 +130,7 @@ class SettingsController extends FrontController
     {
         /** @var CHttpRequest $request */
         $request = Yii::app()->getRequest();
-        $this->pageTitle = 'Уведомления';
+        $this->pageTitle = Yii::t('basic', 'Notifications e-mail');
         $this->layout = '//layouts/settings';
 
         /** @var User $user */
@@ -141,7 +140,7 @@ class SettingsController extends FrontController
             $userData = $request->getPost('User');
             $user->setAttribute('consent_recive_notification', $userData['consent_recive_notification']);
             if ($user->save(true, ['consent_recive_notification'])) {
-                Yii::app()->user->setFlash('success-edit-profile', 'Данные успешно обновлены');
+                Yii::app()->user->setFlash('success-edit-profile', Yii::t('basic', 'Successfully updated'));
                 $this->refresh();
             }
         }
@@ -155,7 +154,7 @@ class SettingsController extends FrontController
     {
         /** @var CHttpRequest $request */
         $request = Yii::app()->getRequest();
-        $this->pageTitle = 'Доступ';
+        $this->pageTitle = Yii::t('basic', 'Access control');
         $this->layout = '//layouts/settings';
 
         /** @var User $user */
@@ -174,7 +173,7 @@ class SettingsController extends FrontController
                     $user->password = $user->hashPassword($form->passwordNew);
                     if ($user->update(['password'])) {
                         $this->onAfterPasswordUpdate($user, $form->passwordNew);
-                        Yii::app()->user->setFlash('success-edit-profile', 'Данные успешно обновлены');
+                        Yii::app()->user->setFlash('success-edit-profile', Yii::t('basic', 'Successfully updated'));
                     }
                     $this->refresh();
                 }
@@ -195,15 +194,12 @@ class SettingsController extends FrontController
         $this->raiseEvent('onAfterPasswordUpdate', $event);
     }
 
-    /**
-     * Раздел в настройках юзера - "Массовые изменения".
-     */
     public function actionBulkUpdates()
     {
         /** @var CHttpRequest $request */
         $request = Yii::app()->getRequest();
         $user = Getter::userModel();
-        $this->pageTitle = 'Массовые изменения';
+        $this->pageTitle = Yii::t('basic', 'Bulk updates');
         $this->layout = '//layouts/settings';
 
         $minPricePercents = -99;
@@ -213,7 +209,6 @@ class SettingsController extends FrontController
         if ($request->getIsPostRequest()) {
             $done = false;
 
-            // Перевыставление лотов.
             $republish = $request->getPost('switch_auto_republish');
             if ($republish && in_array($republish, ['y', 'n'])) {
                 Yii::app()
@@ -228,7 +223,6 @@ class SettingsController extends FrontController
                 $done = true;
             }
 
-            // Изменение цен.
             if ($request->getPost('price_update')) {
                 $percent = (int)$request->getPost('price_update');
                 if ($percent >= $minPricePercents && $percent <= $maxPricePercents) {
@@ -270,7 +264,7 @@ class SettingsController extends FrontController
             }
 
             if ($done) {
-                Getter::webUser()->setFlash('success_bulk_update', 'Данные успешно обновлены!');
+                Getter::webUser()->setFlash('success_bulk_update', Yii::t('basic', 'Successfully updated'));
             }
             $this->refresh();
         }
@@ -299,7 +293,7 @@ class SettingsController extends FrontController
         if ($file->saveAs($uploadPath . '/' . $file_name)) {
             if (!is_dir($uploadPath . '/thumbs')) {
                 if ((@mkdir($uploadPath . '/thumbs')) == false)
-                    throw new CException('отсутствует каталог Thumbs');
+                    throw new CException('Thumbs not found');
             }
 
             $org_image = Yii::app()->image->load($uploadPath . '/' . $file_name);
@@ -323,7 +317,6 @@ class SettingsController extends FrontController
         }
     }
 
-    // Изменение информации о условиях передачи для всех лотов пользователя
     public function actionUpdate_info()
     {
         if (Yii::app()->request->isAjaxRequest && !Yii::app()->user->isGuest) {
@@ -332,14 +325,12 @@ class SettingsController extends FrontController
     }
 
     /**
-     * Отправка данных для Верификации пользователя
-     *
      * @throws CDbException
      */
     public function actionCertified()
     {
         $request = Yii::app()->getRequest();
-        $this->pageTitle = 'Верификация аккаунта';
+        $this->pageTitle = Yii::t('basic', 'Verification');
         $this->layout = '//layouts/settings';
         $user = Getter::userModel();
 

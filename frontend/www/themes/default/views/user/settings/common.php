@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @author Ivan Teleshun <teleshun.ivan@gmail.com>
@@ -7,7 +6,6 @@
  * @copyright 2016 MolotokSoftware
  * @license GNU General Public License, version 3
  */
-
 /**
  * 
  * This file is part of MolotokSoftware.
@@ -26,40 +24,47 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/user/settings/common.js');
 Yii::app()->clientScript->registerScript(
-    'user-edit-scripts',
-    '
+        'user-edit-scripts', '
 
-   
-    // Изменение информации о условиях передачи для всех лотов пользователя
+    $(".update-my-lots-address").click(function() {
+        if(confirm("'.Yii::t('basic', 'Update for all items?').'")) {
+            if ($(".city-selector .city-select").val()) {
+                $.ajax({
+                    url: "/editor/setAuctionCity/id_city/" + $(".city-selector .city-select").val(),
+                    complete: function () {
+                        alert("'.Yii::t('basic', 'Succeessfully updated').'")
+                    }
+                });
+            } else {
+                alert("'.Yii::t('basic', 'Select a city').'");
+            }
+        }
+    })
+
     $("#usl_peredachi_r").click(function()
     {
-        if (confirm("Информация о условиях передачи будет установлена для всех Ваших лотов. Вы действительно хотите это сделать?")) 
+        if (confirm("'.Yii::t('basic', 'Update for all items?').'")) 
         {
             var inform = $("#EditUserForm_terms_delivery").val();
-            
+
             $.ajax({
     			type: "GET",
                 data: {info: inform},
     			url: "/user/settings/update_info",
     			"success":function() 
                 {
-                    alert("Информация о условиях передачи успешна обновлена для всех ваших лотов.");
+                    alert("'.Yii::t('basic', 'Succeessfully updated').'");
     			}
     		});
         }
     });
-    
- 
-   
-   ',
-    CClientScript::POS_END
+   ', CClientScript::POS_END
 );
 ?>
 
 
-<h3>Общие настройки</h3>
+<h3><?= Yii::t('basic', 'My Account') ?></h3>
 
 
 <?php if (Yii::app()->user->hasFlash('success-edit-profile')): ?>
@@ -70,106 +75,104 @@ Yii::app()->clientScript->registerScript(
 
 <?php
 $this->widget(
-    'ext.imageSelect.ImageSelect',
-    array(
-        'path' => $user->uploadedFile->getImage('avatar'),
-        'alt' => $user->login,
-        'raiting' => $user->rating,
-        'uploadUrl' => '/user/settings/uploadAvatar/',
-        'htmlOptions' => array('class' => 'img-thumbnail', 'style' => 'width:150px;')
-    )
+        'ext.imageSelect.ImageSelect', array(
+    'path' => $user->uploadedFile->getImage('avatar'),
+    'alt' => $user->login,
+    'raiting' => $user->rating,
+    'uploadUrl' => '/user/settings/uploadAvatar/',
+    'htmlOptions' => array('class' => 'img-thumbnail', 'style' => 'width:150px;')
+        )
 );
 ?>
 
 <?php
 $form = $this->beginWidget(
-    'CActiveForm',
-    array(
-        'id' => 'form-edit-user',
-        //'action' => $this->createUrl('/creator/lot'),
-        'enableAjaxValidation' => true,
-        'enableClientValidation' => false,
-        'errorMessageCssClass' => 'error',
-        'clientOptions' => array(
-            'errorCssClass' => 'error-row',
-            'successCssClass' => 'success-row',
-            'validateOnSubmit' => true,
-            'validateOnChange' => false,
-            'validateOnType' => false,
-        ),
-        'focus' => array($model, 'firstname'),
-        'htmlOptions' => array(
-            'autocomplete' => 'off',
-            'class' => 'form-horizontal',
-        ),
-    )
+        'CActiveForm', array(
+    'id' => 'form-edit-user',
+    //'action' => $this->createUrl('/creator/lot'),
+    'enableAjaxValidation' => true,
+    'enableClientValidation' => false,
+    'errorMessageCssClass' => 'error',
+    'clientOptions' => array(
+        'errorCssClass' => 'error-row',
+        'successCssClass' => 'success-row',
+        'validateOnSubmit' => true,
+        'validateOnChange' => false,
+        'validateOnType' => false,
+    ),
+    'focus' => array($model, 'firstname'),
+    'htmlOptions' => array(
+        'autocomplete' => 'off',
+        'class' => 'form-horizontal',
+    ),
+        )
 );
 ?>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Контактная информация</div>
-  <div class="panel-body">
+    <div class="panel-heading"><?= Yii::t('basic', 'User\'s data') ?></div>
+    <div class="panel-body">
         <div class="form-group">
-            <label for="inputLogin" class="col-sm-2 control-label">Логин:</label>
+            <label for="inputLogin" class="col-sm-2 control-label"><?= Yii::t('basic', 'Username') ?>:</label>
             <div class="col-sm-10 control-label">
-              <?= $user->login; ?>
+                <?= $user->login; ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputRating" class="col-sm-2 control-label">Рейтинг:</label>
+            <label for="inputRating" class="col-sm-2 control-label"><?= Yii::t('basic', 'Rating') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?= $user->rating; ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputCreatetime" class="col-sm-2 control-label">Регистрация:</label>
+            <label for="inputCreatetime" class="col-sm-2 control-label"><?= Yii::t('basic', 'Registration') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?= $user->createtime; ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputNick" class="col-sm-2 control-label">Ник:</label>
+            <label for="inputNick" class="col-sm-2 control-label"><?= Yii::t('basic', 'Display name') ?>:</label>
             <div class="col-sm-10 control-label">
                 <? if(!$model->nick) { ?>
-                    <?php echo $form->error($model, 'nick'); ?>
-                   <?php echo $form->textField($model, 'nick', array('class' => 'form-control', 'style' => 'width:200px')); ?>
+                <?php echo $form->error($model, 'nick'); ?>
+                <?php echo $form->textField($model, 'nick', array('class' => 'form-control', 'style' => 'width:200px')); ?>
                 <? } else { ?>
-                   <?= CHtml::encode($model->nick); ?>
+                <?= CHtml::encode($model->nick); ?>
                 <? } ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputFirstname" class="col-sm-2 control-label">Имя:</label>
+            <label for="inputFirstname" class="col-sm-2 control-label"><?= Yii::t('basic', 'First name') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?php echo $form->textField($model, 'firstname', array('class' => 'form-control', 'style' => 'width:200px')); ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputLastname" class="col-sm-2 control-label">Фамилия:</label>
+            <label for="inputLastname" class="col-sm-2 control-label"><?= Yii::t('basic', 'Last name') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?php echo $form->textField($model, 'lastname', array('class' => 'form-control', 'style' => 'width:200px')); ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPlace" class="col-sm-2 control-label">Местонахождение:</label>
+            <label for="inputPlace" class="col-sm-2 control-label"><?= Yii::t('basic', 'Location') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?php
-                    $this->widget('frontend.widgets.citySelector.CitySelectorWidget', array(
-                        'model' => $model
-                    ));
+                $this->widget('frontend.widgets.citySelector.CitySelectorWidget', array(
+                    'model' => $model
+                ));
                 ?>
-                <small><a href="javascript:void(0)" class="update-my-lots-address">Обновить местоположение для всех лотов</a></small>
+                <small><a href="javascript:void(0)" class="update-my-lots-address"><?= Yii::t('basic', 'Update for all lots') ?></a></small>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail" class="col-sm-2 control-label">E-mail:</label>
+            <label for="inputEmail" class="col-sm-2 control-label"><?= Yii::t('basic', 'E-mail') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?php echo $form->error($model, 'email'); ?>
                 <?php echo $form->textField($model, 'email', array('class' => 'form-control', 'style' => 'width:200px')); ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputTelephone" class="col-sm-2 control-label">Телефон:</label>
+            <label for="inputTelephone" class="col-sm-2 control-label"><?= Yii::t('basic', 'Telephone') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?php echo $form->error($model, 'telephone'); ?>
                 <?php echo $form->textField($model, 'telephone', array('class' => 'form-control', 'style' => 'width:200px')); ?>
@@ -177,39 +180,38 @@ $form = $this->beginWidget(
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" name="name" class="btn btn-default" value="Сохранить">
+                <input type="submit" name="name" class="btn btn-default" value="<?= Yii::t('basic', 'Save change') ?>">
             </div>
         </div>
-  </div>
+    </div>
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Дополнительные инструменты</div>
-  <div class="panel-body">
+    <div class="panel-heading"><?= Yii::t('basic', 'Additional tools') ?></div>
+    <div class="panel-body">
         <div class="form-group">
-            <label for="inputAdd_contact_info" class="col-sm-2 control-label">Дополнительная контактная информация:</label>
+            <label for="inputAdd_contact_info" class="col-sm-2 control-label"><?= Yii::t('basic', 'Additional contact information') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?php echo $form->textArea($model, 'add_contact_info', ['class' => 'form-control', 'style' => 'height: 150px;']); ?>
-                <small>Дополнительные телефонные номера, email, ICQ, Skype и др. Эта информация будет передана пользователю автоматически, при совершении с 
-                   Вами какой-либо сделки, например при покупке или продаже товаров.</small> 
+                <small><?= Yii::t('basic', 'Additional telephone numbers, e-mail, Skype, Telegram.') ?></small> 
             </div>
         </div>
         <div class="form-group">
-            <label for="inputTerms_delivery" class="col-sm-2 control-label">Условия передачи:</label>
+            <label for="inputTerms_delivery" class="col-sm-2 control-label"><?= Yii::t('basic', 'Shipping terms') ?>:</label>
             <div class="col-sm-10 control-label">
                 <?php echo $form->textArea($model, 'terms_delivery', ['class' => 'form-control', 'style' => 'height: 150px;']); ?>
-                <small>Опишите условия передачи Ваших лотов. Эта информация автоматически подставляется при создании лота в соответствующее поле.</small> 
+                <small><?= Yii::t('basic', 'Shipping terms for your items.') ?></small> 
                 <a id="usl_peredachi_r" href="#">
-                    <small>Обновить для всех лотов</small>
+                    <small><?= Yii::t('basic', 'Update for all lots') ?></small>
                 </a>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" name="name" class="btn btn-default" value="Сохранить">
+                <input type="submit" name="name" class="btn btn-default" value="<?= Yii::t('basic', 'Save change') ?>">
             </div>
         </div>
-  </div>
+    </div>
 </div>
 
 <?php $this->endWidget(); ?>

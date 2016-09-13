@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  *
  * @author Ivan Teleshun <teleshun.ivan@gmail.com>
@@ -26,9 +25,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-class ImageSelect extends CWidget
-{
+class ImageSelect extends CWidget {
 
     private $id;
     public $text = 'Change Image';
@@ -40,21 +37,19 @@ class ImageSelect extends CWidget
     public $htmlOptions = array();
     public $type = 0;
 
-    public function init()
-    {
+    public function init() {
         $this->id = uniqid();
         $dir = dirname(__FILE__) . '/assets';
         $this->assetsDir = Yii::app()->assetManager->publish($dir);
         $this->register();
-        
+
         Yii::app()->clientScript->registerScript(
-            'script_' . $this->id,
-            "
+                'script_' . $this->id, "
             $('#div_image_select_" . $this->id . " form').hide();
 			$('#div_image_select_" . $this->id . " a').file().choose(function(e, input) {
 				$('.image-select-loading').show();
 				input.appendTo('#div_image_select_" . $this->id . " form');
-                
+
 				$('#div_image_select_" . $this->id . " form').ajaxSubmit({
 					success : function(responseText){
                             var data = $.parseJSON(responseText);
@@ -62,11 +57,11 @@ class ImageSelect extends CWidget
                                 $('#mini-user-avatar').attr('src', data.response.data.avatar_mini + '?' + new Date().getTime());
                                 $('#div_image_select_" . $this->id . " img').attr('src', data.response.data.avatar + '?' + new Date().getTime());
                                 $('.image-select-loading').hide();
-                                
+
                                 if (data.response.data.type == 1) {
                                     $('#img1').val(data.response.data.img);
                                 }
-                                
+
                                 if (data.response.data.type == 2) {
                                     $('#img2').val(data.response.data.img);
                                 }
@@ -74,56 +69,47 @@ class ImageSelect extends CWidget
 				    }
 				});
 			});"
-            ,
-            CClientScript::POS_LOAD
+                , CClientScript::POS_LOAD
         );
     }
 
-    public function run()
-    {
-                
+    public function run() {
+
         echo '<div class="panel panel-default" id="div_image_select_' . $this->id . '">';
-        echo '<div class="panel-heading">Фотография профиля</div><div class="panel-body"><div class="row">';
+        echo '<div class="panel-heading">'.Yii::t('basic', 'Your photo').'</div><div class="panel-body"><div class="row">';
         echo '<div class="col-xs-2">';
 
         echo CHtml::image($this->path, $this->alt, $this->htmlOptions);
-        
+
         echo CHtml::form(
-            $this->uploadUrl,
-            'POST',
-            array(
-                'enctype' => "multipart/form-data",
-                'id' => "frm_img_select"
-            )
+                $this->uploadUrl, 'POST', array(
+            'enctype' => "multipart/form-data",
+            'id' => "frm_img_select"
+                )
         );
         echo CHtml::endForm();
         echo '</div>';
         echo '<div class="col-xs-10">';
-        echo '<a>Изменить фотографию</a>';
-        echo '<p>Измените фотографию для Вашего личного профиля.</p>';
+        echo '<a>'.Yii::t('basic', 'Change photo').'</a>';
+        echo '<p>'.Yii::t('basic', 'Change photo for your profile').'</p>';
         echo '</div></div></div>';
         echo '</div>';
-
     }
 
-    public function register($rtl = false)
-    {
+    public function register($rtl = false) {
         $this->registerCss($rtl);
         $this->registerScripts($rtl);
     }
 
-    public function registerCss($rtl = false)
-    {
+    public function registerCss($rtl = false) {
         Yii::app()->clientScript->registerCssFile($this->assetsDir . '/css/hidden-file-input.css');
         Yii::app()->clientScript->registerCssFile($this->assetsDir . '/css/image-select.css');
     }
 
-    public function registerScripts($rtl)
-    {
+    public function registerScripts($rtl) {
         Yii::app()->clientScript->registerScriptFile($this->assetsDir . '/js/jquery.form.js', CClientScript::POS_END);
         Yii::app()->clientScript->registerScriptFile(
-            $this->assetsDir . '/js/jquery-custom-file-input.js',
-            CClientScript::POS_END
+                $this->assetsDir . '/js/jquery-custom-file-input.js', CClientScript::POS_END
         );
     }
 

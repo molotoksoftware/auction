@@ -35,7 +35,7 @@
 <div class="container">
 <div class="row auction">
         <div class="col-xs-9">
-            <h2>Настройки и управление аккаунтом</h2>
+            <h2><?= Yii::t('basic', 'Your Control Panel')?></h2>
         </div>
 </div>
 
@@ -48,55 +48,55 @@
                     array(
                         'items' => array(
                             [
-                                'label' => '<span class="glyphicon glyphicon-cog"></span> Общие настройки',
+                                'label' => '<span class="glyphicon glyphicon-cog"></span> '.Yii::t('basic', 'General settings'),
                                 'itemOptions' => ['class' => 'list-group-item head_li'],
                             ],
                                 [
-                                    'label' => 'Основные настройки',
+                                    'label' => Yii::t('basic', 'My Account'),
                                     'url' => ['/user/settings/common'],
                                     'itemOptions' => ['class' => 'list-group-item'],
 
                                 ],
                                 [
-                                    'label' => 'Личный счет',
+                                    'label' => Yii::t('basic', 'Payments'),
                                     'url' => ['/user/balance/index'],
                                     'itemOptions' => ['class' => 'list-group-item'],
 
                                 ],
                                 [
-                                    'label' => 'Уведомления E-mail',
+                                    'label' => Yii::t('basic', 'Notifications e-mail'),
                                     'url' => ['/user/settings/notifications'],
                                     'itemOptions' => ['class' => 'list-group-item'],
                                 ],
 
                                 [
-                                    'label' => 'Доступ',
+                                    'label' => Yii::t('basic', 'Access control'),
                                     'url' => ['/user/settings/access'],
                                     'itemOptions' => ['class' => 'list-group-item'],
                                 ],
                             [
-                                'label' => '<span class="glyphicon glyphicon-user"></span> Продавцу товаров',
+                                'label' => '<span class="glyphicon glyphicon-user"></span> '. Yii::t('basic', 'Selling'),
                                 'itemOptions' => ['class' => 'list-group-item head_li'],
                             ],
                                 [
-                                    'label' => 'Верификация аккаунта',
+                                    'label' => Yii::t('basic', 'Verifycation'),
                                     'url' => ['/user/settings/certified'],
                                     'itemOptions' => ['class' => 'list-group-item'],
                                 ],
                                 [
-                                    'label' => 'ПРО-аккаунт',
+                                    'label' => Yii::t('basic', 'PRO'),
                                     'url' => ['/user/pro/index'],
                                     'itemOptions' => ['class' => 'list-group-item'],
 
                                 ],
                                 [
-                                    'label' => 'Страница "Обо мне"',
+                                    'label' => Yii::t('basic', 'About Me'),
                                     'url' => ['/user/settings/aboutMe'],
                                     'itemOptions' => ['class' => 'list-group-item'],
                                 ],
 
                                 [
-                                    'label' => 'Массовые действия с лотами',
+                                    'label' => Yii::t('basic', 'Bulk updates'),
                                     'url' => ['/user/settings/bulkUpdates'],
                                     'itemOptions' => ['class' => 'list-group-item'],
                                 ],

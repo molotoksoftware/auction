@@ -7,6 +7,8 @@ var defaults = {
     cat_2: '',
     cat_3: '',
     type: '',
+    select_cat_t: '',
+    no_param: '',
     where_show: 0,
     getOptions: true
 };
@@ -22,7 +24,7 @@ var Creator = function(options) {
             },
             this.hideOptions = function() {
                 content = $('#content-options');
-                content.empty().html('Выберите категорию, чтобы указать параметры ↑');
+                content.empty().html(opts.select_cat_t + ' ↑');
                 $('#content-options').css({'background-color':'white', 'padding':'0px'});
             },
             this.downloadOptions = function(id) {
@@ -46,7 +48,7 @@ var Creator = function(options) {
                             $('#content-options-block').show();
                             $('#content-options').css({'background-color':'#f1f1f1', 'padding':'0 5px'});
                         } else {
-                            content.empty().html('Для этой категории не определены параметры, продолжайте заполнение данных.').show();
+                            content.empty().html(opts.no_param).show();
                             $('#content-options-block').show();
                             $('#content-options').css({'background-color':'white', 'padding':'0px'});
                         }

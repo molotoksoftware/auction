@@ -32,7 +32,7 @@
 cs()->registerScriptFile(Yii::app()->baseUrl.'/js/user/settings/common.js');
 ?>
 
-<h3>Уведомления</h3>
+<h3><?= Yii::t('basic', 'Notifications e-mail')?></h3>
 
 <?php if (Yii::app()->user->hasFlash('success-edit-profile')): ?>
     <div class="alert alert-success">
@@ -56,16 +56,15 @@ $form = $this->beginWidget(
 
  <div class="form-group">
      <p>
-        Система автоматически присылает важные уведомления Вам на почтовый ящик. Не отключайте эту функцию, если хотите быть в курсе всех
-        событий связанных с Вашим участием на торговой площадке.
+        <?= Yii::t('basic', 'The system automatically sends you important notifications to the mailbox. Do not turn off this feature if you want to be informed about all events.')?>
     </p>
   <div class="checkbox">
     <label>
           <?php echo $form->checkBox($user, 'consent_recive_notification'); ?>
-        Получать уведомления на E-mail
+        <?= Yii::t('basic', 'To recieve a notification email')?>
     </label>
   </div>
-    <?php echo CHtml::submitButton('Сохранить', ['class' => 'btn btn-default']); ?>
+    <?php echo CHtml::submitButton(Yii::t('basic', 'Save change'), ['class' => 'btn btn-default']); ?>
  </div>
 
 <?php $this->endWidget(); ?>

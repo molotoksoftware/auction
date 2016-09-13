@@ -120,6 +120,8 @@ class FrontController extends BaseController
                 }
             }
         }
+        
+        Yii::app()->language = Yii::app()->params['language'];
 
         $this->attachEventHandlers();
 
