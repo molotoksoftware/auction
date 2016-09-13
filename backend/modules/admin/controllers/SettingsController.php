@@ -59,7 +59,6 @@ class SettingsController extends BackController
                     'pages_pro',
                     array(
                         'text_pro_account' => $form['text_pro_account'],
-                        'text_promotion_services' => $form['text_promotion_services'],
                         'text_certified' => $form['text_certified']
                     )
                 );
@@ -79,7 +78,6 @@ class SettingsController extends BackController
             array(
                 'title' => 'Тексты',
                 'text_pro_account' => $text['text_pro_account'],
-                'text_promotion_services' => $text['text_promotion_services'],
                 'text_certified' => $text['text_certified']
             )
         );
