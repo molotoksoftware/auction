@@ -101,7 +101,7 @@
     <a href="<?= Yii::app()->createUrl('/' . $userModel->login); ?>" class="seller_info_name" style="font-weight: bold;"><?= $userModel->outName(); ?></a>
     <span class="seller_info_love">(<?= $userModel->rating; ?>)</span>
     <?php if ($userModel->certified == 1): echo UserDataHelper::getStarColor($userModel->rating);
-    endif; echo $userModel->rating;?> 
+    endif;?> 
 
 
 <?php elseif ($scope == UserInfo::SCOPE_DISCUSSIONS_GRID): ?>
