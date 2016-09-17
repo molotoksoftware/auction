@@ -36,7 +36,10 @@
     Количество: <?=$quantity; ?><br/>
     Общая сумма: <?=$amount;?> руб.<br/>
 <?php else: ?>
-    <?php if (isset($lotModel->price)) {echo $lotModel->price;} ?><br/>
+    <?php if (isset($lotModel->price)): ?>
+        <strong>Куплен по блиц-цене:</strong> <?= $lotModel->price; ?> руб.<br/>
+        <br/>
+    <?php endif; ?>
 <?php endif; ?>
 <br/> 
 <strong>Контактные данные:</strong><br/> 

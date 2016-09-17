@@ -99,7 +99,7 @@ class Auction extends BaseAuction
         return array_merge(
             parent::attributeLabels(),
             array(
-                'quantity' => Yii::t('Items quantity')
+                'quantity' => Yii::t('basic', 'Items quantity')
             )
         );
     }

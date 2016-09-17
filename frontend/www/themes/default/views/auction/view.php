@@ -172,7 +172,7 @@ $cs->registerScript(
 );
 
 
-$author = User::model()->cache(1000)->findByPk($base['owner']);
+$author = User::model()->findByPk($base['owner']);
 $user = Getter::userModel();
 ?>
 
