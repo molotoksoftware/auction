@@ -32,6 +32,10 @@ class Settings extends CApplicationComponent
 {
     public function __construct()
     {
+        if(!in_array(Setting::model()->tableName(), Yii::app()->db->schema->tableNames)) {
+            return;
+        }
+
         $configs = Setting::model()->getByPreload()->findAll();
         foreach ($configs as $config) {
             Yii::app()->params[$config->name] = $config->value;
