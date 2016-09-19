@@ -1,0 +1,10 @@
+chmod 0777 backend/runtime
+chmod 0777 backend/www/assets
+chmod 0777 console/runtime
+chmod 0777 frontend/runtime
+chmod 0777 frontend/www/assets
+chmod 0777 frontend/www/i2
+chmod 0777 frontend/www/tmp
+chmod 0777 frontend/www/images/users
+chmod 0777 frontend/www/images/admins
+chmod 0777 frontend/www/images/news
