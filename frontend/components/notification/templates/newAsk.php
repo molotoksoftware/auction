@@ -29,8 +29,12 @@
 
 ?>
 
-По Вашему лоту № <?=$lot_id?> "<?=$lot_link?>", появился новый вопрос.<br>
-<strong>Вопрос</strong>: <?=$question?><br />
-<br />
-Контактные данные для ответа:<br>
-E-mail: <?=$email?>, телефон: <?=$telephone?>
+<?=Yii::t('mail', 'In your item {item} {item_title}, a new question.',[
+    '{item}' => $lotModel->auction_id,
+    '{item_title}' => $linkItem,
+]); ?><br />
+
+<strong><?=Yii::t('mail', 'Question')?></strong>: <?=$question?><br /><br />
+
+<?=Yii::t('mail', 'Contact information')?>:<br />
+E-mail: <?=$author->email?>, <?=Yii::t('mail', 'telephone')?>: <?=$author->telephone?$author->telephone:Yii::t('mail', 'not specified')?>

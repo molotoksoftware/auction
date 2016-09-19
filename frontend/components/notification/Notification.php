@@ -75,7 +75,7 @@ class Notification
                 );
             }
         } else {
-            Yii::log('ошибка при отправлении уведомления');
+            Yii::log('Error sending notification');
         }
     }
 
@@ -220,7 +220,7 @@ class Notification
         if (isset($this->params['lotModel'])) {
             /** @var Auction $lotModel */
             $lotModel = $this->params['lotModel'];
-            $lotId = '№ ' . $lotModel->getPrimaryKey();
+            $lotId = $lotModel->getPrimaryKey();
             if (empty($lotName)) {
                 $lotName = $lotModel->name;
             }
@@ -228,7 +228,10 @@ class Notification
 
         switch ($this->type) {
             case self::TYPE_NEW_ASK:
-                return 'По вашему лоту '.$lotId.' "'.iconv_substr($lotName, 0, 50, 'UTF-8').'..." появился новый вопрос';
+                return Yii::t('mail', 'In your item {item} {item_title}, a new question.',[
+                    '{item}' => $lotId,
+                    '{item_title}' => iconv_substr($lotName, 0, 50, 'UTF-8'),
+                    ]);
                 break;
             case self::TYPE_WINNER_AUCTION:
                 return 'Вы стали победителем в торгах по лоту '.$lotId.' "'.iconv_substr($lotName, 0, 50, 'UTF-8').'..."';
@@ -254,7 +257,7 @@ class Notification
 
 
             default:
-                return 'Открытая торговая интернет-площадка России';
+                return Yii::app()->params['siteName'];
                 break;
         }
     }

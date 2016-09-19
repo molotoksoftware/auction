@@ -106,6 +106,22 @@ class Questions extends CActiveRecord
     {
             return parent::model($className);
     }
+    
+    public function afterSave() {
+        parent::afterSave();
+
+        if ($this->isNewRecord) {
+            $params = [
+                'linkItem'     => $this->auction->getLink(true),
+                'lotModel'     => $this->auction,
+                'author'    => Getter::userModel(),
+                'question'  => $this->text,
+            ];
+
+            $ntf = new Notification($this->owner_id, $params, Notification::TYPE_NEW_ASK);
+            $ntf->send();
+        }
+    }
 
     /**
      * ************************************************************************* 
@@ -146,5 +162,6 @@ class Questions extends CActiveRecord
         );
         return $this;
     }
+
 
 }
