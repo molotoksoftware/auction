@@ -55,7 +55,6 @@ class RegistrationAction extends CAction
                 $user->email = $model->email;
                 $user->login = $model->login;
                 $user->createtime = date('Y-m-d H:i:s');
-                $user->birthday = '';
 
                 if ($user->save()) {
 
