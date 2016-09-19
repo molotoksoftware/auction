@@ -25,20 +25,15 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
+class UserController extends BackController {
 
-
-class UserController extends BackController
-{
-
-    public function filters()
-    {
+    public function filters() {
         return array(
             'accessControl'
         );
     }
 
-    public function accessRules()
-    {
+    public function accessRules() {
         return array(
             array('allow',
                 'actions' => array('login', 'logout'),
@@ -53,8 +48,7 @@ class UserController extends BackController
         );
     }
 
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $user = new User('search');
         $user->unsetAttributes();
 
@@ -73,9 +67,8 @@ class UserController extends BackController
             ));
         }
     }
-    
-    public function actionToggle($id, $attribute)
-    {
+
+    public function actionToggle($id, $attribute) {
         if (!Yii::app()->request->isPostRequest)
             throw new CHttpException(400, 'Некорректный запрос');
         if (!in_array($attribute, array('certified')))
@@ -90,8 +83,7 @@ class UserController extends BackController
     }
 
     // Бан пользователя
-    public function actionBan($id, $attribute)
-    {
+    public function actionBan($id, $attribute) {
         if (!Yii::app()->request->isPostRequest)
             throw new CHttpException(400, 'Некорректный запрос');
         if (!in_array($attribute, array('ban')))
@@ -105,8 +97,7 @@ class UserController extends BackController
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
     }
 
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new User();
         $this->performAjaxValidation($model, 'form-user');
 
@@ -132,8 +123,7 @@ class UserController extends BackController
         $this->render('create', array('model' => $model));
     }
 
-    public function actionProfile()
-    {
+    public function actionProfile() {
         $model = Users::model()->findByPk(11);
 
         $this->render('profile', array(
@@ -141,8 +131,7 @@ class UserController extends BackController
         ));
     }
 
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->_loadModel($id);
         $oldPassword = $model->password;
 
@@ -173,8 +162,7 @@ class UserController extends BackController
         ));
     }
 
-    protected function _loadModel($id)
-    {
+    protected function _loadModel($id) {
         if (!$model = User::model()->findByPk($id)) {
             if (Yii::app()->request->isAjaxRequest) {
                 RAjax::error(array('messages' => 'Пользователь не существует'));
@@ -185,13 +173,11 @@ class UserController extends BackController
         return $model;
     }
 
-    public function actionMultipleRemove()
-    {
+    public function actionMultipleRemove() {
         $this->multipleRemove('User');
     }
 
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $deleted = 0;
         $deleted = $this->_loadModel($id)->delete();
 

@@ -27,7 +27,7 @@
  */
 
 
-$this->pageTitle = 'История пополнений';
+$this->pageTitle = 'История пополнений и списаний';
 
 $this->header_info = array(
     'icon' => 'icon-credit-card',
@@ -38,9 +38,9 @@ $this->header_info = array(
 <div class="container-fluid padded">
     <div class="box">
         <div class="box-header">
-            <span class="title"> История пополнений</span>
+            <span class="title"> История пополнений (+) и списаний (-) средств с баланса пользователей</span>
             <ul class="box-toolbar">
-                <li><span class="label label-blue"><?= $dataProvider->getTotalItemCount(); ?></span></li>
+                <li><span class="label label-blue"><? // $dataProvider->getTotalItemCount(); ?></span></li>
             </ul>
         </div>
         <div class="box-content">
@@ -48,7 +48,7 @@ $this->header_info = array(
             $this->renderPartial(
                 '_table_history_recharge',
                 array(
-                    'dataProvider' => $dataProvider
+                    'model' => $model,
                 )
             );
             ?>

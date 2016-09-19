@@ -7,7 +7,6 @@
  * @copyright 2016 MolotokSoftware
  * @license GNU General Public License, version 3
  */
-
 /**
  * 
  * This file is part of MolotokSoftware.
@@ -36,8 +35,8 @@
  * @property string $summa
  * @property string $created_on
  */
-class BalanceHistory extends CActiveRecord
-{
+class BalanceHistory extends CActiveRecord {
+
     const STATUS_ADD = 1;
     const STATUS_SUB = 2;
     const STATUS_RETURN = 3;
@@ -47,16 +46,14 @@ class BalanceHistory extends CActiveRecord
     /**
      * @return string the associated database table name
      */
-    public function tableName()
-    {
+    public function tableName() {
         return 'balance_history';
     }
 
     /**
      * @return array validation rules for model attributes.
      */
-    public function rules()
-    {
+    public function rules() {
         return array(
             array('user_id, type, summa', 'required'),
             array('user_id', 'length', 'max' => 10),
@@ -67,8 +64,7 @@ class BalanceHistory extends CActiveRecord
         );
     }
 
-    public function behaviors()
-    {
+    public function behaviors() {
         return array(
             'CTimestampBehavior' => array(
                 'class' => 'zii.behaviors.CTimestampBehavior',
@@ -80,8 +76,7 @@ class BalanceHistory extends CActiveRecord
     /**
      * @return array relational rules.
      */
-    public function relations()
-    {
+    public function relations() {
         return array(
             'user' => array(self::BELONGS_TO, 'User', 'user_id')
         );
@@ -90,8 +85,7 @@ class BalanceHistory extends CActiveRecord
     /**
      * @return array customized attribute labels (name=>label)
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return array(
             'id' => 'ID',
             'user_id' => 'User',
@@ -105,8 +99,7 @@ class BalanceHistory extends CActiveRecord
     /**
      * @return CActiveDataProvider the data provider that can return the models
      */
-    public function search()
-    {
+    public function search() {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
@@ -123,14 +116,35 @@ class BalanceHistory extends CActiveRecord
         ));
     }
 
+    public function searchAdmin() {
+        // @todo Please modify the following code to remove attributes that should not be searched.
+
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('type', $this->type, true);
+        $criteria->compare('summa', $this->summa, true);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+            'sort' => [
+                'defaultOrder' => 'created_on DESC'
+            ],
+                //  'sort' => [
+                //      'defaultOrder' => 'sale_id DESC',
+                //   ],
+        ));
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
      * @return BalanceHistory the static model class
      */
-    public static function model($className = __CLASS__)
-    {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -139,35 +153,28 @@ class BalanceHistory extends CActiveRecord
      * API
      * *************************************************************************
      */
-
-    public function getBuyerLink()
-    {
+    public function getBuyerLink() {
         if (is_null($this->user)) {
             return '_';
         } else {
             return CHtml::link(
-                $this->user->login,
-                Yii::app()->params["siteUrl"]. '/' . $this->user->login,
-                array(
-                    'target' => "_blank"
-                )
+                            $this->user->login, Yii::app()->params["siteUrl"] . '/' . $this->user->login, array(
+                        'target' => "_blank"
+                            )
             );
         }
     }
 
-    public function getSumma()
-    {
-        return floatval($this->summa);
+    public function getSumma() {
+        $modul = $this->type == 1 ? '+ ' : '- ';
+        return $modul . floatval($this->summa);
     }
 
-    public function getSummaFormat($decimals = 0)
-    {
+    public function getSummaFormat($decimals = 0) {
         return number_format(floatval($this->summa), $decimals, '.', ' ');
     }
 
-
-    public function getSummaWithIcoType()
-    {
+    public function getSummaWithIcoType() {
         $ico = '';
         $summa = $this->getSumma();
 
@@ -178,6 +185,20 @@ class BalanceHistory extends CActiveRecord
         }
 
         return $ico . ' ' . $summa;
+    }
+
+    public static function getStatusList() {
+        return [
+            self::STATUS_ADD => 'Пополнение',
+            self::STATUS_SUB => 'Списание',
+            self::STATUS_RETURN => 'Возврат',
+            self::STATUS_COMMISSION_SALE_LOT => 'Комиссия',
+        ];
+    }
+
+    public function getStatus() {
+        $statuses = self::getStatusList();
+        return (isset($statuses[$this->type])) ? $statuses[$this->type] : '-';
     }
 
 }

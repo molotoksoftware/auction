@@ -7,7 +7,6 @@
  * @copyright 2016 MolotokSoftware
  * @license GNU General Public License, version 3
  */
-
 /**
  * 
  * This file is part of MolotokSoftware.
@@ -25,37 +24,58 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 $this->widget(
-    'ex-bootstrap.widgets.ETbExtendedGridView',
-    array(
-        'id' => 'table-history-order',
-        'dataProvider' => $dataProvider,
-//        'filter' => $model,
-        'summaryText' => 'История пополнений {start}—{end} из {count}.',
-        'columns' => array(
-            array(
-                'header' => '#',
-                'name' => 'id',
-            ),
-            array(
-                'header' => 'Пользователь',
-                'name' => 'user_id',
-                'type' => 'raw',
-                'value' => '$data->getBuyerLink()'
-            ),
-            array(
-                'header' => 'Сума',
-                'name' => 'summa',
-                'type' => 'raw',
-                'value' => '$data->getSumma()'
-            ),
-            array(
-                'header' => 'Дата',
-                'name' => 'created_on',
-                'value' => 'Yii::app()->dateFormatter->format("dd MMMM yyyy HH:mm:ss", $data->created_on)'
-            ),
-        )
+        'ex-bootstrap.widgets.ETbExtendedGridView', array(
+    'id' => 'table-history-order',
+    'dataProvider' => $model->searchAdmin(),
+    'filter' => $model,
+    'summaryText' => 'История {start}—{end} из {count}.',
+    'columns' => array(
+        array(
+            'header' => '#',
+            'name' => 'id',
+            'filter' => false,
+            'headerHtmlOptions' => ['width' => '1%'],
+        ),
+        array(
+            'header' => 'Пользователь',
+            'name' => 'user_id',
+            'type' => 'raw',
+            'value' => '$data->getBuyerLink()',
+            'filter' => false,
+            'headerHtmlOptions' => ['width' => '10%'],
+        ),
+        array(
+            'header' => 'Сума',
+            'name' => 'summa',
+            'type' => 'raw',
+            'value' => '$data->getSumma()',
+            'filter' => false,
+            'headerHtmlOptions' => ['width' => '10%'],
+        ),
+        array(
+            'header' => 'Тип операции',
+            'name' => 'type',
+            'filter' => BalanceHistory::getStatusList(),
+            'type' => 'raw',
+            'value' => '$data->getStatus()',
+            'headerHtmlOptions' => ['width' => '10%'],
+        ),
+        array(
+            'header' => 'Описание',
+            'name' => 'description',
+            'filter' => false,
+            'type' => 'raw',
+            'value' => '$data->description',
+            'headerHtmlOptions' => ['width' => '20%'],
+        ),
+        array(
+            'header' => 'Дата',
+            'filter' => false,
+            'name' => 'created_on',
+            'value' => 'Yii::app()->dateFormatter->format("dd MMMM HH:mm", $data->created_on)',
+            'headerHtmlOptions' => ['width' => '8%'],
+        ),
     )
+        )
 );
