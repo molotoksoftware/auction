@@ -113,6 +113,7 @@ class UserController extends BackController
         if (Yii::app()->request->isPostRequest && isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             $model->birthday = date('Y-m-d', CDateTimeParser::parse($_POST['User']['birthday'], 'dd-MM-yyyy'));
+            $model->password = $model->hashPassword($model->password);
 
             if ($model->validate()) {
 
@@ -143,6 +144,7 @@ class UserController extends BackController
     public function actionUpdate($id)
     {
         $model = $this->_loadModel($id);
+        $oldPassword = $model->password;
 
         $model->scenario = "update";
         $this->performAjaxValidation($model, 'form-user');
@@ -151,12 +153,20 @@ class UserController extends BackController
             $model->attributes = $_POST['User'];
             $model->birthday = date('Y-m-d', CDateTimeParser::parse($_POST['User']['birthday'], 'dd-MM-yyyy'));
 
+            if (!$model->password) {
+                $model->password = $oldPassword;
+            } else {
+                $model->password = $model->hashPassword($model->password);
+            }
+
             if ($model->validate()) {
                 $model->save(false);
                 Yii::app()->user->setFlash('success', 'Изменения успешно применены');
                 $this->redirect(array('/user/user/index'));
             }
         }
+
+        $model->password = false;
 
         $this->render('update', array(
             'model' => $model

@@ -108,7 +108,8 @@ class User extends CActiveRecord {
      */
     public function rules() {
         return [
-            ['login', 'required'],
+            ['login, email', 'required'],
+            ['password', 'required', 'on' => 'insert'],
             ['status, rating, id_country, id_region, id_city', 'numerical', 'integerOnly' => true],
             ['login, firstname, lastname, avatar, email, password', 'length', 'max' => 255],
             ['login, email', 'filter', 'filter' => 'trim'],
@@ -171,7 +172,8 @@ class User extends CActiveRecord {
      */
     public function attributeLabels() {
         return [
-            'login' => 'Ник',
+            'login' => 'Логин',
+            'nick' => 'Ник',
             'firstname' => 'Имя',
             'lastname' => 'Фамилия',
             'birthday' => 'Дата рождения',

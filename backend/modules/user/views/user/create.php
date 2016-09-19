@@ -74,11 +74,14 @@ $this->breadcrumbs = array(
                     ?>
                     <?php echo $form->errorSummary($model); ?>
                     <div class="padded">
-                    <?php echo $form->textFieldRow($model, 'firstname'); ?>
+                        <?php echo $form->textFieldRow($model, 'firstname'); ?>
                         <?php echo $form->textFieldRow($model, 'lastname'); ?>
                         <?php echo $form->textFieldRow($model, 'email'); ?>
                         <?php echo $form->textFieldRow($model, 'login'); ?>
+                        <?php echo $form->textFieldRow($model, 'nick'); ?>
                         <?php echo $form->textFieldRow($model, 'password'); ?>
+                        <?php echo $form->textFieldRow($model, 'telephone'); ?>
+                        <?php echo $form->textFieldRow($model, 'rating'); ?>
 
                         <?php
                         $this->widget('backend.extensions.simpleImageUpload.SimpleImageUploadWidget', array(

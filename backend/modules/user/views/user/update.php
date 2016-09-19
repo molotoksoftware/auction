@@ -116,17 +116,18 @@ Yii::app()->clientScript->registerScript(
                         )
                     );
                     ?>
+                    <pre>
+                    </pre>
                     <div class="padded">
                         <?php echo $form->textFieldRow($model, 'firstname'); ?>
                         <?php echo $form->textFieldRow($model, 'lastname'); ?>
                         <?php echo $form->textFieldRow($model, 'email'); ?>
                         <?php echo $form->textFieldRow($model, 'login'); ?>
                         <?php echo $form->textFieldRow($model, 'nick'); ?>
+                        <?php echo $form->textFieldRow($model, 'password'); ?>
                         <?php echo $form->textFieldRow($model, 'telephone'); ?>
                         <?php echo $form->textFieldRow($model, 'rating'); ?>
-                        <?php echo $model->last_ip_addr; ?>
-
-
+                        <?php echo $form->textFieldRow($model, 'last_ip_addr'); ?>
 
                         <?php
                         $this->widget(
