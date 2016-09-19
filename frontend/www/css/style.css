@@ -114,7 +114,6 @@ a {
     margin-top:15px;
 }
 .search_box_form {
-    text-align: center;
 }
 /* Форма поиска   КОНЕЦ                         */
 
@@ -518,6 +517,18 @@ span.price_2 span {
 }
 .dl_dt_block dd {
     padding-top:10px;
+}
+.dl-horizontal dt {
+    float: left;
+    width: 160px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dl-horizontal dd {
+    margin-left: 180px;
 }
 .price-field {
     font-size: 18px;

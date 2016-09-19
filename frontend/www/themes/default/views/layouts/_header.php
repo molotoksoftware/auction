@@ -73,13 +73,12 @@
 
 <div class="container">
     <div class="row search">
-        <div class="col-xs-2">
+        <div class="col-xs-3">
             <a href="/"><img src="/bootstrap/img/logo.png"></a>
         </div>
-        <div class="col-xs-8 search_box_form">
+        <div class="col-xs-9 search_box_form">
             <?php $this->widget('frontend.widgets.search.SearchWidget', array()); ?>
         </div>
-        <div class="col-xs-2"></div>
     </div>
     <div class="top_menu">
         <div class="row">
