@@ -50,26 +50,30 @@ $this->breadcrumbs = array(
 Yii::app()->clientScript->registerScript(
     'eventEditBalance',"
 
-       $('#editBalance').toggle(function(){
-       var input =  $('#User_changeBalance');
-       input.removeClass('lock-input');
-       input.attr('readonly',false);
+            $('.edit_balance').on('click', '#editBalance', function(){
 
-       $('#comment_change_balance').show();
-       $('#i_change_balance').val(1);
+                var tog = $('#i_change_balance');
+                var tog_val = tog.val();
 
-       return false;
+                if (tog_val == 0) {
+                    var input =  $('#User_changeBalance');
+                    input.removeClass('lock-input');
+                    input.attr('readonly',false);
+                    $('#comment_change_balance').show();
+                    tog.val(1); tog_val = 1;
+                } else if (tog_val == 1) {
+                    var input =  $('#User_changeBalance');
+                    input.addClass('lock-input');
+                    input.attr('readonly',true);
+                    $('#comment_change_balance').hide();
+                    tog.val(0); tog_val = 0;
 
-   }, function() {
-       var input =  $('#User_changeBalance');
-       input.addClass('lock-input');
-       input.attr('readonly',true);
+                }
+                return false; 
+            });
 
-       $('#comment_change_balance').hide();
-       $('#i_change_balance').val(0)
 
-       return false;
-   });
+ 
 
 
    ",
@@ -163,14 +167,14 @@ Yii::app()->clientScript->registerScript(
                             </div>
                             <label for="Participant_changeBalance" class="control-label">Изменить баланс</label>
 
-                            <div class="controls">
+                            <div class="controls edit_balance">
                                 <?php echo $form->textField(
                                     $model,
                                     'changeBalance',
                                     array('class' => 'lock-input', 'readonly' => 'readonly')
                                 ); ?>
-                                <a rel="tooltip" data-original-title="Изменить балан" href="#" id="editBalance"><i
-                                        class="icon-pencil"></i></a>
+                                <a rel="tooltip" data-original-title="Изменить баланс" href="#" id="editBalance">
+                                    <i class="icon-pencil"></i></a>
                                 <?php echo $form->error($model, 'changeBalance'); ?>
                             </div>
 
@@ -186,7 +190,6 @@ Yii::app()->clientScript->registerScript(
                                     <?php echo $form->error($model, 'balance_comment'); ?>
                                 </div>
                             </div>
-                            <!--<p><i class=" icon-info-sign"></i></p>-->
 
                         </div>
                         <!-- END CHANGE BALANCE -->

@@ -256,6 +256,9 @@ class User extends CActiveRecord {
                 }
             }
         }
+        if ($this->nick == false) {
+            $this->nick = null;
+        }
 
         return parent::beforeSave();
     }
