@@ -82,6 +82,7 @@ class BaseAuction extends CActiveRecord
     const ST_SOLD_BLITZ_PRICE = 2; // продан по блиц
     const ST_SOLD_SUCCESS_BID = 3; // продан в результате завершения торгов
     const ST_COMPLETED_EXPR_DATE = 4; //завершенный по истечению даты
+    const ST_SAME = 7; // Выставить похожий
 
     const ST_DELETED = 10;
 

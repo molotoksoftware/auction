@@ -182,6 +182,15 @@ SQL;
         $class = get_class($model);
         if (Yii::app()->request->isPostRequest && isset($_POST[$class])) {
             $refresh = (isset($_POST['refresh'])) ? (boolean)$_POST['refresh'] : false;
+            
+            
+            if($model->status == BaseAuction::ST_SAME) { // Аукцион в спрятанном статусе (Выставили похожий, но еще не сохранили)
+                $to_status = (isset($_POST['to_status']) &&  $_POST['to_status']==4)?4:1;
+                $model->status = $to_status;
+                if($to_status == 4) {
+                    $model->bidding_date = date('Y-m-d H:i:s', time());
+                } else $refresh = true;
+            }
 
             if ($refresh == false) {
                 unset($_POST[$class]['duration']);

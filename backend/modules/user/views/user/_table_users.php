@@ -108,7 +108,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
         ),
         array(
             'header'=>'Кол. лотов',
-            'value'=>'$data->count_lots'
+            'value'=>'$data->count_lots',
         ),
         array(
             'class' => 'bootstrap.widgets.TbToggleColumn',
@@ -122,6 +122,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
             'toggleAction' => '/user/user/ban',
             'name' => 'ban',
             'filter' => false,
+            'sortable' => false,
         ),
         array(
             'htmlOptions' => array('nowrap' => 'nowrap'),

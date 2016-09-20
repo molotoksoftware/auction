@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @author Ivan Teleshun <teleshun.ivan@gmail.com>
@@ -7,7 +6,6 @@
  * @copyright 2016 MolotokSoftware
  * @license GNU General Public License, version 3
  */
-
 /**
  * 
  * This file is part of MolotokSoftware.
@@ -25,12 +23,9 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /** @var Controller $this */
 /** @var Auction $model */
 /** @var array $dependentCurrenciesData */
-
-
 $type = get_class($model);
 
 $cs = Yii::app()->clientScript;
@@ -54,7 +49,7 @@ Yii::app()->clientScript->registerScriptFile(bu() . '/js/creator.js', CClientScr
 $opt = CJavaScript::encode($options);
 $cs->registerScriptFile(bu() . '/js/creator.js', CClientScript::POS_END);
 $cs->registerScript(
-    'create-lot','
+        'create-lot', '
 
     var creator = new Creator(' . $opt . ');
     creator.init();
@@ -64,8 +59,7 @@ $cs->registerScript(
     
 
 
-',
-    CClientScript::POS_READY
+', CClientScript::POS_READY
 );
 
 $js = <<<EOD
@@ -114,21 +108,20 @@ $seller = Yii::app()->user->getModel();
 ?>
 
 <div class="container create_lot">
-    
-<div class="row auction">
+
+    <div class="row auction">
         <div class="col-xs-9">
             <h2>Редактирование лота</h2>
         </div>
-</div>
-<hr class="top10 horizontal_line">
+    </div>
+    <hr class="top10 horizontal_line">
 
-<?php
-/** @var CActiveForm $form */
-$form = $this->beginWidget(
-    'CActiveForm',
-    array(
+    <?php
+    /** @var CActiveForm $form */
+    $form = $this->beginWidget(
+            'CActiveForm', array(
         'id' => 'form-create-lot',
-        'action' => $this->createUrl('/editor/lot/id/'.$model->auction_id),
+        'action' => $this->createUrl('/editor/lot/id/' . $model->auction_id),
         'enableAjaxValidation' => true,
         'enableClientValidation' => false,
         'errorMessageCssClass' => 'error',
@@ -176,335 +169,341 @@ $form = $this->beginWidget(
         'htmlOptions' => array(
             'autocomplete' => 'off',
         ),
-    )
-);
-?>
+            )
+    );
+    ?>
 
 
-<?php $this->widget('frontend.widgets.imageUploader.ImageUploaderWidget', ['model' => $model]); ?>
+    <?php $this->widget('frontend.widgets.imageUploader.ImageUploaderWidget', ['model' => $model]); ?>
 
 
-<div class="row action_lot">
-    <div class="col-xs-3 left_col">
-        <p>Действия:</p>
-    </div>
-    <div class="col-xs-9 right_col">
+    <?php if ($model->status == 7) : ?>
+        <div class="row action_lot">
+            <div class="col-xs-3 left_col">
+                <p>Публиковать?</p>
+            </div>
+            <div class="col-xs-9 right_col">
 
-        <?php
-            $refreshDef = (isset($_GET['strepub']) &&  $_GET['strepub']==1)?1:0;
-            echo CHtml::dropDownList(
-                'refresh',
-                $refreshDef,
-                array(
+                <?php
+                $to_status = (isset($_POST['to_status']) && $_POST['to_status'] == 4) ? 4 : 1;
+                echo CHtml::dropDownList(
+                        'to_status', $to_status, array(
+                    1 => 'да',
+                    4 => 'нет'
+                        ), ['class' => 'form-control width_input']
+                );
+                ?>
+
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="row action_lot">
+            <div class="col-xs-3 left_col">
+                <p>Действия:</p>
+            </div>
+            <div class="col-xs-9 right_col">
+
+                <?php
+                $refreshDef = (isset($_GET['strepub']) && $_GET['strepub'] == 1) ? 1 : 0;
+                echo CHtml::dropDownList(
+                        'refresh', $refreshDef, array(
                     0 => 'обновить только данные',
                     1 => 'обновить и опубликовать снова'
-                ),
-                    ['class' => 'form-control width_input']
-            );
-         ?>
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Название лота:</p>
-    </div>
-    <div class="col-xs-9 right_col">
-        <?php echo $form->error($model, 'name'); ?>
-	<?php echo $form->textField($model,'name',array('class' => 'form-control width_input')); ?> 
-    </div>
-</div>
-
-<?php
-$cat1_id = '';
-$cat2_id = '';
-$cat3_id = '';
-$cat4_id = '';
-
-$favourites_category = $model->getAncestorCategoryId();
-foreach ($favourites_category as $key => $value) {
-	${"cat" . ($key + 1) . "_id"} = $value;
-}
-
-$cat_2_elements = Category::getCategoriesForSelect($cat1_id);
-$display_2 = (count($cat_2_elements) > 0) ? 'display:block' : 'display:none';
-$cat_3_elements = Category::getCategoriesForSelect($cat2_id);
-$display_3 = (count($cat_3_elements) > 0) ? 'display:block' : 'display:none';
-$cat_4_elements = Category::getCategoriesForSelect($cat3_id);
-$display_4 = (count($cat_4_elements) > 0) ? 'display:block' : 'display:none';
-
-?>
-
-
-
-<?php echo $form->hiddenField($model, 'category_id'); ?>
-<input type="hidden" name="hide_cats" id="hide_category_id" />
-
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Категория:</p>
-        <span>Определите место в каталоге</span>
-    </div>
-    <div class="col-xs-9 right_col">
-        <?php echo $form->error($model, 'category_id'); ?>
-        <div class="cat-list-block">
-            <div class="cat-list-block-label">Основная категория</div>
-                <?php
-                echo Chtml::dropDownList('Cat1', $cat1_id, Category::getCategoriesForSelect(),
-                    [
-                        'class' => 'cat-list form-control',
-                        'id' => 'Cat1',
-                        'style' => '',
-                        'size' => 12
-                    ]);
+                        ), ['class' => 'form-control width_input']
+                );
                 ?>
+
+            </div>
         </div>
+    <?php endif; ?>
 
-        <div style="<?= $display_2; ?>" class="cat-list-block">
-            <div class="cat-list-block-label">Подкатегория</div>
-                <?php
-                echo Chtml::dropDownList('Cat2', $cat2_id, $cat_2_elements,
-                    [
-                        'class' => 'cat-list form-control',
-                        'id' => 'Cat2',
-                        'style' => $display_2,
-                        'size' => 12
-                    ]);
-                ?>
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Название лота:</p>
         </div>
-
-        <div style="<?= $display_3; ?>" class="cat-list-block">
-            <div class="cat-list-block-label">Дополнительно</div>
-                <?php
-                echo Chtml::dropDownList('Cat3', $cat3_id, $cat_3_elements,
-                    [
-                        'class' => 'cat-list form-control',
-                        'id' => 'Cat3',
-                        'style' => $display_3,
-                        'size' => 12
-                    ]);
-                ?>
-        </div>
-        <div style="<?= $display_4; ?>" class="cat-list-block cat4_last">
-            <div class="cat-list-block-label">Дополнительно</div>
-                <?php
-                echo Chtml::dropDownList('Cat4', $cat4_id, $cat_4_elements,
-                    [
-                        'class' => 'cat-list form-control',
-                        'id' => 'Cat4',
-                        'style' => $display_4,
-                        'size' => 12
-                    ]);
-                ?>
+        <div class="col-xs-9 right_col">
+            <?php echo $form->error($model, 'name'); ?>
+            <?php echo $form->textField($model, 'name', array('class' => 'form-control width_input')); ?> 
         </div>
     </div>
-</div>
+
+    <?php
+    $cat1_id = '';
+    $cat2_id = '';
+    $cat3_id = '';
+    $cat4_id = '';
+
+    $favourites_category = $model->getAncestorCategoryId();
+    foreach ($favourites_category as $key => $value) {
+        ${"cat" . ($key + 1) . "_id"} = $value;
+    }
+
+    $cat_2_elements = Category::getCategoriesForSelect($cat1_id);
+    $display_2 = (count($cat_2_elements) > 0) ? 'display:block' : 'display:none';
+    $cat_3_elements = Category::getCategoriesForSelect($cat2_id);
+    $display_3 = (count($cat_3_elements) > 0) ? 'display:block' : 'display:none';
+    $cat_4_elements = Category::getCategoriesForSelect($cat3_id);
+    $display_4 = (count($cat_4_elements) > 0) ? 'display:block' : 'display:none';
+    ?>
 
 
 
+    <?php echo $form->hiddenField($model, 'category_id'); ?>
+    <input type="hidden" name="hide_cats" id="hide_category_id" />
 
-
-
-
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Параметры лота</p>
-    </div>
-
-    <div class="col-xs-9 right_col" id="content-options-block">
-
-        <div id="content-options" style="padding: 0px 5px; background-color: rgb(241, 241, 241);">
-			<?php
-			$this->renderPartial(
-				'_options',
-				array(
-					'options' => $ItemOptions,
-					'selected' => true,
-					'auction_id' => $model->auction_id
-				)
-			);
-			?>
-	</div>
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Описание лота</p>
-        <span>
-            Подробно опишите товар. Укажите преимущества и дополнительные характеристики. Опишите дефекты если таковые
-            имеются. Сделайте Ваше описание побуждающим к действию.
-        </span>
-    </div>
-    <div class="col-xs-9 right_col">
-	<?php echo $form->error($model, 'description'); ?>
-        <?php
-        Yii::import('backend.extensions.imperaviRedactor.ImperaviRedactorWidget');
-        $this->widget('ImperaviRedactorWidget', array(
-            'model' => $model,
-            'attribute' => 'text',
-            'options' => array(
-                'lang' => 'ru',
-                'convertVideoLinks' => 'true',
-                 'buttons' => array('formatting', '|', 'bold', 'italic', 'deleted', 'underline', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|', 'fontcolor', 'backcolor', '|', 'alignleft', 'aligncenter', 'alignright', 'justify', '|', 'link', 'image', 'video', 'horizontalrule'),
-                'iframe' => true,
-                'minHeight' => 250
-            ),
-            'plugins' => array(
-                'fontsize' => array(
-                    'js' => array('fontsize.js'),
-                ),
-            )
-        ));
-	?>
-    </div>
-</div>
-
-
-
-
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Тип аукциона и цена</p>
-    </div>
-    <div class="col-xs-9 right_col">
-        <?php echo $form->error($model, 'type_transaction'); ?>
-        <?php
-        echo CHtml::radioButtonList(
-            CHtml::activeName($model, 'type_transaction'),
-            0,
-            array(
-                    Auction::TP_TR_STANDART => 'Стандартный',
-                    Auction::TP_TR_START_ONE => 'С 1 рубля',
-                    Auction::TP_TR_SALE => 'Фиксированная цена'
-            ),
-            array(
-                    'id' => 'type_transaction',
-                    'template' => '<div class="radio-inline">{input}{label}</div>',
-                    'separator' => "\n"
-            )
-        );
-
-        ?>
-        <div class="input_block">
-            <div id="starting_price_block" class="div3">
-                    <?php echo $form->label($model, 'starting_price', [
-                            'required' => true,
-                            'label' => 'Начальная цена (руб.)'
-                        ]); ?><br>
-                    <?php echo $form->textField($model, 'starting_price', ['class'=>'form-control width_input_short']); ?>
-                    <?php echo $form->error($model, 'starting_price'); ?>
-                    <p>Укажите <b>начальную цену</b>. Виигрывает тот участник который предложит наивысшую цену на момент
-                            окончания торгов.</p>
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Категория:</p>
+            <span>Определите место в каталоге</span>
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php echo $form->error($model, 'category_id'); ?>
+            <div class="cat-list-block">
+                <div class="cat-list-block-label">Основная категория</div>
+                <?php
+                echo Chtml::dropDownList('Cat1', $cat1_id, Category::getCategoriesForSelect(), [
+                    'class' => 'cat-list form-control',
+                    'id' => 'Cat1',
+                    'style' => '',
+                    'size' => 12
+                ]);
+                ?>
             </div>
 
-            <div id="price_block" class="p_block">
+            <div style="<?= $display_2; ?>" class="cat-list-block">
+                <div class="cat-list-block-label">Подкатегория</div>
+                <?php
+                echo Chtml::dropDownList('Cat2', $cat2_id, $cat_2_elements, [
+                    'class' => 'cat-list form-control',
+                    'id' => 'Cat2',
+                    'style' => $display_2,
+                    'size' => 12
+                ]);
+                ?>
+            </div>
+
+            <div style="<?= $display_3; ?>" class="cat-list-block">
+                <div class="cat-list-block-label">Дополнительно</div>
+                <?php
+                echo Chtml::dropDownList('Cat3', $cat3_id, $cat_3_elements, [
+                    'class' => 'cat-list form-control',
+                    'id' => 'Cat3',
+                    'style' => $display_3,
+                    'size' => 12
+                ]);
+                ?>
+            </div>
+            <div style="<?= $display_4; ?>" class="cat-list-block cat4_last">
+                <div class="cat-list-block-label">Дополнительно</div>
+                <?php
+                echo Chtml::dropDownList('Cat4', $cat4_id, $cat_4_elements, [
+                    'class' => 'cat-list form-control',
+                    'id' => 'Cat4',
+                    'style' => $display_4,
+                    'size' => 12
+                ]);
+                ?>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Параметры лота</p>
+        </div>
+
+        <div class="col-xs-9 right_col" id="content-options-block">
+
+            <div id="content-options" style="padding: 0px 5px; background-color: rgb(241, 241, 241);">
+                <?php
+                $this->renderPartial(
+                        '_options', array(
+                    'options' => $ItemOptions,
+                    'selected' => true,
+                    'auction_id' => $model->auction_id
+                        )
+                );
+                ?>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Описание лота</p>
+            <span>
+                Подробно опишите товар. Укажите преимущества и дополнительные характеристики. Опишите дефекты если таковые
+                имеются. Сделайте Ваше описание побуждающим к действию.
+            </span>
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php echo $form->error($model, 'description'); ?>
+            <?php
+            Yii::import('backend.extensions.imperaviRedactor.ImperaviRedactorWidget');
+            $this->widget('ImperaviRedactorWidget', array(
+                'model' => $model,
+                'attribute' => 'text',
+                'options' => array(
+                    'lang' => 'ru',
+                    'convertVideoLinks' => 'true',
+                    'buttons' => array('formatting', '|', 'bold', 'italic', 'deleted', 'underline', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|', 'fontcolor', 'backcolor', '|', 'alignleft', 'aligncenter', 'alignright', 'justify', '|', 'link', 'image', 'video', 'horizontalrule'),
+                    'iframe' => true,
+                    'minHeight' => 250
+                ),
+                'plugins' => array(
+                    'fontsize' => array(
+                        'js' => array('fontsize.js'),
+                    ),
+                )
+            ));
+            ?>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Тип аукциона и цена</p>
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php echo $form->error($model, 'type_transaction'); ?>
+            <?php
+            echo CHtml::radioButtonList(
+                    CHtml::activeName($model, 'type_transaction'), 0, array(
+                Auction::TP_TR_STANDART => 'Стандартный',
+                Auction::TP_TR_START_ONE => 'С 1 рубля',
+                Auction::TP_TR_SALE => 'Фиксированная цена'
+                    ), array(
+                'id' => 'type_transaction',
+                'template' => '<div class="radio-inline">{input}{label}</div>',
+                'separator' => "\n"
+                    )
+            );
+            ?>
+            <div class="input_block">
+                <div id="starting_price_block" class="div3">
+                    <?php
+                    echo $form->label($model, 'starting_price', [
+                        'required' => true,
+                        'label' => 'Начальная цена (руб.)'
+                    ]);
+                    ?><br>
+                    <?php echo $form->textField($model, 'starting_price', ['class' => 'form-control width_input_short']); ?>
+                    <?php echo $form->error($model, 'starting_price'); ?>
+                    <p>Укажите <b>начальную цену</b>. Виигрывает тот участник который предложит наивысшую цену на момент
+                        окончания торгов.</p>
+                </div>
+
+                <div id="price_block" class="p_block">
                     <?php echo $form->label($model, 'price', ['label' => 'Блиц-цена (руб.)']); ?><br>
-                    <?php echo $form->textField($model, 'price', ['class'=>'form-control width_input_short']); ?>
+                    <?php echo $form->textField($model, 'price', ['class' => 'form-control width_input_short']); ?>
                     <?php echo $form->error($model, 'price'); ?>
                     <p><b>Блиц-цена</b> — это цена за которую Вы готовы продать лот досрочно, не дожидаясь окончания торгов.
                     </p>
+                </div>
+
             </div>
-
         </div>
     </div>
-</div>
 
 
 
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Количество</p>
-        <span>Укажите доступное количество единиц лота</span>
-    </div>
-    <div class="col-xs-9 right_col">
-        <?php echo $form->error($model, 'quantity'); ?>
-        <?php echo $form->textField($model, 'quantity', ['class'=>'form-control width_input_short']); ?>
-    </div>
-</div>
-
-
-
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Продолжительность торгов</p>
-    </div>
-    <div class="col-xs-9 right_col">
-        <?php
-        if (!isset($model->duration)){$model->duration = 8;}
-        echo Chtml::activeDropDownList(
-                $model,
-                'duration',
-                Auction::getDurationList(),
-                array(
-                        'empty' => ' - выберите период - ',
-                        'class' => 'form-control width_input_short'
-                )
-        );
-        ?>
-        <?php echo $form->error($model, 'duration'); ?>
-
-        <div class="checkbox">
-            <?php echo Chtml::activeCheckBox($model, 'is_auto_republish', ['style'=>'margin-left:0px']); ?> 
-            <?= CHtml::activeLabel($model, 'is_auto_republish', array('label' => 'Автоматически перевыставить лот если не нашелся покупатель')) ?>
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Количество</p>
+            <span>Укажите доступное количество единиц лота</span>
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php echo $form->error($model, 'quantity'); ?>
+            <?php echo $form->textField($model, 'quantity', ['class' => 'form-control width_input_short']); ?>
         </div>
     </div>
-</div>
 
 
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Местонахождение лота</p>
-        <span>Для автоматической подстановки данных заполните местоположение в настройках</span>
-    </div>
-    <div class="col-xs-9 right_col">
-        <?php $this->widget('frontend.widgets.citySelector.CitySelectorWidget', array('model' => $model)); ?>
-        <?php echo $form->error($model, 'id_city'); ?>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Дополнительные контактные данные</p>
-        <span>Укажите какими дополнительными способами с Вами можно связаться.
-    	Эта информация также будет передана победителю. Варианты и стоимость пересылки.</span>
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Продолжительность торгов</p>
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php
+            if (!isset($model->duration)) {
+                $model->duration = 8;
+            }
+            echo Chtml::activeDropDownList(
+                    $model, 'duration', Auction::getDurationList(), array(
+                'empty' => ' - выберите период - ',
+                'class' => 'form-control width_input_short'
+                    )
+            );
+            ?>
+            <?php echo $form->error($model, 'duration'); ?>
+
+            <div class="checkbox">
+                <?php echo Chtml::activeCheckBox($model, 'is_auto_republish', ['style' => 'margin-left:0px']); ?> 
+                <?= CHtml::activeLabel($model, 'is_auto_republish', array('label' => 'Автоматически перевыставить лот если не нашелся покупатель')) ?>
+            </div>
+        </div>
     </div>
-    <div class="col-xs-9 right_col">
-        <?php
-        echo $form->textArea($model, 'contacts', ['class' => 'form-control width_input text_area']);
-        ?>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-3 left_col">
-        <p>Условия передачи</p>
-        <span>Укажите на каких условиях Вы готовы передать товар</span>
-    </div>
-    <div class="col-xs-9 right_col">
-        <?php
-        echo $form->textArea($model, 'conditions_transfer', ['class' => 'form-control width_input text_area']);
-        ?>
-    </div>
-</div>
 
 
-<div class="row">
-    <div class="col-xs-3 left_col">
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Местонахождение лота</p>
+            <span>Для автоматической подстановки данных заполните местоположение в настройках</span>
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php $this->widget('frontend.widgets.citySelector.CitySelectorWidget', array('model' => $model)); ?>
+            <?php echo $form->error($model, 'id_city'); ?>
+        </div>
     </div>
-    <div class="col-xs-9 right_col">
-        <?php
-        echo $form->errorSummary(
-                $model,
-                '<span class="head_error">Ошибки заполнения:</span>',
-                '<p>Пожалуйста, исправьте ошибки и вы сможете опубликовать лот.</p>',
-                array('class' => 'error_container')
-        );
-        ?>
-        <?php echo CHtml::submitButton('Опубликовать', array('class' => 'btn btn-success')); ?>
+
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Дополнительные контактные данные</p>
+            <span>Укажите какими дополнительными способами с Вами можно связаться.
+                Эта информация также будет передана победителю. Варианты и стоимость пересылки.</span>
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php
+            echo $form->textArea($model, 'contacts', ['class' => 'form-control width_input text_area']);
+            ?>
+        </div>
     </div>
-</div>
-<?php $this->endWidget(); ?>
+    <div class="row">
+        <div class="col-xs-3 left_col">
+            <p>Условия передачи</p>
+            <span>Укажите на каких условиях Вы готовы передать товар</span>
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php
+            echo $form->textArea($model, 'conditions_transfer', ['class' => 'form-control width_input text_area']);
+            ?>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-3 left_col">
+        </div>
+        <div class="col-xs-9 right_col">
+            <?php
+            echo $form->errorSummary(
+                    $model, '<span class="head_error">Ошибки заполнения:</span>', '<p>Пожалуйста, исправьте ошибки и вы сможете опубликовать лот.</p>', array('class' => 'error_container')
+            );
+            ?>
+            <?php echo CHtml::submitButton('Опубликовать', array('class' => 'btn btn-success')); ?>
+        </div>
+    </div>
+    <?php $this->endWidget(); ?>
 
 </div>
