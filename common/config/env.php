@@ -4,10 +4,10 @@ return [
     'preload'    => ['log'],
     'components' => [
         'db'  => [
-            'connectionString'      => 'mysql:host=localhost;dbname=dbname',
+            'connectionString'      => 'mysql:host=localhost;dbname=buysell',
             'emulatePrepare'        => true,
-            'username'              => 'dbuser',
-            'password'              => 'dbpassword',
+            'username'              => 'buysell',
+            'password'              => 'buysell',
             'charset'               => 'utf8',
             'enableProfiling'       => true,
             'enableParamLogging'    => true,

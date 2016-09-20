@@ -83,12 +83,14 @@ class City extends CActiveRecord
 
     public static function getCitiesByRegion($id_region)
     {
-        $cities = Yii::app()->cache->get('cities-of-region-'.$id_region);
+        $cities = Yii::app()->cache ? Yii::app()->cache->get('cities-of-region-'.$id_region) : false;
 
         if ($cities === false)
         {
             $cities = City::model()->findAllByAttributes(array('id_region' => $id_region));
-            Yii::app()->cache->set('cities-of-region-'.$id_region, $cities, Yii::app()->params['cache_duration']);
+            if(Yii::app()->cache) {
+                Yii::app()->cache->set('cities-of-region-'.$id_region, $cities, Yii::app()->params['cache_duration']);
+            }
         }
 
         return $cities;

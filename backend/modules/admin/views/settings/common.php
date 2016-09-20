@@ -90,6 +90,9 @@ $this->header_info = array(
                                                 'uncheckValue' => '0')
                                         );
                                         break;
+                                    case Setting::TYPE_FIELD_LOCATION:
+                                        $this->widget('frontend.widgets.citySelector.CitySelectorWidget', array('model' => $field, 'baseUrl' => Yii::app()->params['siteUrl']));
+                                        break;
                                 }
                                 echo "<br /> {$field->name}";
                                 ?>

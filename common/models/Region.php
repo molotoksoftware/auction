@@ -81,12 +81,14 @@ class Region extends CActiveRecord
 
     public static function getRegionsByCountry($id_country)
     {
-        $regions = Yii::app()->cache->get('regions-'.$id_country);
+        $regions = Yii::app()->cache ? Yii::app()->cache->get('regions-'.$id_country) : false;
 
         if ($regions === false)
         {
             $regions = Region::model()->findAllByAttributes(array('id_country' => $id_country));
-            Yii::app()->cache->set('regions-'.$id_country, $regions, Yii::app()->params['cache_duration']);
+            if(Yii::app()->cache) {
+                Yii::app()->cache->set('regions-'.$id_country, $regions, Yii::app()->params['cache_duration']);
+            }
         }
 
         return $regions;

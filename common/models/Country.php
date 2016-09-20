@@ -80,12 +80,14 @@ class Country extends CActiveRecord
 
     public static function getAllCountries()
     {
-        $countries = Yii::app()->cache->get('country');
+        $countries = Yii::app()->cache ? Yii::app()->cache->get('country') : false;
 
         if ($countries === false)
         {
             $countries = Country::model()->findAll();
-            Yii::app()->cache->set('country', $countries, Yii::app()->params['cache_duration']);
+            if(Yii::app()->cache) {
+                Yii::app()->cache->set('country', $countries, Yii::app()->params['cache_duration']);
+            }
         }
 
         return $countries;
