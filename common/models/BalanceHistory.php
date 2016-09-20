@@ -122,6 +122,10 @@ class BalanceHistory extends CActiveRecord {
 
         $criteria->compare('type', $this->type, true);
         $criteria->compare('summa', $this->summa, true);
+        $criteria->compare('description', $this->description, true);
+
+        $criteria->join.= ' LEFT JOIN users ON users.user_id = t.user_id';
+        $criteria->compare('login', $this->user_id, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

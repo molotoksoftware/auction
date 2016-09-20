@@ -42,7 +42,6 @@ $this->widget(
             'name' => 'user_id',
             'type' => 'raw',
             'value' => '$data->getBuyerLink()',
-            'filter' => false,
             'headerHtmlOptions' => ['width' => '10%'],
         ),
         array(
@@ -50,7 +49,6 @@ $this->widget(
             'name' => 'summa',
             'type' => 'raw',
             'value' => '$data->getSummaWithIcoType()',
-            'filter' => false,
             'headerHtmlOptions' => ['width' => '10%'],
         ),
         array(
@@ -64,7 +62,6 @@ $this->widget(
         array(
             'header' => 'Описание',
             'name' => 'description',
-            'filter' => false,
             'type' => 'raw',
             'value' => '$data->description',
             'headerHtmlOptions' => ['width' => '20%'],
