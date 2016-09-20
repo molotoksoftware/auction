@@ -43,6 +43,7 @@ $options = array(
     'cat_1' => '#Cat1',
     'cat_2' => '#Cat2',
     'cat_3' => '#Cat3',
+    'cat_4' => '#Cat4',
     'type' => $type
 );
 
@@ -219,6 +220,7 @@ $form = $this->beginWidget(
 $cat1_id = '';
 $cat2_id = '';
 $cat3_id = '';
+$cat4_id = '';
 
 $favourites_category = $model->getAncestorCategoryId();
 foreach ($favourites_category as $key => $value) {
@@ -229,6 +231,8 @@ $cat_2_elements = Category::getCategoriesForSelect($cat1_id);
 $display_2 = (count($cat_2_elements) > 0) ? 'display:block' : 'display:none';
 $cat_3_elements = Category::getCategoriesForSelect($cat2_id);
 $display_3 = (count($cat_3_elements) > 0) ? 'display:block' : 'display:none';
+$cat_4_elements = Category::getCategoriesForSelect($cat3_id);
+$display_4 = (count($cat_4_elements) > 0) ? 'display:block' : 'display:none';
 
 ?>
 
@@ -243,9 +247,9 @@ $display_3 = (count($cat_3_elements) > 0) ? 'display:block' : 'display:none';
         <span>Определите место в каталоге</span>
     </div>
     <div class="col-xs-9 right_col">
+        <?php echo $form->error($model, 'category_id'); ?>
         <div class="cat-list-block">
             <div class="cat-list-block-label">Основная категория</div>
-                <?php echo $form->error($model, 'category_id'); ?>
                 <?php
                 echo Chtml::dropDownList('Cat1', $cat1_id, Category::getCategoriesForSelect(),
                     [
@@ -278,6 +282,18 @@ $display_3 = (count($cat_3_elements) > 0) ? 'display:block' : 'display:none';
                         'class' => 'cat-list form-control',
                         'id' => 'Cat3',
                         'style' => $display_3,
+                        'size' => 12
+                    ]);
+                ?>
+        </div>
+        <div style="<?= $display_4; ?>" class="cat-list-block cat4_last">
+            <div class="cat-list-block-label">Дополнительно</div>
+                <?php
+                echo Chtml::dropDownList('Cat4', $cat4_id, $cat_4_elements,
+                    [
+                        'class' => 'cat-list form-control',
+                        'id' => 'Cat4',
+                        'style' => $display_4,
                         'size' => 12
                     ]);
                 ?>

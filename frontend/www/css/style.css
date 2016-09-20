@@ -828,6 +828,9 @@ span.rew_yes_no.up_active {
 .cat-list {
     width:270px !important;
 }
+.cat4_last {
+    margin-top:10px;
+}
 
 .width_input {
     width:500px !important;

@@ -44,6 +44,7 @@ $options = array(
     'cat_1' => '#Cat1',
     'cat_2' => '#Cat2',
     'cat_3' => '#Cat3',
+    'cat_4' => '#Cat4',
     'type' => $type,
     'select_cat_t' => Yii::t('basic', 'Please select the category'),
     'no_param' => Yii::t('basic', 'For this category of parameters to be determined'),
@@ -214,6 +215,7 @@ $seller = Yii::app()->user->getModel();
     $cat1_id = '';
     $cat2_id = '';
     $cat3_id = '';
+    $cat4_id = '';
 
     if (isset($model->category_id) && !empty($model->category_id)) {
         $base = new BaseAuction();
@@ -229,6 +231,8 @@ $seller = Yii::app()->user->getModel();
     $display_2 = (count($cat_2_elements) > 0) ? 'display:block' : 'display:none';
     $cat_3_elements = Category::getCategoriesForSelect($cat2_id);
     $display_3 = (count($cat_3_elements) > 0) ? 'display:block' : 'display:none';
+    $cat_4_elements = Category::getCategoriesForSelect($cat3_id);
+    $display_4 = (count($cat_4_elements) > 0) ? 'display:block' : 'display:none';
     ?>
 
     <?php echo $form->hiddenField($model, 'category_id'); ?>
@@ -272,6 +276,17 @@ $seller = Yii::app()->user->getModel();
                     'class' => 'cat-list form-control',
                     'id' => 'Cat3',
                     'style' => $display_3,
+                    'size' => 12
+                ]);
+                ?>
+            </div>
+            <div style="<?= $display_4; ?>" class="cat-list-block cat4_last">
+            <div class="cat-list-block-label"><?= Yii::t('basic', 'Subcategory') ?></div>
+                <?php
+                echo Chtml::dropDownList('Cat4', $cat4_id, $cat_4_elements, [
+                    'class' => 'cat-list form-control',
+                    'id' => 'Cat4',
+                    'style' => $display_4,
                     'size' => 12
                 ]);
                 ?>

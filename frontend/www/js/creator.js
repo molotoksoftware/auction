@@ -139,12 +139,47 @@ var Creator = function(options) {
         });
     });
 
-    //cat3
     $(opts.cat_3).change(function() {
-        cat_id = $("#Cat3").find("option:selected").val();
-        
+        var data = {
+            "cat_id": $(this).find("option:selected").val(),
+            "level": 3,
+            "where_show": opts.where_show
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: opts.dynamicCategoriesUrl,
+            data: data,
+            dataType: 'json',
+            beforeSend: function() {
+	            $("#Cat4").parent('.cat-list-block').hide();
+                $("#Cat4").hide();
+                $("#" + opts.type + "_category_id").val("");
+                main.hideOptions();
+            },
+            success: function(data) {
+                if (data.isSubCategories) {
+                    $("#Cat4").html(data.options);
+                    $("#Cat4").show();
+	                $("#Cat4").parent('.cat-list-block').show();
+
+                    $("#hide_category_id").val("");
+                } else {
+                    cat_id = $("#Cat3").find("option:selected").val();
+
+                    $("#hide_category_id").val(cat_id);
+
+                    $("#" + opts.type + "_category_id").val(cat_id);
+                    main.downloadOptions(cat_id);
+                }
+            }
+        });
+    });
+
+    //cat4
+    $(opts.cat_4).change(function() {
+        cat_id = $("#Cat4").find("option:selected").val();
         $("#hide_category_id").val(cat_id);
-        
         $("#" + opts.type + "_category_id").val(cat_id);
         main.downloadOptions(cat_id);
     });
