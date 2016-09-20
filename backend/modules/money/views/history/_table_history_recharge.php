@@ -49,7 +49,7 @@ $this->widget(
             'header' => 'Сума',
             'name' => 'summa',
             'type' => 'raw',
-            'value' => '$data->getSumma()',
+            'value' => '$data->getSummaWithIcoType()',
             'filter' => false,
             'headerHtmlOptions' => ['width' => '10%'],
         ),

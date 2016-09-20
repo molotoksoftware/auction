@@ -40,7 +40,7 @@ $this->header_info = array(
         <div class="box-header">
             <span class="title"> История пополнений (+) и списаний (-) средств с баланса пользователей</span>
             <ul class="box-toolbar">
-                <li><span class="label label-blue"><? // $dataProvider->getTotalItemCount(); ?></span></li>
+                <li><span class="label label-blue"><?= $model->searchAdmin()->getTotalItemCount(); ?></span></li>
             </ul>
         </div>
         <div class="box-content">

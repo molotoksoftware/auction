@@ -47,46 +47,6 @@ class HistoryController extends BackController {
 
     public function actionRecharge() {
 
-        /*
-          $model = new BalanceHistory('search');
-          $model->unsetAttributes();
-
-          if (isset($_GET['BalanceHistory'])) {
-          $model->attributes = $_GET['BalanceHistory'];
-          }
-
-
-
-          $dataProvider = new CActiveDataProvider($model, array(
-          'pagination' => array(
-          'pageSize' => 25,
-          ),
-          'sort' => array(
-          'defaultOrder' => 'created_on DESC'
-          ),
-          //    'criteria' => $criteria
-          ));
-
-          if (isset($_GET['ajax'])) {
-          $this->renderPartial(
-          '_table_history_recharge',
-          array(
-          'dataProvider' => $dataProvider,
-          'model' => $model,
-          )
-          );
-          } else {
-          $this->render(
-          'recharge',
-          array(
-          'dataProvider' => $dataProvider,
-          'model' => $model,
-          )
-          );
-          }
-         * 
-         * 
-         */
         $model = new BalanceHistory('searchAdmin');
         $model->unsetAttributes();
 

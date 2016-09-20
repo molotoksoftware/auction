@@ -40,8 +40,7 @@ class BalanceHistory extends CActiveRecord {
     const STATUS_ADD = 1;
     const STATUS_SUB = 2;
     const STATUS_RETURN = 3;
-    const STATUS_COMMISSION_SALE_LOT = 4; // Комиссия с продажи лота.
-    const STATUS_REFERAL = 5;
+    const STATUS_COMMISSION_SALE_LOT = 4;
 
     /**
      * @return string the associated database table name
@@ -132,9 +131,6 @@ class BalanceHistory extends CActiveRecord {
             'sort' => [
                 'defaultOrder' => 'created_on DESC'
             ],
-                //  'sort' => [
-                //      'defaultOrder' => 'sale_id DESC',
-                //   ],
         ));
     }
 
@@ -166,8 +162,7 @@ class BalanceHistory extends CActiveRecord {
     }
 
     public function getSumma() {
-        $modul = $this->type == 1 ? '+ ' : '- ';
-        return $modul . floatval($this->summa);
+        return floatval($this->summa);
     }
 
     public function getSummaFormat($decimals = 0) {
@@ -176,23 +171,25 @@ class BalanceHistory extends CActiveRecord {
 
     public function getSummaWithIcoType() {
         $ico = '';
+        $class = 'label-green';
         $summa = $this->getSumma();
 
         if ($this->type == self::STATUS_ADD or $this->type == self::STATUS_RETURN) {
             $ico = '+';
         } elseif (in_array($this->type, [self::STATUS_SUB, self::STATUS_COMMISSION_SALE_LOT])) {
             $ico = '-';
+            $class = 'label-red';
         }
 
-        return $ico . ' ' . $summa;
+        return '<span class="label ' . $class . '">' . $ico . ' ' . $summa . '</span>';
     }
 
     public static function getStatusList() {
         return [
-            self::STATUS_ADD => 'Пополнение',
-            self::STATUS_SUB => 'Списание',
-            self::STATUS_RETURN => 'Возврат',
-            self::STATUS_COMMISSION_SALE_LOT => 'Комиссия',
+            self::STATUS_ADD => Yii::t('money', 'Recharge'),
+            self::STATUS_SUB => Yii::t('money', 'Discharge'),
+            self::STATUS_RETURN => Yii::t('money', 'Return'),
+            self::STATUS_COMMISSION_SALE_LOT => Yii::t('money', 'Commission'),
         ];
     }
 
