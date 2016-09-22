@@ -37,7 +37,7 @@
         $model->id_city = $user->id_city;
     }
 
-    if(!$model->id_city && $defaultLocation && get_class(Yii::app()->user->model) == 'User') {
+    if(!$model->id_city && $model->id_region && $model->id_country&& $defaultLocation && get_class(Yii::app()->user->model) == 'User') {
         $model->id_country = $defaultLocation->id_country;
         $model->id_region = $defaultLocation->id_region;
         $model->id_city = $defaultLocation->id_city;
@@ -45,27 +45,27 @@
 
     $lock = false;
     if(get_class(Yii::app()->user->model) == 'User') {
-        $lock = Setting::getByName('defaultLocationLock');
+        $lock = Yii::app()->params['defaultLocationLock'];
     }
 ?>
 
 <div class="city-selector" data-base-url="<?= $baseUrl ?>">
-    <? if($model->hasErrors('id_city') || $model->hasErrors('id_region') || $model->hasErrors('id_country')): ?>
+    <?php if($model->hasErrors('id_city') || $model->hasErrors('id_region') || $model->hasErrors('id_country')): ?>
         <div>
             <small><span style="color: red;"><?= Yii::t('basic', 'Select a location')?></span></small>
         </div>
         <div class="clear"></div>
     <?php endif; ?>
-    
+
+    <?php if ($scope == CitySelectorWidget::SCOPE_CATEGORY): ?>
+        <label for="<?= CHtml::activeId($model, 'id_country') ?>">
+            <?= Yii::t('basic', 'Location of items')?>
+        </label>
+    <?php endif; ?>
+
     <?php if($lock && $defaultLocation->id_country): ?>
         <?= CHtml::activeHiddenField($model,'id_country'); ?>
     <?php else: ?>
-        <?php if ($scope == CitySelectorWidget::SCOPE_CATEGORY): ?>
-            <label for="<?= CHtml::activeId($model, 'id_country') ?>">
-                <?= Yii::t('basic', 'Location of items')?>
-            </label>
-        <?php endif; ?>
-
         <div class="select_cat_id_cont">
             <?php echo CHtml::activeDropDownList(
                 $model,

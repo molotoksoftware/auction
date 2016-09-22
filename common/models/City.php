@@ -109,11 +109,7 @@ class City extends CActiveRecord
      */
     public static function getCityPathString(City $city)
     {
-        if ($city->country->id_country != 1) {
-            return CHtml::encode($city->country->name . ', ' . $city->region->name . ', ' . $city->name);
-        } else {
-            return CHtml::encode($city->region->name . ', ' . $city->name);
-        }
+        return CHtml::encode($city->country->name . ', ' . $city->region->name . ', ' . $city->name);
     }
 
     public static function model($className = __CLASS__)

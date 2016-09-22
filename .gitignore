@@ -11,6 +11,7 @@ composer.phar
 /backend/www/assets/*
 /backend/www/webstat/*
 /console/runtime/*
+/common/config/env.php
 /frontend/runtime/*
 /frontend/www/assets/*
 /frontend/www/i2/*
