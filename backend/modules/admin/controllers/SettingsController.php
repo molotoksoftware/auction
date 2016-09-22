@@ -115,6 +115,23 @@ class SettingsController extends BackController
     {
 
         if ($configs = Yii::app()->request->getParam('Setting')) {
+            $configs['defaultLocation'] = [];
+            if(isset($configs['id_country'])) {
+                $configs['defaultLocation']['country'] = $configs['id_country'];
+                unset($configs['id_country']);
+            }
+            
+            if(isset($configs['id_region'])) {
+                $configs['defaultLocation']['region'] = $configs['id_region'];
+                unset($configs['id_region']);
+            }
+            
+            if(isset($configs['id_city'])) {
+                $configs['defaultLocation']['city'] = $configs['id_city'];
+                unset($configs['id_city']);
+            }
+
+            $configs['defaultLocation'] = json_encode($configs['defaultLocation']);
 
             foreach ($configs as $name => $value) {
                 Setting::model()->updateAll(

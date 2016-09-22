@@ -37,10 +37,19 @@ class CitySelectorWidget extends CWidget
     public $showIco = true;
     public $useUserRegion = true;
     public $scope = self::SCOPE_DEFAULT;
+    public $baseUrl = '';
+
+    private $defaultLocation;
 
     public function init()
     {
         Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/country_dropdown.js');
+        $this->defaultLocation = Setting::model()->find('name=:name AND type=:type',
+            array(
+                ':name' => 'defaultLocation',
+                ':type' => Setting::TYPE_COMMON,
+            )
+        );
     }
 
     public function run()
@@ -51,6 +60,8 @@ class CitySelectorWidget extends CWidget
             'showIco'       => $this->showIco,
             'useUserRegion' => $this->useUserRegion,
             'scope'         => $this->scope,
+            'baseUrl'         => $this->baseUrl,
+            'defaultLocation'         => $this->defaultLocation,
         ]);
     }
 }

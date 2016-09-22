@@ -43,10 +43,14 @@ class Setting extends CActiveRecord
     const TYPE_FIELD_TEXT = 1;
     const TYPE_FIELD_TEXT_AREA = 2;
     const TYPE_FIELD_CHECK_BOX = 3;
+    const TYPE_FIELD_LOCATION = 4;
 
     const TYPE_COMMON = 1;
     const TYPE_PRO = 2;
 
+    public $id_city;
+    public $id_region;
+    public $id_country;
 
     /**
      * @return string the associated database table name
@@ -79,6 +83,28 @@ class Setting extends CActiveRecord
     public function relations()
     {
         return array();
+    }
+
+    public function afterFind() {
+        if($this->type_field == self::TYPE_FIELD_LOCATION) {
+            try {
+                $location = json_decode($this->value, true);
+            } catch (Exception $e) {
+                $location = [];
+            }
+
+            if(isset($location['country'])) {
+                $this->id_country = $location['country'];
+            }
+
+            if(isset($location['region'])) {
+                $this->id_region = $location['region'];
+            }
+
+            if(isset($location['city'])) {
+                $this->id_city = $location['city'];
+            }
+        }
     }
 
     /**
