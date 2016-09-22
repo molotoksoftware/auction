@@ -37,7 +37,7 @@
         $model->id_city = $user->id_city;
     }
 
-    if(!$model->id_city && $model->id_region && $model->id_country&& $defaultLocation && get_class(Yii::app()->user->model) == 'User') {
+    if(!$model->id_city && !$model->id_region && !$model->id_country && $defaultLocation && get_class(Yii::app()->user->model) == 'User') {
         $model->id_country = $defaultLocation->id_country;
         $model->id_region = $defaultLocation->id_region;
         $model->id_city = $defaultLocation->id_city;
