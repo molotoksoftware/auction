@@ -326,7 +326,6 @@ class SalesController extends FrontController
                                     [':owner' => Yii::app()->user->id, ':auction_id' => $lot]
                                 );
                                 if ($model) {
-                                    $model->del_status = 1;
                                     $model->status = 10;
                                     $model->update();
                                 }
@@ -358,7 +357,6 @@ class SalesController extends FrontController
 
         if ($count == 1) {
             $model = Auction::model()->findByPk($id);
-            $model->del_status = 1;
             $model->status = 10;
             $model->update();
         }
