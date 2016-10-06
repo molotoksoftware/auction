@@ -54,14 +54,6 @@ $form = $this->beginWidget(
 );
 ?>
 
-    <label>Уточнение поиска</label>
-
-    <?php
-    $search = (isset($_GET['search']) && !empty($_GET['search']) && $_GET['search'] !== 'Введите фразу для поиска') ? $_GET['search'] : '';
-    ?>
-    <div class="form-group">
-    <?php echo CHtml::textField('search', $search, ['class'=>'form-control', 'style'=>'width:175px']); /*$form->textField($filter, 'name');*/ ?>
-    </div>
     <label>Цена</label>
     <div class="form-group form-inline">
     <?php echo $form->textField($filter, 'price_min', ['class' => 'form-control', 'style'=>'width:80px']); ?> -

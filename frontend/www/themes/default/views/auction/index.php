@@ -81,34 +81,10 @@ if ($category == false) {
     <div class="col-xs-3 sidebar_left">
        <?php 
 
-        if (!$this->active_search) {
+        if (!$search_active) {
             $this->widget('frontend.widgets.category.CategoryWidget');
         } else {
-            $this->widget('frontend.widgets.categories.CategoriesWidget', [
-                'htmlOptions'              => [
-                    'class' => 'main_nav profile_cat_tree list-group',
-                ],
-                'prefix'                   => 'auction',
-                'widgetCacheKey'           => 'auction_user_h55our_' . date('h'),
-                'countRelationName'        => 'count',
-                'categories'               => $this->categories,
-                'activeCategory'           => $this->userSelectedCategory,
-                'prependAllCategoriesItem' => [
-                    'label'               => 'Все категории',
-                    'url'                 => '/auction?'.Yii::app()->getRequest()->getQueryString(),
-                    'count'               => null,
-                    'num'                 => null,
-                    'spec'                => 0,
-                    'level'               => null,
-                    'alias'               => '',
-                    'isAllCategoriesItem' => true,
-                    'active'              => $this->userSelectedCategory === 0,
-                    'linkOptions'         => ['class' => 'all-cat-item'],
-                ],
-                'linkBaseUrl'              => Yii::app()->createUrl('/auctions'),
-                'itemCssClass' => 'subcat list-group-item',
-                'cacheMenuItems' => false
-            ]);
+            $this->widget('frontend.widgets.category_search.CategorySearchWidget',['auc_id_arr' => $auc_id_arr]);
         }?>
         <hr class="horizontal_line">
         <?php

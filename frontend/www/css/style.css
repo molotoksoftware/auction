@@ -115,6 +115,13 @@ a {
 }
 .search_box_form {
 }
+.search_box_form small {
+    margin-left: 13px;
+    color: #54a0ff;
+}
+.search_box_form #change-search-action {
+    cursor: pointer;
+}
 /* Форма поиска   КОНЕЦ                         */
 
 /* Sidebar НАчало*/

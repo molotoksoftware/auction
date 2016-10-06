@@ -147,7 +147,10 @@ class ReviewsController extends FrontController
         } else {
             $items = Reviews::model()->cache(8000, $condition)->getTo($user)->findAll($criteria);
         }
-        $this->prepareUserCategoriesTreeData($user);
+
+        $this->prepareUserCategoriesTreeData($user->user_id);
+        $this->searchAction = '/user/page/'.$user->login;
+        $this->userNick = $user->getNickOrLogin();
 
         $this->render(
             'view',

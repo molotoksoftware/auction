@@ -30,10 +30,27 @@
 class SearchWidget extends CWidget
 {
     protected $allowed;
+    public $searchActionInWidget;
+    public $userNickInWidget;
     public $formModel;
 
     public function init()
     {
+
+        Yii::app()->clientScript->registerScript(
+            'create-close-all', '
+
+
+    $("#change-search-action").click(function() {
+        $(this).parent().remove();
+        
+        $(".search_form_top").attr("action", "/auction");
+    });
+    
+',
+            CClientScript::POS_END
+        );
+
         $this->allowed = array(
             'auction',
             'site',
@@ -47,7 +64,11 @@ class SearchWidget extends CWidget
 
     public function run()
     {
-            $this->render('search', array('formModel' => $this->formModel));
+            $this->render('search', [
+                'formModel' => $this->formModel,
+                'searchActionInWidget' => $this->searchActionInWidget,
+                'userNickInWidget' => $this->userNickInWidget,
+            ]);
     }
 
 }

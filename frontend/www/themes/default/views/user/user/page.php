@@ -53,7 +53,7 @@ $issetLot = UserDataHelper::issetLot($this->user->user_id);
 
 <div class="row auction">
         <div class="col-xs-9">
-            <h2>Лоты пользователя</h2>
+            <h2>Лоты пользователя <?= $this->user->getNickOrLogin();?></h2>
 
         </div>
         <div class="col-xs-3 text-right">
@@ -64,38 +64,11 @@ $issetLot = UserDataHelper::issetLot($this->user->user_id);
 </div>
 <hr class="top10 horizontal_line">
 
-<?php // print_r($_GET['Auction']); ?>
 <div class ="row">
     <div class="col-xs-3 sidebar_left">
-        <?php $this->widget('frontend.widgets.categories.CategoriesWidget', [
-            'htmlOptions'              => [
-                'class' => 'main_nav profile_cat_tree list-group',
-            ],
-            'prefix'                   => 'auction',
-            'widgetCacheKey'           => 'auction_user_' . $this->user->user_id . '_hour_' . date('h'),
-            'countRelationName'        => 'count',
-            'categories'               => $this->categories,
-            'activeCategory'           => $this->userSelectedCategory,
-            'prependAllCategoriesItem' => [
-                'label'               => 'Все категории',
-                'url'                 => Yii::app()->createUrl(
-                    '/user/user/page',
-                    ['login' => $this->user->login, 'path' => 'all']
-                ),
-                'count'               => null,
-                'num'                 => null,
-                'spec'                => 0,
-                'level'               => null,
-                'alias'               => '',
-                'isAllCategoriesItem' => true,
-                'active'              => $this->userSelectedCategory === 0,
-                'linkOptions'         => ['class' => 'all-cat-item'],
-            ],
-            'linkBaseUrl'              => Yii::app()->createUrl('/user/user/page', [
-                'login' => $this->user->login,
-            ]),
-            'itemCssClass' => 'subcat list-group-item',
-            'cacheMenuItems' => false
+        <?php $this->widget('frontend.widgets.category_search.CategorySearchWidget',[
+                        'auc_id_arr' => $auc_id_arr,
+                        'userLogin' => $this->user->login,
         ]); ?>
         <hr class="horizontal_line">
         <span class="pull-right unset_par">
@@ -142,7 +115,7 @@ $issetLot = UserDataHelper::issetLot($this->user->user_id);
             ],
         ],
         'htmlOptions' => [
-            'class' => 'ttf-items',
+            'class' => 'ttf-items list-unstyled nomark type_transaction',
         ]]); ?>
     <hr class="horizontal_line">
      <?php $this->renderPartial(

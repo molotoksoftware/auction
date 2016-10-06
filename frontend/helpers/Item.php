@@ -308,12 +308,29 @@ class Item
         return ($count == false) ? 0 : $count;
     }
 
-    public static function searchHelper($keyword) 
+    public static function searchHelper($keyword, $search_type_filter, $user = false)
     {
         $db = Yii::app()->db->createCommand();
         $db->select('auction_id, category_id');
         $db->from('auction');
         $db->where('status = 1');
+
+        if (isset($search_type_filter)) {
+            if ($search_type_filter == 'default') {
+                $db->andWhere('type_transaction = 0');
+            }
+            if ($search_type_filter == 'buynow') {
+                $db->andWhere('type_transaction = 1');
+            }
+            if ($search_type_filter == 'nulls') {
+                $db->andWhere('type_transaction = 2');
+            }
+        }
+
+        if ($user) {
+            $db->andWhere('owner = :owner', [':owner' => $user]);
+        }
+
         $db->andWhere("name LIKE '%$keyword%'");
 
         return $db->queryAll();

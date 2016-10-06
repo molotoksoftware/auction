@@ -90,24 +90,14 @@ class UserController extends FrontController
 	 */
     public function actionPage($login)
     {
-        $request = Yii::app()->getRequest();
         $pageSize = $this->getPageSize();
 
-        if ($request->getQuery('sort')) {
-            $this->saveCookieInf('u_current_items_sort', $request->getQuery('sort'));
-        } elseif (isset(Yii::app()->request->cookies['u_current_items_sort']->value)) {
-            $_GET['sort'] = Yii::app()->request->cookies['u_current_items_sort']->value;
-        }
-        if ($request->getQuery('size')) {
-            $this->saveCookieInf('u_active_items_page_size', $request->getQuery('size'));
-        } elseif (isset($request->cookies['u_active_items_page_size']->value)) {
-            $_GET['size'] = Yii::app()->request->cookies['u_active_items_page_size']->value;
-        }
-
         $ownerUser = User::getByLogin($login);
-        $this->pageTitle = "Лоты пользователя " . $ownerUser->login;
+        $this->pageTitle = "Товары пользователя " . $ownerUser->getNickOrLogin();
         $this->layout = '//layouts/auction';
         $this->user = $ownerUser;
+        $this->searchAction = '/user/page/'.$ownerUser->login;
+        $this->userNick = $ownerUser->getNickOrLogin();
 
         $auction = new Auction;
         if (isset($_GET['Auction'])) {
@@ -144,11 +134,6 @@ class UserController extends FrontController
             $params[':type_transaction'] = $auction->type_transaction;
         }
 
-        if (!empty($userSelectedCategoriesIds)) {
-            $sql->andWhere(['in', 'a.category_id', $userSelectedCategoriesIds]);
-            $sqlCount->andWhere(['in', 'a.category_id', $userSelectedCategoriesIds]);
-        }
-
         // Filter start {
 
         $filter = new Filter();
@@ -156,11 +141,34 @@ class UserController extends FrontController
             $filter->filters = $_GET['Filter'];
         }
 
-        if (isset($_GET['search']) && !empty($_GET['search']) && $_GET['search'] !== 'Введите фразу для поиска') {
+       /* if (isset($_GET['search']) && !empty($_GET['search'])) {
             $search = CHtml::encode($_GET['search']);
             $sql->andWhere("a.name LIKE '%$search%'");
             $sqlCount->andWhere("a.name LIKE '%$search%'");
-        }
+        }*/
+
+
+            $search = isset($_GET['search'])?strip_tags($_GET['search']):'';
+
+            $result = Item::searchHelper($search, false, $ownerUser->user_id);
+
+            if (count($result) > 0) {
+                foreach ($result as $item) {
+                    // Составляем массив из идентификаторов найденных аукционов
+                    $auc_id_arr[] = intval($item['auction_id']);
+                }
+
+                $auc_list = implode(",", $auc_id_arr);
+
+                $sql->andWhere("a.auction_id IN ($auc_list)");
+                $sqlCount->andWhere("a.auction_id IN ($auc_list)");
+
+            } else {
+                $sql->andWhere("a.auction_id=0");
+                $sqlCount->andWhere("a.auction_id=0");
+                $auc_id_arr = [];
+            }
+
 
         if ($filter->price_min == !'') {
             $q = '
@@ -340,14 +348,45 @@ class UserController extends FrontController
             $categoryNames = explode('/', $path);
             $categoryName = array_pop($categoryNames);
             $selectedCategoryModel = Category::model()->find('alias=:alias', [':alias' => $categoryName]);
+            $this->searchAction .= '/'.$categoryName;
         } elseif ($filter->cat !== '') {
             $selectedCategoryModel = Category::model()->find('category_id=:category_id', [':category_id' => $filter->cat]);
         }
 
-        $catsData = $this->prepareUserCategoriesTreeData(
-            $ownerUser,
-            $selectedCategoryModel ? $selectedCategoryModel->getPrimaryKey() : 0
-        );
+        if (!empty($_GET['cat']) && $_GET['cat'] != '-') {
+            $selectedCategoryModel = Category::model()->find('category_id=:category_id', [':category_id' => $_GET['cat']]);
+        }
+
+        $attributeOptions = [];
+        if ($selectedCategoryModel) {
+            $_GET['path'] = $selectedCategoryModel->getPath();
+            $d = $selectedCategoryModel->getAllDependents();
+            // Запрещаем интимные категории.
+
+            if (count($d) == 0) {
+                $d[0] = 0;
+            }
+
+            $sql->andWhere(['in', 'category_id', $d]);
+            $sqlCount->andWhere(['in', 'category_id', $d]);
+
+            $sqlOptions = '
+                select
+                    a.name,
+                    a.attribute_id,
+                    a.type,
+                    a.child_id,
+                    a.show_expanded
+                from attribute a
+                left join category_attributes ca on ca.attribute_id=a.attribute_id
+                where ca.category_id=:id
+                group by a.attribute_id
+                order by ca.sort ASC
+            ';
+            $attributeOptions = Yii::app()->db->createCommand($sqlOptions)->queryAll(
+                true, [':id' => $selectedCategoryModel->category_id]
+            );
+        }
 
         switch (Yii::app()->request->getQuery('period')) {
             case '3h':
@@ -372,10 +411,6 @@ class UserController extends FrontController
                 break;
         }
 
-        if (!empty($catsData['userSelectedCategoriesIds'])) {
-            $sql->andWhere(['in', 'a.category_id', $catsData['userSelectedCategoriesIds']]);
-            $sqlCount->andWhere(['in', 'a.category_id', $catsData['userSelectedCategoriesIds']]);
-        }
 
         $auctionCount = $sqlCount->queryScalar($params);
 
@@ -429,34 +464,6 @@ class UserController extends FrontController
             City::model()->with('region', 'country')->findAllByPk($cityIds), 'id_city'
         );
 
-        $attributeOptions = [];
-        if ($selectedCategoryModel) {
-            $_GET['path'] = $selectedCategoryModel->getPath();
-            $d = $selectedCategoryModel->getAllDependents();
-            // Запрещаем интимные категории.
-
-            if (count($d) == 0) {
-                $d[0] = 0;
-            }
-
-            $sqlOptions = '
-                select
-                    a.name,
-                    a.attribute_id,
-                    a.type,
-                    a.child_id,
-                    a.show_expanded
-                from attribute a
-                left join category_attributes ca on ca.attribute_id=a.attribute_id
-                where ca.category_id=:id
-                group by a.attribute_id
-                order by ca.sort ASC
-            ';
-            $attributeOptions = Yii::app()->db->createCommand($sqlOptions)->queryAll(
-                true, [':id' => $selectedCategoryModel->category_id]
-            );
-        }
-
         $attributeOptions = AttributeHelper::makeNestedDependentExpanded(
             Models::indexBy($attributeOptions, 'attribute_id')
         );
@@ -484,6 +491,7 @@ class UserController extends FrontController
                 'cities'                   => $cities,
                 'dataProvider'             => $dataProvider,
                 'auctionsImages'           => $auctionsImages,
+                'auc_id_arr'               => $auc_id_arr,
             ]
         );
     }
@@ -492,13 +500,15 @@ class UserController extends FrontController
 	{
 		$user = User::getByLogin($login);
 
-                $user_name = $user->nick?$user->nick:$user->login;
+        $user_name = $user->getNickOrLogin();
 
 		$this->pageTitle = 'Информация о пользователе '.$user_name;
 		$this->layout = '//layouts/userPageLayout';
 		$this->user = $user;
 
-        $this->prepareUserCategoriesTreeData($user);
+        $this->prepareUserCategoriesTreeData($user->user_id);
+        $this->searchAction = '/user/page/'.$user->login;
+        $this->userNick = $user_name;
 
 		$this->render('aboutMe', array('model' => $user));
         }
@@ -507,11 +517,11 @@ class UserController extends FrontController
 	{
 		$user = User::getByLogin($login);
 
-                $userName = $user->nick?$user->nick:$user->login;
-
-		$this->pageTitle = 'Пользователь '.$userName;
-		$this->layout = '//layouts/auction';
-		$this->user = $user;
+        $this->searchAction = '/user/page/' . $user->login;
+        $this->userNick = $user->getNickOrLogin();
+        $this->pageTitle = 'Пользователь ' . $this->userNick;
+        $this->layout = '//layouts/auction';
+        $this->user = $user;
 
                 // превью для соц. сетей
                 $imageLink = '/images/users/thumbs/avatar_'.$user->avatar;

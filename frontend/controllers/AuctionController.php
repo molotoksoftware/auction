@@ -113,6 +113,26 @@ class AuctionController extends FrontController
 
     public function actionIndex()
     {
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search_active = true;
+
+            $number_lot = trim(CHtml::encode($_GET['search']));
+
+            if (is_numeric($number_lot)) {
+                $res = Yii::app()->db->createCommand()
+                    ->select('auction_id')
+                    ->from('auction')
+                    ->where('auction_id = :id', [':id' => $number_lot])
+                    ->queryScalar();
+
+                if (!empty($res)) {
+                    $this->redirect('/auction/' . $res);
+                }
+            }
+        } else {
+            $search_active = false;
+        }
+
         $num_page_size = $this->getPageSize();
         $path = Yii::app()->request->getParam('path', null);
         $this->layout = 'auction';
@@ -121,13 +141,11 @@ class AuctionController extends FrontController
         if (!isset($_GET['filter'])) {
             $_GET['filter'] = 'oll';
         }
+        $to_search_filter = $_GET['filter'];
 
-        $active_search = false;
         $result_total = 0;
-        $auc_count = [];
-
+        $auc_id_arr  = [];
         $options = [];
-        /** @var Category|bool $category */
         $category = false;
         $params = [];
 
@@ -170,19 +188,12 @@ class AuctionController extends FrontController
         if (isset($_GET['search']) && !empty($_GET['search']) && $_GET['search'] !== 'Введите фразу для поиска') {
             $search = strip_tags($_GET['search']);
 
-            $result = Item::searchHelper($search);
+            $result = Item::searchHelper($search, $to_search_filter);
 
             if (count($result) > 0) {
                 foreach ($result as $item) {
                     // Составляем массив из идентификаторов найденных аукционов
                     $auc_id_arr[] = intval($item['auction_id']);
-
-                    // Составляем массив с идентификаторами категорий и кол-вом аукционов в них из найденных результтаов
-                    if (isset($auc_count[$item['category_id']])) {
-                        $auc_count[$item['category_id']]++;
-                    } else {
-                        $auc_count[$item['category_id']] = 1;
-                    }
                 }
 
                 $auc_list = implode(",", $auc_id_arr);
@@ -190,15 +201,11 @@ class AuctionController extends FrontController
                 $sql->andWhere("a.auction_id IN ($auc_list)");
                 $count_sql->andWhere("a.auction_id IN ($auc_list)");
 
-                // говорим виджету категорий что поиск дал результаты
-                $this->active_search = true;
             } else {
                 $sql->andWhere("a.auction_id=0");
                 $count_sql->andWhere("a.auction_id=0");
             }
 
-
-            $active_search = true;
             $result_total = count($result);
         }
 
@@ -411,19 +418,6 @@ SQL;
         }
         //end category
 
-        // for CategoriesWidget
-        if ($this->active_search) {
-            $catsData = $this->prepareSearchCategoriesTreeData(
-            $auc_id_arr,
-            $category ? $category->getPrimaryKey() : 0,
-            $d);
-
-            if (!empty($catsData['userSelectedCategoriesIds'])) {
-                $sql->andWhere(['in', 'a.category_id', $catsData['userSelectedCategoriesIds']]);
-                $count_sql->andWhere(['in', 'a.category_id', $catsData['userSelectedCategoriesIds']]);
-            }
-        }
-
         //filter
         if (isset($_GET['filter'])) {
             if ($_GET['filter'] == 'default') {
@@ -517,6 +511,10 @@ SQL;
             ],
         ]);
 
+        if ($count == 0) {
+            $search_active = false;
+        }
+
         $options = AttributeHelper::makeNestedDependentExpanded(
             Models::indexBy($options, 'attribute_id')
         );
@@ -544,7 +542,7 @@ SQL;
         );
 
         $auctionsImages = AuctionHelper::getImagesByIds(
-            ArrayHelper::getColumn($dataProvider->getData(), 'auction_id')
+            ArrayHelper::getColumn($auctions, 'auction_id')
         );
 
         $this->render(
@@ -556,11 +554,11 @@ SQL;
                 'cities'                   => $cities,
                 'filter'                   => $filter,
                 'options'                  => $options,
-                'active_search'            => $active_search,
+                'search_active'            => $search_active,
                 'result_total'             => $result_total,
-                'auc_count'                => $auc_count,
                 'showRecommendedContainer' => $showRecommendedContainer,
                 'auctionsImages'           => $auctionsImages,
+                'auc_id_arr'               => $auc_id_arr,
             ]
         );
     }

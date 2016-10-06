@@ -38,11 +38,9 @@ class FrontController extends BaseController
 
     public $defaultPage = 25;
 
-    public $categories;
-
-    public $userSelectedCategory = 0;
-
-    public $active_search = false;
+    public $searchAction = '/auction/index';
+    public $userNick = false;
+    public $auc_id_arr = [];
 
     public function behaviors()
     {
@@ -174,87 +172,20 @@ class FrontController extends BaseController
         $this->raiseEvent('onAfterPasswordReset', $event);
     }
 
-    /**
-     * @param User     $user
-     * @param null|int $selectedCategoryId
-     *
-     * @return array
-     */
-    public function prepareUserCategoriesTreeData(User $user, $selectedCategoryId = null)
+
+    public function prepareUserCategoriesTreeData($user_id)
     {
-        /** @var HttpRequest $request */
-        $request = Yii::app()->getRequest();
-        if ($selectedCategoryId === null) {
-            $selectedCategoryId = $request->getQuery('category_id');
-            $selectedCategoryId = is_numeric($selectedCategoryId) ? (int)$selectedCategoryId : null;
-        } else {
-            $selectedCategoryId = (int)$selectedCategoryId;
-        }
+        if ($result = Item::searchHelper('', false, $user_id)) {
 
-        // Товары юзера.
-        /** @var CDbCommand $userProductsDbComm */
-        $userProductsDbComm = Yii::app()->db->createCommand();
-        $userAuctions = $userProductsDbComm
-            ->select('a.category_id')
-            ->from('auction a')
-            ->where(
-                'a.status=:status and a.owner=:owner',
-                [
-                    ':owner'  => $user->user_id,
-                    ':status' => Auction::ST_ACTIVE,
-                ]
-            )->queryAll();
-        $userCategoryIds = array_map(function ($eachAuction) {
-            return $eachAuction['category_id'];
-        }, $userAuctions);
-        $userCategoryIds = array_unique($userCategoryIds);
+            foreach ($result as $item) {
+                // Составляем массив из идентификаторов найденных аукционов
+                $auc_id_arr[] = intval($item['auction_id']);
 
-        /** @var Category[] $userCategories */
-        $userCategories = Category::model()->byIdsAndAncestors($userCategoryIds)->findAll();
-
-        /** @var Category[] $userCategoriesById */
-        $userCategoriesById = [];
-        foreach ($userCategories as $i => $eachCategory) {
-            if (!isset($userCategoriesById[$eachCategory->category_id])) {
-
-                $eachCategory->auction_count = 0;
-                $userCategoriesById[$eachCategory->category_id] = $eachCategory;
-                $userCategoriesById[$eachCategory->category_id]->url = Yii::app()->createUrl(
-                    '/user/user/page',
-                    ['login' => $user->login, 'path' => $eachCategory->getPath()]
-                );
             }
+
+             $this->auc_id_arr = $auc_id_arr;
         }
-        unset($userCategories);
-
-        // Добавляем категориям кол-во лотов юзера.
-        foreach ($userAuctions as $eachAuction) {
-            if (!empty($eachAuction['category_id']) && isset($userCategoriesById[$eachAuction['category_id']])) {
-                $userCategoriesById[$eachAuction['category_id']]->auction_count++;
-            }
-        }
-        $this->categories = $userCategoriesById;
-
-        $this->userSelectedCategory = $selectedCategoryId;
-
-        $userSelectedCategoriesIds = [];
-        if (!empty($selectedCategoryId)) {
-            /** @var Category[] $descendants */
-            $selectedCategory = Category::model()->findByPk($selectedCategoryId);
-            $descendants = $selectedCategory->descendants()->findAll();
-            $userSelectedCategoriesIds = array_map(function (Category $eachCategory) {
-                return $eachCategory->category_id;
-            }, $descendants);
-            $userSelectedCategoriesIds[] = $selectedCategoryId;
-            $userSelectedCategoriesIds[] = 0;
-
-        }
-        return [
-            'userSelectedCategoriesIds' => $userSelectedCategoriesIds,
-        ];
     }
-
-
 
     public function beforeAction($action)
     {
@@ -314,79 +245,6 @@ class FrontController extends BaseController
                 $cache->set(self::CACHE_USER_COMMON_CURRENCY_ID, $webUser->getCurrencyId());
             }
         }
-    }
-
-    public function prepareSearchCategoriesTreeData($auctionIds, $selectedCategoryId = null, $d)
-    {
-        /** @var HttpRequest $request */
-        $request = Yii::app()->getRequest();
-        if ($selectedCategoryId === null) {
-            $selectedCategoryId = $request->getQuery('category_id');
-            $selectedCategoryId = is_numeric($selectedCategoryId) ? (int)$selectedCategoryId : null;
-        } else {
-            $selectedCategoryId = (int)$selectedCategoryId;
-        }
-
-        // Товары для виджета категорий в зависимости от поисковой строки
-        $sql_a = Yii::app()->db->createCommand()
-            ->select('a.category_id')
-            ->from('auction a')
-            ->where('a.status=:status',[':status' => Auction::ST_ACTIVE])
-            ->andWhere(['in', 'auction_id', $auctionIds]);
-
-        if (!empty($d)) {
-            $sql_a->andWhere(['in', 'category_id', $d]);
-        }
-
-        $auctions = $sql_a->queryAll();
-
-        $auctionCategoryIds = array_map(function ($eachAuction) {
-                return $eachAuction['category_id'];
-            }, $auctions);
-
-        $auctionCategoryIds = array_unique($auctionCategoryIds);
-
-        $userCategories = Category::model()->byIdsAndAncestors($auctionCategoryIds)->findAll();
-
-        $userCategoriesById = [];
-
-        $getWithOutCatId = preg_replace("/\&cat\=[0-9]{1,5}/ui", "", Yii::app()->getRequest()->getQueryString());
-
-        foreach ($userCategories as $i => $eachCategory) {
-            if (!isset($userCategoriesById[$eachCategory->category_id])) {
-
-                $eachCategory->auction_count = 0;
-                $userCategoriesById[$eachCategory->category_id] = $eachCategory;
-                $userCategoriesById[$eachCategory->category_id]->url = '/auctions/'.$eachCategory->getPath().'?'.$getWithOutCatId;
-            }
-        }
-        unset($userCategories);
-
-        // Добавляем категориям кол-во лотов по поиску.
-        foreach ($auctions as $eachAuction) {
-            if (!empty($eachAuction['category_id']) && isset($userCategoriesById[$eachAuction['category_id']])) {
-                $userCategoriesById[$eachAuction['category_id']]->auction_count++;
-            }
-        }
-        $this->categories = $userCategoriesById;
-
-        $this->userSelectedCategory = $selectedCategoryId;
-
-        $userSelectedCategoriesIds = [];
-        if (!empty($selectedCategoryId)) {
-            /** @var Category[] $descendants */
-            $selectedCategory = Category::model()->findByPk($selectedCategoryId);
-            $descendants = $selectedCategory->descendants()->findAll();
-            $userSelectedCategoriesIds = array_map(function (Category $eachCategory) {
-                return $eachCategory->category_id;
-            }, $descendants);
-            $userSelectedCategoriesIds[] = $selectedCategoryId;
-            $userSelectedCategoriesIds[] = 0;
-
-        }
-        return [
-            'userSelectedCategoriesIds' => $userSelectedCategoriesIds,
-        ];
     }
 
 }

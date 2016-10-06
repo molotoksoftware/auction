@@ -50,35 +50,9 @@ $user_name = $this->user->nick?$this->user->nick:$this->user->login;
 
     <div class ="row">
         <div class="col-xs-3 sidebar_left">
-            <?php $this->widget('frontend.widgets.categories.CategoriesWidget', [
-                'htmlOptions'              => [
-                    'class' => 'main_nav profile_cat_tree list-group',
-                ],
-                'prefix'                   => 'auction',
-                'widgetCacheKey'           => 'auction_user_' . $this->user->user_id . '_hour_' . date('h'),
-                'countRelationName'        => 'count',
-                'categories'               => $this->categories,
-                'activeCategory'           => $this->userSelectedCategory,
-                'prependAllCategoriesItem' => [
-                    'label'               => 'Все категории',
-                    'url'                 => Yii::app()->createUrl(
-                        '/user/user/page',
-                        ['login' => $this->user->login, 'path' => 'all']
-                    ),
-                    'count'               => null,
-                    'num'                 => null,
-                    'spec'                => 0,
-                    'level'               => null,
-                    'alias'               => '',
-                    'isAllCategoriesItem' => true,
-                    'active'              => $this->userSelectedCategory === 0,
-                    'linkOptions'         => ['class' => 'all-cat-item'],
-                ],
-                'linkBaseUrl'              => Yii::app()->createUrl('/user/user/page', [
-                    'login' => $this->user->login,
-                ]),
-                'itemCssClass' => 'subcat list-group-item',
-                'cacheMenuItems' => false
+            <?php $this->widget('frontend.widgets.category_search.CategorySearchWidget',[
+                                'auc_id_arr' => $this->auc_id_arr,
+                                'userLogin' => $this->user->login,
             ]); ?>
 
 

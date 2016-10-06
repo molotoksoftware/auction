@@ -77,7 +77,10 @@
             <a href="/"><img src="/bootstrap/img/logo.png"></a>
         </div>
         <div class="col-xs-9 search_box_form">
-            <?php $this->widget('frontend.widgets.search.SearchWidget', array()); ?>
+            <?php $this->widget('frontend.widgets.search.SearchWidget', [
+                                'searchActionInWidget' => $this->searchAction,
+                                'userNickInWidget' => $this->userNick,
+                           ]); ?>
         </div>
     </div>
     <div class="top_menu">
