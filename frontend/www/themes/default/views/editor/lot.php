@@ -85,15 +85,15 @@ function changeTransaction(e) {
             
             break;
         
-        case "1"://Фиксированная цена
-            $("label[for=\"Auction_price\"]").html("Цена").append(" <span class=\"required\">*</span>")
+        case "1":// Buy now
+            $("label[for=\"Auction_price\"]").html("'.Yii::t('basic','Buy Now').'").append(" <span class=\"required\">*</span>")
                  .addClass("required");
             $("#starting_price_block").hide();
             
             break;
-        case "2"://С 1 рубля
+        case "2":// From 1
 
-            $("#Auction_starting_price").css({"border":"none","font-weight":"bold","color":"#009900","background" : "none"}).val("1 рубль");
+            $("#Auction_starting_price").css({"border":"none","font-weight":"bold","color":"#009900","background" : "none"}).val("'.PriceHelper::formate(1).'");
             $("label[for=\"Auction_starting_price\"]").removeClass("required").find("span.required").remove();
             $("#Auction_starting_price").parent().show();
             break;
@@ -401,7 +401,7 @@ $seller = Yii::app()->user->getModel();
             echo CHtml::radioButtonList(
                     CHtml::activeName($model, 'type_transaction'), $model->type_transaction, array(
                 Auction::TP_TR_STANDART => Yii::t('basic', 'Standart auction'),
-                Auction::TP_TR_START_ONE => Yii::t('basic', 'From 1 dollar'),
+                Auction::TP_TR_START_ONE => Yii::t('basic', 'From'). ' ' . PriceHelper::formate(1),
                 Auction::TP_TR_SALE => Yii::t('basic', 'Fix price')
                     ), array(
                 'id' => 'type_transaction',

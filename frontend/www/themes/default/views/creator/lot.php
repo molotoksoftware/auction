@@ -107,7 +107,7 @@ function changeTransaction(e) {
             break;
 
         case "2":// from $1
-            $("#FormCreateLot_starting_price").css({"border":"none","font-weight":"bold","color":"#009900","background" : "none"}).val("'.Yii::t('basic','1 dollar').'");
+            $("#FormCreateLot_starting_price").css({"border":"none","font-weight":"bold","color":"#009900","background" : "none"}).val("'.PriceHelper::formate(1).'");
             $("label[for=\"FormCreateLot_starting_price\"]").removeClass("required").find("span.required").remove();
             $("#FormCreateLot_starting_price").parent().show();
             break;
@@ -380,7 +380,7 @@ $seller = Yii::app()->user->getModel();
             echo CHtml::radioButtonList(
                     CHtml::activeName($model, 'type_transaction'), 0, array(
                 Auction::TP_TR_STANDART => Yii::t('basic', 'Standart auction'),
-                Auction::TP_TR_START_ONE => Yii::t('basic', 'From 1 dollar'),
+                Auction::TP_TR_START_ONE => Yii::t('basic', 'From'). ' ' . PriceHelper::formate(1),
                 Auction::TP_TR_SALE => Yii::t('basic', 'Fix price')
                     ), array(
                 'id' => 'type_transaction',

@@ -40,7 +40,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/auction?filter=nulls"><?= Yii::t('basic', 'From $1') ?></a></li>
+                <li><a href="/auction?filter=nulls"><?= Yii::t('basic', 'From'). ' ' . PriceHelper::formate(1) ?></a></li>
                 <li><a href="/news"><?= Yii::t('basic', 'News') ?></a></li>
                 <li><a href="#contact"><?= Yii::t('basic', 'Community') ?></a></li>
                 <!--<li class="dropdown">
