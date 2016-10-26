@@ -1,6 +1,11 @@
 <?php
 
 return [
+
+    // Other
+
+    'Yes' => 'Да',
+    'No' => 'Нет',
     
     // Header menu
     'News' => 'Новости площадки',
@@ -9,6 +14,7 @@ return [
     'Login' => 'Войти',
     'From $1' => 'Лоты от 1 рубля',
     'Your auction' => 'Мой аукцион',
+    'Auction' => 'Аукцион',
     'Balance' => 'Баланс',
     'Logout' => 'Выйти',
     'PRO account' => 'ПРО аккаунт',
@@ -20,7 +26,7 @@ return [
     'Sales' => 'Продажи',
     'Favorite items' => 'Избранное',
     'Your subscribe' => 'Продавцы',
-    '${amount}' => '{amount} руб.',
+    'Banned' => 'Ошибка доступа',
 
     // Main categories
     'Automotive {span}& Industrial{span2}' => 'Автомобили {span}и техника{span2}',
@@ -33,6 +39,7 @@ return [
     'All {span}categories{span2}' => 'Все {span}категории{span2}',
 
     'Last news' => 'Последние новости',
+    'Verifed user' => 'Верифицированный участник',
     
     // Search widget
     'Enter search keywords here' => 'Введите фразу для поиска',
@@ -46,7 +53,11 @@ return [
     'new lots' => 'выставленные за сегодня',
     'most popular' => 'самое популярное',
     'see all' => 'читать все',
-    
+
+
+
+
+
     // Footer
     'Terms and Conditions' => 'Правила использования',
     'About us' => 'О нас',
@@ -106,6 +117,20 @@ return [
     'Specify the starting price' => 'Укажите начальную цену',
     'Starting price may not be more than buy now price' => 'Начальная цена не может быть больше блиц-цены',
     'Starting price may not be equal to the buy now price' => 'Начальная цена не может равняться блиц-цене',
+
+    // Editor lot
+
+    'Actions' => 'Действия',
+    'Put up for sale?' => 'Выставить на продажу?',
+    'Save' => 'Сохранить',
+    'Edit' => 'Редактирование',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+
 
     // Settings
     'Your Control Panel' => 'Настройки и управление аккаунтом',
@@ -168,8 +193,70 @@ return [
     '' => '',
     '' => '',
     '' => '',
+
+    //filters
+    'Today' => 'Сегодня',
+    'Yesterday' => 'Вчера',
+    'Last week'  => 'За неделю',
+    'Last month' => 'За месяц',
+    'Last half year' => 'За 6 месяцев',
+    'Last year' => 'За год',
+    'All' => 'Все',
+    'All buyers' => 'Все покупатели',
+    'All sellers' => 'Все продавцы',
+    'Filter' => 'Фильтр',
+    'Ended' => 'Торги завершены',
+    'Current price' => 'Текущая цена',
+    'Buy now' => 'Купить сейчас',
+    'Last bid' => '>Последняя ставка',
     '' => '',
-    
-    
+    '' => '',
+
+
+    // cabinet
+    'My auction' => 'Мой auction',
+    'Favorite sellers' => 'Любимые продавцы',
+    'Bids' => 'Активные ставки',
+    'Didn\'t win' => 'Не выигранные',
+    'Purchase history' => 'История покупок',
+    'My purchases' => 'Мои покупки',
+    'Sell' => 'Мои продажи',
+    'Active items' => 'Активные лоты',
+    'Unsold' => 'Непроданные лоты',
+    'Sold' => 'Проданные лоты',
+    'Reviews' => 'Отзывы',
+
+    'About me' => 'Отзывы обо мне',
+    'From me' => 'Мои отзывы',
+    'No items' => '',
+    'Price' => 'Цена',
+    'Item' => 'Товар',
+    'Leave feedback' => 'Оставить отзыв',
+    'Hide purchase' => 'Скрыть',
+    'Hide purchases' => 'Скрыть',
+    'Actions with marked' => 'Действия с отмеченными',
+    'Leader' => 'Лидер',
+    'Quantity' => 'Количество',
+    'Quantity sold' => 'Продано',
+
+    // reviews
+    'You left feedback about the seller' => 'Вы оставили отзыв о продавце',
+    'Feedback needed' => 'Необходимо оставить отзыв',
+    'You left feedback about the buyer' => 'Вы оставили отзыв о покупателе',
+    'Feedback received' => 'Отзыв получен',
+    'No feedback received' => 'Отзыв не получен',
+    '' => '',
+
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+
+
+
+
+
 
 ];

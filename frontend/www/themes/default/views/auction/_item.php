@@ -47,19 +47,6 @@ $breadcrumbOptions = isset($breadcrumbOptions) ? $breadcrumbOptions : [];
 
 <?= CHtml::openTag('div', $itemDivAttributes) ?>
 
-<?  if($this->beginCache("auction_" . $data['auction_id'], [
-    'dependency' => [
-        'class'            => 'system.caching.dependencies.CDbCacheDependency',
-        'sql'              => "SELECT `update` FROM auction WHERE auction_id = :auction_id",
-        'params'           => [
-            ':auction_id' => $data['auction_id'],
-        ],
-    ],
-    'varyByExpression' => function ($cache) {
-        return Getter::webUser()->getCurrencyCode();
-    },
-])) {
-?>
         <div class="col15-xs-3 relative">
             <?= Item::getPreview($data, ['class' => 'lazy img-thumbnail'], 'prv', ['setDataImages' => $auctionImages]) ?>
             <?php if ($data['image_count'] > 1): ?>
@@ -99,6 +86,5 @@ $breadcrumbOptions = isset($breadcrumbOptions) ? $breadcrumbOptions : [];
     </div>
 </div>
 
-    <?  $this->endCache(); }  ?>
 
 <?= CHtml::closeTag('div') ?> <hr class="horizontal_line">

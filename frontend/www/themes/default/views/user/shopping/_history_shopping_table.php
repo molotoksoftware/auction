@@ -26,11 +26,6 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * История покупок
- */
-/** @var CController $this */
-
 $request = Yii::app()->getRequest();
 $gridId = 'history-shopping-table';
 
@@ -38,13 +33,6 @@ $this->renderPartial('//user/_popups/_delete_purchase');
 
 $auction = $request->getParam('Auction');
 
-
-// print_r ($auction);
-
-
-/**
- * История покупок
- */
 $params = array(
     ':buyer' => Yii::app()->user->id,
 );
@@ -85,7 +73,7 @@ if($countHistoryPurchases == 0 && isset($hide_empty) && $hide_empty) return;
 $pageSize = $limit;
 
 
-// Фильтр по периоду.
+// period filter
 GridLotFilter::appendQueryToCommand($sqlHistoryPurchases);
 
 if (isset($auction)) {
@@ -93,7 +81,7 @@ if (isset($auction)) {
     $params[':name'] = '%' . CHtml::encode($auction['name']) . '%';
 }
 
-// Фильтр по продавцу.
+// seller filter.
 $sqlAllSellers = clone $sqlHistoryPurchases;
 $sqlAllSellersParams = $params;
 CounterInfo::applyFilterSeller($sqlHistoryPurchases, $params);
@@ -101,10 +89,11 @@ $sqlAllSellers->select('a.owner');
 $allSellerIds = $sqlAllSellers->queryAll(false, $sqlAllSellersParams);
 $allSellerIds = array_map(function($each) { return $each[0]; }, $allSellerIds);
 $selectedSeller = intval($request->getParam('seller'));
+
 if ($selectedSeller && array_search($selectedSeller, $allSellerIds) === false) {
-    // Добавляем выбранного
     $allSellerIds[] = $selectedSeller;
 }
+
 $sellers = Yii::app()
     ->getDb()
     ->createCommand()
@@ -112,7 +101,9 @@ $sellers = Yii::app()
     ->from(User::model()->tableName())
     ->where(['in', 'user_id', $allSellerIds])
     ->queryAll();
+
 $sellersArray = [];
+
 foreach ($sellers as $eachSeller) {
     $sellersArray[$eachSeller['user_id']] = $eachSeller['nick'] ? $eachSeller['nick'] : $eachSeller['login'];
 }
@@ -148,7 +139,7 @@ $dataProvider = new CSqlDataProvider($sqlHistoryPurchases->text, array(
 ?>
 
 
-<h3>История покупок <?= UI::showQuantityTablHdr($countHistoryPurchases); ?></h3>
+<h3><?= Yii::t('basic', 'Purchase history')?> <?= UI::showQuantityTablHdr($countHistoryPurchases); ?></h3>
 
 <?php if (Yii::app()->user->hasFlash('success')): ?>
 <div class="alert alert-success alert-dismissable">
@@ -189,7 +180,6 @@ function getPriceCellData($data)
         $html = TableItem::getPriceField($data["s_price"]);
     }
 
-
     return $html;
 }
 
@@ -199,7 +189,7 @@ $this->widget(
         'id' => $gridId,
         'dataProvider' => $dataProvider,
         'template' => $template,
-        'emptyText' => 'История покупок отсутствует',
+        'emptyText' => Yii::t('basic', 'No items'),
         'pager' => isset($gridViewPager) ? $gridViewPager : null,
         'pagerCssClass' => 'false',
         'htmlOptions' => array('class' => ''),
@@ -210,11 +200,9 @@ $this->widget(
                 'selectableRows'      => 2,
                 'name'                => 'sale_id',
                 'checkBoxHtmlOptions' => array('class' => 'checkbox'),
-           //     'cssClassExpression'  => 'Table::getSalesCheckBoxColumnCss($data, "buyer", "shopping")',
-
             ),
             array(
-                'header' => 'Товар',
+                'header' => Yii::t('basic', 'Item'),
                 'type' => 'raw',
                 'name' => 'name',
                 'value' => 'TableItem::getTovarField($data)',
@@ -222,7 +210,7 @@ $this->widget(
                 'htmlOptions' => array('class' => 'td1')
             ),
             array(
-                'header' => 'Дата',
+                'header' => Yii::t('basic', 'Date'),
                 'name' => 'date',
                 'type' => 'raw',
                 'value' => 'getDateCellData($data)',
@@ -230,7 +218,7 @@ $this->widget(
                 'htmlOptions' => array('class' => 'td2')
             ),
             array(
-                'header' => 'Цена',
+                'header' => Yii::t('basic', 'Price'),
                 'type' => 'raw',
                 'name' => 'price',
                 'value' => 'getPriceCellData($data)',
@@ -255,13 +243,13 @@ $this->widget(
             ),
             array(
                 'class' => 'frontend.components.ButtonColumn',
-                'header' => 'Действия',
+                'header' => Yii::t('basic', 'Actions'),
                 'headerHtmlOptions' => array('class' => 'th6'),
                 'htmlOptions' => array('class' => 'td6'),
                 'template' => '<div>{leave_comment}</div><div>{delete_purchase}</div>',
                 'buttons' => array(
                     'leave_comment' => array(
-                        'label' => 'Оставить отзыв',
+                        'label' => Yii::t('basic', 'Leave feedback'),
                         'options' => array(
                             'class' => 'create-one-review',
                         ),
@@ -272,15 +260,9 @@ $this->widget(
                             'data-sale_id'  => '$data["sale_id"]',
                         ),
                         'url' => 'Yii::app()->createUrl("/user/reviews/preCreate", ["role" => Reviews::ROLE_BUYER, "id" => $data["sale_id"]])'
-                        
-                    ),/*
-                    'other_items_seller' => array(
-                        'label' => 'Другие лоты продавца',
-                        'url' => 'Yii::app()->createUrl("/user/user/page", array("login" => $data["owner_login"]))'
-                    ), */
-
+                    ),
                     'delete_purchase' => [
-                        'label'          => 'Удалить',
+                        'label'          => Yii::t('basic', 'Hide purchase'),
                         'options'        => ['class' => 'js-delete-purchase'],
                         'dataExpression' => [
                             'data-sale_id'  => '$data["sale_id"]',
@@ -300,9 +282,9 @@ $this->widget(
 <?php if ($countHistoryPurchases > 0): ?>
 
   <div class="form-group">
-      <label>Действия с отмеченными:</label>
-      <button class="btn btn-info" id="create_rewiev">Оставить отзывы</button>
-      <button class="btn btn-danger" id="bulk_delete_purchases">Удалить</button>
+      <label><?= Yii::t('basic', 'Actions with marked')?></label>
+      <button class="btn btn-info" id="create_rewiev"><?= Yii::t('basic', 'Leave feedback')?></button>
+      <button class="btn btn-danger" id="bulk_delete_purchases"><?= Yii::t('basic', 'Hide purchases')?></button>
   </div>
 <?php endif; ?>
 

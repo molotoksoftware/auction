@@ -64,11 +64,7 @@ class FormCreateLot extends CFormModel
             array('description', 'descValidator'),
 			array(
                 'price, starting_price',
-                'numerical',
-                'min' => 0,
-                'max' => 99999999,
-                'tooBig' => Yii::t('basic', 'Price too high'),
-                'tooSmall' => Yii::t('basic', 'Specify price'),
+                'numerical', 'numberPattern'=>'/^[0-9]{1,9}(\.[0-9]{1,2})?$/'
             ),
             array('conditions_transfer, add_contact_info', 'length'),
             array('is_auto_republish', 'boolean'),

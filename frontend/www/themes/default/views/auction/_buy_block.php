@@ -34,7 +34,7 @@ $js_1 = "var result = confirm('Вы действительно хотите сд
 $js_2 = "$(function(){
                 var qu_num = $('#qu_num').size() ? $('#qu_num').val() : 1;
                 var pr_num = $('#pr_num').val();
-                var res = confirm('Вы действительно хотите купить ' + qu_num + ' единиц(ы) лота за ' + pr_num * qu_num + ' " . Getter::webUser()->getCurrencySymbol() . "?');
+                var res = confirm('Вы действительно хотите купить ' + qu_num + ' единиц(ы) лота за ' + pr_num * qu_num + '?');
                 if (res) {return true;} else {event.preventDefault(); event.stopPropagation();}
             });";
 
@@ -156,25 +156,20 @@ if (!empty($sales)) {
             if (!is_null($base['current_bid'])) {
                 $starting_price = $base['current_bid'];
             }
-            $minStepValueFloat = FrontBillingHelper::getUserPrice(
-                Yii::app()->params['minStepRatePercentage'] * $starting_price / 100, false
-            );
-            if ($minStepValueFloat > 1) {
-                $minStepValue = ceil($minStepValueFloat);
-            } else {
-                $minStepValue = round($minStepValueFloat, 2);
-            }
+            $minStepValueFloat = Yii::app()->params['minStepRatePercentage'] * $starting_price / 100;
+            $minStepValue = round($minStepValueFloat, 2);
+
              ?>
             <dt>Текущая стоимость:</dt>
             <dd>
-                <span class="price-field <?= !Getter::webUser()->getCurrencyIsRUR() ? 'not-rur-currency' : '' ?>">
-                <?= FrontBillingHelper::getUserPriceWithCurrency($starting_price, ['rurCurrencySign' => false]) ?>
+                <span class="price-field">
+                <?= PriceHelper::formate($starting_price)?>
                 </span>
             <dt></dt>
             <dd>
                 <div class="row">
                     <div class="col-xs-12 min_stap">
-                        Минимальный шаг:&nbsp;<span id="min_stap"><?php echo $minStepValue; ?></span>
+                        Минимальный шаг:&nbsp;<span id="min_stap"><?php echo PriceHelper::formate($minStepValue); ?></span>
                     </div>
                 </div>
                 <div class="row">
@@ -182,8 +177,7 @@ if (!empty($sales)) {
                     <input type="hidden" name="start" value="<?=$starting_price;?>"/>
                     <input type="hidden" name="lotId" value="<?=$base['auction_id'];?>"/>
                     <?php
-                        $nextStepRUR = ceil(($base['current_bid'] ? Yii::app()->params['minStepRatePercentage'] * $starting_price / 100 : 0) + $starting_price);
-                        $nextStep = FrontBillingHelper::getUserPrice($nextStepRUR, false);
+                        $nextStep = round(($base['current_bid'] ? Yii::app()->params['minStepRatePercentage'] * $starting_price / 100 : 0) + $starting_price, 2);
                         ?>
                     <div class="col-xs-5">
                         <input type="text" name="price" id="value_stap" value="<?= str_replace(' ', '', $nextStep); ?>" class="bet_text form-control" <?=($base['owner'] == Yii::app()->user->id OR $base['status'] != BaseAuction::ST_ACTIVE)?'disabled':''?>/>
@@ -203,11 +197,11 @@ if (!empty($sales)) {
                 <div class="row buy_now_container">
                     <form id="bid-blitz-form" action="" class="form-group">
                     <input type="hidden" name="lotId" value="<?=$base['auction_id'];?>"/>
-                     <input type="hidden" id="pr_num" name="priceValue" value="<?= FrontBillingHelper::calculateUserPrice($base['price'], true) ?>"/>
+                     <input type="hidden" id="pr_num" name="priceValue" value="<?= $base['price']; ?>"/>
                     <div class="col-xs-5">
-                        <span class="<?= !Getter::webUser()->getCurrencyIsRUR() ? 'not-rur-currency' : '' ?>">
+                        <span>
                                 <b id="price-block">
-                                    <?= FrontBillingHelper::getUserPriceWithCurrency($base['price'], ['rurCurrencySign' => false]) ?>
+                                    <?= PriceHelper::formate($base['price']); ?>
                                 </b>
                         </span>
                     </div>
@@ -297,11 +291,11 @@ if (!empty($sales)) {
 
                 <?php if ($leader_bid->owner == Yii::app()->user->id): ?>
                         Вы лидер торгов
-                        (макс. ставка: <span id="min_stap"><?=FrontBillingHelper::getUserPrice($ab->price, false); ?></span> <?= Getter::webUser()->getCurrencySymbol() ?>)
+                        (макс. ставка: <span id="min_stap"><?= $ab->price; ?></span>)
 
                 <?php else: ?>
                     <div style="color: red;">
-                        Ваша ставка (<span id="min_stap"><?=FrontBillingHelper::getUserPrice($ab->price, false); ?></span> <?= Getter::webUser()->getCurrencySymbol() ?>) перебита
+                        Ваша ставка (<span id="min_stap"><?= $ab->price; ?></span>) перебита
                     </div>
                 <?php endif; ?>
 

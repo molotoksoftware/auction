@@ -63,47 +63,55 @@ $cs->registerScript(
 ', CClientScript::POS_READY
 );
 
-$js = <<<EOD
 
-//action change transaction
+
+$cs->registerScript('tools-create-lot', '
+
 function changeTransaction(e) {
-    var val = $("input[name='Auction[type_transaction]']:checked").val();
-    switch(val){
-        case '0'://Стандартный
-            $('label[for="Auction_starting_price"]')
-                .html('Начальная цена')
-                .append(' <span class="required">*</span>')
-                .addClass('required');
-
-            $('label[for="Auction_price"]')
-                .html('Блиц-цена').removeClass('required').find('span.required');
-
-            $('#Auction_starting_price').removeAttr('style');
-            $('#starting_price_block').show();
-                        
-            //$('#Auction_price').parent().parent().show();
-            //$('#Auction_starting_price').parent().parent().show();
-            $('#Auction_starting_price').val(parseInt($('#Auction_starting_price').val()));
-
+    var val = $("input[name=\"Auction[type_transaction]\"]:checked").val();
+    
+        switch(val){
+        case "0":
+        $("label[for=\"Auction_starting_price\"]")
+                .html("'.Yii::t('basic','Starting price').'")
+                .append(" <span class=\"required\">*</span>")
+                .addClass("required");
+                
+        $("label[for=\"Auction_price\"]")
+        .html("'.Yii::t('basic','Buy Now').'").removeClass("required").find("span.required");
+                
+        $("#Auction_starting_price").removeAttr("style");
+            $("#starting_price_block").show();
+            
             break;
-        case '1'://Фиксированная цена
-            $('label[for="Auction_price"]').html('Цена').append(' <span class="required">*</span>').addClass('required');
-            $('#starting_price_block').hide();
-
-
+        
+        case "1"://Фиксированная цена
+            $("label[for=\"Auction_price\"]").html("Цена").append(" <span class=\"required\">*</span>")
+                 .addClass("required");
+            $("#starting_price_block").hide();
+            
             break;
-        case '2'://С 1 рубля
+        case "2"://С 1 рубля
 
-            $('#Auction_starting_price').css({'border':'none','font-weight':'bold','color':'#009900','background' : 'none'}).val('1 рубль');
-            $('label[for="Auction_starting_price"]').removeClass('required').find('span.required').remove();
-            $('#Auction_starting_price').parent().show();
-            //$('#Auction_starting_price').parent().parent().show();
+            $("#Auction_starting_price").css({"border":"none","font-weight":"bold","color":"#009900","background" : "none"}).val("1 рубль");
+            $("label[for=\"Auction_starting_price\"]").removeClass("required").find("span.required").remove();
+            $("#Auction_starting_price").parent().show();
             break;
 
     }
+
 }
-EOD;
+
+function validatePrice(inp) {
+    inp.value = inp.value.replace(/[^\d.]*/g, "")
+                         .replace(/([.])[.]+/g, "$1")
+                         .replace(/^[^\d]*(\d+([.]\d{0,5})?).*$/g, "$1");
+}
+', CClientScript::POS_END);
+
+/*
 $cs->registerScript('tools-create-lot', $js, CClientScript::POS_END);
+*/
 
 $seller = Yii::app()->user->getModel();
 ?>
@@ -112,7 +120,7 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row auction">
         <div class="col-xs-9">
-            <h2>Редактирование лота</h2>
+            <h2><?= Yii::t('basic', 'Edit item') ?></h2>
         </div>
     </div>
     <hr class="top10 horizontal_line">
@@ -162,7 +170,7 @@ $seller = Yii::app()->user->getModel();
                 if (val=="") {
                     val = 0;
                 }
-                $("#' . CHtml::activeId($model, 'starting_price') . '").val(parseInt(val));
+
                 return true;
             }',
         ),
@@ -181,7 +189,7 @@ $seller = Yii::app()->user->getModel();
     <?php if ($model->status == 7) : ?>
         <div class="row action_lot">
             <div class="col-xs-3 left_col">
-                <p>Публиковать?</p>
+                <p><?= Yii::t('basic', 'Put up for sale?')?></p>
             </div>
             <div class="col-xs-9 right_col">
 
@@ -189,8 +197,8 @@ $seller = Yii::app()->user->getModel();
                 $to_status = (isset($_POST['to_status']) && $_POST['to_status'] == 4) ? 4 : 1;
                 echo CHtml::dropDownList(
                         'to_status', $to_status, array(
-                    1 => 'да',
-                    4 => 'нет'
+                    1 => Yii::t('basic', 'Yes'),
+                    4 => Yii::t('basic', 'No')
                         ), ['class' => 'form-control width_input']
                 );
                 ?>
@@ -200,7 +208,7 @@ $seller = Yii::app()->user->getModel();
     <?php else: ?>
         <div class="row action_lot">
             <div class="col-xs-3 left_col">
-                <p>Действия:</p>
+                <p><?= Yii::t('basic', 'Actions')?></p>
             </div>
             <div class="col-xs-9 right_col">
 
@@ -208,19 +216,19 @@ $seller = Yii::app()->user->getModel();
                 $refreshDef = (isset($_GET['strepub']) && $_GET['strepub'] == 1) ? 1 : 0;
                 echo CHtml::dropDownList(
                         'refresh', $refreshDef, array(
-                    0 => 'обновить только данные',
-                    1 => 'обновить и опубликовать снова'
+                    0 => Yii::t('basic', 'Update'),
+                    1 => Yii::t('basic', 'Update and republish')
                         ), ['class' => 'form-control width_input']
                 );
                 ?>
 
             </div>
         </div>
-    <?php endif; ?>
+    <?php endif;  ?>
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Название лота:</p>
+            <p><?= Yii::t('basic', 'Item title') ?>:</p>
         </div>
         <div class="col-xs-9 right_col">
             <?php echo $form->error($model, 'name'); ?>
@@ -257,13 +265,13 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Категория:</p>
-            <span>Определите место в каталоге</span>
+            <p><?= Yii::t('basic', 'Category') ?>:</p>
+            <span><?= Yii::t('basic', 'Select a category') ?></span>
         </div>
         <div class="col-xs-9 right_col">
             <?php echo $form->error($model, 'category_id'); ?>
             <div class="cat-list-block">
-                <div class="cat-list-block-label">Основная категория</div>
+                <div class="cat-list-block-label"><?= Yii::t('basic', 'Main category') ?></div>
                 <?php
                 echo Chtml::dropDownList('Cat1', $cat1_id, Category::getCategoriesForSelect(), [
                     'class' => 'cat-list form-control',
@@ -275,7 +283,7 @@ $seller = Yii::app()->user->getModel();
             </div>
 
             <div style="<?= $display_2; ?>" class="cat-list-block">
-                <div class="cat-list-block-label">Подкатегория</div>
+                <div class="cat-list-block-label"><?= Yii::t('basic', 'Subcategory') ?></div>
                 <?php
                 echo Chtml::dropDownList('Cat2', $cat2_id, $cat_2_elements, [
                     'class' => 'cat-list form-control',
@@ -287,7 +295,7 @@ $seller = Yii::app()->user->getModel();
             </div>
 
             <div style="<?= $display_3; ?>" class="cat-list-block">
-                <div class="cat-list-block-label">Дополнительно</div>
+                <div class="cat-list-block-label"><?= Yii::t('basic', 'Subcategory') ?></div>
                 <?php
                 echo Chtml::dropDownList('Cat3', $cat3_id, $cat_3_elements, [
                     'class' => 'cat-list form-control',
@@ -298,7 +306,7 @@ $seller = Yii::app()->user->getModel();
                 ?>
             </div>
             <div style="<?= $display_4; ?>" class="cat-list-block cat4_last">
-                <div class="cat-list-block-label">Дополнительно</div>
+                <div class="cat-list-block-label"><?= Yii::t('basic', 'Subcategory') ?></div>
                 <?php
                 echo Chtml::dropDownList('Cat4', $cat4_id, $cat_4_elements, [
                     'class' => 'cat-list form-control',
@@ -309,7 +317,7 @@ $seller = Yii::app()->user->getModel();
                 ?>
             </div>
             <div style="<?= $display_5; ?>" class="cat-list-block cat4_last">
-                <div class="cat-list-block-label">Дополнительно</div>
+                <div class="cat-list-block-label"><?= Yii::t('basic', 'Subcategory') ?></div>
                 <?php
                 echo Chtml::dropDownList('Cat5', $cat5_id, $cat_5_elements, [
                     'class' => 'cat-list form-control',
@@ -330,7 +338,7 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Параметры лота</p>
+            <p><?= Yii::t('basic', 'Additional options') ?></p>
         </div>
 
         <div class="col-xs-9 right_col" id="content-options-block">
@@ -352,10 +360,8 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Описание лота</p>
+            <p><?= Yii::t('basic', 'Item description') ?></p>
             <span>
-                Подробно опишите товар. Укажите преимущества и дополнительные характеристики. Опишите дефекты если таковые
-                имеются. Сделайте Ваше описание побуждающим к действию.
             </span>
         </div>
         <div class="col-xs-9 right_col">
@@ -366,7 +372,7 @@ $seller = Yii::app()->user->getModel();
                 'model' => $model,
                 'attribute' => 'text',
                 'options' => array(
-                    'lang' => 'ru',
+                    'lang' => Yii::app()->language,
                     'convertVideoLinks' => 'true',
                     'buttons' => array('formatting', '|', 'bold', 'italic', 'deleted', 'underline', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|', 'fontcolor', 'backcolor', '|', 'alignleft', 'aligncenter', 'alignright', 'justify', '|', 'link', 'image', 'video', 'horizontalrule'),
                     'iframe' => true,
@@ -387,16 +393,16 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Тип аукциона и цена</p>
+            <p><?= Yii::t('basic', 'Auction\'s type') ?></p>
         </div>
         <div class="col-xs-9 right_col">
             <?php echo $form->error($model, 'type_transaction'); ?>
             <?php
             echo CHtml::radioButtonList(
                     CHtml::activeName($model, 'type_transaction'), $model->type_transaction, array(
-                Auction::TP_TR_STANDART => 'Стандартный',
-                Auction::TP_TR_START_ONE => 'С 1 рубля',
-                Auction::TP_TR_SALE => 'Фиксированная цена'
+                Auction::TP_TR_STANDART => Yii::t('basic', 'Standart auction'),
+                Auction::TP_TR_START_ONE => Yii::t('basic', 'From 1 dollar'),
+                Auction::TP_TR_SALE => Yii::t('basic', 'Fix price')
                     ), array(
                 'id' => 'type_transaction',
                 'template' => '<div class="radio-inline">{input}{label}</div>',
@@ -409,21 +415,18 @@ $seller = Yii::app()->user->getModel();
                     <?php
                     echo $form->label($model, 'starting_price', [
                         'required' => true,
-                        'label' => 'Начальная цена (руб.)'
+                        'label' => Yii::t('basic', 'Starting price')
                     ]);
                     ?><br>
-                    <?php echo $form->textField($model, 'starting_price', ['class' => 'form-control width_input_short']); ?>
+                    <?php echo $form->textField($model, 'starting_price', ['class' => 'form-control width_input_short', 'onkeyup' => 'validatePrice(this)']); ?>
                     <?php echo $form->error($model, 'starting_price'); ?>
-                    <p>Укажите <b>начальную цену</b>. Виигрывает тот участник который предложит наивысшую цену на момент
-                        окончания торгов.</p>
+
                 </div>
 
                 <div id="price_block" class="p_block">
-                    <?php echo $form->label($model, 'price', ['label' => 'Блиц-цена (руб.)']); ?><br>
-                    <?php echo $form->textField($model, 'price', ['class' => 'form-control width_input_short']); ?>
+                    <?php echo $form->label($model, 'price', ['label' => Yii::t('basic', 'Buy Now')]); ?><br>
+                    <?php echo $form->textField($model, 'price', ['class' => 'form-control width_input_short', 'onkeyup' => 'validatePrice(this)']); ?>
                     <?php echo $form->error($model, 'price'); ?>
-                    <p><b>Блиц-цена</b> — это цена за которую Вы готовы продать лот досрочно, не дожидаясь окончания торгов.
-                    </p>
                 </div>
 
             </div>
@@ -434,8 +437,8 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Количество</p>
-            <span>Укажите доступное количество единиц лота</span>
+            <p><?= Yii::t('basic', 'Items quantity') ?></p>
+            <span></span>
         </div>
         <div class="col-xs-9 right_col">
             <?php echo $form->error($model, 'quantity'); ?>
@@ -447,7 +450,7 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Продолжительность торгов</p>
+            <p><?= Yii::t('basic', 'Duration') ?></p>
         </div>
         <div class="col-xs-9 right_col">
             <?php
@@ -456,7 +459,7 @@ $seller = Yii::app()->user->getModel();
             }
             echo Chtml::activeDropDownList(
                     $model, 'duration', Auction::getDurationList(), array(
-                'empty' => ' - выберите период - ',
+                'empty' => Yii::t('basic', ' - select period - '),
                 'class' => 'form-control width_input_short'
                     )
             );
@@ -465,7 +468,7 @@ $seller = Yii::app()->user->getModel();
 
             <div class="checkbox">
                 <?php echo Chtml::activeCheckBox($model, 'is_auto_republish', ['style' => 'margin-left:0px']); ?> 
-                <?= CHtml::activeLabel($model, 'is_auto_republish', array('label' => 'Автоматически перевыставить лот если не нашелся покупатель')) ?>
+                <?= CHtml::activeLabel($model, 'is_auto_republish', array('label' => Yii::t('basic', 'Automatically republish item if buyer is not found'))) ?>
             </div>
         </div>
     </div>
@@ -473,8 +476,8 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Местонахождение лота</p>
-            <span>Для автоматической подстановки данных заполните местоположение в настройках</span>
+            <p><?= Yii::t('basic', 'Location') ?></p>
+            <span></span>
         </div>
         <div class="col-xs-9 right_col">
             <?php $this->widget('frontend.widgets.citySelector.CitySelectorWidget', array('model' => $model)); ?>
@@ -484,9 +487,8 @@ $seller = Yii::app()->user->getModel();
 
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Дополнительные контактные данные</p>
-            <span>Укажите какими дополнительными способами с Вами можно связаться.
-                Эта информация также будет передана победителю. Варианты и стоимость пересылки.</span>
+            <p><?= Yii::t('basic', 'More contacts') ?></p>
+            <span></span>
         </div>
         <div class="col-xs-9 right_col">
             <?php
@@ -496,8 +498,8 @@ $seller = Yii::app()->user->getModel();
     </div>
     <div class="row">
         <div class="col-xs-3 left_col">
-            <p>Условия передачи</p>
-            <span>Укажите на каких условиях Вы готовы передать товар</span>
+            <p><?= Yii::t('basic', 'Shipping terms') ?></p>
+            <span></span>
         </div>
         <div class="col-xs-9 right_col">
             <?php
@@ -513,10 +515,10 @@ $seller = Yii::app()->user->getModel();
         <div class="col-xs-9 right_col">
             <?php
             echo $form->errorSummary(
-                    $model, '<span class="head_error">Ошибки заполнения:</span>', '<p>Пожалуйста, исправьте ошибки и вы сможете опубликовать лот.</p>', array('class' => 'error_container')
+                $model, '<span class="head_error">' . Yii::t('basic', 'Errors') . ':</span>', '<p></p>', array('class' => 'error_container')
             );
             ?>
-            <?php echo CHtml::submitButton('Опубликовать', array('class' => 'btn btn-success')); ?>
+            <?php echo CHtml::submitButton(Yii::t('basic', 'Save'), array('class' => 'btn btn-success')); ?>
         </div>
     </div>
     <?php $this->endWidget(); ?>

@@ -36,7 +36,6 @@ class WebUser extends CWebUser
     /**
      * @var BillingCurrency
      */
-    private $currency;
 
     public function init()
     {
@@ -83,54 +82,5 @@ class WebUser extends CWebUser
         return $this->_model;
     }
 
-    /**
-     * @return BillingCurrency
-     */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
 
-    /**
-     * @param BillingCurrency $currency
-     *
-     * @return BillingCurrency
-     */
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCurrencyId()
-    {
-        return $this->getCurrency()->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCurrencyCode()
-    {
-        return $this->getCurrency()->code;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCurrencySymbol()
-    {
-        return $this->getCurrency()->getSymbol();
-    }
-
-    /**
-     * @return bool
-     */
-    public function getCurrencyIsRUR()
-    {
-        return $this->getCurrency()->code == BillingCurrency::CODE_RUR;
-    }
 }

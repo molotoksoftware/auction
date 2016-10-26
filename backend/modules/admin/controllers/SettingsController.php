@@ -43,7 +43,7 @@ class SettingsController extends BackController
         return array(
             array(
                 'allow',
-                'actions' => array('common', 'pagesPro', 'settingsPro'),
+                'actions' => array('common', 'pagesPro', 'settingsPro', 'localization'),
                 'roles' => array('admin', 'root'),
                 'users' => array('@'),
             ),
@@ -76,7 +76,7 @@ class SettingsController extends BackController
         $this->render(
             'pagesPro',
             array(
-                'title' => 'Тексты',
+                'title' => Yii::t('common', 'Texts'),
                 'text_pro_account' => $text['text_pro_account'],
                 'text_certified' => $text['text_certified']
             )
@@ -87,17 +87,7 @@ class SettingsController extends BackController
     {
         if ($configs = Yii::app()->request->getParam('Setting')) {
 
-            foreach ($configs as $name => $value) {
-                Setting::model()->updateAll(
-                    array('value' => $value),
-                    "name=:name and type=:type",
-                    array(
-                        ':name' => $name,
-                        ':type' => Setting::TYPE_PRO
-                    )
-                );
-            }
-            Yii::app()->user->setFlash('success', 'Успешно сохранено');
+            Setting::updateSettings($configs, Setting::TYPE_PRO);
 
         }
         $model = Setting::model()->getByType(Setting::TYPE_PRO)->findAll();
@@ -106,26 +96,25 @@ class SettingsController extends BackController
             'common',
             array(
                 'model' => $model,
-                'title' => 'Настройки ПРО'
+                'title' => Yii::t('common', 'PRO settings')
             )
         );
     }
 
-    public function actionCommon()
+    public function actionLocalization()
     {
-
         if ($configs = Yii::app()->request->getParam('Setting')) {
             $configs['defaultLocation'] = [];
             if(isset($configs['id_country'])) {
                 $configs['defaultLocation']['country'] = $configs['id_country'];
                 unset($configs['id_country']);
             }
-            
+
             if(isset($configs['id_region'])) {
                 $configs['defaultLocation']['region'] = $configs['id_region'];
                 unset($configs['id_region']);
             }
-            
+
             if(isset($configs['id_city'])) {
                 $configs['defaultLocation']['city'] = $configs['id_city'];
                 unset($configs['id_city']);
@@ -133,18 +122,25 @@ class SettingsController extends BackController
 
             $configs['defaultLocation'] = json_encode($configs['defaultLocation']);
 
-            foreach ($configs as $name => $value) {
-                Setting::model()->updateAll(
-                    array('value' => $value),
-                    "name=:name and type=:type",
-                    array(
-                        ':name' => $name,
-                        ':type' => Setting::TYPE_COMMON
-                    )
-                );
-            }
-            Yii::app()->user->setFlash('success', 'Успешно сохранено');
+            Setting::updateSettings($configs, Setting::TYPE_LOCALIZATION);
+        }
 
+        $model = Setting::model()->getByType(Setting::TYPE_LOCALIZATION)->findAll();
+
+        $this->render(
+            'localization',
+            [
+                'model' => $model,
+                'title' => Yii::t('common', 'Localization')
+            ]
+        );
+    }
+
+    public function actionCommon()
+    {
+
+        if ($configs = Yii::app()->request->getParam('Setting')) {
+            Setting::updateSettings($configs, Setting::TYPE_COMMON);
         }
         $model = Setting::model()->getByType(Setting::TYPE_COMMON)->findAll();
 
@@ -152,7 +148,7 @@ class SettingsController extends BackController
             'common',
             array(
                 'model' => $model,
-                'title' => 'Настройки сайта'
+                'title' => Yii::t('common', 'Main settings')
             )
         );
     }

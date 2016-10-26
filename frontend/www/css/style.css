@@ -54,15 +54,10 @@ a {
 }
 .span_cost {
     color: #3F3F3F;
-    background: url('/img/p_black.png') no-repeat right;
     padding-right: 14px;
     font-weight: bold;
 }
 
-.span_cost.not-rur-currency {
-    background: none;
-    padding-right: 0;
-}
 .margint_top_30 {
     margin-top:20px !important;
 }
@@ -390,18 +385,13 @@ a {
 .price_1 {
     font-size: 20px;
     font-weight:bold;
-    background: url('/img/seller_icons.png') no-repeat right -119px;
     display: inline-block;
-    padding-right: 18px;
-
     color: #393939;
     white-space: nowrap;
 }
 span.price_2 {
     display: block;
     font-size: 16px;
-    background: url('/img/seller_icons.png') no-repeat right -162px;
-    padding-right: 16px;
     font-weight: bold;
     color: #979797;
 }
@@ -539,15 +529,11 @@ span.price_2 span {
 }
 .price-field {
     font-size: 18px;
-    background: url('../img/seller_icons.png') no-repeat right 5px;
     padding-right: 19px;
     font-weight: bold;
 }
 
-.price-field .not-rur-currency {
-    background: none;
-    padding-right: 0;
-}
+
 .bet_text {
     width:100px !important;
     padding-left:3px !important;
@@ -558,7 +544,6 @@ span.price_2 span {
 }
 .buy_now_container span {
     color: #005799;
-    background: url('/img/seller_icons.png') no-repeat right -39px;
     padding-right: 18px;
     display: block;
     float: left;
@@ -695,8 +680,8 @@ span.price_2 span {
 .grid_cabinet .th6 {
     width:15%;
 }
-.price1, .price2 {
-    font-size:88%;
+.price1, .price2, .show_date_sold_items {
+    font-size:12px;
     color:gray;
 }
 .price1 p {
@@ -707,11 +692,8 @@ span.price_2 span {
 .price1 span {
     background: url('../img/seller_icons.png') no-repeat right -122px !important;
 }
-.price1.not-rur-currency span {
-    background: none !important;
-}
+
 .price2 {
-    font-size: 15px;
     color: #6d7987;
 }
 .price2 p {
@@ -723,9 +705,7 @@ span.price_2 span {
 .price2 span {
     background: url('../img/seller_icons.png') no-repeat right -159px !important;
 }
-.price2.not-rur-currency span {
-    background: none !important;
-}
+
 .grid_cabinet .td2, .grid_cabinet .td6 {
     font-size:80%;
 }

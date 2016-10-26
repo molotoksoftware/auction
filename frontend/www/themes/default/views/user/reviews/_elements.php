@@ -33,10 +33,8 @@ if (empty($items)) {
 } else {
     $webUser = Getter::webUser();
 
-$symbol = '';
-if (!$webUser->getCurrencyIsRUR()): ?>
-                   <?php $symbol = $webUser->getCurrencySymbol(); ?>
-<?php endif; ?>
+
+?>
 
 <table style="margin:10px 0;color:#242424">
     <tr>
@@ -90,9 +88,9 @@ if (!$webUser->getCurrencyIsRUR()): ?>
 
         <br>
         <?php if (!empty($item->sale->price)): ?>
-                <span class="span_cost <?= !$webUser->getCurrencyIsRUR() ? 'not-rur-currency' : '' ?>">
-                <?=FrontBillingHelper::getUserPrice($item->sale->price, false);?> 
-<?=$symbol;?>
+                <span class="span_cost">
+                <?= $item->sale->price;?>
+
                 </span>
         <?php endif;?>
     </td>

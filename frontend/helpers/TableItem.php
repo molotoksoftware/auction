@@ -43,8 +43,8 @@ class TableItem
 
     public static function getTimeLestFieldActlLotTables($item, $params = [])
     {
-        $time_row = (Item::getTimeLeftSimple($item) == '<span>Торги завершены</span>')
-                ? '<i style="color:red">Торги завершены</i>'
+        $time_row = (Item::getTimeLeftSimple($item) == '<span>'.Yii::t('basic', 'Ended').'</span>')
+                ? '<i style="color:red">'.Yii::t('basic', 'Ended').'</i>'
                 : Item::getTimeLeftSimple($item);
         $res = "<div>" . $time_row . '</div>';
 
@@ -89,11 +89,6 @@ class TableItem
     public static function getPriceField($price, $params = array())
     {
         $result = '<span>' . Item::getPriceFormat($price) . '</span>';
-
-        if (!empty($params['showDeliveryInfo']) && !empty($params['data']) && !empty($params['showDeliveryScope'])) {
-            $result .= self::getDeliveryInfo($params['data'], $params['showDeliveryScope']);
-        }
-
         return $result;
     }
 
@@ -101,9 +96,9 @@ class TableItem
     {
 
         if ($item['review_about_my_buyer'] > 0) {
-            return '<span title="Вы оставили отзыв о продавце" class="rew_yes_no up_active"></span>';
+            return '<span title="'.Yii::t('basic', 'You left feedback about the seller').'" class="rew_yes_no up_active"></span>';
         } else {
-            return '<span title="Нет Вашего отзыв о продавце" class="rew_yes_no up_noactive"></span>';
+            return '<span title="'.Yii::t('basic', 'Feedback needed').'" class="rew_yes_no up_noactive"></span>';
         }
     }
 
@@ -111,9 +106,9 @@ class TableItem
     {
 
         if ($item['review_about_my_buyer'] > 0) {
-            return '<span title="Оставлен отзыв покупателя о вас" class="rew_yes_no down_active"></span>';
+            return '<span title="'.Yii::t('basic', 'Feedback received').'" class="rew_yes_no down_active"></span>';
         } else {
-            return '<span title="Нет отзыва покупателя о вас" class="rew_yes_no down_noactive"></span>';
+            return '<span title="'.Yii::t('basic', 'No feedback received').'" class="rew_yes_no down_noactive"></span>';
         }
     }
 
@@ -121,18 +116,18 @@ class TableItem
     public static function getMyReviewBySallerForSales($item)
     {
         if ($item['review_my_about_saller'] > 0) {
-            return '<span title="Вы оставили отзыв о покупателе" class="rew_yes_no up_active"></span>';
+            return '<span title="'.Yii::t('basic', 'You left feedback about the buyer').'" class="rew_yes_no up_active"></span>';
         } else {
-            return '<span title="Нет Вашего отзыва о покупателе" class="rew_yes_no up_noactive"></span>';
+            return '<span title="'.Yii::t('basic', 'Feedback needed').'" class="rew_yes_no up_noactive"></span>';
         }
     }
 
     public static function getMyReviewBySallerShopping($item)
     {
          if ($item['review_my_about_saller'] > 0) {
-            return '<span title="Продавец оставил отзыв о Вас" class="rew_yes_no down_active"></span>';
+            return '<span title="'.Yii::t('basic', 'Feedback received').'" class="rew_yes_no down_active"></span>';
         } else {
-            return '<span title="Нет отзыва продавца о Вас" class="rew_yes_no down_noactive"></span>';
+            return '<span title="'.Yii::t('basic', 'No feedback received').'" class="rew_yes_no down_noactive"></span>';
         }
 
     }
@@ -146,7 +141,7 @@ class TableItem
     {
         $html = '';
         if (!empty($item['auction_id'])) {
-            $html = "<div class='grid_lot_number'>Лот № {$item['auction_id']}</div>";
+            $html = "<div class='grid_lot_number'>".Yii::t('basic', 'Item')." # {$item['auction_id']}</div>";
         }
         return $html;
     }
@@ -155,7 +150,7 @@ class TableItem
     {
         $html = '';
         if (!empty($item['current_bid'])) {
-            $html = '<div>Последняя ставка: ' . Item::getPriceFormat($item['current_price_bid']) . '</div>';
+            $html = '<div>'.Yii::t('basic', 'Last bid').': ' . Item::getPriceFormat($item['current_price_bid']) . '</div>';
         }
         return $html;
     }
@@ -165,6 +160,8 @@ class TableItem
         $html = '';
         if (!empty($item['bid_count'])) {
             $html = $item['bid_count'];
+        } else {
+            $html = 0;
         }
         return $html;
     }
@@ -174,7 +171,7 @@ class TableItem
         $html = '';
         if (!empty($item['bid_count']) && (!empty($item['bid_leader_login']) || !empty($item['bid_leader_nick']))) {
             $text = !empty($item['bid_leader_nick']) ? $item['bid_leader_nick'] : $item['bid_leader_login'];
-            $html = '<br><br><span style="font-size:80%;color:gray;">Лидер:<Br>' . CHtml::link($text, '/' . $item['bid_leader_login']) . '</span>';
+            $html = '<br><br><span style="font-size:80%;color:gray;">'.Yii::t('basic', 'Leader').':<Br>' . CHtml::link($text, '/' . $item['bid_leader_login']) . '</span>';
         }
         return $html;
     }
@@ -186,9 +183,9 @@ class TableItem
             return $html;
         }
         if ($item['quantity'] > 1 || $item['quantity_sold'] > 0) {
-            $html .= "<div class='grid_lot_quantity'>Осталось: {$item['quantity']}</div>";
+            $html .= "<div class='grid_lot_quantity'>".Yii::t('basic', 'Quantity').": {$item['quantity']}</div>";
             if ($item['quantity_sold'] > 0) {
-                $html .= "<div class='grid_lot_sold_quantity'>Продано: {$item['quantity_sold']}</div>";
+                $html .= "<div class='grid_lot_sold_quantity'>".Yii::t('basic', 'Quantity sold').": {$item['quantity_sold']}</div>";
             }
         }
         return $html;

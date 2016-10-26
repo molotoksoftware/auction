@@ -97,7 +97,8 @@ class CCacheHttpSession extends CHttpSession
 	 */
 	public function destroySession($id)
 	{
-	    return $this->_cache->delete($this->calculateKey($id));
+        $this->_cache->delete($this->calculateKey($id));
+        return true;
 	}
 
 	/**

@@ -30,7 +30,7 @@ $this->beginContent('//layouts/main'); ?>
 <div class="container">
 <div class="row auction">
         <div class="col-xs-9">
-            <h2>Мой auction</h2>
+            <h2><?= Yii::t('basic', 'My auction')?></h2>
         </div>
 </div>
 <hr class="top10 horizontal_line">
@@ -44,64 +44,60 @@ $this->beginContent('//layouts/main'); ?>
                 'lastItemCssClass' => 'last',
                 'items' => array(
                     [
-                        'label' => '<span class="glyphicon glyphicon-download"></span> Мои покупки',
+                        'label' => '<span class="glyphicon glyphicon-download"></span> '.Yii::t('basic', 'My purchases'),
                         'itemOptions' => ['class' => 'list-group-item head_li'],
                     ],
                         array(
-                            'label' => '<span>Корзина</span> ',
-                            'url' => '#',
-                        ),
-                        array(
-                            'label' => '<span>Избранные лоты</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityFavItems()),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Favorite items')) . UI::showQuantityLeftMenu(CounterInfo::quantityFavItems()),
                             'url' => array('/user/favorites/items')
                         ),
                         array(
-                            'label' => '<span>Любимые продавцы</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityOtslItems()),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Favorite sellers')) . UI::showQuantityLeftMenu(CounterInfo::quantityOtslItems()),
                             'url' => array('/user/lenta/index')
                         ),
                         array(
-                            'label' => '<span>Активные ставки</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityActiveBets(Yii::app()->user->id)),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Bids')) . UI::showQuantityLeftMenu(CounterInfo::quantityActiveBets(Yii::app()->user->id)),
                             'url' => array('/user/shopping/activeBets')
                         ),
                         array(
-                            'label' => '<span>Не выигранные</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityNoWonItems()),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Didn\'t win')) . UI::showQuantityLeftMenu(CounterInfo::quantityNoWonItems()),
                             'url' => array('/user/shopping/notWonItems')
                         ),
                         array(
-                            'label' => '<span>История покупок</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityHistoryShopping()),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Purchase history')) . UI::showQuantityLeftMenu(CounterInfo::quantityHistoryShopping()),
                             'url' => array('/user/shopping/historyShopping')
                         ),
                     [
-                        'label'=>'<span class="glyphicon glyphicon-upload"></span> Продажи',
+                        'label'=>'<span class="glyphicon glyphicon-upload"></span> '.Yii::t('basic', 'Sell'),
                         'itemOptions' => ['class' => 'list-group-item head_li'],
                     ],
 
                         array(
-                            'label' => '<span>Активные лоты</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityActiveLots()),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Active items')) . UI::showQuantityLeftMenu(CounterInfo::quantityActiveLots()),
                             'url' => array('/user/sales/activeItems')
                         ),
                         array(
-                            'label' => '<span>Непроданные лоты</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityCompletedItems()),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Unsold')) . UI::showQuantityLeftMenu(CounterInfo::quantityCompletedItems()),
                             'url' => array('/user/sales/completedItems')
                         ),
                         array(
-                            'label' => '<span>Проданные лоты</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantitySoldItems()),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Sold')) . UI::showQuantityLeftMenu(CounterInfo::quantitySoldItems()),
                             'url' => array('/user/sales/soldItems')
                         ),
                         array(
-                            'label' => '<span>Вопросы по лотам</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityQuestionsForMe()),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'Questions')) . UI::showQuantityLeftMenu(CounterInfo::quantityQuestionsForMe()),
                             'url' => array('/user/questions/index')
                         ),
                     [
-                        'label' => '<span class="glyphicon glyphicon-bullhorn"></span> Отзывы',
+                        'label' => '<span class="glyphicon glyphicon-bullhorn"></span> '.Yii::t('basic', 'Reviews'),
                         'itemOptions' => ['class' => 'list-group-item head_li'],
                     ],
                         array(
-                            'label' => '<span>Отзывы обо мне</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityReviews('to_me')),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'About me')) . UI::showQuantityLeftMenu(CounterInfo::quantityReviews('to_me')),
                             'url' => array('/user/reviews/index/route/to_me')
                         ),
                         array(
-                            'label' => '<span>Мои отзывы</span> ' . UI::showQuantityLeftMenu(CounterInfo::quantityReviews('from_me')),
+                            'label' => Item::spanEnvelopment(Yii::t('basic', 'From me')). UI::showQuantityLeftMenu(CounterInfo::quantityReviews('from_me')),
                             'url' => array('/user/reviews/index/route/from_me')
                         ),
                 ),

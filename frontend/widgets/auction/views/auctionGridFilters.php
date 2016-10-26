@@ -55,7 +55,7 @@ $cs = Getter::clientScript();
 <div class="row" id="row grid-lot-filter">
     <div class="col-xs-12">
          <div class="panel panel-default">
-            <div class="panel-heading">Фильтр</div>
+            <div class="panel-heading"><?= Yii::t('basic', 'Filter') ?></div>
                 <div class="panel-body">
                 <div class="col-xs-6">
                     <!-- search-filter -->
@@ -63,11 +63,11 @@ $cs = Getter::clientScript();
                         <div class="grid-search-filter-cnt input-group">
                             <?=CHtml::textField($searchFieldName, $searchFieldValue, [
                                 'id'          => 'grid-search-filter',
-                                'placeholder' => 'Поиск по лотам',
+                                'placeholder' => Yii::t('basic', 'Search'),
                                 'class'       => 'form-control'
                             ])?> 
                             <span class="input-group-btn">
-                                <?=CHtml::button('Найти', ['id' => 'gsf-find-btn', 'class' => 'btn btn-default'])?>
+                                <?=CHtml::button(Yii::t('basic', 'Search'), ['id' => 'gsf-find-btn', 'class' => 'btn btn-default'])?>
                             </span>
                         </div>
                     <?php endif; ?>
@@ -76,13 +76,13 @@ $cs = Getter::clientScript();
                     <?php if ($showPeriodFilter): ?>
                         <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                            <strong>Период:</strong> <?= $datePeriodOptions[$activePeriodOption];?> <span class="caret"></span>
+                            <strong><?= Yii::t('basic', 'Period')?>:</strong> <?= $datePeriodOptions[$activePeriodOption];?> <span class="caret"></span>
                          </button>
                         <?php
                         $items = [];
                         foreach ($datePeriodOptions as $period => $title) {
                             $items[] = [
-                                'label'       => $title,
+                                'label'       => Yii::t('basic', $title),
                                 'url'         => '',
                                 'active'      => $activePeriodOption == $period,
                                 'linkOptions' => [
@@ -104,7 +104,7 @@ $cs = Getter::clientScript();
                             ? CHtml::activeDropDownList(
                                 $auction, 'category_id',
                                 $userCategoriesList,
-                                array('empty' => 'Все категории', 'encode' => false, 'class' => 'form-control')
+                                array('empty' => Yii::t('basic', 'All categories'), 'encode' => false, 'class' => 'form-control')
                             )
                             : false; ?>
                             <?php
@@ -127,7 +127,7 @@ $cs = Getter::clientScript();
                                 'buyer',
                                 $request->getParam('buyer'),
                                 $buyersArray,
-                                ['prompt' => 'Все покупатели',
+                                ['prompt' => Yii::t('basic', 'All buyers'),
                                  'class'  => 'form-control'
                                 ]
                             )?>
@@ -150,7 +150,7 @@ $cs = Getter::clientScript();
                                 'seller',
                                 $request->getParam('seller'),
                                 $sellersArray,
-                                ['prompt' => 'Все продавцы', 'class' => 'form-control']
+                                ['prompt' => Yii::t('basic', 'All sellers'), 'class' => 'form-control']
                             )?>
                             <?php
                             $js = "

@@ -45,7 +45,8 @@ class Bid extends CModel
     {
         return array(
             array('owner, lot_id, price', 'required'),
-            array('owner, lot_id, price', 'numerical'),
+            array('owner, lot_id', 'numerical'),
+            array('price', 'numerical', 'numberPattern'=>'/^[0-9]{1,9}(\.[0-9]{1,2})?$/'),
             array('lot_id', 'validateLot')
         );
     }
@@ -165,8 +166,8 @@ class Bid extends CModel
 
             if ($current_bid) {
                 $starting_price = $current_bid['max_price'];
-                $step = ceil($starting_price * Yii::app()->params['minStepRatePercentage'] / 100) > 1
-                    ? ceil($starting_price * Yii::app()->params['minStepRatePercentage'] / 100)
+                $step = round($starting_price * Yii::app()->params['minStepRatePercentage'] / 100, 2) > 1
+                    ? round($starting_price * Yii::app()->params['minStepRatePercentage'] / 100, 2)
                     : 1;
 
                 if ($this->skip_max_valid || $current_bid['max_price'] + $step <= $this->price) {

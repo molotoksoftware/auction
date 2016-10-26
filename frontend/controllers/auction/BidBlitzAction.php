@@ -75,7 +75,6 @@ class BidBlitzAction extends CAction
                     'lotModel'     => $lot,
                     'amount'       => ($lot->price * $quantity),
                     'sellerModel'  => $sellerModel,
-                    'currencyCode' => Getter::webUser()->getCurrencyCode(),
                 ];
                 $ntf = new Notification(
                     Yii::app()->user->id, $params, Notification::TYPE_WINNER_AUCTION);
@@ -93,7 +92,6 @@ class BidBlitzAction extends CAction
                     'quantity'     => $quantity,
                     'amount'       => ($lot->price * $quantity),
                     'buyerModel'   => Yii::app()->user->getModel(),
-                    'currencyCode' => $sellerModel->getCommonData()->currency->code,
                 ];
                 $ntf = new Notification(
                     $lot->owner, $params, Notification::TYPE_COMPLETED_WINNER_LOT);
@@ -152,7 +150,6 @@ EOD;
                             $params = [
                                 'linkItem'     => $lot->getLink(true),
                                 'bidPrice'     => $bid['price'],
-                                'currencyCode' => User::getCurrencyCodeByUserId($bid['owner']),
                             ];
                             $ntf = new Notification(
                                 $bid['owner'], $params, Notification::TYPE_NOT_WON_BIDDING_LOT);

@@ -68,7 +68,6 @@ class NewBidAction extends CAction
                     'bidPrice'     => $event->params['bidPrice'],
                     'lotName'      => $event->params['lot']['name'],
                     'userLink'     => User::model()->findByPk($event->params['owner'])->getLink(),
-                    'currencyCode' => User::getCurrencyCodeByUserId($lot['owner']),
                 ];
                 $ntf = new Notification($lot['owner'], $params, Notification::TYPE_ACTIVE_LOTS);
                 $ntf->send();
@@ -97,7 +96,6 @@ class NewBidAction extends CAction
                     'linkItem'     => BaseAuction::staticGetLink($event->params['lot']['name'], $event->params['lot']['auction_id']),
                     'bet'          => $bid['price'],
                     'lotName'      => $event->params['lot']['name'],
-                    'currencyCode' => User::getCurrencyCodeByUserId($bid['owner']),
                 ];
                 $ntf = new Notification($bid['owner'], $params, Notification::TYPE_RATE_SLAUGHTERED);
                 $ntf->send();
@@ -148,18 +146,9 @@ class NewBidAction extends CAction
         if (Yii::app()->user->isGuest) { RAjax::error(array('type' => 'NOT_AUTHORIZED', 'returnUrl' => Yii::app()->user->loginUrl)); }
 
         $lotId = Yii::app()->request->getParam('lotId', null);
-        $price = Yii::app()->request->getParam('price', null);
-        $priceFloat = floatval($price);
+        $priceFloat = Yii::app()->request->getParam('price', null);
+        $price = round($priceFloat, 2);
 
-        if (!Getter::webUser()->getCurrencyIsRUR()) {
-            // Конвертируем в рубли.
-            $price = Getter::billing()->convertMoney(
-                $priceFloat,
-                Getter::billing()->getCurrencyIdByCode(BillingCurrency::CODE_RUR),
-                Getter::webUser()->getCurrencyId()
-            );
-            $price = ceil($price);
-        }
 
         $lot = $this->getLot($lotId, $price);
         $current_bid = BidAR::model()->findByPk($lot->current_bid);
@@ -176,7 +165,7 @@ class NewBidAction extends CAction
             ]);
         }
 
-        if($lead_auto_bid && $lead_auto_bid->price == intval($price)) {
+        if($lead_auto_bid && $lead_auto_bid->price == floatval($price)) {
             RAjax::error(array(
                 'type' => 'COMMON_ERROR',
                 'message' => 'Такая ставка сделана другим пользователем ранее. Поставьте другую ставку'
@@ -188,7 +177,7 @@ class NewBidAction extends CAction
         if($price < $calc_price) {
             RAjax::error(array(
                 'type' => 'COMMON_ERROR',
-                'message' => 'Ваша ставка ('.intval($price).' руб.) должна быть больше текущей ставки + минимальный шаг ('.($calc_price).')'
+                'message' => 'Ваша ставка ('.floatval($price).' руб.) должна быть больше текущей ставки + минимальный шаг ('.($calc_price).')'
             ));
         }
 

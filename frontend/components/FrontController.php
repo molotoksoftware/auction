@@ -33,8 +33,6 @@
  */
 class FrontController extends BaseController
 {
-    const COOKIE_CURRENCY_KEY = 'currency_code';
-    const CACHE_USER_COMMON_CURRENCY_ID = 'user_common_currency_id';
 
     public $defaultPage = 25;
 
@@ -201,50 +199,10 @@ class FrontController extends BaseController
             $this->redirect('/system/maintenance');
         }
 
-        $this->initUserCurrency();
 
         return true;
     }
 
-    private function initUserCurrency()
-    {
-        $request = Yii::app()->getRequest();
-        $cookies = $request->getCookies();
-        $webUser = Getter::webUser();
-        $cache = Yii::app()->getCache();
 
-        $availableCurrencies = FrontBillingHelper::getAvailableCurrencies();
-
-        $selectedCurrency = $request->getQuery('currency');
-        if ($selectedCurrency && isset($availableCurrencies[$selectedCurrency])) {
-            $currentCurrencyCode = $selectedCurrency;
-            $cookies[self::COOKIE_CURRENCY_KEY] = new CHttpCookie(self::COOKIE_CURRENCY_KEY, $currentCurrencyCode);
-        } else {
-            if (isset($cookies[self::COOKIE_CURRENCY_KEY])) {
-                $currentCurrencyCode = $cookies[self::COOKIE_CURRENCY_KEY]->value;
-            } else {
-                if (!$webUser->getIsGuest()) {
-                    $currentCurrencyCode = $webUser->getModel()->getCommonData()->currency->code;
-                } else {
-                    $currentCurrencyCode = FrontBillingHelper::getDefaultUserCurrencyCode();
-                }
-                $cookies[self::COOKIE_CURRENCY_KEY] = new CHttpCookie(self::COOKIE_CURRENCY_KEY, $currentCurrencyCode);
-            }
-        }
-
-        $webUser->setCurrency($availableCurrencies[$currentCurrencyCode]);
-
-        if (!$webUser->getIsGuest()) {
-            $commonModel = $webUser->getModel()->getCommonData();
-            if ($currentCurrencyCode != $commonModel->currency->code) {
-                $commonModel->currency_id = $webUser->getCurrencyId();
-                $commonModel->update(['currency_id']);
-            }
-            $cacheCurrencyId = $cache->get(self::CACHE_USER_COMMON_CURRENCY_ID);
-            if ($cacheCurrencyId === false || $webUser->getCurrencyId() != $cacheCurrencyId) {
-                $cache->set(self::CACHE_USER_COMMON_CURRENCY_ID, $webUser->getCurrencyId());
-            }
-        }
-    }
 
 }

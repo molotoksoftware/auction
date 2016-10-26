@@ -27,5 +27,5 @@
  */
 
 ?>
-Активные ставки. Ваша ставка "<?= CommonBillingHelper::getPriceWithCurrency($bet, $currencyCode); ?>" по лоту <?=$linkItem; ?> перебита, <a href="<?=$linkActiveRate; ?>">Перейти к ставкам</a>
+Активные ставки. Ваша ставка "<?= $bet; ?>" по лоту <?=$linkItem; ?> перебита, <a href="<?=$linkActiveRate; ?>">Перейти к ставкам</a>
 

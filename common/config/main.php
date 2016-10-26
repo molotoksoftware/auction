@@ -70,7 +70,7 @@ return [
         'php.timezone'             => 'Europe/Moscow',
 
         // Минимальный шаг ставки в процентах.
-        'minStepRatePercentage'    => 1,
+        'minStepRatePercentage'    => 5,
 
     ],
 ];

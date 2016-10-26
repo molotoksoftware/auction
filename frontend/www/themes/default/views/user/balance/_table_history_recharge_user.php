@@ -45,10 +45,7 @@ function getSuma(BalanceHistory $data) {
         return '';
     }
 
-    $price = FrontBillingHelper::getUserPriceWithCurrency($data->summa, [
-                'rurCurrencySign' => '<span class="rubl">руб.</span>',
-                'lrcDecimals' => 2,
-    ]);
+    $price = $data->summa;
 
     return '<p><span style="font-weight:bold;color:' . $style . '">' . $ico . '' . $price . '</span></p>';
 }

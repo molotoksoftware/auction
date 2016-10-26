@@ -131,9 +131,12 @@ class BaseAuction extends CActiveRecord
             array('id_country, id_region, id_city', 'numerical', 'integerOnly' => true),
             array('duration', 'required', 'message' => 'Укажите продолжительность торгов'),
             array('owner', 'required', 'message' => 'Укажите пользователя'),
-            array('price, starting_price', 'numerical', 'min' => 0, 'max' => 99999999),
+            array(
+                'price, starting_price',
+                'numerical', 'numberPattern'=>'/^[0-9]{1,9}(\.[0-9]{1,2})?$/'
+            ),
             array('type_transaction, publication_status', 'numerical', 'integerOnly' => true),
-            array('category_id, price, owner', 'length', 'max' => 10),
+            array('category_id, owner', 'length', 'max' => 10),
             array('name, meta_description, meta_keywords, image, conditions_transfer', 'length', 'max' => 2048),
             array('text', 'safe'),
             array('contacts', 'length'),

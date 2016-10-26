@@ -28,10 +28,19 @@
 
 
 
-return array(
+return [
     'RUB' => 'р.',
     'reply' => 'назад',
     'Reply' => 'Назад',
     'authorization' => 'Авторизация',
-    'return to the site' => 'Вернуться на сайт'
-);
+    'return to the site' => 'Вернуться на сайт',
+
+    'Localization' => 'Локализация',
+    'PRO settings' => 'Настройки ПРО',
+    'Main settings' => 'Основные настройки',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+];

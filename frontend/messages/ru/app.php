@@ -31,6 +31,6 @@ return [
     '{n} hour|{n} hours'   => '{n} час|{n} часа|{n} часов',
     '{n} day|{n} days'     => '{n} день|{n} дня|{n} дней',
     '{n} money|{n} moneys' => '{n} рубль|{n} рубля|{n} рублей',
-    'LABEL_BIDS_COUNT'     => '<strong>{n} ставка</strong>|<strong>{n} ставки</strong>|<strong>{n} ставок</strong>|<strong>{n} ставки</strong>',
+    '{n} bid|{n} bids|{n} bids|{n} bids'     => '<strong>{n} ставка</strong>|<strong>{n} ставки</strong>|<strong>{n} ставок</strong>|<strong>{n} ставки</strong>',
     'LABEL_RESULTS_COUNT'  => '{n} результат|{n} результата|{n} результатов',
 ];

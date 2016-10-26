@@ -99,7 +99,6 @@ function changeTransaction(e) {
             $("#FormCreateLot_starting_price").val(0).removeAttr("style");
             $("#starting_price_block").show();
 
-            $("#FormCreateLot_starting_price").val(parseInt($("#FormCreateLot_starting_price").val()));
             break;
 
         case "1"://fix price
@@ -115,6 +114,14 @@ function changeTransaction(e) {
 
     }
 }
+
+function validatePrice(inp) {
+    inp.value = inp.value.replace(/[^\d.]*/g, "")
+                         .replace(/([.])[.]+/g, "$1")
+                         .replace(/^[^\d]*(\d+([.]\d{0,5})?).*$/g, "$1");
+}
+
+
 ', CClientScript::POS_END);
 
 $seller = Yii::app()->user->getModel();
@@ -181,7 +188,6 @@ $seller = Yii::app()->user->getModel();
                     if (val=="") {
                         val = 0;
                     }
-                    $("#FormCreateLot_starting_price").val(parseInt(val));
 
 
                     return true;
@@ -322,18 +328,12 @@ $seller = Yii::app()->user->getModel();
             <?php elseif ($opt_post == 1): ?>
                 <div id="content-options" style="padding: 0px 5px; background-color: rgb(241, 241, 241);">
                     <?php
-                    $sql = <<<SQL
-        select a.name, a.attribute_id, a.type, a.mandatory
-from attribute a 
-left join category_attributes ca on ca.attribute_id=a.attribute_id
-where ca.category_id=:id and a.type<>:type
-order by ca.sort ASC
-SQL;
-                    $options = Yii::app()->db->createCommand($sql)->queryAll(true, array(
-                        ':id' => $model->category_id,
-                        ':type' => Attribute::TYPE_CHILD_ELEMENT
-                    ));
-                    $this->renderPartial('_options', ['options' => $options, 'post' => $_POST['options'],]);
+                    $this->renderPartial(
+                        '_options', array(
+                            'options' => $ItemOptions,
+                            'post' => $_POST['options']
+                        )
+                    );
                     ?>
                 </div>
             <?php endif; ?>
@@ -344,7 +344,6 @@ SQL;
         <div class="col-xs-3 left_col">
             <p><?= Yii::t('basic', 'Item description') ?></p>
             <span>
-                <?= Yii::t('basic', 'Item description subtext') ?>
             </span>
         </div>
         <div class="col-xs-9 right_col">
@@ -398,14 +397,14 @@ SQL;
                         'label' => Yii::t('basic', 'Starting price')
                     ]);
                     ?><br>
-                    <?php echo $form->textField($model, 'starting_price', ['class' => 'form-control width_input_short']); ?>
+                    <?php echo $form->textField($model, 'starting_price', ['class' => 'form-control width_input_short', 'onkeyup' => 'validatePrice(this)']); ?>
                     <?php echo $form->error($model, 'starting_price'); ?>
 
                 </div>
 
                 <div id="price_block" class="p_block">
                     <?php echo $form->label($model, 'price', ['label' => Yii::t('basic', 'Buy Now')]); ?><br>
-                    <?php echo $form->textField($model, 'price', ['class' => 'form-control width_input_short']); ?>
+                    <?php echo $form->textField($model, 'price', ['class' => 'form-control width_input_short', 'onkeyup' => 'validatePrice(this)']); ?>
                     <?php echo $form->error($model, 'price'); ?>
 
                 </div>

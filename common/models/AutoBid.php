@@ -37,7 +37,8 @@ class AutoBid extends CActiveRecord
     {
         return array(
             array('auction_id, price, user_id', 'required'),
-            array('auction_id, price, user_id', 'numerical', 'integerOnly' => true)
+            array('auction_id, user_id', 'numerical', 'integerOnly' => true),
+            array('price', 'numerical', 'numberPattern'=>'/^[0-9]{1,9}(\.[0-9]{1,2})?$/')
         );
     }
 
@@ -92,7 +93,7 @@ class AutoBid extends CActiveRecord
             $price = $bid->price;
         } else return $price;
 
-        $price = $price + ceil($price * Yii::app()->params['minStepRatePercentage'] / 100);
+        $price = $price + round($price * Yii::app()->params['minStepRatePercentage'] / 100, 2);
         return $price;
     }
 

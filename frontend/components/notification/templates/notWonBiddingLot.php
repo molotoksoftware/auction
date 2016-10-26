@@ -27,6 +27,6 @@
  */
 
 ?>
-Не выигранные. Торги по лоту <?=$linkItem; ?> завершены. Ваша ставка <?= CommonBillingHelper::getPriceWithCurrency($bidPrice, $currencyCode); ?> не сыграла.
+Не выигранные. Торги по лоту <?=$linkItem; ?> завершены. Ваша ставка <?= $bidPrice; ?> не сыграла.
 <?=  CHtml::link('Перейти к ставкам', Yii::app()->createAbsoluteUrl('/user/shopping/notWonItems'));
 

@@ -136,14 +136,13 @@ class AuctionController extends FrontController
         $num_page_size = $this->getPageSize();
         $path = Yii::app()->request->getParam('path', null);
         $this->layout = 'auction';
-        $this->pageTitle = 'Аукцион';
+        $this->pageTitle = Yii::t('basic', 'Auction');
 
         if (!isset($_GET['filter'])) {
             $_GET['filter'] = 'oll';
         }
         $to_search_filter = $_GET['filter'];
 
-        $result_total = 0;
         $auc_id_arr  = [];
         $options = [];
         $category = false;
@@ -185,14 +184,13 @@ class AuctionController extends FrontController
             $params[':id_city'] = $filter->id_city;
         }
 
-        if (isset($_GET['search']) && !empty($_GET['search']) && $_GET['search'] !== 'Введите фразу для поиска') {
-            $search = strip_tags($_GET['search']);
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search = CHtml::encode($_GET['search']);
 
             $result = Item::searchHelper($search, $to_search_filter);
 
             if (count($result) > 0) {
                 foreach ($result as $item) {
-                    // Составляем массив из идентификаторов найденных аукционов
                     $auc_id_arr[] = intval($item['auction_id']);
                 }
 
@@ -206,7 +204,6 @@ class AuctionController extends FrontController
                 $count_sql->andWhere("a.auction_id=0");
             }
 
-            $result_total = count($result);
         }
 
         if ($filter->price_min == !'') {
@@ -224,7 +221,7 @@ class AuctionController extends FrontController
             ';
             $sql->andWhere($q);
             $count_sql->andWhere($q);
-            $params[':price_min'] = FrontBillingHelper::calculateRUR($filter->price_min);
+            $params[':price_min'] = $filter->price_min;
         }
         if ($filter->price_max == !'') {
             $q = '
@@ -241,7 +238,7 @@ class AuctionController extends FrontController
             ';
             $sql->andWhere($q);
             $count_sql->andWhere($q);
-            $params[':price_max'] = FrontBillingHelper::calculateRUR($filter->price_max);
+            $params[':price_max'] = $filter->price_max;
         }
 
         if (isset($_GET['Filter']['option'][0]) && (count($_GET['Filter']['option'][0]) > 0)) {
@@ -418,15 +415,15 @@ SQL;
         }
         //end category
 
-        //filter
+        //filter type_transaction
         if (isset($_GET['filter'])) {
             if ($_GET['filter'] == 'default') {
                 $count_sql->andWhere(' a.starting_price != 0');
                 $sql->andWhere('a.starting_price != 0');
             }
             if ($_GET['filter'] == 'buynow') {
-                $count_sql->andWhere('a.starting_price=0');
-                $sql->andWhere('a.starting_price=0');
+                $count_sql->andWhere('a.starting_price != 0');
+                $sql->andWhere('a.starting_price != 0');
             }
             if ($_GET['filter'] == 'nulls') {
                 $count_sql->andWhere('a.type_transaction=' . Auction::TP_TR_START_ONE);
@@ -555,7 +552,6 @@ SQL;
                 'filter'                   => $filter,
                 'options'                  => $options,
                 'search_active'            => $search_active,
-                'result_total'             => $result_total,
                 'showRecommendedContainer' => $showRecommendedContainer,
                 'auctionsImages'           => $auctionsImages,
                 'auc_id_arr'               => $auc_id_arr,
@@ -589,7 +585,7 @@ SQL;
 
         $this->layout = 'auction';
 
-        $dependency = new CDbCacheDependency('SELECT `update` FROM auction WHERE auction_id='.$id);
+      //  $dependency = new CDbCacheDependency('SELECT `update` FROM auction WHERE auction_id='.$id);
         $data = Yii::app()->db->createCommand()
             ->select(
                 'a.*, bid.price as current_bid, bid.bid_id as current_bid_id, u.login as user_login, u.pro as user_pro, u.rating as user_rating, u.user_id, f.favorite_id'
@@ -643,7 +639,7 @@ SQL;
             }
         }
 
-        $dependency2 = new CDbCacheDependency('SELECT MAX(`update`) FROM auction_attribute_value WHERE auction_id='.$id);
+      //  $dependency2 = new CDbCacheDependency('SELECT MAX(`update`) FROM auction_attribute_value WHERE auction_id='.$id);
         $params = Yii::app()->db->createCommand()
             ->select('a.name, ca.sort, av.value as av_value, acv.value as value, a.type, a.child_id')
             ->from('auction_attribute_value acv')

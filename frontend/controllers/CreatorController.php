@@ -62,12 +62,25 @@ class CreatorController extends FrontController
 
         $form = new FormCreateLot('main');
 
+        $sql = <<<SQL
+        select a.name, a.attribute_id, a.type, a.mandatory
+from attribute a 
+left join category_attributes ca on ca.attribute_id=a.attribute_id
+where ca.category_id=:id and a.type<>:type
+order by ca.sort ASC
+SQL;
+        $options = Yii::app()->db->createCommand($sql)->queryAll(true, array(
+            ':id' => $form->category_id,
+            ':type' => Attribute::TYPE_CHILD_ELEMENT
+        ));
+
         $this->performAjaxValidation($form, 'form-create-lot');
         $this->save($form, BaseAuction::TYPE_AUCTION);
 
 
         $this->render('lot', [
             'model'                   => $form,
+            'ItemOptions'             => $options,
         ]);
 
     }

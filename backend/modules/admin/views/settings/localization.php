@@ -32,7 +32,7 @@ $this->pageTitle = $title;
 
 $this->header_info = array(
     'icon' => 'icon-cog icon-2x',
-    'title' => 'Настройки сайта',
+    'title' => Yii::t('common', 'Localization'),
 );
 
 ?>

@@ -47,7 +47,7 @@ class CitySelectorWidget extends CWidget
         $this->defaultLocation = Setting::model()->find('name=:name AND type=:type',
             array(
                 ':name' => 'defaultLocation',
-                ':type' => Setting::TYPE_COMMON,
+                ':type' => Setting::TYPE_LOCALIZATION,
             )
         );
     }

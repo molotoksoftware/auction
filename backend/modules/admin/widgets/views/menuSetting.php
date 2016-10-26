@@ -38,6 +38,12 @@ $this->widget(
             ],
 
             [
+                'label'=>Yii::t('common', 'Localization'),
+                'url'   => ['/admin/settings/localization'],
+                //   'itemOptions' => array('class' => Yii::app()->controller->id=='reviews'?'active':'')
+            ],
+
+            [
                 'label'=>'Тексты',
                 'url'   => ['/admin/settings/pagesPro'],
              //   'itemOptions' => array('class' => Yii::app()->controller->id=='reviews'?'active':'')

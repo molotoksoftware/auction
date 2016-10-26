@@ -185,7 +185,7 @@ class UserController extends FrontController
             ';
             $sql->andWhere($q);
             $sqlCount->andWhere($q);
-            $params[':price_min'] = FrontBillingHelper::calculateRUR($filter->price_min);
+            $params[':price_min'] = $filter->price_min;
         }
         if ($filter->price_max == !'') {
             $q = '
@@ -202,7 +202,7 @@ class UserController extends FrontController
             ';
             $sql->andWhere($q);
             $sqlCount->andWhere($q);
-            $params[':price_max'] = FrontBillingHelper::calculateRUR($filter->price_max);
+            $params[':price_max'] = $filter->price_max;
         }
 
         if (isset($_GET['Filter']['option'][0]) && (count($_GET['Filter']['option'][0]) > 0)) {

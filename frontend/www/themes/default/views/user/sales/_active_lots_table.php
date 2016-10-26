@@ -130,8 +130,8 @@ function getLinkRemoveTrading($data)
 
 function getPricess($data, $params = array())
 {
-    $price = $data['price'];
-    $starting_price = $data['starting_price'];
+    $price = Item::getPriceFormat($data['price']);
+    $starting_price = Item::getPriceFormat($data['starting_price']);
     $prc = "";
 
     $prefix = '';
@@ -142,13 +142,13 @@ function getPricess($data, $params = array())
     }
 
     if ($price == '0.00' && $starting_price != '0.00') {
-        $prc = '<div class="price1"><p class="disp_inl_bl">' . ($prefix ? $prefix . '<br /> (' : '') . FrontBillingHelper::getUserPriceWithCurrency($starting_price) . ($prefix ? ')' : '') . '</p></div>';
+        $prc = '<div class="price1"><p class="disp_inl_bl">' . ($prefix ? $prefix . '<br /> (' : '') . $starting_price . ($prefix ? ')' : '') . '</p></div>';
     }
     if ($price != '0.00' && $starting_price == '0.00') {
-        $prc = '<div class="price2"><p class="disp_inl_bl">' . ($prefix ? $prefix . '<br /> (' : '') . FrontBillingHelper::getUserPriceWithCurrency($price) . ($prefix ? ')' : '') . '</p></div>';
+        $prc = '<div class="price2"><p class="disp_inl_bl">' . ($prefix ? $prefix . '<br /> (' : '') . $price . ($prefix ? ')' : '') . '</p></div>';
     }
     if ($price != '0.00' && $starting_price != '0.00') {
-        $prc = '<div class="price1"><p class="disp_inl_bl">' . ($prefix ? $prefix . '<br /> (' : '') . FrontBillingHelper::getUserPriceWithCurrency($starting_price) . ($prefix ? ')' : '') . '</p></div><div class="price2"><p class="disp_inl_bl">' . FrontBillingHelper::getUserPriceWithCurrency($price) . '</p></div>';
+        $prc = '<div class="price1"><p class="disp_inl_bl">' . ($prefix ? $prefix . '<br /> (' : '') . $starting_price . ($prefix ? ')' : '') . '</p></div><div class="price2"><p class="disp_inl_bl">' . $price . '</p></div>';
     }
 
 
@@ -160,8 +160,8 @@ function getViewed_urls2($data)
     $result = '';
     if(empty($data['viewed'])) $data['viewed'] = 0;
     if (isset($data['auction_id'])) {$result = '<a href="/user/cabinet/viewed/type/0/id/'.$data['auction_id'].'">'.$data['viewed'].'</a>';}
-    $result .= '<div title="В избранном" style="display:inline-block; width: 27px; margin-left: 8px;"><span class="favorites-icon"></span> '.$data['favorites_count'].'</div>';
-    return $result;
+    $result .= ' (<span title="В избранном" class="glyphicon glyphicon-star"></span>'.$data['favorites_count'].')';
+    return '<small>'.$result.'</small>';
 }
 
 ?>

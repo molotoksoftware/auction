@@ -27,15 +27,17 @@
  */
 
 /**
- * Class CurrencySelectorWidget
+ * Class Cookie
  */
-class CurrencySelectorWidget extends CWidget
+class PriceHelper
 {
-    public function run()
+    public static function formate($price)
     {
-        $this->render('currencySelector', [
-            'currentCurrencyCode' => Getter::webUser()->getCurrencyCode(),
-            'availableCurrencies' => FrontBillingHelper::getAvailableCurrencies(),
-        ]);
+        if (Yii::app()->params['currencyPosition'] == 0) {
+            return $price. ' ' . Yii::app()->params['currency'];
+        } else {
+            return Yii::app()->params['currency'] . ' ' .$price;
+        }
     }
+
 }

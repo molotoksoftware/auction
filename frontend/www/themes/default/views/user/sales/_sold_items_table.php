@@ -186,10 +186,10 @@ function buyerCellData($id, $nick, $login, $email, $telephone)
 function ind_price($price, $quantity, $amount, $params = [])
 {
     $result = '';
-    $result .= '<span>' . Item::getPriceFormat($price) . '</span>';
+    $result .= '<span class="price1">' . Item::getPriceFormat($price) . '</span>';
 
     if ($quantity > 1) {
-        $result .= '<div>x ' . $quantity . ' = ' . FrontBillingHelper::getUserPriceWithCurrency($amount) . '</div>';
+        $result .= '<div>x ' . $quantity . ' = ' . $amount . '</div>';
     }
 
     echo $result;

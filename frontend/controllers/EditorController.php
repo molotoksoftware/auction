@@ -77,7 +77,7 @@ class EditorController extends FrontController
         if (is_null($model) || $model->owner !== Yii::app()->user->id) {
             throw new CHttpException(404);
         }
-        $this->pageTitle = 'Редактирование "' . $model->name . '"';
+        $this->pageTitle = Yii::t('basic', 'Edit').' "' . $model->name . '"';
 
 
         $sql = <<<SQL

@@ -348,7 +348,6 @@ class Auction extends BaseAuction
                         'auction',
                         array(
                             'sales_id' => 0,
-                            'update' => time(),
                             'quantity' => $lot['quantity'] - $quantity,
                             'quantity_sold' => $lot['quantity_sold'] + $quantity,
                         ),
@@ -400,7 +399,6 @@ class Auction extends BaseAuction
                             'auction',
                             array(
                                 'current_bid' => (int)$activeBid['bid_id'],
-                                'update' => time(),
                             ),
                             'auction_id=:id',
                             array(':id' => $id)
@@ -418,7 +416,6 @@ class Auction extends BaseAuction
                             'sales_id' => $sales_id,
                             'quantity' => $lot['quantity'] - $quantity,
                             'quantity_sold' => $lot['quantity_sold'] + $quantity,
-                            'update' => time(),
                             'status' => Auction::ST_SOLD_BLITZ
                         ),
                         'auction_id=:id',

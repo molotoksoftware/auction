@@ -33,7 +33,7 @@
             <li>
                 <?
                     $user = User::model()->findByPk($bid->owner);
-                    echo ($user ? $user->getLink().': ' : '').CommonBillingHelper::getPriceWithCurrency($bid->price, $currencyCode);
+                    echo ($user ? $user->getLink().': ' : '').$bid->price;
                 ?>
             </li>
     <? endforeach; ?>

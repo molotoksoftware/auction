@@ -272,11 +272,8 @@ $webUser = Getter::webUser();
                         </div>
                         <div>
                             <?php $price = Item::getStaticPriceValue($item, false); ?>
-                            <span class="span_cost <?= !$webUser->getCurrencyIsRUR() ? 'not-rur-currency' : '' ?>">
-                            <?=FrontBillingHelper::getUserPrice($price, false);?>
-                            <?php if (!$webUser->getCurrencyIsRUR()): ?>
-                                <?= $webUser->getCurrencySymbol() ?>
-                            <?php endif; ?>
+                            <span class="span_cost ">
+                            <?=$price;?>
                             </span>
                         </div>
                         <div class="clear"></div>

@@ -70,7 +70,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $userModel->outName(); ?> <b class="caret"></b></a>
         <ul class="dropdown-menu">
 
-            <li><a href="/user/balance"><?= Yii::t('basic', 'Balance') ?>: <?= Yii::t('basic', '${amount}', ['{amount}'=>Getter::userModel()->getBalance(2)]); ?></a></li>
+            <li><a href="/user/balance"><?= Yii::t('basic', 'Balance') ?>: <?= PriceHelper::formate(Getter::userModel()->getBalance(2)); ?></a></li>
             <li><a href="/user/pro/index"><?= Yii::t('basic', 'PRO account') ?></a></li>
             <li><a href="/user/settings/common"><?= Yii::t('basic', 'Settings') ?></a></li>
         </ul>

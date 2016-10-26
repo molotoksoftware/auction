@@ -52,13 +52,13 @@ class AuctionGridFilters extends CWidget
     // Period filter
     public $showPeriodFilter = false;
     public $datePeriodOptions = [
-        'today'          => 'Сегодня',
-        'from_yesterday' => 'Вчера',
-        'last_week'      => 'За неделю',
-        'last_month'     => 'За месяц',
-        'last_half_year' => 'За 6 месяцев',
-        'last_year'      => 'За год',
-        'all'            => 'Все',
+        'today'          => 'Today',
+        'from_yesterday' => 'Yesterday',
+        'last_week'      => 'Last week',
+        'last_month'     => 'Last month',
+        'last_half_year' => 'Last half year',
+        'last_year'      => 'Lat year',
+        'all'            => 'All',
     ];
 
     public function init()

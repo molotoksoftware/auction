@@ -27,5 +27,5 @@
  */
 
 ?>
-Активные лоты. По вашему лоту <?= $linkItem; ?> появилась новая ставка <?= CommonBillingHelper::getPriceWithCurrency($bidPrice, $currencyCode); ?><br/>
+Активные лоты. По вашему лоту <?= $linkItem; ?> появилась новая ставка <?= $bidPrice; ?><br/>
 <?= CHtml::link('Перейти к моим лотам', Yii::app()->createAbsoluteUrl('/user/sales/activeItems')); ?>

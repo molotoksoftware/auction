@@ -244,7 +244,7 @@ function show_date($data)
             break;
     }
     if (isset($data['login'])) {$user = '<a href="/'.$data['login'].'">'.$data['login'].'</a>';} else {$user = '';}
-    return $data['bidding_date'].$title.$user;
+    return '<div class="show_date_sold_items">'.$data['bidding_date'].$title.$user.'</div>';
 }
 
 function getViewed_urls($data)
@@ -256,30 +256,26 @@ function getViewed_urls($data)
 
 function getPrice($data, $params = [])
 {
-    $price = $data['price'];
-    $starting_price = $data['starting_price'];
+    $price = Item::getPriceFormat($data['price']);
+    $starting_price = Item::getPriceFormat($data['starting_price']);
 
     $html = '<div class="price1"><p>-<span></span></p></div>';
 
-    $currencyCss = !Getter::webUser()->getCurrencyIsRUR() ? 'not-rur-currency' : '';
 
     if ($price == '0.00' && $starting_price != '0.00') {
-        $showPrice = FrontBillingHelper::getUserPrice($starting_price, false);
-        $showPrice .= !Getter::webUser()->getCurrencyIsRUR() ? ' ' . Getter::webUser()->getCurrencySymbol() : '';
-        $html = '<div class="price1 ' . $currencyCss . '"><p>' . $showPrice . '<span></span></p></div>';
+        $showPrice = $starting_price;
+        $html = '<div class="price1"><p>' . $showPrice . '<span></span></p></div>';
     }
     if ($price != '0.00' && $starting_price == '0.00') {
-        $showPrice = FrontBillingHelper::getUserPrice($price, false);
-        $showPrice .= !Getter::webUser()->getCurrencyIsRUR() ? ' ' . Getter::webUser()->getCurrencySymbol() : '';
-        $html = '<div class="price2 ' . $currencyCss . '"><p>' . $showPrice . '<span></span></p></div>';
+        $showPrice = $price;
+        $html = '<div class="price2"><p>' . $showPrice . '<span></span></p></div>';
     }
     if ($price != '0.00' && $starting_price != '0.00') {
-        $showPrice1 = FrontBillingHelper::getUserPrice($starting_price, false);
-        $showPrice1 .= !Getter::webUser()->getCurrencyIsRUR() ? ' ' . Getter::webUser()->getCurrencySymbol() : '';
-        $html = '<div class="price1 ' . $currencyCss . '"><p>' . $showPrice1 . '<span></span></p></div>';
-        $showPrice2 = FrontBillingHelper::getUserPrice($price, false);
-        $showPrice2 .= !Getter::webUser()->getCurrencyIsRUR() ? ' ' . Getter::webUser()->getCurrencySymbol() : '';
-        $html .= '<div class="price2 ' . $currencyCss . '"><p>' . $showPrice2 . '<span></span></p></div>';
+        $showPrice1 = $starting_price;
+
+        $html = '<div class="price1"><p>' . $showPrice1 . '<span></span></p></div>';
+        $showPrice2 = $price;
+        $html .= '<div class="price2"><p>' . $showPrice2 . '<span></span></p></div>';
     }
 
     return $html;
@@ -340,7 +336,7 @@ $grid = $this->widget(
                 'header' => 'Цена',
                 'type' => 'raw',
                 'name' => 'price',
-                'value' => 'getPrice($data, ["showDeliveryInfo" => true])',
+                'value' => 'getPrice($data)',
                 'headerHtmlOptions' => array('class' => 'prices_column'),
                 'htmlOptions' => array('class' => 'td3 text_al_left'),
                 'filter' => false

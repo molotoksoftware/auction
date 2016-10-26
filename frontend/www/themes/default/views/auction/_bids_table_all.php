@@ -78,16 +78,6 @@ function userBar($id)
 
     return $str;
 }
-
-
-
-function bidField($amount)
-{
-    return FrontBillingHelper::getUserPriceWithCurrency(
-        $amount,
-        ['rurCurrencySign' => '<span class="rubl">руб.</span>']
-    );
-}
 ?>
 
 
@@ -112,7 +102,7 @@ $this->widget(
                 'header' => 'Ставка',
                 'name' => 'bid',
                 'type' => 'raw',
-                'value' => 'bidField($data["price"])',
+                'value' => 'PriceHelper::formate($data["price"])',
                 'htmlOptions'=>array('class'=>'stavka')
             ),
             array(

@@ -42,7 +42,7 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <h4><?= Yii::t('basic', 'Credit remaining')?>: <?= Yii::t('basic', '${amount}', ['{amount}' => Getter::webUser()->getModel()->getBalance()]) ?></h4>
+        <h4><?= Yii::t('basic', 'Credit remaining')?>: <?= PriceHelper::formate(Getter::webUser()->getModel()->getBalance()) ?></h4>
         <a href=""><?= Yii::t('basic', 'Make a payment')?></a>
     </div>
 </div>

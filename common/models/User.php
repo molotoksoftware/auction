@@ -371,15 +371,11 @@ class User extends CActiveRecord {
     }
 
     public function getBalance($decimals = 0) {
-        $currencyCode = BillingCurrency::CODE_RUR;
+
         $webUser = Getter::webUser();
-        if (method_exists($webUser, 'getCurrencyCode')) {
-            $currencyCode = $webUser->getCurrencyCode();
-        }
-        return CommonBillingHelper::getPriceWithCurrency($this->balance, $currencyCode, [
-                    'rurCurrencySign' => '<span class="rubl"></span>',
-                    'lrcDecimals' => $decimals,
-        ]);
+
+        return $this->balance;
+
     }
 
     /**
@@ -507,37 +503,6 @@ class User extends CActiveRecord {
         return self::$unreadNotificationsCount;
     }
 
-    /**
-     * Получить код валюты юзера по его ID.
-     *
-     * @param int $userId
-     *
-     * @return mixed|string
-     */
-    public static function getCurrencyCodeByUserId($userId) {
-        $defaultCurrency = BillingCurrency::CODE_RUR;
-
-        $cache = Yii::app()->getCache();
-        $cacheKey = 'user_' . $userId . 'currency_code';
-        $currencyCode = $cache->get($cacheKey);
-        if ($currencyCode === false) {
-            $currencyCode = Yii::app()
-                    ->getDb()
-                    ->createCommand()
-                    ->select('bc.code')
-                    ->from(UserCommon::model()->tableName() . ' uc')
-                    ->join(BillingCurrency::model()->tableName() . ' bc', 'bc.id = uc.currency_id')
-                    ->where('uc.user_id = :user_id', [':user_id' => $userId])
-                    ->queryScalar();
-            $cache->set($cacheKey, $currencyCode, 60);
-        }
-
-        if (empty($currencyCode)) {
-            $currencyCode = $defaultCurrency;
-        }
-
-        return $currencyCode;
-    }
 
     public function getTimeLastVisit() {
         $visit = strtotime($this->lastvisit);

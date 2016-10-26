@@ -44,9 +44,11 @@ class Setting extends CActiveRecord
     const TYPE_FIELD_TEXT_AREA = 2;
     const TYPE_FIELD_CHECK_BOX = 3;
     const TYPE_FIELD_LOCATION = 4;
+    const TYPE_FIELD_SELECT_BOX = 5;
 
     const TYPE_COMMON = 1;
     const TYPE_PRO = 2;
+    const TYPE_LOCALIZATION = 3;
 
     public $id_city;
     public $id_region;
@@ -165,10 +167,29 @@ class Setting extends CActiveRecord
      */
 
 
+
+
+    public static function updateSettings($configs, $type)
+    {
+        foreach ($configs as $name => $value) {
+            self::model()->updateAll(
+                array('value' => $value),
+                "name=:name and type=:type",
+                array(
+                    ':name' => $name,
+                    ':type' => $type
+                )
+            );
+        }
+
+        Yii::app()->user->setFlash('success', 'Успешно сохранено');
+    }
+
     /**
      * @param int $type
      * @return Setting
      */
+
     public function getByType($type)
     {
         $this->getDbCriteria()->mergeWith(
