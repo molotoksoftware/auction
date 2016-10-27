@@ -145,10 +145,10 @@ Yii::app()->clientScript->registerScript(
                         <?php echo $form->toggleButtonRow($model, 'ban'); ?>
 
                         <div class="control-group ">
-                            <label for="Participant_current_balanc" class="control-label">Текущий баланс, руб.</label>
+                            <label for="Participant_current_balanc" class="control-label">Текущий баланс.</label>
                             <div class="controls">
                                 <p>
-                                    <div class="label"><?php echo $model->getBalance(); ?> руб.</div>
+                                    <div class="label"><?php echo PriceHelper::formate($model->getBalance()); ?></div>
                                 </p>
                             </div>
                         </div>

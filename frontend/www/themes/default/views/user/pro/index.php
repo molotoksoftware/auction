@@ -82,7 +82,7 @@ $userModel = Getter::userModel();
             <div class="panel panel-default">
                 <div class="panel-heading"><?=$price->name;?></div>
                    <div class="panel-body">
-                       Стоимость: <strong><?=floatval($price->price); ?> руб.</strong><br />
+                       Стоимость: <strong><?= PriceHelper::formate($price->price); ?></strong><br />
                        <a class="btn btn-success margint_top_30" href="<?= Yii::app()->createAbsoluteUrl('/buy/pro', array('id' => $price->id)); ?>">
                         <?php if ($userModel['pro'] != 1): ?>активировать<?php else: ?>продлить<?php endif; ?></a>
                 </div>
