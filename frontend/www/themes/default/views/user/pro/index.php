@@ -66,11 +66,11 @@ $userModel = Getter::userModel();
     </div>
 <?php endif; ?>
 
-<?php if (($textInfo = Setting::getByName('textInformationPro')) != ''): ?>
+<?php if (!empty($text['text_pro_account'])): ?>
 <div class="panel panel-default">
     <div class="panel-heading">Преимущества ПРО-аккаунта</div>
        <div class="panel-body">
-           <?php echo $textInfo; ?>
+           <?php echo $text['text_pro_account']; ?>
     </div>
 </div>
 <?php endif;?>
