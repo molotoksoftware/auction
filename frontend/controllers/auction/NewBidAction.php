@@ -201,7 +201,6 @@ class NewBidAction extends CAction
                 $params = [
                     'lot'          => $lot,
                     'bids'         => [$n2, $n],
-                    'currencyCode' => User::getCurrencyCodeByUserId($lot->owner)
                     //'userLink' => User::model()->findByPk($event->params['owner'])->getLink()
                 ];
                 $ntf = new Notification($lot->owner, $params, Notification::TYPE_ACTIVE_LOTS_BIDS);

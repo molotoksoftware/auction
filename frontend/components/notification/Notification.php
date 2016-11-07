@@ -165,7 +165,6 @@ class Notification
                     'linkItem'       => $this->params['linkItem'],
                     'linkActiveRate' => Yii::app()->createAbsoluteUrl('/user/shopping/activeBets'),
                     'bet'            => $this->params['bet'],
-                    'currencyCode'   => $this->params['currencyCode'],
                 ];
                 return $this->getRendererFile($this->getFile('rateSlaughtered'), $data);
                 break;

@@ -296,7 +296,6 @@ class LotCommand extends CConsoleCommand
             'lotModel'     => $lot,
             'amount'       => ($price * 1),
             'sellerModel'  => $sellerModel,
-            'currencyCode' => User::getCurrencyCodeByUserId($idWinner),
         ];
         $ntf = new Notification($idWinner, $params, Notification::TYPE_WINNER_AUCTION);
         $ntf->send();
@@ -313,7 +312,6 @@ class LotCommand extends CConsoleCommand
             'bidPrice'     => $price,
             'amount'       => ($price * 1),
             'buyerModel'   => User::model()->findByPk($idWinner),
-            'currencyCode' => $sellerModel->getCommonData()->currency->code,
         ];
         $ntf = new Notification(
             $lot->owner, $params, Notification::TYPE_COMPLETED_WINNER_LOT);
@@ -368,7 +366,6 @@ EOD;
                 $params = [
                     'linkItem'     => $lot->getLink(true),
                     'bidPrice'     => $bid['price'],
-                    'currencyCode' => User::getCurrencyCodeByUserId($bid['owner']),
                 ];
                 $ntf = new Notification(
                     $bid['owner'], $params, Notification::TYPE_NOT_WON_BIDDING_LOT);
