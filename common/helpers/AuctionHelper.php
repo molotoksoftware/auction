@@ -40,7 +40,7 @@ class AuctionHelper
     {
         $url = Yii::app()->params["siteUrl"] . '/img/logo.png';
         if (!empty($auction['image'])) {
-            $url = Yii::app()->params["siteUrl"] . '/' . $auction['owner'] . '/thumbs/large_' . $auction['image'];
+            $url = Yii::app()->params["siteUrl"] . '/i2/' . $auction['owner'] . '/thumbs/large_' . $auction['image'];
         }
 
         return $url;
