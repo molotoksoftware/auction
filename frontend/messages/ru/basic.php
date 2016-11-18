@@ -20,6 +20,7 @@ return [
     'PRO account' => 'ПРО аккаунт',
     'Settings' => 'Настройки',
     'Notifications' => 'Уведомления',
+    'Question' => 'Вопрос',
     'Questions' => 'Вопросы',
     'Create a lot' => 'Создать лот',
     'Purchases' => 'Покупки',
@@ -62,6 +63,7 @@ return [
     'Terms and Conditions' => 'Правила использования',
     'About us' => 'О нас',
     'Support' => 'Поддержка',
+    'Please, log in' => 'Пожалуйста, авторизируйтесь',
     'Please visit the website molotoksoftware.com' => 'Перейдите на сайт molotoksoftware.com для того чтобы ознакомиться подробнее с возможностями',
     'Molotok Software (a php-script for online auctions) represents a solution for the arrangement of your own trading platform with multiple functions.' => 'Програмный продукт Molotok (php-скрипт интернет-аукциона), представляет собой решение для организации собственной торговой площадки с множеством различных функций. ',
     
@@ -116,6 +118,7 @@ return [
     'Specify the starting price' => 'Укажите начальную цену',
     'Starting price may not be more than buy now price' => 'Начальная цена не может быть больше блиц-цены',
     'Starting price may not be equal to the buy now price' => 'Начальная цена не может равняться блиц-цене',
+    'Specify price' => 'Укажите цену',
 
     // Editor lot
 
@@ -123,6 +126,34 @@ return [
     'Put up for sale?' => 'Выставить на продажу?',
     'Save' => 'Сохранить',
     'Edit' => 'Редактирование',
+    '- select value -' => '- выберите значение',
+    'Enter an integer' => 'Введите целое число.',
+    'Child element is not defined' => 'Не определен дочерний элемент',
+    'Loading...' => 'идет загрузка...',
+    '' => '',
+    '' => '',
+
+
+    // View lot
+    'Added to wishlist' => 'Добавлен в избранное',
+    'Deleted from wishlist' => 'Удален из избранного',
+    'Add to wishlist' => 'Добавить в избранное',
+    'Delete from wishlist' => 'Удалить из избранного',
+    'Follow' => 'Подписаться на обновления',
+    'Unfollow' => 'Отписаться на обновлений',
+    'You asked seller' => 'Вы задали вопрос. Продавец ответит на Ваш e-mail адрес',
+    'Error sending request' => 'Ошибка при отправке запроса',
+    'Views' => 'Просмотры',
+    'Type your question here' => 'Введите текст Вашего вопроса',
+    'Ask a Question' => 'Задать вопрос',
+    'Bid' => 'Ставка',
+    'Attributes' => 'Аттрибуты',
+    'photos' => 'фото',
+    'Time left' => 'Завершится через',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
     '' => '',
     '' => '',
     '' => '',
@@ -208,8 +239,10 @@ return [
     'Current price' => 'Текущая цена',
     'Buy now' => 'Купить сейчас',
     'Last bid' => '>Последняя ставка',
-    '' => '',
-    '' => '',
+    'Active' => 'Активный',
+    'Completed' => 'Завершен',
+    'Sold buynow' => 'Продан по блиц цене',
+    'Sold winner' => 'Продан победителю',
 
 
     // cabinet

@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -32,36 +32,55 @@ $csrfTokenName = Yii::app()->request->csrfTokenName;
 $csrfToken = Yii::app()->request->csrfToken;
 $csrf = "'$csrfTokenName':'$csrfToken'";
 
+function nameItem($data)  {
+    $html = '<a href="/catalog/auction/update/id/'.$data->item_id.'"><i class="icon-pencil"></i></a> ('.$data->item_id.') ';
+    $html .= '<a href="'.Yii::app()->params['siteUrl'].'/auction/'.$data->auction->auction_id.'">'.$data->auction->name.'</a>';
+    return $html;
+}
 
+function nameUser($user)  {
+    $html = '<a href="/user/user/update/id/'.$user->user_id.'"><i class="icon-pencil"></i></a> ';
+    $html .= '<a href="'.Yii::app()->params['siteUrl'].'/'.$user->login.'">'.$user->getNickOrLogin().'</a>';
+    return $html;
+}
 
 $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
     //'type' => 'striped bordered condensed',
     'id' => 'sales-list',
     'ajaxUrl' => array('/sales/sales/index'),
- //   'enableSorting' => true,
- //   'itemsCssClass' => 'table-normal table-hover-row',
+    //   'enableSorting' => true,
+    //   'itemsCssClass' => 'table-normal table-hover-row',
     //'template' => "{items}",
     'dataProvider' => $model->search(),
     'filter' => $model,
-  //  'pagerCssClass' => 'pagination pagination-centered',
+    //  'pagerCssClass' => 'pagination pagination-centered',
     'summaryText' => 'Заявки {start}—{end} из {count}.',
     'columns' => array(
         [
-          'header' => 'ID',
-          'name' => 'sale_id',
-          'value' => '$data->sale_id',
-          'headerHtmlOptions' => ['width'=>'5%'],
+            'header' => 'ID',
+            'name' => 'sale_id',
+            'value' => '$data->sale_id',
+            'headerHtmlOptions' => ['width'=>'5%'],
         ],
         [
-          'header' => 'Лот',
-          'value' => '$data->item_id',
-          'headerHtmlOptions' => ['width'=>'50%'],
+            'header' => 'Лот',
+            'name' => 'item_id',
+            'value' => 'nameItem($data)',
+          //  'value' => '$data->item_id',
+            'headerHtmlOptions' => ['width'=>'50%'],
+            'type' => 'html',
         ],
         [
-          'header' => 'Покупатель',
-          'name' => 'buyer',
-          'value' => '$data->buyer',
-          'headerHtmlOptions' => ['width'=>'10%'],
+            'header' => 'Дата',
+            'value' => 'Yii::app()->dateFormatter->format("HH:ss, dd MMMM", $data->date)',
+            'headerHtmlOptions' => ['width'=>'10%'],
+        ],
+        [
+            'header' => 'Покупатель',
+            'name' => 'buyer',
+            'value' => 'nameUser($data->buyerModel)',
+            'headerHtmlOptions' => ['width'=>'10%'],
+            'type' => 'html',
         ],
         array(
             'header' => '->',
@@ -72,10 +91,11 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
             'headerHtmlOptions' => ['width'=>'1%'],
         ),
         [
-          'header' => 'Продавец',
-          'name' => 'seller_id',
-          'value' => '$data->seller_id',
-          'headerHtmlOptions' => ['width'=>'10%'],
+            'header' => 'Продавец',
+            'name' => 'seller_id',
+            'value' => 'nameUser($data->sellerModel)',
+            'headerHtmlOptions' => ['width'=>'10%'],
+            'type' => 'html',
         ],
         [
             'header' => '<-',

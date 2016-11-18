@@ -190,7 +190,7 @@ class BaseAuction extends CActiveRecord
             'created'                         => 'Дата публикации',
             'type_transaction'                => 'Тип сделки (0-аукцион1-продажа)',
             'price'                           => 'Блиц-цена',
-            'starting_price'                  => 'Начальная цена', //Блиц-цена
+            'starting_price'                  => 'Начальная цена',
             'conditions_transfer'             => 'Условия передачи',
             'publication_status'              => '0-Публиковать/1-Не публиковать',
             'bidding_date'                    => 'Продолжительность торгов',

@@ -60,7 +60,7 @@ class SalesController extends BackController {
         $sales->unsetAttributes();
 
         if (isset($_GET['Sales'])) {
-            $user->attributes = $_GET['Sales'];
+            $sales->attributes = $_GET['Sales'];
         }
 
         if (isset($_GET['ajax'])) {

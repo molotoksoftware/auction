@@ -74,7 +74,7 @@ $form = $this->beginWidget(
 
     <?php if ($options): ?>
         <div class="options-container attr-filter">
-            <h4><span class="glyphicon glyphicon-asterisk"></span> Аттрибуты</h4>
+            <h4><span class="glyphicon glyphicon-asterisk"></span> <?= Yii::t('basic', 'Attributes')?></h4>
             <br />
             <?php
             $this->renderPartial(

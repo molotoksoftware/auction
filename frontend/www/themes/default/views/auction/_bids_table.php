@@ -82,28 +82,28 @@ $this->widget(
         'dataProvider' => $dataProvider,
         'columns' => array(
             array(
-                'header' => 'Ник',
+                'header' => Yii::t('basic', 'Nick'),
                 'name' => 'user',
                 'type' => 'raw',
                 'value' => 'userBar($data["owner"])'
             ),
             array(
-                'header' => 'Ставка',
+                'header' => Yii::t('basic', 'Bid'),
                 'name' => 'bid',
                 'type' => 'raw',
                 'value' => 'PriceHelper::formate($data["price"])',
                 'htmlOptions'=>array('class'=>'stavka')
             ),
             array(
-                'header' => 'Дата',
+                'header' => Yii::t('basic', 'Date'),
                 'name' => 'created',
                 'htmlOptions'=>array('class'=>'day'),
                 'value' => 'Yii::app()->dateFormatter->format("dd.MM.yyyy H:mm:ss", $data["created"])'
             ),
             array(
-                'header' => 'Удалить',
+                'header' => Yii::t('basic', 'Delete'),
                 'type' => 'raw',
-                'value' => 'CHtml::link("удалить", "javascript:void(0);", array("data-id" => $data["bid_id"], "class" => "delete-icon remove-bid"))'
+                'value' => 'CHtml::link("'.Yii::t('basic', 'Delete').'", "javascript:void(0);", array("data-id" => $data["bid_id"], "class" => "delete-icon remove-bid"))'
             )
         )
     )

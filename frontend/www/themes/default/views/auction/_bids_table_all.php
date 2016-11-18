@@ -27,19 +27,6 @@
  */
 
 
-if ($this->beginCache("bidscache_".$auction_id,[
-                        'dependency' => [
-                            'class' => 'system.caching.dependencies.CDbCacheDependency',
-                            'sql' => "SELECT MAX(`created`) FROM bids WHERE lot_id='".$auction_id."'",
-                        ]
-                    ])):
-
-?>
-
-
-<?php
-
-
 $sql = Yii::app()->db->createCommand()
     ->from('bids b')
     ->select('b.*, u.login')
@@ -73,7 +60,7 @@ function userBar($id)
     $str .= $out_login;
 
 
-    $str .= '<span class="span_love">' . $user['rating'] . '</span>';
+    $str .= ' <span class="span_love">(' . $user['rating'] . ')</span>';
 
 
     return $str;
@@ -93,20 +80,20 @@ $this->widget(
         'itemsCssClass' => 'table table-hover margint_top',
         'columns' => array(
             array(
-                'header' => 'Ник',
+                'header' => Yii::t('basic', 'Nick'),
                 'name' => 'user',
                 'type' => 'raw',
                 'value' => 'userBar($data["owner"])'
             ),
             array(
-                'header' => 'Ставка',
+                'header' => Yii::t('basic', 'Bid'),
                 'name' => 'bid',
                 'type' => 'raw',
                 'value' => 'PriceHelper::formate($data["price"])',
                 'htmlOptions'=>array('class'=>'stavka')
             ),
             array(
-                'header' => 'Дата',
+                'header' => Yii::t('basic', 'Date'),
                 'name' => 'created',
                 'htmlOptions'=>array('class'=>'day'),
                 'value' => 'Yii::app()->dateFormatter->format("dd.MM.yyyy H:mm:ss", $data["created"])'
@@ -115,4 +102,3 @@ $this->widget(
     )
 ); 
 
-$this->endCache(); endif; 

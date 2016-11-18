@@ -83,10 +83,6 @@ $cs->registerScript(
         return false;
     });
 
-
-
-
-
       $("#myTab a").click(function(e){
         e.preventDefault();
         $(this).tab("show");
@@ -97,7 +93,7 @@ $cs->registerScript(
     CClientScript::POS_END
 );
 
-// Добавить лот в список избранных
+// Add to wish list
 $cs->registerScript(
     'favorite',
     '
@@ -118,13 +114,13 @@ $cs->registerScript(
                 {
                     if (data.response.data.stat == 0)
                     {
-                        alert("Успешно добавлено в избранное");
-                        $(fav).text("Удалить из избранного");
+                        alert("'.Yii::t('basic', 'Added to wishlist').'");
+                        $(fav).text("'.Yii::t('basic', 'Delete from wishlist').'");
                     }
                     else
                     {
-                        alert("Успешно удалён из избранного");
-                        $(fav).text("Добавить в избранное");
+                        alert("'.Yii::t('basic', 'Deleted from wishlist').'");
+                        $(fav).text("'.Yii::t('basic', 'Add to wishlist').'");
                     }
                 }
             }
@@ -135,7 +131,7 @@ $cs->registerScript(
     CClientScript::POS_END
 );
 
-// Добавить продавца в список отслеживаемых
+// Add seller to wishlist
 $cs->registerScript(
     'track_owner', '
 
@@ -153,11 +149,11 @@ $cs->registerScript(
             {
                 if (data.response.data.stat == 0)
                 {
-                    $(fav).text("Отписаться от продавца");
+                    $(fav).text("'.Yii::t('basic', 'Unfollow').'");
                 }
                 else
                 {
-                    $(fav).text("Подписаться на продавца");
+                    $(fav).text("'.Yii::t('basic', 'Follow').'");
                 }
             }
         });
@@ -185,7 +181,7 @@ $user = Getter::userModel();
 <div class="row auction">
     <div class="col-xs-9">
             <div class="breadcrumbs">
-            <?php echo Item::getBreadcrumbs($base, ' - ', CHtml::link('Аукцион', ['/auction/index'])); ?>
+            <?php echo Item::getBreadcrumbs($base, ' - ', CHtml::link(Yii::t('basic', 'Auction'), ['/auction/index'])); ?>
             </div>
         </div>
         <div class="col-xs-3 text-right">
@@ -237,25 +233,20 @@ $user = Getter::userModel();
     <div class="col-xs-12">
 
 <ul id="myTab" class="nav nav-tabs top_content_lot">
-      <li class="active"><a href="#panel1">Описание</a></li>
+      <li class="active"><a href="#panel1"><?= Yii::t('basic', 'Description')?></a></li>
          <?php if ($base['conditions_transfer']): ?>
-             <li><a href="#panel2">Условия передачи</a></li>
+             <li><a href="#panel2"><?= Yii::t('basic', 'Shipping terms')?></a></li>
          <?php endif; ?>
 
       <?php if (!empty($auctionBidCount)): ?>
-      <li><a href="#panel3">&nbsp;Ставки: <span class="label label-success"><?= $auctionBidCount ?></span></a></li>
+      <li><a href="#panel3">&nbsp;<?= Yii::t('basic', 'Bids')?>: <span class="label label-success"><?= $auctionBidCount ?></span></a></li>
       <?php endif; ?>
-      <li><a href="#panel4">&nbsp;Задать вопрос</a></li>
-      <?php if (!Getter::webUser()->getIsGuest() && $base['owner'] != Getter::webUser()->getId()): ?>
-      <div class="pull-right">
-      <a href="#" id="getModalBox" class="complaint_link">Сообщить о нарушении</a>
-      </div>
-      <?php endif; ?>
+      <li><a href="#panel4">&nbsp;<?= Yii::t('basic', 'Question')?></a></li>
 </ul>
  
 <div class="tab-content lot_view_text">
     <div id="panel1" class="content tab-pane fade in active">
-        <!-- Характеристики -->
+        <!-- Attributes -->
             <?php   if (count($params) > 0): ?>
         <div class="container">
              <div class="row">
@@ -300,9 +291,9 @@ $user = Getter::userModel();
         </div>
         <hr class="top10 horizontal_line">
         <?php endif;  ?>
-        <!-- Характеристики -->
+        <!-- Attributes -->
 
-        <!-- Описание -->
+        <!-- Description -->
             <?php
             $text = '<video>' . $base['text'];
             $purifier = new CHtmlPurifier();
@@ -315,7 +306,7 @@ $user = Getter::userModel();
             $text = str_replace("[/video]", "\"></video>", $text);
             echo $text;
             ?>
-        <!-- Описание -->
+        <!-- Description -->
     </div>
     <div id="panel2" class="tab-pane fade content">
        <?php if ($base['conditions_transfer']): ?>
@@ -323,7 +314,7 @@ $user = Getter::userModel();
        <?php endif; ?>
     </div>
     <div id="panel3" class="tab-pane fade content">
-        <!-- Ставки -->
+        <!-- Bids -->
               <div>
                   <?php
                   if ($base['owner'] == Yii::app()->user->id) {
@@ -333,14 +324,14 @@ $user = Getter::userModel();
                   }
                   ?>
               </div>
-         <!-- Ставки -->
+         <!-- Bids -->
     </div>
     <div id="panel4" class="tab-pane fade content">
-        <!-- Задать вопрос -->
+        <!-- Question -->
               <div>
                   <?php if (!Yii::app()->user->isGuest): ?>
                   <div id="form_quest">
-                  <p>Введите текст Вашего вопроса</p>
+                  <p><?= Yii::t('basic', 'Type your question here')?></p>
                   <?php $form = $this->beginWidget('CActiveForm',[
                       'id' => 'question-create',
                       ]); ?>
@@ -350,16 +341,16 @@ $user = Getter::userModel();
                   <?php echo $form->hiddenField($questionForm, 'owner_id', ['value' => $base['owner']]); ?>
                   
                   <?php 
-                    echo CHtml::ajaxSubmitButton('Задать вопрос', ['/user/questions/create'], 
+                    echo CHtml::ajaxSubmitButton(Yii::t('basic', 'Ask a Question'), ['/user/questions/create'],
                             [
                                 'type' => 'POST',
                                 'dataType'   => 'json',
                                 'success' => 'js: function(data) {
                                     if (data.response.status=="success") {
-                                        $("#quest_answer").html("<div class=\"alert alert-success\">Ваш вопрос успешно отправлен. Продавец ответит на Ваш e-mail адрес</div>");
+                                        $("#quest_answer").html("<div class=\"alert alert-success\">'.Yii::t('basic', 'You asked seller').'</div>");
                                         $("#form_quest").empty();
                                     } else {
-                                        $("#quest_answer").html("<div class=\"alert alert-danger margint_top_30\">Ошибка отправки вопроса. Попробуйте похже либо обратитесь в администрацию торговой площадки");
+                                        $("#quest_answer").html("<div class=\"alert alert-danger margint_top_30\">'.Yii::t('basic', 'Error sending request').'</div>");
                                     }
                                  }'
                             ],
@@ -376,10 +367,10 @@ $user = Getter::userModel();
                       
                   </div>
                   <?php else: ?>
-                  <div class="alert alert-info"><a href="/login">Авторизируйтесь</a>, чтобы задать вопрос продавцу</div>
+                  <div class="alert alert-info"><a href="/login"><?= Yii::t('basic', 'Please, log in')?></a></div>
                   <?php endif; ?>
               </div>
-         <!-- Задать вопрос -->
+         <!-- Question -->
     </div>
   </div>
 </div>
@@ -389,6 +380,6 @@ $user = Getter::userModel();
     
 <div class="row">
     <div class="col-12-lg text-right small" style="padding-right:20px;">
-        Просмотры: <? echo $base['viewed']; ?>
+<?= Yii::t('basic', 'Views')?>: <? echo $base['viewed']; ?>
     </div>
 </div>

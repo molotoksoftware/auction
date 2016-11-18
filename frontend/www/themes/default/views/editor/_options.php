@@ -52,7 +52,7 @@ foreach ($options as $option) {
 			echo CHtml::label($option['name'], 'options_' . $option['attribute_id']);
 			echo "</div>";
 			$selected_id = (isset($selected) && $selected) ? $option['value_id'] : '';
-			echo CHtml::dropDownList('options[0][' . $option['attribute_id'] . ']', $selected_id, getAttributeValues($option['attribute_id']), array('empty' => '- выберите значение -'));
+			echo CHtml::dropDownList('options[0][' . $option['attribute_id'] . ']', $selected_id, getAttributeValues($option['attribute_id']), array('empty' => Yii::t('basic', '- select value -')));
 			echo '<p class="m_type_1"></p>';
             break;
 		case Attribute::TYPE_RADIO_LIST:
@@ -107,7 +107,7 @@ foreach ($options as $option) {
             if ($option['mandatory'] == 1) {echo "<div class='mandat'>"; $option['name'] = '* '.$option['name'];} else {echo "<div>";}
 			echo CHtml::label($option['name'], 'options_' . $option['attribute_id']);
 			$value = (isset($selected) && $selected) ? $option['value'] : '';
-            echo CHtml::telField('options[1][' . $option['attribute_id'] . ']', $value, array('onkeyUp'=>'return type_text_range_check(this);', 'placeholder' => 'введите целое число', 'style' => 'padding-left: 5px;'));
+            echo CHtml::telField('options[1][' . $option['attribute_id'] . ']', $value, array('onkeyUp'=>'return type_text_range_check(this);', 'placeholder' => Yii::t('basic', 'Enter an integer'), 'style' => 'padding-left: 5px;'));
 			echo "</div>";
             echo '<p class="m_type_10"></p>';
 			break;
@@ -118,7 +118,7 @@ foreach ($options as $option) {
 			$rootAttr = Attribute::model()->findByPk($option['attribute_id']);
 			$childAttr = Attribute::model()->findByPk($rootAttr->child_id);
 			if (is_null($childAttr)) {
-				echo CHtml::tag('p', 'Не определен дочерний элемент');
+				echo CHtml::tag('p', Yii::t('basic', 'Child element is not defined'));
 				break;
 			}
 
@@ -139,7 +139,7 @@ foreach ($options as $option) {
 				getAttributeValues($option['attribute_id']),
 				array(
 					'class' => 'span8',
-					'empty' => '- выберите значение -',
+					'empty' => Yii::t('basic', '- select value -'),
 					'onchange' => new CJavaScriptExpression('
 var select_id = $("#' . 'options_0_' . $option['attribute_id'] . '").find("option:selected").val();
 
@@ -157,7 +157,7 @@ beforeSend: function() {
 
 $("#' . $childAttrName . '").val("");
 
-$("#' . $childAttrName . '").find("option:selected").html("идет загрузка...");
+$("#' . $childAttrName . '").find("option:selected").html("'.Yii::t('basic', 'Loading...').'");
 
 $("#' . $childAttrName . '").attr("disabled", true);
 
@@ -209,7 +209,7 @@ echo '<p class="m_type_9"></p>';
 				$depValues,
 				array(
 					'class' => 'span8',
-					'empty' => '- выберите значение -'
+					'empty' => Yii::t('basic', '- select value -')
 				)
 			);
 

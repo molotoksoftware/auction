@@ -90,6 +90,7 @@ class Sales extends CActiveRecord
         return [
             'auction'       => [self::BELONGS_TO, 'Auction', 'item_id'],
             'buyerModel'    => [self::BELONGS_TO, 'User', 'buyer'],
+            'sellerModel'   => [self::BELONGS_TO, 'User', 'seller_id'],
         ];
     }
 
@@ -129,6 +130,7 @@ class Sales extends CActiveRecord
         $criteria->compare('seller_id', $this->seller_id, true);
         $criteria->compare('buyer', $this->buyer, true);
         $criteria->compare('sale_id', $this->sale_id, true);
+        $criteria->compare('item_id', $this->item_id, true);
 
         return new CActiveDataProvider($this, array(
                 'criteria'=>$criteria,

@@ -141,7 +141,7 @@ $seller = Yii::app()->user->getModel();
             'validateOnType' => false,
             'beforeValidate' => 'js:function(){
                 
-                // Делаем проверку обязательных атрибутов
+                // check attributes
                 $(".cat-list-block p").html(""); var check_err_atr = 0;
                 
                 $("div.mandat").each(function()
@@ -158,11 +158,11 @@ $seller = Yii::app()->user->getModel();
 
                     if (!atr_val)
                     {
-                        check_err_atr = 1; $("p", atr_p).text("Необходимо выбрать значение атрибута!");
+                        check_err_atr = 1; $("p", atr_p).text("'.Yii::t('basic', 'You must select an attribute value').'");
                     }
                 });
 
-                if (check_err_atr == 1) {$("#Cat1").focus(); return false;} // Если есть ошибки, то прекращаем отправку формы
+                if (check_err_atr == 1) {$("#Cat1").focus(); return false;}
 
                 ////////
                 //editor.post();

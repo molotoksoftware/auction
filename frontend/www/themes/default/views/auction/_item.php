@@ -50,7 +50,7 @@ $breadcrumbOptions = isset($breadcrumbOptions) ? $breadcrumbOptions : [];
         <div class="col15-xs-3 relative">
             <?= Item::getPreview($data, ['class' => 'lazy img-thumbnail'], 'prv', ['setDataImages' => $auctionImages]) ?>
             <?php if ($data['image_count'] > 1): ?>
-                <p class="label label-default count_img_auc"><?php echo $data['image_count']; ?> фото</p>
+                <p class="label label-default count_img_auc"><?php echo $data['image_count']; ?> <?= Yii::t('basic', 'photos')?></p>
             <?php endif; ?>
         </div>
         <div class="col15-xs-9 info_lot">
@@ -70,7 +70,7 @@ $breadcrumbOptions = isset($breadcrumbOptions) ? $breadcrumbOptions : [];
 
                 </div>
                 <div class="col-xs-6">
-                    завершится через: 
+                    <?= Yii::t('basic', 'Time left')?>:
                     <?= Item::getTimeLeft($data); ?>
                 </div>
 
