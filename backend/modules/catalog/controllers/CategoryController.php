@@ -107,7 +107,7 @@ class CategoryController extends BackController
 
         if (isset($_GET['ajax'])) {
             $this->renderPartial(
-                '_table_сategories',
+                '_table_categories',
                 array(
                     'model' => $categories,
                 )
