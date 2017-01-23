@@ -51,3 +51,6 @@ $this->widget('zii.widgets.CListView', array(
 <div class="alert alert-info">Просмотры отсутствуют</div>
 
 <?php endif; ?>
+
+
+<?php // print_r(); ?>

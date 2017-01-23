@@ -624,6 +624,7 @@ SQL;
                         [
                             'auction_id'  => $id,
                             'day_viewed'  => 1,
+                            'type'        => 0,
                             'date_viewed' => $today,
                         ]
                     );
