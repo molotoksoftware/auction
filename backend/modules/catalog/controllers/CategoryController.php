@@ -151,6 +151,17 @@ class CategoryController extends BackController
                     }
                 }
 
+                if ($model->applyToChild && !empty($_POST['options'])) {
+                    $child = $model->descendants()->findAll();
+
+                    foreach ($child as $ch) {
+                        CategoryAttributes::model()->deleteAll('category_id='.$ch->category_id);
+                        foreach ($_POST['options'] as $key => $item) {
+                            CategoryAttributes::addAttributesToCategory($ch->category_id, $key, $item);
+                        }
+                    }
+                }
+
                 Yii::app()->user->setFlash('success', 'Категория успешно сохранена');
                 $this->redirect(array('/catalog/category/index'));
             } else {
@@ -181,11 +192,7 @@ class CategoryController extends BackController
                 //update option for category
                 if (!empty($_POST['options'])) {
                     foreach ($_POST['options'] as $key => $item) {
-                        $ca = new CategoryAttributes();
-                        $ca->attribute_id = $item;
-                        $ca->category_id = $model->category_id;
-                        $ca->sort = $key;
-                        $ca->save();
+                        CategoryAttributes::addAttributesToCategory($model->category_id, $key, $item);
                     }
                 }
 
@@ -200,6 +207,8 @@ class CategoryController extends BackController
 
         $this->render('create', array('model' => $model));
     }
+
+
 
     public function actionDelete($id)
     {

@@ -88,4 +88,13 @@ class CategoryAttributes extends CActiveRecord
      * API
      * *************************************************************************
      */
+
+    public static function addAttributesToCategory($category_id, $key, $item)
+    {
+        $ca = new self();
+        $ca->attribute_id = $item;
+        $ca->category_id = $category_id;
+        $ca->sort = $key;
+        $ca->save();
+    }
 }

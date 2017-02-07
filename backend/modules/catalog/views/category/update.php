@@ -110,6 +110,13 @@ $this->breadcrumbs = array(
                                     'model' => $model,
                                 ));
                                 ?>
+                                <div class="control-group ">
+                                    <label for="duration" class="control-label">Применить значения атрибутов к дочерним категориям</label>
+                                    <div class="controls">
+                                        <?php echo $form->checkBox($model, 'applyToChild', array()); ?>
+                                        <?php echo $form->error($model, 'applyToChild'); ?>
+                                    </div>
+                                </div>
                             </div>
                             <div id="options" class="tab-pane" >
                                 <?php

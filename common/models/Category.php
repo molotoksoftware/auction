@@ -46,6 +46,7 @@ class Category extends CActiveRecord
 
     public $parent_id;
     public $url;
+    public $applyToChild;
 
     const DEFAULT_CATEGORY = 1;
     const ST_ACTIVE = 1;
@@ -159,6 +160,7 @@ class Category extends CActiveRecord
             array('name', 'required'),
             array('status', 'numerical', 'integerOnly' => true),
             array('alias', 'unique'),
+            array('applyToChild', 'boolean'),
             array('name, alias, description', 'length', 'max' => 255),
             array('category_id, name, alias, description, status', 'safe', 'on' => 'search'),
         );
