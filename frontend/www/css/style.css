@@ -149,11 +149,12 @@ a {
     background: linear-gradient(to bottom,#d6d6d6 0,#fff 100%);
 }
 .top_menu {
-    background-image: url('/bootstrap/img/top_menu.png');
-    background-repeat: no-repeat;
     line-height: 11px;
-    padding-top: 7px;
-    height:40px;
+    margin-bottom: 10px;
+}
+.top_menu .row {
+    margin-right: 0px;
+    margin-left: 0px;
 }
 .header_cat {
     width:12.5%;
@@ -161,12 +162,22 @@ a {
 }
 .top_menu .but {
     text-align: center;
+    border-right: 3px solid white;
+
 }
 .top_menu .but a {
+    display: block;
     color:#757575;
     font-weight:bold;
+    padding: 14px 0;
     font-size:14px;
+    height: 50px;
+    border-bottom: 3px solid #55a1ff;
 }
+.top_menu .but a:hover{
+    border-bottom: 3px solid gray;
+}
+
 .top_menu .but a:hover {
     text-decoration: none;
     color:#3E8ED3;
