@@ -422,8 +422,8 @@ SQL;
                 $sql->andWhere('a.starting_price != 0');
             }
             if ($_GET['filter'] == 'buynow') {
-                $count_sql->andWhere('a.starting_price != 0');
-                $sql->andWhere('a.starting_price != 0');
+                $count_sql->andWhere('a.price != 0');
+                $sql->andWhere('a.price != 0');
             }
             if ($_GET['filter'] == 'nulls') {
                 $count_sql->andWhere('a.type_transaction=' . Auction::TP_TR_START_ONE);
