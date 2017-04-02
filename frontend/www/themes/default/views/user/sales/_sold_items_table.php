@@ -279,7 +279,7 @@ $this->widget(
                 'header'            => 'Действия',
                 'headerHtmlOptions' => ['class' => 'th6'],
                 'htmlOptions'       => ['class' => 'td6'],
-                'template'          => '<div>{create_review}</div><div>{contact_seller}</div><div>{repub_link}</div><div>{delete_sale}</div>',
+                'template'          => '<div>{create_review}</div><div>{repub_link}</div><div>{delete_sale}</div>',
                 'buttons'           => [
                     'create_review' => array(
                         'label' => 'Оставить отзыв',
@@ -295,10 +295,6 @@ $this->widget(
                         'url' => 'Yii::app()->createUrl("/user/reviews/preCreate", ["role" => Reviews::ROLE_SELLER, "id" => $data["sale_id"]])'
                         
                     ),
-                    'contact_seller' => [
-                        'label' => 'Написать покупателю',
-                        'url'   => 'Yii::app()->createUrl("/dialogs/message", array("recipient" => $data["buyer"]))',
-                    ],
                     'repub_link'     => [
                         'label'   => 'Повторить торги',
                         'options' => [
