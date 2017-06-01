@@ -12,33 +12,21 @@
  */
 defined('APP_CONFIG_NAME') or define('APP_CONFIG_NAME', 'frontend');
 
-// web application configuration
+
 return [
     'id'                => 'auction',
     'basePath'          => realPath(__DIR__ . '/..'),
     'defaultController' => 'site',
-    //тема приложения
     'theme'             => 'default',
-    //основной Layout
     'layout'            => 'main',
-    // path aliases
     'aliases'           => [],
-    // application behaviors
     'behaviors'         => [],
-    // controllers mappings
     'controllerMap'     => [],
     'preload'           => ['log'],
-    // application modules
     'modules'           => [
         'user'        => [
             'class'   => 'frontend.modules.user.UserModule',
             'enabled' => true,
-        ],
-        'gii'         => [
-            'class'          => 'system.gii.GiiModule',
-            'password'       => 'yii',
-            'generatorPaths' => ['backend.extensions.gii'],
-            'ipFilters'      => ['127.0.0.1', '::1'],
         ],
     ],
     'import'            => [
@@ -51,13 +39,11 @@ return [
         'frontend.widgets.user.UserInfo',
         'common.components.events.*',
     ],
-    // application components
     'components'        => [
         'request'     => [
             'class'                  => 'HttpRequest',
             'noCsrfValidationRoutes' => [
                 '^user/sales/workwithlots$',
-
             ],
             'enableCsrfValidation' => true,
             'enableCookieValidation' => true,
@@ -94,18 +80,11 @@ return [
                 ],
                 [
                     'class'      => 'CFileLogRoute',
-                    'levels'     => 'fsdfsdf',
-                    'categories' => 'example',
-                    'logFile'    => 'C',
-                ],
-                [
-                    'class'      => 'CFileLogRoute',
                     'categories' => ['system.db.CDbCommand'],
                     'logFile'    => 'query.log',
 //                    'levels'     => ['info'],
                     'enabled'    => YII_DEBUG,
                 ],
-
             ],
         ],
         'urlManager'              => [

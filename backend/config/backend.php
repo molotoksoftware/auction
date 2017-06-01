@@ -17,7 +17,6 @@ return array(
     'name' => '',
     'basePath' => realPath(__DIR__ . '/..'),
     'defaultController' => 'main',
-    // path aliases
     'aliases' => array(
         'ex-bootstrap' => dirname(__FILE__) . '/../extensions/ex-bootstrap',
     ),
@@ -25,16 +24,11 @@ return array(
         'backend.extensions.bootstrap.widgets.*',
         'backend.components.notification.Notification'
     ),
-    //исходный язык приложения
     'sourceLanguage' => 'en',
-    //язык приложения
     'language' => 'ru',
     'preload' => array('bootstrap'),
-    // application behaviors
     'behaviors' => array(),
-    // controllers mappings
     'controllerMap' => array(),
-    // application modules
     'modules' => array(
         'catalog' => array(
             'class' => 'application.modules.catalog.CatalogModule',
@@ -65,7 +59,6 @@ return array(
             'enabled' => true,
         ),
     ),
-    // application components
     'components' => array(
         'user' => array(
             'class' => 'backend.modules.admin.components.WebUser',

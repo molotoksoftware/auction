@@ -39,6 +39,10 @@
         $categories = explode('/', $path);
         $category_name = array_pop($categories);
         $current_cat = Category::model()->find('alias=:alias', [':alias' => $category_name]);
+
+        if (empty($current_cat))
+            throw new CHttpException(404, Yii::t('basic', 'Category not found'));
+
         $categories = $current_cat->children()->findAll();
         $ancestors = $current_cat->ancestors()->findAll($current_cat->category_id);
 

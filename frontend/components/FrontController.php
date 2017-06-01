@@ -191,10 +191,6 @@ class FrontController extends BaseController
             return false;
         }
 
-        if (YII_ENV == 'dev') {
-            date_default_timezone_set('Europe/Chisinau');
-        }
-
         if (!empty(Yii::app()->params['maintenanceMode']) && $this->id != 'system' && $action->id != 'maintenance') {
             $this->redirect('/system/maintenance');
         }

@@ -84,9 +84,8 @@ class SitemapCommand extends CConsoleCommand
      */
     public function addUrl($url, $changeFreq = self::DAILY, $priority = 0.5, $lastMod = 0)
     {
-        $host = Yii::app()->request->hostInfo;
         $item = array(
-            'loc' => $host . $url,
+            'loc' => Yii::app()->params['siteUrl'] . $url,
             'changefreq' => $changeFreq,
             'priority' => $priority
         );

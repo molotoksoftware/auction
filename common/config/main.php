@@ -58,10 +58,6 @@ return [
             'isFirstVersion'  => true,
             'isSecondVersion' => false,
         ],
-        'billing'           => [
-            'class'             => 'common.components.billing.Billing',
-            'currencyRateCache' => 60 * 60 // Время кэширования в секундах для получения курса валюты.
-        ],
         'accessManager'     => ['class' => 'common.components.AccessManager'],
 
     ],

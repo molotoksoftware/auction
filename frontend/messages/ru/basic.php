@@ -39,6 +39,8 @@ return [
     'Beauty, Health {span}& Grocery{span2}' => 'Красота {span}и здоровье{span2}',
     'All {span}categories{span2}' => 'Все {span}категории{span2}',
 
+    'Category not found' => 'Категория не найдена',
+
     'Last news' => 'Последние новости',
     'Verifed user' => 'Верифицированный участник',
     

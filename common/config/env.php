@@ -1,8 +1,12 @@
 <?php
 
 return [
-    'preload'    => ['log'],
+    'preload' => ['debug', 'log'],
     'components' => [
+
+        /*'debug' => array(
+            'class' => 'common.extensions.yii2-debug.Yii2Debug',
+        ),*/
         'db'  => [
             'connectionString'      => 'mysql:host=localhost;dbname=dbname',
             'emulatePrepare'        => true,
