@@ -52,12 +52,12 @@ class PeriodHtmlSelectorWidget extends CWidget
         if (empty($this->periods)) {
             if ($this->scope == self::SCOPE_PAGE_AUCTION) {
                 $this->periods = [
-                    '3h'  => '3 часа',
-                    '12h' => '12 часов',
-                    '1d'  => '1 день',
-                    '3d'  => '3 дня',
-                    '1w'  => 'неделю',
-                    'all' => 'всё время',
+                    '3h'  => Yii::t('basic', 'Past 3 hours'),
+                    '12h' => Yii::t('basic', 'Past 12 hours'),
+                    '1d'  => Yii::t('basic', 'Past 1 day'),
+                    '3d'  => Yii::t('basic', 'Past 3 days'),
+                    '1w'  => Yii::t('basic', 'Past week'),
+                    'all' => Yii::t('basic', 'All time'),
                 ];
             }
         }

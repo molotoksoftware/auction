@@ -53,7 +53,7 @@
         
     </div>
     <div class="col-xs-9">
-        <p><a href="<?= Yii::app()->createUrl('/news/index'); ?>"><span class="glyphicon glyphicon-arrow-left"></span> Назад к новостям</a></p>
+        <p><a href="<?= Yii::app()->createUrl('/news/index'); ?>"><span class="glyphicon glyphicon-arrow-left"></span> <?= Yii::t('basic', 'Back to news feed')?></a></p>
         <p><small><?= Yii::app()->dateFormatter->format('dd MMMM yyyy', strtotime($model->date)); ?></small></p>
         <div><?= $model->content; ?> </div>
     </div>

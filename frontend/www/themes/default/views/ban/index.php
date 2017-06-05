@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,9 +29,9 @@ s
 ?>
 
 <div style="margin: 0 auto; width: 300px; margin-top: 200px;">
-    <p style="font-size: 24px; margin: 0px;">Ваш аккаунт заблокирован!</p>
+    <p style="font-size: 24px; margin: 0px;"><?= Yii::t('basic', 'Your account has been banned') ?></p>
     <p style="line-height: 1.4; text-align: justify;">
-        Это могло быть вызвано вашей деятельностью на сайте или низким рейтингом. Для уточнения или снятия бана свяжитесь с администрацией сайта по 
-        электронной почте <b><?=Yii::app()->params["adminEmail"]?></b>
+        <?= Yii::t('basic', 'If you dont know reason, please contact administrator') ?>
+        <b><?= Yii::app()->params["adminEmail"] ?></b>
     </p>
 </div>

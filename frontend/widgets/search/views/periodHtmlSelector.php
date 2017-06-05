@@ -47,7 +47,7 @@ cs()->registerScript(
 
 <div class="dropdown periodHtmlSelector">
  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-     Выставленные за: <?= $currentPeriodTitle ?>
+     <?= $currentPeriodTitle ?>
      <span class="caret"></span>
 </button>
 <ul class="dropdown-menu">

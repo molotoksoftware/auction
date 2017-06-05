@@ -191,7 +191,7 @@ class FrontController extends BaseController
             return false;
         }
 
-        if (!empty(Yii::app()->params['maintenanceMode']) && $this->id != 'system' && $action->id != 'maintenance') {
+        if (Yii::app()->params['maintenanceMode'] && $this->id != 'system' && $action->id != 'maintenance') {
             $this->redirect('/system/maintenance');
         }
 

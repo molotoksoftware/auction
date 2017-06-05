@@ -1,5 +1,5 @@
-<div class="container_maintenance" style="margin-left:20px">
-    <h3>Технические работы</h3>
+<div class="container_maintenance">
+    <h3><?= Yii::t('basic', 'Maintenance works') ?></h3>
 
-    <p>Идут технические работы. Руки программистов неустанно трудятся над введением новой рабочей версией торговой площадки.</p>
+    <p><?= Yii::t('basic', 'Maintenance works are running... Try again later') ?></p>
 </div>

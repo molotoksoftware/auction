@@ -26,18 +26,11 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * опции для виджета фильтров
- *
- * @var Controller $this
- * @var array $options
- * @var Filter $filter
- */
 
 cs()->registerCssFile(bu() . '/js/libs/jquery_multiselect/bootstrap-multiselect.css');
 cs()->registerScriptFile(bu() . '/js/libs/jquery_multiselect/bootstrap-multiselect.js');
 
-cs()->registerScript(
+/* cs()->registerScript(
     'random',
     '
 
@@ -53,10 +46,27 @@ cs()->registerScript(
 
     ',
     CClientScript::POS_READY
+); */
+
+cs()->registerScript(
+    'random',
+    '
+
+    $(".multiselect").multiselect({
+        buttonWidth: "200pх",
+        nonSelectedText: "'.Yii::t('basic', '- select value -').'",
+        numberDisplayed: 5,
+        enableCaseInsensitiveFiltering: true,
+        allSelectedText: "'.Yii::t('basic', 'Selected').'",
+        filterPlaceholder: "'.Yii::t('basic', 'Search').'",
+
+    });
+
+    ',
+    CClientScript::POS_READY
 );
 
-// Массив родителя у которого есть child.
-// Будет использован дочерним для выборки значений.
+
 $lastParentOption = null;
 
 foreach ($options as $option) {
@@ -137,10 +147,6 @@ foreach ($options as $option) {
         echo "<br/>";
     }
 }
-//Filter[price_max]=&Filter[foto]=0&Filter[city]=&Filter[option][0][38]=889&Filter[option][0][39]=&Filter[option][0][41]=&Filter[option][0][40]=
-//Filter[price_max]=&Filter[foto]=0&Filter[city]=&Filter[option][0][38]=890&Filter[option][0][39]=&Filter[option][0][41]=&Filter[option][0][40]=
-//Filter[price_max]=&Filter[foto]=0&Filter[city]=&Filter[option][0][38]=&Filter[option][0][38][]=890&Filter[option][0][39]=&Filter[option][0][41]=&Filter[option][0][40]=
-//Filter[price_max]=&Filter[foto]=0&Filter[city]=&Filter[option][0][38]=&Filter[option][0][38][]=887&Filter[option][0][39]=&Filter[option][0][41]=&Filter[option][0][40]=
 
 /**
  * @param array  $option

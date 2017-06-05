@@ -6,7 +6,11 @@ return [
 
     'Yes' => 'Да',
     'No' => 'Нет',
-    
+    'Oops! Something went wrong' => 'Ой! Что-то пошло не так',
+    'Please, return to main page' => 'Пожалуйста, перейдите на главную страницу',
+    'Maintenance works' => 'Технические работы',
+    'Maintenance works are running... Try again later' => 'На данный момент выполняются технические работы. Пожалуйста, попробуйте обновить страницу позже',
+
     // Header menu
     'News' => 'Новости площадки',
     'Community' => 'Сообщество',
@@ -57,7 +61,30 @@ return [
     'most popular' => 'самое популярное',
     'see all' => 'читать все',
 
+    'newly listed' => 'сначала новые',
+    'ending soonest' => 'скоро заканчиваются',
+    'lowest first' => 'наименьшая',
+    'highest first' => 'наивысшая',
+    'fewest first' => 'наименьшее',
+    'most first' => 'наибольшее',
 
+    'Past 3 hours'  => 'Последние 3 часа',
+    'Past 12 hours' => 'Последние 12 часов',
+    'Past 1 day'  => 'Последний 1 день',
+    'Past 3 days'  => 'Последние 3 дня',
+    'Past week'  => 'Последнюю неделю',
+    'All time' => 'За всё время',
+
+    'Time' => 'Время',
+    'Number of bids' => 'Количество ставок',
+
+    'Type of sell' => 'Тип торгов',
+    'view all' => 'показать все',
+    'There doesn\'t seem to be any items matching your search result' => 'К сожалению, ничего не найдено',
+    'First page' => 'в начало',
+    'Last page' => 'в конец',
+    'All items' => 'Все лоты',
+    'Selected' => 'Выбрано',
 
 
 
@@ -151,13 +178,41 @@ return [
     'Bid' => 'Ставка',
     'Attributes' => 'Аттрибуты',
     'photos' => 'фото',
-    'Time left' => 'Завершится через',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'Time left' => 'Осталось времени',
+    'Do you really want to remove bid?' => 'Вы уверены, что хотите удалить ставку?',
+    'Bid has been removed' => 'Ставка была удалена',
+    'It\'s your item' => 'Это Ваш лот',
+    'In favorites' => 'В избранных',
+    'Sell this item' => 'Продать лот',
+    'Do you really want to sell this item? The item will be sold at the last price.' => 'Вы действительно хотите завершить торги досрочно? Лот будет продан по последней наивысшей ставке.',
+    'Edit item' => 'Редактировать лот',
+    'Do you really want to remove item from sell?' => 'Вы действительно хотите снять лот с торгов?',
+    'Do you really want to remove item from sell? There are bids. Your rating will be reduced' => 'Вы действительно хотите снять лот с торгов? По лоту имеются ставки, Ваш рейтинг будет уменьшен на единицу.',
+    'Republish item' => 'Перевыставить лот',
+    'Publish similar' => 'Выставить похожий',
+    'Follow this seller' => 'Подписаться на продавца',
+    'Following this seller' => 'Подписаться на продавца',
+    'Add to favorites' => 'Добавить в избранное',
+    'Remove from favorites' => 'Удалить из избранного',
+
+    'Minimal step' => 'Минимальный шаг',
+    'See other items' => 'Посмотреть другие товары',
+
+    'Place bid' => 'Сделать ставку',
+    'Available' => 'Доступно сейчас',
+    'Sold' => 'Продано',
+    'Status' => 'Статус',
+    'You are leader' => 'Вы лидер торгов',
+    'max. bid' => 'макс. ставка',
+    'Your bid' => 'Ваша ставка',
+    'Your bid {bid} has been outbid' => 'Ваша ставка {bid} была перебита',
+    'Item location' => 'Местонахождение',
+    'Bidding has ended on this item' => 'Торги завершены',
+    'for' => 'за',
+    'Do you really want to place bid?' => 'Вы действительно хотите сделать ставку?',
+    'Do you really want to buy this item?' => 'Вы действительно хотите купить этот товар?',
+    'Bidding has ended' => 'Торги окончены',
+    'Sold for {sum}' => 'Продано за {sum}',
     '' => '',
     '' => '',
     '' => '',
@@ -201,6 +256,10 @@ return [
     'Update for all items?' => 'Обновить информацию для всех лотов?',
     'Successfully updated' => 'Успешно обновлено',
     'E-mail is not available' => 'E-mail занят другим пользователем',
+    'specify an integer' => 'введите целое число',
+    'child element is not specified' => 'не определен дочерний элемент',
+    'loading...' => 'идет загрузка...',
+
     
     // Payments
     'Payment received!' => 'Платеж получен!',
@@ -216,7 +275,10 @@ return [
     //pagination
     'Older' => 'Поздние',
     'Newer' => 'Более ренние',
-    
+    'Next' => 'Вперед',
+    'Previous' => 'Назад',
+
+
     'To recieve a notification email' => 'Получать уведомления на E-mail',
     'The system automatically sends you important notifications to the mailbox. Do not turn off this feature if you want to be informed about all events.' => 'Система автоматически присылает важные уведомления Вам на почтовый ящик. Не отключайте эту функцию, если хотите быть в курсе всех событий связанных с Вашим участием на торговой площадке.',
     '' => '',
@@ -259,6 +321,9 @@ return [
     'Unsold' => 'Непроданные лоты',
     'Sold' => 'Проданные лоты',
     'Reviews' => 'Отзывы',
+    'Reviews about' => 'Отзывы о',
+    'About' => 'О пользователе',
+
 
     'About me' => 'Отзывы обо мне',
     'From me' => 'Мои отзывы',
@@ -273,16 +338,27 @@ return [
     'Quantity' => 'Количество',
     'Quantity sold' => 'Продано',
 
+    'Activate republish' => 'Назначить автоперевыставление',
+    'Remove from sell' => 'Снять с торгов',
+
+    // News
+    'Back to news feed' => 'Вернуться к новостной ленте',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+
     // reviews
     'You left feedback about the seller' => 'Вы оставили отзыв о продавце',
     'Feedback needed' => 'Необходимо оставить отзыв',
     'You left feedback about the buyer' => 'Вы оставили отзыв о покупателе',
     'Feedback received' => 'Отзыв получен',
     'No feedback received' => 'Отзыв не получен',
-    '' => '',
 
-    '' => '',
-    '' => '',
+    // ban
+    'Your account has been banned' => 'Ваш аккаунт был заблокирован',
+    'If you dont know reason, please contact administrator' => 'Это могло быть вызвано Вашей деятельностью на сайте или низким рейтингом. Для уточнения или снятия бана свяжитесь с администрацией сайта по электронной почте',
     '' => '',
     '' => '',
     '' => '',

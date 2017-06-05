@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,17 +33,15 @@ cs()->registerScript(
     CClientScript::POS_READY
 );
 
-
 $csrfTokenName = Yii::app()->request->csrfTokenName;
 $csrfToken = Yii::app()->request->csrfToken;
+
 cs()->registerScript(
     'Core',
     "
     csrfTokenName = '" . $csrfTokenName . "';
     csrfToken='" . $csrfToken . "';
     if (typeof console == 'undefined') var console = { log: function() {} };
-
-    window.minStepRatePercentage = " . Yii::app()->params['minStepRatePercentage'] . ";
 ",
     CClientScript::POS_HEAD
 );
@@ -53,7 +50,6 @@ cs()->registerScript(
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?= Yii::app()->language ?>">
 <head>
     <meta charset="utf-8"/>
-
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <meta name="description" content="<?= CHtml::encode($this->pageDescription); ?>">
@@ -69,17 +65,17 @@ cs()->registerScript(
     <?php $this->renderMetaTags(); ?>
 
     <?php cs()->registerCssFile(bu() . '/css/style.css', ''); ?>
-    <?php cs()->registerCssFile(bu() . '/bootstrap/css/bootstrap_col_15.css', ''); ?>  
-    <?php  cs()->registerCssFile(bu() . '/bootstrap/css/bootstrap.min.css', 'screen, projection'); ?>
-<?php cs()->registerScriptFile(bu() . '/js/dev.js',CClientScript::POS_HEAD); ?>
-<?php cs()->registerScriptFile(bu() . '/js/frontend.js', CClientScript::POS_END); ?>
+    <?php cs()->registerCssFile(bu() . '/bootstrap/css/bootstrap_col_15.css', ''); ?>
+    <?php cs()->registerCssFile(bu() . '/bootstrap/css/bootstrap.min.css', 'screen, projection'); ?>
+    <?php cs()->registerScriptFile(bu() . '/js/dev.js', CClientScript::POS_HEAD); ?>
+    <?php cs()->registerScriptFile(bu() . '/js/frontend.js', CClientScript::POS_END); ?>
 
     <link rel="icon" href="/favicon.png" type="image/x-icon"/>
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon"/>
 </head>
 <body>
-<?= $content; ?>
 
+<?= $content; ?>
 
 <?php cs()->registerScript('frontend-init', '
 frontend.init({});

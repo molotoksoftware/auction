@@ -55,7 +55,7 @@ foreach ($options as $option)
                 if ($option['mandatory'] == 1) {echo "<div class='mandat'>"; $option['name'] = '* '.$option['name'];} else {echo "<div>";}
 				echo CHtml::label($option['name'], 'options_' . $option['attribute_id']).'<Br>';
             	echo "</div>";
-				echo CHtml::dropDownList('options[0][' . $option['attribute_id'] . ']', $val_now, getAttributeValues($option['attribute_id']), array('empty' => '- выберите значение -'));
+				echo CHtml::dropDownList('options[0][' . $option['attribute_id'] . ']', $val_now, getAttributeValues($option['attribute_id']), array('empty' => Yii::t('basic', '- select value -')));
                 echo '<p class="m_type_1"></p>';
 			break;
         case Attribute::TYPE_RADIO_LIST:
@@ -114,7 +114,7 @@ foreach ($options as $option)
     			$i++;
                 if ($option['mandatory'] == 1) {echo "<div class='mandat'>"; $option['name'] = '* '.$option['name'];} else {echo "<div>";}
     			echo CHtml::label($option['name'], 'options_' . $option['attribute_id']).'<Br>';
-                echo CHtml::telField('options[1][' . $option['attribute_id'] . ']', $val_now, array('onkeyUp'=>'return type_text_range_check(this);', 'placeholder' => 'введите целое число', 'style' => 'padding-left: 5px; color: black;'));
+                echo CHtml::telField('options[1][' . $option['attribute_id'] . ']', $val_now, array('onkeyUp'=>'return type_text_range_check(this);', 'placeholder' => Yii::t('basic', 'specify an integer'), 'style' => 'padding-left: 5px; color: black;'));
                 echo "</div>";
                 echo '<p class="m_type_10"></p>';
             break;
@@ -132,7 +132,7 @@ foreach ($options as $option)
 
             $childAttr = Attribute::model()->findByPk($rootAttr->child_id);
             if (is_null($childAttr)) {
-                echo CHtml::tag('p', 'Не определен дочерний элемент');
+                echo CHtml::tag('p', Yii::t('basic', 'child element is not specified'));
                 break;
             }
             $childAttrName = 'options_0_' . $childAttr->attribute_id;
@@ -152,7 +152,7 @@ foreach ($options as $option)
                 getAttributeValues($option['attribute_id']),
                 array(
                     'class' => 'span8',
-                    'empty' => '- выберите значение -',
+                    'empty' => Yii::t('basic', '- select value -'),
                     'onchange' => new CJavaScriptExpression('
                        var select_id = $("#' . 'options_0_' . $option['attribute_id'] . '").find("option:selected").val();
                        $.ajax({
@@ -162,7 +162,7 @@ foreach ($options as $option)
                         dataType: "json",
                         beforeSend: function() {
                                  $("#' . $childAttrName . '").val("");
-                                 $("#' . $childAttrName . '").find("option:selected").html("идет загрузка...");
+                                 $("#' . $childAttrName . '").find("option:selected").html("'.Yii::t('basic', 'loading...').'");
                                  $("#' . $childAttrName . '").attr("disabled", true);
                         },
                         success: function(data) {
@@ -223,7 +223,7 @@ foreach ($options as $option)
                 $depValues,
                 array(
                     'class' => 'span8',
-                    'empty' => '- выберите значение -'
+                    'empty' => Yii::t('basic', '- select value -')
                 )
             );
 

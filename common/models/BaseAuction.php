@@ -86,8 +86,6 @@ class BaseAuction extends CActiveRecord
 
     const ST_DELETED = 10;
 
-    use BaseAuctionRender;
-
     /**
      * @return string the associated database table name
      */

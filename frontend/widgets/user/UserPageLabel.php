@@ -33,7 +33,6 @@ class UserPageLabel extends CWidget {
 
 	public function init() {
             $cs = Yii::app()->clientScript;
-            // Добавить продавца в список отслеживаемых
             $cs->registerScript(
                 'track_owner', '
 

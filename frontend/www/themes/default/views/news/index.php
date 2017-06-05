@@ -33,7 +33,7 @@ $items = $data->getData();
 
 <div class="row auction">
         <div class="col-xs-12">
-            <h2>Новости</h2>
+            <h2><?= Yii::t('basic', 'News')?></h2>
         </div>
 </div>
 <hr class="top10 horizontal_line">
@@ -53,8 +53,8 @@ $items = $data->getData();
         'firstPageLabel' => '',
         'lastPageLabel' => '',
         'selectedPageCssClass' => 'active',
-        'prevPageLabel' => '&lt; <span>Назад</span>',
-        'nextPageLabel' => '<span>Вперёд</span> &gt;',
+        'prevPageLabel' => '&lt; <span>'.Yii::t('basic', 'Previous').'</span>',
+        'nextPageLabel' => '<span>'.Yii::t('basic', 'Next').'</span> &gt;',
         'header' => '',
         'footer' => '',
         'cssFile' => false,

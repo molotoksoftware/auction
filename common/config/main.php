@@ -24,7 +24,6 @@ return [
         'application.extensions.*',
         'application.helpers.*',
         'application.models.*',
-        'common.models.Layers.BaseAuction.*',
         'common.extensions.mail.YiiMailMessage',
         'common.extensions.consoleRunner.ConsoleRunner',
     ],
@@ -59,14 +58,12 @@ return [
             'isSecondVersion' => false,
         ],
         'accessManager'     => ['class' => 'common.components.AccessManager'],
-
     ],
     'params'         => [
         'php.defaultCharset'       => 'utf-8',
         'php.timezone'             => 'Europe/Moscow',
-
-        // Минимальный шаг ставки в процентах.
         'minStepRatePercentage'    => 5,
+        'maintenanceMode'          => false
 
     ],
 ];

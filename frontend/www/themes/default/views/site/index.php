@@ -99,9 +99,9 @@ $auctionRandom = Yii::app()->db
             </a>
         </div><!-- End Carousel -->
 
-        <!--    <a data-target="#myCarousel" data-slide-to="0" class="active">Первый слайд</a>
-            <a data-target="#myCarousel" data-slide-to="1">второй слайд</a>
-            <a data-target="#myCarousel" data-slide-to="2">трейти слайд</a>
+        <!--    <a data-target="#myCarousel" data-slide-to="0" class="active">First slide</a>
+            <a data-target="#myCarousel" data-slide-to="1">Second slide</a>
+            <a data-target="#myCarousel" data-slide-to="2">Third slide</a>
         -->
 
     </div>

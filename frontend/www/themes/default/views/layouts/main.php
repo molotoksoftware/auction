@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -29,23 +28,15 @@
 /** @var Controller $this */
 ?>
 <?php $this->beginContent('//layouts/static'); ?>
-
-
-
-  <header>
-      <?php $this->renderPartial('//layouts/_header'); ?>
-  </header>
-
-  <main>
-
-          <?php echo $content; ?>
-
-  </main>
-
-  <footer>
-      <?php $this->renderPartial('//layouts/_footer'); ?>
-  </footer>
-
+<header>
+    <?php $this->renderPartial('//layouts/_header'); ?>
+</header>
+<main>
+    <?php echo $content; ?>
+</main>
+<footer>
+    <?php $this->renderPartial('//layouts/_footer'); ?>
+</footer>
 <?php $this->endContent(); ?>
 
 

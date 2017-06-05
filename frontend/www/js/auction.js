@@ -89,8 +89,8 @@ var Auction = function(options) {
                             $('.price-field', '#bid-form').empty().html(priceValue);
                             $(priceField).val('');
                             $(form).find('input[name="start"]').val(priceValue);
-                            $('#min_stap').html(Math.round(window.minStepRatePercentage * parseInt(priceValue) / 100));
-                            $('#value_stap').val((Math.round(window.minStepRatePercentage * parseInt(priceValue) / 100)) + parseInt(priceValue));
+                            // $('#min_stap').html(Math.round(window.minStepRatePercentage * parseInt(priceValue) / 100));
+                            // $('#value_stap').val((Math.round(window.minStepRatePercentage * parseInt(priceValue) / 100)) + parseInt(priceValue));
                             // Скрываем возможность делать своё предложение
                             $('.my_bid_title, .my_bid').hide();
                             location.reload();

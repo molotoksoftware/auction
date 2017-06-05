@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -41,11 +40,8 @@ Yii::import('frontend.widgets.search.PeriodHtmlSelectorWidget');
 $this->registerSEO($category);
 
 
-
-
-
 if ($category == false) {
-    $category_name = 'Все лоты';
+    $category_name = Yii::t('basic', 'All items');
     $breadcrumbs = array();
 } else {
     $category_name = $category->name;
@@ -54,48 +50,52 @@ if ($category == false) {
 ?>
 
 <div class="row auction">
-        <div class="col-xs-9">
-            <h2><?= $category_name; ?></h2>
-             <?php
-                $this->widget(
-                    'zii.widgets.CBreadcrumbs',
-                    array(
-                        'links' => $breadcrumbs,
-                        'tagName' => 'div',
-                        'htmlOptions' => array('class' => 'breadcrumbs'),
-                        'separator' => ' - ',
-                        'inactiveLinkTemplate' => '<span>{label}</span>',
-                        'homeLink' => CHtml::link('Аукцион', array('/auction/index')),
-                    )
-                );
-             ?>
-        </div>
-        <div class="col-xs-3 text-right">
-            <script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
-            <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
-            <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter" data-size="s"></div>
-        </div>
+    <div class="col-xs-9">
+        <h2><?= $category_name; ?></h2>
+        <?php
+        $this->widget(
+            'zii.widgets.CBreadcrumbs',
+            array(
+                'links' => $breadcrumbs,
+                'tagName' => 'div',
+                'htmlOptions' => array('class' => 'breadcrumbs'),
+                'separator' => ' - ',
+                'inactiveLinkTemplate' => '<span>{label}</span>',
+                'homeLink' => CHtml::link(Yii::t('basic', 'Auction'), array('/auction/index')),
+            )
+        );
+        ?>
+    </div>
+    <div class="col-xs-3 text-right">
+        <script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
+        <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter"
+             data-size="s"></div>
+    </div>
 </div>
 <hr class="top10 horizontal_line">
-<div class ="row">
+<div class="row">
     <div class="col-xs-3 sidebar_left">
-       <?php 
+        <?php
 
         if (!$search_active) {
             $this->widget('frontend.widgets.category.CategoryWidget');
         } else {
-            $this->widget('frontend.widgets.category_search.CategorySearchWidget',['auc_id_arr' => $auc_id_arr]);
-        }?>
+            $this->widget('frontend.widgets.category_search.CategorySearchWidget', ['auc_id_arr' => $auc_id_arr]);
+        } ?>
         <hr class="horizontal_line">
         <?php
-        function filterCrop($uri) {
+        function filterCrop($uri)
+        {
             return preg_replace("/filter\=[a-z]{1,10}\&/ui", "", $uri);
         }
-        function filterItem($label, $filter, $params = array()) {
-            $getWithOutFilter = '&'.filterCrop(Yii::app()->getRequest()->getQueryString());
+
+        function filterItem($label, $filter, $params = array())
+        {
+            $getWithOutFilter = '&' . filterCrop(Yii::app()->getRequest()->getQueryString());
             return array(
                 'label' => $label,
-                'url' => '/'.Yii::app()->request->getPathInfo(). '?filter='.$filter.$getWithOutFilter,
+                'url' => '/' . Yii::app()->request->getPathInfo() . '?filter=' . $filter . $getWithOutFilter,
                 'active' => isset($_GET['filter']) && $_GET['filter'] == $filter,
                 'itemOptions' => isset($params['itemOptions']) ? $params['itemOptions'] : array()
             );
@@ -103,19 +103,19 @@ if ($category == false) {
 
         ?>
         <span class="pull-right unset_par">
-            <a href="<?=filterCrop(Yii::app()->getRequest()->getRequestUri()); ?>">показать все</a>
+            <a href="<?= filterCrop(Yii::app()->getRequest()->getRequestUri()); ?>"><?= Yii::t('basic', 'view all') ?></a>
         </span>
-        <b>Тип торгов</b>
+        <b><?= Yii::t('basic', 'Type of sell') ?></b>
 
-       <?php
+        <?php
 
         $this->widget(
             'zii.widgets.CMenu',
             array(
                 'items' => array(
-                    filterItem('Аукционы', 'default'),
-                    filterItem('Купить сейчас', 'buynow'),
-                    filterItem('От 1 рубля', 'nulls', array('itemOptions' => array('class' => 'from_1_ruble_item'))),
+                    filterItem(Yii::t('basic', 'Auction'), 'default'),
+                    filterItem(Yii::t('basic', 'Buy Now'), 'buynow'),
+                    filterItem(Yii::t('basic', 'From') . ' ' . PriceHelper::formate(1), 'nulls', array('itemOptions' => array('class' => 'from_1_ruble_item'))),
                 ),
                 'firstItemCssClass' => 'first',
                 'htmlOptions' => ['class' => 'list-unstyled nomark type_transaction']
@@ -128,10 +128,10 @@ if ($category == false) {
         $this->renderPartial(
             '_filter',
             [
-                'filter'          => $filter,
-                'category'        => $category,
-                'options'         => $options,
-                'actionUrlRoute'  => '/auction/index',
+                'filter' => $filter,
+                'category' => $category,
+                'options' => $options,
+                'actionUrlRoute' => '/auction/index',
                 'actionUrlParams' => $_GET,
             ]
         );
@@ -142,24 +142,24 @@ if ($category == false) {
         <div class="row top_auction_list">
             <div class="col-xs-4">
                 <?php $this->widget('frontend.widgets.search.SortSelectorWidget', [
-                'scope'        => SortSelectorWidget::SCOPE_PAGE_AUCTION,
-                'dataProvider' => $dataProvider,
-            ]); ?>
+                    'scope' => SortSelectorWidget::SCOPE_PAGE_AUCTION,
+                    'dataProvider' => $dataProvider,
+                ]); ?>
             </div>
             <div class="col-xs-4">
                 <?php $this->widget('frontend.widgets.search.PeriodHtmlSelectorWidget', [
-                'scope' => PeriodHtmlSelectorWidget::SCOPE_PAGE_AUCTION,
-            ]); ?>
+                    'scope' => PeriodHtmlSelectorWidget::SCOPE_PAGE_AUCTION,
+                ]); ?>
             </div>
             <div class="col-xs-4 text-right">
-            <?php
+                <?php
                 $this->widget(
                     'CLinkPager',
                     array(
                         'pages' => $dataProvider->getPagination(),
                         'maxButtonCount' => 1,
-                        'firstPageLabel' => 'в начало',
-                        'lastPageLabel' => 'в конец',
+                        'firstPageLabel' => '<<',
+                        'lastPageLabel' => '>>',
                         'selectedPageCssClass' => 'active',
                         'prevPageLabel' => '&lt; ',
                         'nextPageLabel' => ' &gt;',
@@ -175,33 +175,32 @@ if ($category == false) {
             </div>
         </div>
         <hr class="horizontal_line">
-        <div class ="row top_auctions">
+        <div class="row top_auctions">
             <div class="col-xs-12">
-             <?php
-            $items = $dataProvider->getData();
-            if (count($items) <= 0) {
-                echo '<div class="alert alert-info">К сожалению, ничего не найдено</div>';
-            }
-            ?>
+                <?php
+                $items = $dataProvider->getData();
+                if (count($items) <= 0) : ?>
+                    <div class="alert alert-info"><?= Yii::t('basic', 'There doesn\'t seem to be any items matching your search result') ?></div>
+                <?php endif; ?>
 
             </div>
         </div>
-            <?php foreach ($items as $itemKey => $item): ?>
-                <?php $this->renderPartial(
-                    '_item',
-                    [
-                        'data'                => $item,
-                        'owner'               => isset($users[$item['owner']]) ? $users[$item['owner']] : null,
-                        'city'                => isset($cities[$item['id_city']]) ? $cities[$item['id_city']] : null,
-                        'additional'          => [],
-                        'is'                  => [],
-                        'auctionImages'       => isset($auctionsImages[$item['auction_id']])
-                            ? $auctionsImages[$item['auction_id']]
-                            : [],
-                    ],
-                    false
-                ); ?>
-            <?php endforeach; ?>
+        <?php foreach ($items as $itemKey => $item): ?>
+            <?php $this->renderPartial(
+                '_item',
+                [
+                    'data' => $item,
+                    'owner' => isset($users[$item['owner']]) ? $users[$item['owner']] : null,
+                    'city' => isset($cities[$item['id_city']]) ? $cities[$item['id_city']] : null,
+                    'additional' => [],
+                    'is' => [],
+                    'auctionImages' => isset($auctionsImages[$item['auction_id']])
+                        ? $auctionsImages[$item['auction_id']]
+                        : [],
+                ],
+                false
+            ); ?>
+        <?php endforeach; ?>
 
 
         <div class="row bottom_auctions">
@@ -212,7 +211,7 @@ if ($category == false) {
                     array(
                         'dataProvider' => $dataProvider,
                         'sizerCssClass' => 'pagination',
-                    //    'sizerHeader' => '',
+                        //    'sizerHeader' => '',
                         'sizerAttribute' => 'size',
                         'sizerVariants' => array(25, 50, 100)
                     )
@@ -226,8 +225,8 @@ if ($category == false) {
                     array(
                         'pages' => $dataProvider->getPagination(),
                         'maxButtonCount' => 5,
-                        'firstPageLabel' => 'в начало',
-                        'lastPageLabel' => 'в конец',
+                        'firstPageLabel' => Yii::t('First page', 'Auction'),
+                        'lastPageLabel' => Yii::t('Last page', 'Auction'),
                         'selectedPageCssClass' => 'active',
                         'prevPageLabel' => '&lt; ',
                         'nextPageLabel' => ' &gt;',

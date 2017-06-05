@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,31 +21,26 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** @var AuctionBulkChanges $this */
-/** @var FormBulkChangeCategory $model */
-/** @var string $actionUrl */
-/** @var int $lotsCount */
-/** @var string $gridId */
-/** @var array $dependentCurrencies */
 
 $options = [
-    'csrfToken'            => Yii::app()->request->csrfToken,
-    'csrfTokenName'        => Yii::app()->request->csrfTokenName,
+    'csrfToken' => Yii::app()->request->csrfToken,
+    'csrfTokenName' => Yii::app()->request->csrfTokenName,
 ];
 
 ?>
-<!-- Блок с кнопками -->
-<div class="form-group">
-      <label>Действия с отмеченными:</label>
-   <a style="cursor: pointer" class="btn btn-info" href="javascript:void(0);" id="action_mass_autorepub">Назначить автоперевыставление</a>
-    <a style="cursor: pointer" class="btn btn-danger" href="" id="action_close_all">Снять с торгов</a>
 
-  </div>
+<div class="form-group">
+    <label><?= Yii::t('basic', 'Actions with marked') ?></label>
+    <a style="cursor: pointer" class="btn btn-info" href="javascript:void(0);"
+       id="action_mass_autorepub"><?= Yii::t('basic', 'Activate republish') ?></a>
+    <a style="cursor: pointer" class="btn btn-danger" href=""
+       id="action_close_all"><?= Yii::t('basic', 'Remove from sell') ?></a>
+
+</div>
 
 <? echo CHtml::beginForm('/editor/massAutoRepub', 'POST', array('id' => 'autorepub_mass_form', 'style' => 'display: none;')); ?><? echo CHtml::endForm(); ?>
-<!--/ Блок с кнопками -->
+

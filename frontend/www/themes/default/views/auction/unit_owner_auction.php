@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -36,12 +35,12 @@ Yii::app()->clientScript->registerScript(
     $(".remove-bid").on("click", function() {
         var self = this;
 
-        if(confirm("Вы уверены, что хотите удалить ставку?")) {
+        if(confirm("' . Yii::t('basic', 'Do you really want to remove bid?') . '")) {
             $.ajax({
                 url: "/auction/removeBid/bid_id/" + $(this).attr("data-id"),
                 success: function() {
                     self.closest("tr").remove();
-                    alert("Ставка удалена");
+                    alert("' . Yii::t('basic', 'Bid has been removed') . '");
                 }
             })
         }
@@ -55,55 +54,63 @@ Yii::app()->clientScript->registerScript(
 
 <div class="row padding15">
     <div class="col-xs-12">
-        <b>Это Ваш лот</b><br />
-        <small>В избранном: <?=$base['favorites_count']; ?> </small>
-        <small><a href="/user/cabinet/viewed/type/0/id/<?=$base['auction_id']; ?>">Просмотры: <? echo $base['viewed']; ?></a></small>
+        <b><?= Yii::t('basic', 'It\'s your item') ?></b><br/>
+        <small><?= Yii::t('basic', 'In favorites') ?>: <?= $base['favorites_count']; ?> </small>
+        <small><a href="/user/cabinet/viewed/type/0/id/<?= $base['auction_id']; ?>"><?= Yii::t('basic', 'Views') ?>
+                : <? echo $base['viewed']; ?></a></small>
     </div>
 </div>
 <div class="row padding15">
     <div class="col-xs-12">
         <?php if ($base['status'] != 10): ?>
-
-            <?php 
-                // Кнопка "Завершить досрочно". Только если по лоту имеются ставки и лот активен
-                if (($base['current_bid'] != 0) && ($base['status'] == BaseAuction::ST_ACTIVE)): ?>
-                <?= CHtml::link('Завершить досрочно',['/editor/longTermCompleted', 'id' => $base['auction_id']],
-                        ['class' => 'btn btn-success btn-sm',
-                         'onclick' => 'return confirm("Вы действительно хотите завершить торги досрочно? Лот будет продан по последней наивысшей ставке.")',
-                         'role' => 'button',
-                        ]
+            <?php
+            // Sell button. Show, if there are some bids on the item and item has got active status
+            if (($base['current_bid'] != 0) && ($base['status'] == BaseAuction::ST_ACTIVE)): ?>
+                <?= CHtml::link(Yii::t('basic', 'Sell this item'), ['/editor/longTermCompleted', 'id' => $base['auction_id']],
+                    ['class' => 'btn btn-success btn-sm',
+                        'onclick' => 'return confirm("' . Yii::t('basic', 'Do you really want to sell this item? The item will be sold at the last price.') . '")',
+                        'role' => 'button',
+                    ]
                 ); ?>
             <?php endif; ?>
 
-            <?php 
-                // Кнопка "Редактировать". Только если по лоту НЕТ ставок и он не продан
-                if (($base['current_bid'] == 0) && ($base['status'] != BaseAuction::ST_SOLD_BLITZ_PRICE) && ($base['status'] != BaseAuction::ST_SOLD_SUCCESS_BID)): ?>
-                <?= CHtml::link("Редактировать лот",["/editor/lot", "id" => $base["auction_id"]],
-                        ["class" => "btn btn-default btn-sm", 
-                         "role" => "button"]); 
+            <?php
+            // Edit button. Show, if there aren't any bids on the item
+            if (($base['current_bid'] == 0) && ($base['status'] != BaseAuction::ST_SOLD_BLITZ_PRICE) && ($base['status'] != BaseAuction::ST_SOLD_SUCCESS_BID)): ?>
+                <?= CHtml::link(Yii::t('basic', 'Edit item'), ["/editor/lot", "id" => $base["auction_id"]],
+                    ["class" => "btn btn-default btn-sm",
+                        "role" => "button"]);
                 ?>
             <?php endif; ?>
 
-            <?php 
-                // Кнопка "Снять с торгов". Только если лот активен, при этом проверим, есть ли по лоту ставки
-                if ($base['status'] == BaseAuction::ST_ACTIVE): ?>
-                <?php $link = Yii::app()->createUrl('/editor/removeTrading',['type' => 'item','id' => $base['auction_id']]);?>
-                <a title='Cнять с торгов'
-                   class="<?= ($base['current_bid'] == 0)?'btn btn-default btn-sm':'btn btn-warning btn-sm'?>"
-                   onclick='return confirm("<?= ($base['current_bid'] == 0) ? 'Вы действительно хотите снять лот с торгов?' : 'Вы действительно хотите снять лот с торгов? По лоту имеются ставки, Ваш рейтинг будет уменьшен на единицу.'; ?>")'
-                   href="<?= $link; ?>">Снять с торгов</a>
+            <?php
+            // Remove from sell button. Show, if item has got active status and check bids,,,
+            // If there are some bids on the item, will need to reduce seller's rating
+            if ($base['status'] == BaseAuction::ST_ACTIVE): ?>
+                <?php $link = Yii::app()->createUrl('/editor/removeTrading', ['type' => 'item', 'id' => $base['auction_id']]); ?>
+                <a class="<?= ($base['current_bid'] == 0) ? 'btn btn-default btn-sm' : 'btn btn-warning btn-sm' ?>"
+                   onclick='return confirm("<?= ($base['current_bid'] == 0) ? Yii::t('basic', 'Do you really want to remove item from sell?') : Yii::t('basic', 'Do you really want to remove item from sell? There are bids. Your rating will be reduced'); ?>")'
+                   href="<?= $link; ?>">
+                    <?= Yii::t('basic', 'Remove from sell') ?>
+                </a>
             <?php endif; ?>
 
-            <?php 
-                // Кнопка "Перевыставить лот". Только если лот имеет статус завершенного
-                if ($base['status'] == BaseAuction::ST_COMPLETED_EXPR_DATE): ?>
-                <?php $link = Yii::app()->createUrl('/editor/lot',['strepub' => 1,'id' => $base['auction_id']]);?>
-                <a class="btn btn-primary btn-sm" title='Перевыставить лот' href="<?= $link; ?>">Перевыставить лот</a>
+            <?php
+            // Republish item button. Show, if item has got ended status
+            if ($base['status'] == BaseAuction::ST_COMPLETED_EXPR_DATE): ?>
+                <?php $link = Yii::app()->createUrl('/editor/lot', ['strepub' => 1, 'id' => $base['auction_id']]); ?>
+                <a class="btn btn-primary btn-sm" href="<?= $link; ?>">
+                    <?= Yii::t('basic', 'Republish item') ?>
+                </a>
             <?php endif; ?>
 
-            <?php 
-                // Кнопка "Выставить похожий". Активна всегда ?>
-                <a target="_blank" class="btn btn-default btn-sm" title='Выставить похожий' href="<?= Yii::app()->baseUrl.'/creator/publishSame/id/'.$base['auction_id'] ?>">Выставить похожий</a>
+            <?php
+            // Publish a similar
+            ?>
+            <a target="_blank" class="btn btn-default btn-sm"
+               href="<?= Yii::app()->baseUrl . '/creator/publishSame/id/' . $base['auction_id'] ?>">
+                <?= Yii::t('basic', 'Publish similar')?>
+            </a>
 
 
         <?php endif; ?>

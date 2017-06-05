@@ -51,6 +51,8 @@ class SystemController extends FrontController
 
     public function actionMaintenance()
     {
+        $this->layout = 'common';
+        $this->pageTitle = Yii::t('basic', 'Maintenance works');
         $this->render('maintenance');
     }
 }
