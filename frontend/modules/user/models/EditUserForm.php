@@ -46,7 +46,7 @@ class EditUserForm extends CFormModel
     public $show_telephone;
     public $add_contact_info;
     public $terms_delivery;
-    public $consent_recive_notification;
+    public $consent_receive_notification;
     public $telephone;
 
     public $id_country;
@@ -63,7 +63,7 @@ class EditUserForm extends CFormModel
             ['email', 'email', 'message' => 'Некорректный e-mail'],
             ['add_contact_info', 'length', 'max' => 512],
             ['terms_delivery', 'length', 'max' => 2048],
-            ['show_telephone, consent_recive_notification', 'boolean'],
+            ['show_telephone, consent_receive_notification', 'boolean'],
             ['telephone', 'length', 'max' => 20],
             ['telephone', 'numerical', 'integerOnly' => true],
             ['passwordRe', 'compare', 'compareAttribute' => 'passwordNew'],

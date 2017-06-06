@@ -89,7 +89,7 @@ return [
 
 
     // Footer
-    'Terms and Conditions' => 'Правила использования',
+    'Terms and Conditions' => 'Пользовательское соглашение',
     'About us' => 'О нас',
     'Support' => 'Поддержка',
     'Please, log in' => 'Пожалуйста, авторизируйтесь',
@@ -145,9 +145,10 @@ return [
     'Select the duration' => 'Укажите продолжительность торгов',
     'Price too high' => 'Цена слишком большая',
     'Specify the starting price' => 'Укажите начальную цену',
-    'Starting price may not be more than buy now price' => 'Начальная цена не может быть больше блиц-цены',
-    'Starting price may not be equal to the buy now price' => 'Начальная цена не может равняться блиц-цене',
+    'Starting price can\'t be more than buy now price' => 'Начальная цена не может быть больше блиц-цены',
+    'Starting price can\'t be equal to the buy now price' => 'Начальная цена не может равняться блиц-цене',
     'Specify price' => 'Укажите цену',
+    'Max. photo: {count}' => 'Максимальное количество фото: {count}',
 
     // Editor lot
 
@@ -206,6 +207,7 @@ return [
     'max. bid' => 'макс. ставка',
     'Your bid' => 'Ваша ставка',
     'Your bid {bid} has been outbid' => 'Ваша ставка {bid} была перебита',
+    'Your bid has been outbid' => 'Ваша ставка была перебита',
     'Item location' => 'Местонахождение',
     'Bidding has ended on this item' => 'Торги завершены',
     'for' => 'за',
@@ -213,6 +215,36 @@ return [
     'Do you really want to buy this item?' => 'Вы действительно хотите купить этот товар?',
     'Bidding has ended' => 'Торги окончены',
     'Sold for {sum}' => 'Продано за {sum}',
+    'Only Buy now' => 'Только Купить сейчас',
+    'Item is not available for bid' => 'Лот не доступен для ставки',
+
+
+    // system notify
+    'No notifications' => 'Уведомления отсутствуют',
+    'New' => 'Новое',
+    'Select all' => 'Выбрать все',
+    'Delete' => 'Удалить',
+    'Mark as' => 'Отметить как',
+    'Read' => 'Прочитанное',
+    'Unread' => 'Непрочитанное',
+    'System Notifications' => 'Системные уведомления',
+    '' => '',
+
+    'Your max. bid has been set' => 'Максимальная ставка переустановлена',
+    'Your bid ({bid}) should be more then current price + minimal step ({need_bid})' => 'Ваша ставка ({bid}) должна быть больше текущей ставки + минимальный шаг ({need_bid})',
+    'This bid has been done by another user. Please set a new bid' => 'Такая ставка сделана другим пользователем ранее. Поставьте другую ставку',
+    'Your bid can\'t be more than buy now price' => 'Ставка не может быть больше блиц цены',
+    'Your bid should be more than current price or equal' => 'Ваша ставка должна быть больше или равна стартовой цене',
+
+    // user module
+    '' => 'Удаление информации о сделках',
+    '' => 'Вы действительно хотите удалить информацию о выбранных сделках?',
+    'Close' => 'Закрыть',
+    'Confirm' => 'Подтвердить',
+    'Delete purchase information' => 'Удаление информации об покупках',
+    'Delete sale information' => 'Удаление информации об покупках',
+    'Do you really want to remove purchase information?' => 'Вы действительно хотите удалить информацию о покупках?',
+    'Do you really want to remove sale information?' => 'Вы действительно хотите удалить информацию о покупках?',
     '' => '',
     '' => '',
     '' => '',
@@ -267,10 +299,11 @@ return [
     'Transaction history' => 'Операции с внутренним счетом',
     'Credit remaining' => 'Остаток на счету',
     'Make a payment' => 'Пополнить',
-    'Comission' => 'Комиссия',
+    'Commission' => 'Комиссия',
     'Date' => 'Дата',
     'Amount' => 'Сумма',
     'Description' => 'Описание',
+    'Commission on sold item #' => 'Комиссия за проданный лот №',
 
     //pagination
     'Older' => 'Поздние',
@@ -278,13 +311,39 @@ return [
     'Next' => 'Вперед',
     'Previous' => 'Назад',
 
+    // access
+    'Current password' => 'Настоящий пароль',
+    'New password' => 'Новый пароль',
+    'Repeat new password' => 'Повторите новый пароль',
+    'Repeat password' => 'Повторите пароль',
+    'Specify new password' => 'Укажите новый пароль',
+    'Wrong password' => 'Неверный пароль',
+    'Incorrect login or password' => 'Неправильный логин или пароль',
+    'Don\'t remember me' => 'Не запоминать меня',
+    'Password' => 'Пароль',
+    'Your login' => 'Логин',
+    'You need specify field "{attribute}"' => 'Заполните поле "{attribute}"',
+    'Log in' => 'Войти',
+    'Forgot password?' => 'Забыли пароль',
+    'Sign up' => 'Зарегистрироваться',
+    'I agree to the Terms and Conditions' => 'Я принимаю условия пользовательского соглашения',
+    'You need to enter Letters of the Latin alphabet and numbers' => 'Допустимы только буквы латинского алфавита и цифры',
+    'User with e-mail "{value}" already exists' => 'Пользователь с e-mail "{value}" уже существует',
+    'User with login "{value}" already exists' => 'Пользователь с логином "{value}" уже существует',
+    'Password must be repeated exactly' => 'Пароль должен совпадать',
+    'Login already exists' => 'Логин уже занят',
+    'You didn\'t read the Terms and Conditions' => 'Вы не ознакомились с пользовательским соглашением',
+    'Incorrect E-mail' => 'Некорректный e-mail',
+    'E-mail {email} is not available' => 'Email "{email}" недоступен',
+    'Password recovery' => 'Восстановление пароля',
+    'Reset password' => 'Сбросить пароль',
+    'New password will be sent to your E-mail. It\'s generated automatically. We recommend you to change this password.' => 'На вашу электронную почту мы отправим новый пароль. Он генерируется автоматически и его сложно запомнить. Рекомендуем поменять пароль в настройках аккаунта. Если письмо не пришло, посмотрите в папке Нежелательная почта (спам), возможно оно там. Либо попробуйте восстановить пароль заново. Учтите, пароль будет изменён!',
 
-    'To recieve a notification email' => 'Получать уведомления на E-mail',
+
+
+    'Receive e-mail notifications' => 'Получать уведомления на E-mail',
     'The system automatically sends you important notifications to the mailbox. Do not turn off this feature if you want to be informed about all events.' => 'Система автоматически присылает важные уведомления Вам на почтовый ящик. Не отключайте эту функцию, если хотите быть в курсе всех событий связанных с Вашим участием на торговой площадке.',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+
     '' => '',
     '' => '',
 

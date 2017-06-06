@@ -35,10 +35,17 @@ class RecoveryForm extends CFormModel
     public function rules()
     {
         return array(
-            array('email', 'required', 'message' => 'Не введена электронная почта'),
+            array('email', 'required', 'message' => Yii::t('basic', 'You need specify field "{attribute}"')),
             array('email', 'email'),
             array('email', 'checkEmail'),
         );
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'email'      => Yii::t('basic', 'E-mail'),
+        ];
     }
 
     public function checkEmail($attribute, $params)
@@ -48,7 +55,9 @@ class RecoveryForm extends CFormModel
             if (!$this->_user) {
                 $this->addError(
                     'email',
-                    'Email "' . $this->email . '" не найден или пользователь заблокирован !'
+                    Yii::t('basic', 'E-mail {email} is not available', [
+                        '{email}' => $this->email
+                    ])
                 );
             }
         }

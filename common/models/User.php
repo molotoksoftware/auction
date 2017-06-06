@@ -44,7 +44,7 @@
  * @property string   $createtime
  * @property string   $lastvisit
  * @property integer  $rating
- * @property integer  $consent_recive_notification
+ * @property integer  $consent_receive_notification
  * @property integer  $balance
  * @property string   $pro
  * @property string   $certified
@@ -116,7 +116,7 @@ class User extends CActiveRecord {
             ['email', 'email'],
             ['add_contact_info', 'length', 'max' => 512],
             ['terms_delivery', 'length', 'max' => 2048],
-            ['show_telephone, consent_recive_notification', 'boolean'],
+            ['show_telephone, consent_receive_notification', 'boolean'],
             ['login, email', 'unique'],
             ['certified, ban', 'numerical', 'integerOnly' => true],
             [

@@ -138,8 +138,8 @@ class SettingsController extends FrontController
 
         if ($request->getIsPostRequest() && $request->getPost('User')) {
             $userData = $request->getPost('User');
-            $user->setAttribute('consent_recive_notification', $userData['consent_recive_notification']);
-            if ($user->save(true, ['consent_recive_notification'])) {
+            $user->setAttribute('consent_receive_notification', $userData['consent_recive_notification']);
+            if ($user->save(true, ['consent_receive_notification'])) {
                 Yii::app()->user->setFlash('success-edit-profile', Yii::t('basic', 'Successfully updated'));
                 $this->refresh();
             }

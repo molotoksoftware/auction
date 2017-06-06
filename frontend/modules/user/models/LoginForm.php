@@ -28,10 +28,6 @@
  */
 
 
-/**
- * Форма авторизации
- *
- */
 class LoginForm extends CFormModel
 {
 
@@ -43,8 +39,7 @@ class LoginForm extends CFormModel
     public function rules()
     {
         return array(
-            array('login, password', 'required', 'message' => 'Заполните поле "{attribute}"'),
-            //array('login', 'email', 'message' => 'Некорректный e-mail'),
+            array('login, password', 'required', 'message' => Yii::t('basic', 'You need specify field "{attribute}"')),
             array('rememberMe', 'boolean'),
             array('password', 'authenticate')
         );
@@ -53,9 +48,9 @@ class LoginForm extends CFormModel
     public function attributeLabels()
     {
         return [
-            'login'      => 'Логин или E-mail',
-            'password'   => 'Пароль',
-            'rememberMe' => 'Чужой компьютер',
+            'login'      => Yii::t('basic', 'Your login'),
+            'password'   => Yii::t('basic', 'Password'),
+            'rememberMe' => Yii::t('basic', 'Don\'t remember me'),
         ];
     }
 
@@ -65,7 +60,7 @@ class LoginForm extends CFormModel
             $this->_identity = new UserIdentity($this->login, $this->password);
 
             if (!$this->_identity->authenticate()) {
-                $this->addError('password', 'Неправильный логин или пароль');
+                $this->addError('password', Yii::t('basic', 'Incorrect login or password'));
             }
         }
     }
@@ -77,7 +72,6 @@ class LoginForm extends CFormModel
             $this->_identity->authenticate();
         }
         if ($this->_identity->errorCode === UserIdentity::ERROR_NONE) {
-            //авторизируем пользователя
             $duration = (!$this->rememberMe) ? 3600 * 24 * 30 : 0; // 30 days
             Yii::app()->getUser()->login($this->_identity, $duration);
             return true;

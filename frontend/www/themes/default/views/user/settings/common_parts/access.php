@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,11 +29,11 @@
 /** @var User $user */
 /** @var EditUserForm $model */
 
-cs()->registerScriptFile(Yii::app()->baseUrl.'/js/user/settings/common.js');
+cs()->registerScriptFile(Yii::app()->baseUrl . '/js/user/settings/common.js');
 ?>
 
 
-<h3>Доступ</h3>
+<h3><?= Yii::t('basic', 'Access control') ?></h3>
 
 <?php if (Yii::app()->user->hasFlash('success-edit-profile')): ?>
     <div class="alert alert-success">
@@ -58,21 +57,21 @@ $form = $this->beginWidget(
 );
 ?>
 <div class="form-group">
-    <label for="passwordOld" class="col-sm-2 control-label">Настоящий пароль</label>
+    <label for="passwordOld" class="col-sm-2 control-label"><?= Yii::t('basic', 'Current password') ?></label>
     <div class="col-sm-10">
         <?php echo $form->error($model, 'passwordOld'); ?>
         <?php echo $form->passwordField($model, 'passwordOld', ['class' => 'form-control', 'style' => 'width:200px;']); ?>
     </div>
 </div>
 <div class="form-group">
-    <label for="passwordNew" class="col-sm-2 control-label">Новый пароль</label>
+    <label for="passwordNew" class="col-sm-2 control-label"><?= Yii::t('basic', 'New password') ?></label>
     <div class="col-sm-10">
         <?php echo $form->error($model, 'passwordNew'); ?>
         <?php echo $form->passwordField($model, 'passwordNew', ['class' => 'form-control', 'style' => 'width:200px;']); ?>
     </div>
 </div>
 <div class="form-group">
-    <label for="passwordRe" class="col-sm-2 control-label">Повторите новый пароль</label>
+    <label for="passwordRe" class="col-sm-2 control-label"><?= Yii::t('basic', 'Repeat new password') ?></label>
     <div class="col-sm-10">
         <?php echo $form->error($model, 'passwordRe'); ?>
         <?php echo $form->passwordField($model, 'passwordRe', ['class' => 'form-control', 'style' => 'width:200px;']); ?>
@@ -82,7 +81,7 @@ $form = $this->beginWidget(
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-       <?php echo CHtml::submitButton('Сохранить', ['class' => 'btn btn-default']); ?>
+        <?php echo CHtml::submitButton(Yii::t('basic', 'Confirm'), ['class' => 'btn btn-default']); ?>
     </div>
 </div>
 

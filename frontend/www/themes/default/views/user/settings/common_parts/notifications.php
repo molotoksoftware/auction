@@ -60,8 +60,8 @@ $form = $this->beginWidget(
     </p>
   <div class="checkbox">
     <label>
-          <?php echo $form->checkBox($user, 'consent_recive_notification'); ?>
-        <?= Yii::t('basic', 'To recieve a notification email')?>
+          <?php echo $form->checkBox($user, 'consent_receive_notification'); ?>
+        <?= Yii::t('basic', 'Receive e-mail notifications')?>
     </label>
   </div>
     <?php echo CHtml::submitButton(Yii::t('basic', 'Save change'), ['class' => 'btn btn-default']); ?>

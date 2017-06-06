@@ -26,11 +26,6 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-/**
- * Форма регистрации
- *
- */
 class RegistrationForm extends CFormModel
 {
 
@@ -40,7 +35,7 @@ class RegistrationForm extends CFormModel
     public $password;
     public $confirmPassword;
     public $agreeLicense;
-    public $agreeNorifier;
+    public $agreeNotifier;
 
 
     private $_identity;
@@ -48,14 +43,14 @@ class RegistrationForm extends CFormModel
     public function rules()
     {
         return [
-            ['login, password, email', 'required', 'message' => 'Заполните поле "{attribute}"'],
-            ['login', 'match', 'pattern' => '/^[A-Za-z0-9_\-]{2,50}$/', 'message' => 'Допустимы только буквы латинского алфавита и цифры.'],
-            ['email', 'email', 'message' => 'Некорректный e-mail'],
-            ['email', 'unique', 'className' => 'User', 'attributeName' => 'email', 'message' => 'Пользователь с e-mail \'{value} \' уже существует'],
-            ['login', 'unique', 'className' => 'User', 'attributeName' => 'login', 'message' => 'Пользователь с логином \'{value} \' уже существует'],
+            ['login, password, email', 'required', 'message' => Yii::t('basic', 'You need specify field "{attribute}"')],
+            ['login', 'match', 'pattern' => '/^[A-Za-z0-9_\-]{2,50}$/', 'message' => Yii::t('basic', 'You need to enter Letters of the Latin alphabet and numbers')],
+            ['email', 'email', 'message' => Yii::t('basic', 'Incorrect E-mail')],
+            ['email', 'unique', 'className' => 'User', 'attributeName' => 'email', 'message' => Yii::t('basic', 'User with e-mail "{value}" already exists')],
+            ['login', 'unique', 'className' => 'User', 'attributeName' => 'login', 'message' => Yii::t('basic', 'User with login "{value}" already exists')],
             ['login, email', 'filter', 'filter' => 'trim'],
             ['agreeLicense', 'agree'],
-            ['confirmPassword', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароль должен совпадать'],
+            ['confirmPassword', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('basic', 'Password must be repeated exactly')],
             ['login', 'uniqueNick'],
         ];
     }
@@ -65,7 +60,7 @@ class RegistrationForm extends CFormModel
         $user = User::model()->findByAttributes(['nick' => $this->login]);
 
         if ($user) {
-            $this->addError('login', 'Логин занят');
+            $this->addError('login',  Yii::t('basic', 'Login already exists'));
         }
     }
 
@@ -73,7 +68,7 @@ class RegistrationForm extends CFormModel
     {
         if (!$this->hasErrors()) {
             if ((boolean)$this->$attribute == false) {
-                $this->addError($attribute, 'Вы не ознакомились с Правилами');
+                $this->addError($attribute, Yii::t('basic','You didn\'t read the Terms and Conditions'));
             }
         }
     }
@@ -81,12 +76,12 @@ class RegistrationForm extends CFormModel
     public function attributeLabels()
     {
         return [
-            'email'                  => 'E-mail',
-            'login'                  => 'Логин',
-            'password'               => 'Пароль',
-            'confirmPassword'        => 'Повторите пароль',
-            'agreeNorifier'          => 'Получать уведомленияя',
-            'agreeLicense'           => 'Лицензионное соглашения',
+            'email'                  => Yii::t('basic','E-mail'),
+            'login'                  => Yii::t('basic','Login'),
+            'password'               => Yii::t('basic','Password'),
+            'confirmPassword'        => Yii::t('basic','Repeat password'),
+            'agreeNotifier'          => Yii::t('basic','Receive e-mail notification'),
+            'agreeLicense'           => Yii::t('basic','Terms and Conditions'),
         ];
     }
 

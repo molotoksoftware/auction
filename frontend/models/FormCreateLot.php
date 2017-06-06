@@ -115,13 +115,13 @@ class FormCreateLot extends CFormModel
 
             if (!$this->hasErrors()) {
                 if (($this->price > 0) && ($this->starting_price > $this->price)) {
-                    $this->addError('starting_price', Yii::t('basic', 'Starting price may not be more than buy now price'));
+                    $this->addError('starting_price', Yii::t('basic', 'Starting price can\'t be more than buy now price'));
                 }
             }
 
             if (!$this->hasErrors()) {
                 if (($this->price > 0) && ($this->starting_price == $this->price)) {
-                    $this->addError('starting_price', Yii::t('basic', 'Starting price may not be equal to the buy now price'));
+                    $this->addError('starting_price', Yii::t('basic', 'Starting price can\'t be equal to the buy now price'));
                 }
             }
         }

@@ -27,15 +27,14 @@
  */
 
 $this->layout = '//layouts/common';
-$this->pageTitle = 'Регистрация аккаунта';
+$this->pageTitle = Yii::t('basic', 'Signup');
 
 ?>
 <div class="row">
     <div class="col-xs-2"></div>
     <div class="col-xs-6">
-    <h1>Регистрация</h1>
+    <h1><?= Yii::t('basic', 'Signup')?></h1>
     <?php
-    //    Yii::import('frontend.modules.user.models.*');
      //   $model = new RegistrationForm();
         /** @var CActiveForm $form */
         $form = $this->beginWidget(
@@ -93,16 +92,18 @@ $this->pageTitle = 'Регистрация аккаунта';
                 <div class="checkbox">
                     <?php echo $form->error($model, 'agreeLicense'); ?>
                     <?php echo $form->checkBox($model, 'agreeLicense'); ?>
-                    <label>Принимаю <a target="_blank"
-                                       href="<?= Yii::app()->createUrl('/page/view', array('alias' => 'rules')); ?>">пользовательское
-                            соглашение</a></label>
+                    <label>
+                        <a target="_blank" href="<?= Yii::app()->createUrl('/page/view', array('alias' => 'rules')); ?>">
+                            <?= Yii::t('basic', 'I agree to the Terms and Conditions')?>
+                        </a>
+                    </label>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-xs-offset-4 col-xs-8">
-            <?php echo CHtml::submitButton('Зарегистрироваться', ['name' => 'submit_register', 'class' => 'btn btn-default']); ?>
+            <?php echo CHtml::submitButton(Yii::t('basic', 'Sign up'), ['name' => 'submit_register', 'class' => 'btn btn-default']); ?>
             </div>
         </div>
 

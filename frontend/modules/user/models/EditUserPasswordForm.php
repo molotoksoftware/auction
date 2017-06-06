@@ -53,10 +53,10 @@ class EditUserPasswordForm extends CFormModel
             if (!empty($this->passwordOld)) {
                 if (Getter::userModel()->validatePassword($this->passwordOld)) {
                     if (empty($this->passwordNew)) {
-                        $this->addError('passwordNew', 'Укажите новый пароль');
+                        $this->addError('passwordNew', Yii::t('basic', 'Specify new password'));
                     }
                 } else {
-                    $this->addError('passwordOld', 'Неверный пароль');
+                    $this->addError('passwordOld', Yii::t('basic', 'Wrong password'));
                 }
             }
     }
@@ -64,9 +64,9 @@ class EditUserPasswordForm extends CFormModel
     public function attributeLabels()
     {
         return [
-            'passwordRe'  => 'Повторите новый пароль',
-            'passwordNew' => 'Новый пароль',
-            'passwordOld' => 'Старый пароль',
+            'passwordRe'  => Yii::t('basic', 'Repeat new password'),
+            'passwordNew' => Yii::t('basic', 'New password'),
+            'passwordOld' => Yii::t('basic', 'Current password'),
         ];
     }
 

@@ -49,7 +49,7 @@ Yii::app()->clientScript->registerScript(
           if (pageCount<=0) {
             //fix for one show messages
             if ($('.error-message').size() <= 0) {
-                $(container).append('<div class=\"error-message\">Отсутствуют уведомления</div>');
+                $(container).append('<div class=\"error-message\">".Yii::t('basic', 'No notifications')."</div>');
                 return;
             }
           }
@@ -72,7 +72,7 @@ Yii::app()->clientScript->registerScript(
             },
             success:function(data) {
                 if (data.data.length<=0){
-                     $(container).append('<div class=\"error-message\">Отсутствуют уведомления</div>');
+                     $(container).append('<div class=\"error-message\">".Yii::t('basic', 'No notifications')."</div>');
                 } else {
                     it = 10;              
                     $.each(data.data, function(i, item){
@@ -156,9 +156,9 @@ $('.btn-action').click(function() {
             <input type="checkbox" class="checkbox_one" name="item" value="${id}">
 
             {{if read==true}}
-                <span class='label label-default'><span class='glyphicon glyphicon-ok'></span> Прочитано</span>
+                <span class='label label-default'><span class='glyphicon glyphicon-ok'></span> <?= Yii::t('basic', 'Read')?></span>
             {{else}}
-                <span class='label label-success'>Новое</span>
+                <span class='label label-success'><?= Yii::t('basic', 'New')?></span>
             {{/if}}
 
             <span class="small">${date}</span>
@@ -170,25 +170,25 @@ $('.btn-action').click(function() {
     </li>
 </script>
 
-<h3>Уведомления <?=UI::showQuantityTablHdr(SystemNotification::model()->byUserId(Yii::app()->user->id)->getByStatus(0)->count()); ?></h3>
+<h3><?= Yii::t('basic', 'Notifications')?> <?=UI::showQuantityTablHdr(SystemNotification::model()->byUserId(Yii::app()->user->id)->getByStatus(0)->count()); ?></h3>
 
 <form id="form-notifications">
 <div class="form_head form-inline">
     <div class="checkbox uniq_check">
         <label>
-              <input id="items_checkbox_oll" type="checkbox"> Выбрать все
+              <input id="items_checkbox_oll" type="checkbox"> <?= Yii::t('basic', 'Select all')?>
         </label>
     </div>
     <div class="btn-group btn-group-sm">
-        <button type="button" class="btn btn-default btn-action" data-action="removes" id="btn-delete-fav">Удалить</button>
+        <button type="button" class="btn btn-default btn-action" data-action="removes" id="btn-delete-fav"><?= Yii::t('basic', 'Delete')?></button>
         <div class="btn-group btn-group-sm">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              Отметить как
+              <?= Yii::t('basic', 'Mark as')?>
               <span class="caret"></span>
             </button>
           <ul class="dropdown-menu">
-            <li><a class='btn-action' data-action='read' id="btn-open-fav" href="#">Прочитанное</a></li>
-            <li><a class='btn-action' data-action='unread' id="btn-close-fav" href="#">Непрочитанное</a></li>
+            <li><a class='btn-action' data-action='read' id="btn-open-fav" href="#"><?= Yii::t('basic', 'Read')?></a></li>
+            <li><a class='btn-action' data-action='unread' id="btn-close-fav" href="#"><?= Yii::t('basic', 'Unread')?></a></li>
           </ul>
         </div>
     </div>

@@ -27,18 +27,16 @@
  */
 
 $this->layout = '//layouts/common';
-$this->pageTitle = 'Восстановление пароля';
+$this->pageTitle = Yii::t('basic', 'Password recovery');
 
 ?>
 
 <div class="row">
     <div class="col-xs-2"></div>
     <div class="col-xs-6">
-    <h1>Восстановление пароля</h1>
+    <h1><?= Yii::t('basic', 'Password recovery')?></h1>
     <p><small>
-    На вашу электронную почту мы отправим новый пароль. Он генерируется автоматически и его сложно запомнить. Рекомендуем поменять пароль в настройках аккаунта.
-    Если письмо не пришло, посмотрите в папке Нежелательная почта (спам), возможно оно там. Либо попробуйте восстановить пароль заново.
-    Учтите, пароль будет изменён!
+            <?= Yii::t('basic', 'New password will be sent to your E-mail. It\'s generated automatically. We recommend you to change this password.')?>
         </small></p>
     
 <?php 
@@ -76,7 +74,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
  <div class="form-group">
     <div class="col-xs-offset-4 col-xs-8">
-        <?php echo CHtml::submitButton('Получить новый пароль', ['class' => 'btn btn-default margint_top_30']);?>
+        <?php echo CHtml::submitButton(Yii::t('basic', 'Reset password'), ['class' => 'btn btn-default margint_top_30']);?>
     </div>
 </div>
 

@@ -31,13 +31,13 @@
  * hard implement
  */
 $this->layout = '//layouts/common';
-$this->pageTitle = 'Вход в систему';
+$this->pageTitle = Yii::t('basic', 'Login');
 
 ?>
 <div class="row">
     <div class="col-xs-2"></div>
     <div class="col-xs-6">
-    <h1>Войти в систему</h1>
+    <h1><?= Yii::t('basic', 'Login')?></h1>
     
 
         <?php
@@ -74,7 +74,7 @@ $this->pageTitle = 'Вход в систему';
             <div class="col-xs-8">
                 <?php echo $form->passwordField($model, 'password', ['class'=> 'form-control']); ?>
                 <?php echo $form->error($model, 'password'); ?>
-                <a id="btn-recovery" href="<?php echo Yii::app()->createUrl('/user/user/recovery'); ?>"> Забыли пароль?</a>
+                <a id="btn-recovery" href="<?php echo Yii::app()->createUrl('/user/user/recovery'); ?>"><?= Yii::t('basic', 'Forgot password?')?></a>
             </div>
         </div>
 
@@ -88,7 +88,7 @@ $this->pageTitle = 'Вход в систему';
         </div>
         <div class="form-group">
             <div class="col-xs-offset-4 col-xs-8">
-            <?php echo CHtml::submitButton('Войти', ['class' => 'btn btn-default']); ?>
+            <?php echo CHtml::submitButton(Yii::t('basic', 'Log in'), ['class' => 'btn btn-default']); ?>
             </div>
         </div>
         <?php $this->endWidget(); ?>

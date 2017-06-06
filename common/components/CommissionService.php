@@ -26,12 +26,6 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-/**
- * Class CommissionService
- *
- * Управление комиссиями.
- */
 class CommissionService
 {
     /**
@@ -44,11 +38,11 @@ class CommissionService
     }
 
     /**
-     * Действие - продажа лота.
+     * Sel item
      *
      * @param User    $seller
      * @param Auction $lot
-     * @param float   $targetSum Сумма из которой высчитывается комиссия. Если null - берет price лота.
+     * @param float   $targetSum
      *
      * @return bool
      */
@@ -57,11 +51,10 @@ class CommissionService
         $this->targetSum = floatval($targetSum);
 
         if (!$seller->getIsNewRecord() && $this->targetSum) {
-            // Берем 3% суммы с продавца.
-            $percents = Yii::app()->params['amountComission'];
-            $commission = round($this->targetSum * ($percents / 100), 2);
 
-            $comment = 'Комиссия аукциона за проданный лот № ' . $lot->getPrimaryKey();
+            $percents = Yii::app()->params['amountCommission'];
+            $commission = round($this->targetSum * ($percents / 100), 2);
+            $comment = Yii::t('basic','Commission on sold item #') . $lot->getPrimaryKey();
             $balanceHistoryType = BalanceHistory::STATUS_COMMISSION_SALE_LOT;
             $this->takeCommission($seller, $commission, $comment, $balanceHistoryType);
             return true;
@@ -70,7 +63,7 @@ class CommissionService
     }
 
     /**
-     * Берем коммисию с пользователя.
+     * Get commission
      *
      * @param User   $user
      * @param float  $commission

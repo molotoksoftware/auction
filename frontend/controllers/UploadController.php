@@ -118,7 +118,7 @@ class UploadController extends FrontController
         }
 
         if ($count > $allowedQuantity) {
-            RAjax::error(array('file' => array('Ошибка! максимальное количество фото (' . $allowedQuantity . ')')));
+            RAjax::error(array('file' => [Yii::t('basic', 'Max. photo: {count}', ['{count}' => $allowedQuantity])]));
         }
 
         if ($file->saveAs($dir . '/' . $file_name)) {

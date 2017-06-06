@@ -7,7 +7,7 @@
  * @license GNU General Public License, version 3
  */
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -19,7 +19,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,14 +26,16 @@
 /**
  * @var $model BalanceHistory
  */
-function getDateFormat($date) {
+function getDateFormat($date)
+{
     $time = strtotime($date);
     $str = '<p>' . date('d.m.Y', $time) . '</p>';
     $str .= '<p>' . date('H:i', $time) . '</p>';
     return $str;
 }
 
-function getSuma(BalanceHistory $data) {
+function getSuma(BalanceHistory $data)
+{
     if ($data->type == BalanceHistory::STATUS_ADD or $data->type == BalanceHistory::STATUS_RETURN) {
         $ico = '+';
         $style = 'green';
@@ -50,14 +51,16 @@ function getSuma(BalanceHistory $data) {
     return '<p><span style="font-weight:bold;color:' . $style . '">' . $ico . '' . $price . '</span></p>';
 }
 
-function getDescription($data) {
-    $isCommission = strstr($data->description, Yii::t('basic', 'Comission'));
+function getDescription($data)
+{
+    $isCommission = strstr($data->description, Yii::t('basic', 'Commission'));
     if ($isCommission) {
         $lot = preg_replace("/[^0-9]/", '', $data->description);
         return CHtml::link($data->description, "/auction/" . $lot);
     } else
         return CHtml::tag('p', array(), $data->description);
 }
+
 ?>
 <table align="right" style="margin:10px 0;color:#242424">
     <tr>
@@ -77,14 +80,14 @@ function getDescription($data) {
 
 <table class="table table-hover t_reviews" width="100%">
     <thead>
-        <tr>
-            <th width="25%"><strong><?= Yii::t('basic', 'Date')?></strong>
-            </th>
-            <th width="25%"><strong><?= Yii::t('basic', 'Amount')?></strong>
-            </th>
-            <th width="50%"><strong><?= Yii::t('basic', 'Description')?></strong>
-            </th>
-        </tr>
+    <tr>
+        <th width="25%"><strong><?= Yii::t('basic', 'Date') ?></strong>
+        </th>
+        <th width="25%"><strong><?= Yii::t('basic', 'Amount') ?></strong>
+        </th>
+        <th width="50%"><strong><?= Yii::t('basic', 'Description') ?></strong>
+        </th>
+    </tr>
     </thead>
     <?php foreach ($balance as $item): ?>
 

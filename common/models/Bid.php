@@ -30,7 +30,6 @@
 
 class Bid extends CModel
 {
-
     public $bid_id;
     public $price;
     public $owner;
@@ -55,13 +54,10 @@ class Bid extends CModel
     {
         if (!$this->hasErrors()) {
             if ($this->lot == false) {
-                $this->addError($attribute, 'лот недоступен для ставок');
-            }
-            if ($this->lot['type'] != BaseAuction::TYPE_AUCTION) {
-                $this->addError($attribute, 'Только для лотов');
+                $this->addError($attribute, Yii::t('basic', 'Item is not available for bid'));
             }
             if ($this->lot['type_transaction'] == Auction::TP_TR_SALE) {
-                $this->addError($attribute, 'Только для продажи');
+                $this->addError($attribute, Yii::t('basic', 'Only Buy now'));
             }
         }
     }
@@ -173,14 +169,18 @@ class Bid extends CModel
                 if ($this->skip_max_valid || $current_bid['max_price'] + $step <= $this->price) {
                     return $this->saveBid();
                 } else {
-                    $this->addError('price', 'Ваша ставка ('.$this->price.' руб.) должна быть больше текущей ставки + минимальный шаг ('.($current_bid['max_price'] + $step).')');
+                    $this->addError('price', Yii::t('basic', 'Your bid ({bid}) should be more then current price + minimal step ({need_bid})',
+                        [
+                            '{bid}' => PriceHelper::formate(floatval($this->price)),
+                            '{need_bid}' => PriceHelper::formate((($current_bid['max_price'] + $step)))
+                        ]));
                     return false;
                 }
             } else {
                 if ($this->lot['starting_price'] <= $this->price) {
                     return $this->saveBid();
                 } else {
-                    $this->addError('price', 'Ваша ставка должна быть больше или равна стартовой цене');
+                    $this->addError('price', Yii::t('basic', 'Your bid should be more than current price or equal'));
                 }
             }
         } else {
@@ -231,8 +231,7 @@ class Bid extends CModel
                             ':bid_id' => (int)$id
                         )
                     );
-                // сделаем проверку. Если родитель удаляемой ставки является хозяином максимально-установленной
-                // ставки по данному лоту, то и её (автоставку) тоже удалим.
+
                 if ($autoBidMaxUser == $bid['owner']) {
                     Yii::app()->db->createCommand()
                     ->delete(

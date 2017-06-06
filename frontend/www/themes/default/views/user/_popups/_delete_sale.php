@@ -26,9 +26,6 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Попап - Удалить из Проданных.
- */
 ?>
 
 <div id="deleteSale" class="modal fade">
@@ -42,18 +39,17 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Удаление информации о сделке</h4>
+        <h4 class="modal-title"><?= Yii::t('basic', 'Delete sale information')?></h4>
       </div>
       <div class="modal-body">
-        Вы действительно хотите удалить информацию об этой сделке из раздела?
+          <?= Yii::t('basic', 'Do you really want to remove sale information?')?>
       </div>
       <div id="hidden-form">
-
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?= Yii::t('basic', 'Close')?></button>
         <?php
-            echo CHtml::ajaxSubmitButton('Да, удалить', ['/user/sales/markDeleted'],
+            echo CHtml::ajaxSubmitButton(Yii::t('basic', 'Confirm'), ['/user/sales/markDeleted'],
                     [
                        'type' => 'POST',
                        'dataType' => 'json',
