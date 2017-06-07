@@ -27,7 +27,7 @@
  */
 
 /**
- * Edit лотов, объявлений
+ * Edit item
  *
  * EditorController class
  *
@@ -120,10 +120,6 @@ SQL;
         );
     }
 
-    /**
-     * обновления при изменении типа аукциона
-     * @param $model
-     */
     protected function refreshAuction(&$model)
     {
 
@@ -184,7 +180,7 @@ SQL;
             $refresh = (isset($_POST['refresh'])) ? (boolean)$_POST['refresh'] : false;
             
             
-            if($model->status == BaseAuction::ST_SAME) { // Аукцион в спрятанном статусе (Выставили похожий, но еще не сохранили)
+            if($model->status == BaseAuction::ST_SAME) {
                 $to_status = (isset($_POST['to_status']) &&  $_POST['to_status']==4)?4:1;
                 $model->status = $to_status;
                 if($to_status == 4) {
@@ -234,9 +230,6 @@ SQL;
                 $this->setEndingDate($model, $refresh);
             }
 
-            /**
-             * если кто то захочет редактировать лот при активных ставках
-             */
             if (!$model->isNewRecord && $model->type == BaseAuction::TYPE_AUCTION) {
                 if ($model->hasBids() && $model->status == BaseAuction::ST_ACTIVE) {
                     $this->refreshAuction($model);
@@ -248,10 +241,7 @@ SQL;
 
                 $transaction = $model->dbConnection->beginTransaction();
                 try {
-                    //сохраняем параметры
                     if (isset($_POST['options'])) {
-                        //сохранить выбранные значения
-                        //удаляем текущие атрибуты
                         if (!$model->isNewRecord) {
                             Yii::app()->db->createCommand()
                                 ->delete(
@@ -289,7 +279,6 @@ SQL;
                             }
                         }
 
-                        //сохранить текстовые значения
                         if (!empty($_POST['options'][1])) {
                             foreach ($_POST['options'][1] as $key => $value) {
                                 Yii::app()->db->createCommand()
@@ -315,7 +304,6 @@ SQL;
                 Yii::app()->db->createCommand()
 				    ->update('auction', array('image_count' => $img_count), 'auction_id=:auction_id', array(':auction_id' => $model->auction_id));
 
-               // Yii::app()->user->setFlash('success', 'Ваш лот успешно сохранен и будет опубликован');
                 $this->redirect(array('/auction/view', 'id' => $model->auction_id));
             }
         }
@@ -421,12 +409,6 @@ SQL;
         }
     }
 
-
-    /**
-     * завершить досрочно (рейтинг не меняется)
-     * @param $id
-     * @throws CHttpException
-     */
     public function actionLongTermCompleted($id)
     {
         /**
@@ -453,14 +435,11 @@ SQL;
             throw new CHttpException(404);
         }
 
-        //Проверка наличия ставок
         if ($command->checkExistBets($lot['auction_id'])) {
-            //визначить победителя,
             if (($winner = $command->getWinnerAuction($lot['current_bid'])) !== false) {
                 $command->giveLotWinner($lot, $winner['user_id']);
             }
         } else {
-            //завершить торги по лоту
             Yii::app()->db->createCommand()
                 ->update(
                     'auction',
@@ -514,7 +493,6 @@ SQL;
             $criteria->compare('owner', Yii::app()->user->id);
 
             Auction::model()->updateAll(['is_auto_republish' => 1], $criteria);
-            /*Yii::app()->user->setFlash('success', "У лотов успешно включено автоперевыставление");*/
         }
 
         $this->redirect($_SERVER['HTTP_REFERER']);

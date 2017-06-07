@@ -97,7 +97,6 @@ class SiteController extends FrontController
 
     }
 
-
     public function actionImage()
     {
         $dir = Yii::getPathOfAlias('frontend.www.i') . '/';

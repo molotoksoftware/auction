@@ -55,20 +55,19 @@ class CabinetController extends FrontController
     public function actionIndex()
     {
         $this->layout = '//layouts/cabinet';
-        $this->pageTitle = 'Мой auction';
+        $this->pageTitle = Yii::t('basic', 'Common');
 
         $this->render('index');
     }
 
-    // Вывод статистики просомтров лотов и тендеров
     public function actionViewed($type, $id)
     {
 
         $model = Auction::model()->find('auction_id=:auction_id AND owner=:owner', array(':auction_id' => (int)$id, ':owner' => Yii::app()->user->id));
-        if (!isset($model->auction_id)) {throw new CHttpException(404, "Доступ запрещён.");}
+        if (!isset($model->auction_id)) {throw new CHttpException(404, "Access denied");}
         $url = '/auction/'.$model->auction_id;
 
-        $this->pageTitle = 'Статистика просмотров: "'.$model->name.'"';
+        $this->pageTitle = Yii::t('basic', 'View statistic') . ': "'.$model->name.'"';
 
         $max_viewed = Yii::app()->db->createCommand()
             ->select('day_viewed')

@@ -50,13 +50,11 @@ class UserPageLabel extends CWidget {
                         {
                             if (data.response.data.stat == 0)
                             {
-                                alert("Продавец успешно добавлен в список отслеживаемых");
-                                $(fav).text("Удалить из отслеживаемых");
+                                $(fav).text("'.Yii::t('basic', 'Following this seller').'");
                             }
                             else
                             {
-                                alert("Продавец успешно удалён из списка отслеживаемых");
-                                $(fav).text("Добавить в список отслеживания");
+                                $(fav).text("'.Yii::t('basic', 'Follow this seller').'");
                             }
                         }
                     });

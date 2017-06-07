@@ -26,22 +26,7 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-/*
- * Активные лоты таблица
- */
-/** @var Controller $this */
-/** @var null|int $limit */
-/** @var null|string $gridViewTemplate */
-/** @var array $userCategoriesList */
-/** @var null|array $searchAuctionCategoryIds */
-/** @var null|string $gridCssClass */
-/** @var null|string $gridViewPager */
-/** @var null|string $gridViewSummaryText */
-/** @var null|string $gridViewAfterAjaxUpdate */
-
 $gridId = 'grid-active-lots';
-
 
 $params = array(
     ':owner' => Yii::app()->user->id,
@@ -160,7 +145,7 @@ function getViewed_urls2($data)
     $result = '';
     if(empty($data['viewed'])) $data['viewed'] = 0;
     if (isset($data['auction_id'])) {$result = '<a href="/user/cabinet/viewed/type/0/id/'.$data['auction_id'].'">'.$data['viewed'].'</a>';}
-    $result .= ' (<span title="В избранном" class="glyphicon glyphicon-star"></span>'.$data['favorites_count'].')';
+    $result .= ' (<span title="'.Yii::t('basic', 'In favorites').'" class="glyphicon glyphicon-star"></span>'.$data['favorites_count'].')';
     return '<small>'.$result.'</small>';
 }
 
@@ -169,37 +154,12 @@ function getViewed_urls2($data)
 <?php
 
 cs()->registerScript(
-    'init-grid',
-    '
-        function setAutoRepubTitle(obj) {
-            if($(obj).hasClass("inactive")) return $(obj).attr("title", "Автоперевыставление лота");
-            $(obj).attr("title", $(obj).hasClass("active") ? "Отменить перевыставление" : "Активировать перевыставление")
-        }
-
-        function initGrid() {
-            $(".active_items_autorepub").each(function() { setAutoRepubTitle(this); });
-
-            $(".active_items_autorepub").click(function() {
-                if($(this).hasClass("inactive")) return;
-                $(this).toggleClass("active");
-                setAutoRepubTitle(this);
-
-                $.ajax("/editor/setAutoRepublish/id/" + $(this).attr("data-id") + "/auto_republish/" + ($(this).hasClass("active") ? 1 : 0));
-            });
-        }
-
-    ',
-    CClientScript::POS_BEGIN
-);
-cs()->registerScript(
 	'create-close-all', '
-
-    initGrid();
 
     $("#action_mass_autorepub").click(function() {
         if ($("input.ch_act:checkbox:checked").length == 0)
         {
-            alert("Необходимо отметить, как минимум, один лот");
+            alert("'.Yii::t('basic', 'You need to mark one or more items').'");
         } else {
             var form = $("#autorepub_mass_form");
             var i = 0;
@@ -219,11 +179,11 @@ cs()->registerScript(
         
         if (count_ch == 0)
         {
-            alert("Необходимо отметить, как минимум, один завершённый лот");
+            alert("'.Yii::t('basic', 'You need to mark one or more items').'");
         }
         else
         {
-            if (confirm("Вы действительно хотите снять выбранные лоты с торгов? Если по лоту имеются ставки, Ваш рейтинг будет уменьшен на единицу."))
+            if (confirm("'.Yii::t('basic', 'Do you really want to remove items from sell? If there are bids, your rating will be reduced').'"))
             {
                 $("input.ch_act:checkbox:checked").each(function(e){
                     var id = $(this).val();
@@ -250,7 +210,7 @@ cs()->registerScript(
         setParamToPageUrl("Auction[category_id]", $(this).val());
     });
 ')  ?>
-<h3>Активные лоты <?=UI::showQuantityTablHdr($count); ?></h3>
+<h3><?= Yii::t('basic', 'Active items')?> <?=UI::showQuantityTablHdr($count); ?></h3>
 <?php
 
 $gridFiltersHtml = $this->widget(
@@ -282,7 +242,7 @@ $grid = $this->widget(
         'dataProvider' => $dataProvider,
         'template' => $template,
         'enableSorting' => true,
-        'emptyText' => 'Активные лоты отсутствуют',
+        'emptyText' => Yii::t('basic', 'No items'),
         'htmlOptions' => array('class' => ''),
         'itemsCssClass' => 'table table-hover grid_cabinet margint_top',
         'pager' => isset($gridViewPager) ? $gridViewPager : null,
@@ -296,7 +256,7 @@ $grid = $this->widget(
                 'checkBoxHtmlOptions' => array('class' => 'ch_act')
             ),
             array(
-                'header' => 'Товар',
+                'header' => Yii::t('basic', 'Item'),
                 'type' => 'raw',
                 'name' => 'name',
                 'value' => 'TableItem::getTovarFieldActlLotTables($data, array(
@@ -308,7 +268,7 @@ $grid = $this->widget(
 
             ),
             array(
-                'header' => 'До окончания',
+                'header' => Yii::t('basic', 'Time left'),
                 'type' => 'raw',
                 'name' => 'bidding_date',
                 'value' => 'TableItem::getTimeLestFieldActlLotTables($data, ["showPeriod" => true])',
@@ -316,7 +276,7 @@ $grid = $this->widget(
                 'htmlOptions' => array('class' => 'td3'),
             ),
             array(
-                'header' => 'Цена',
+                'header' => Yii::t('basic', 'Price'),
                 'type' => 'raw',
                 'name' => 'price',
                 'value' => 'getPricess($data, array("showLatestBet" => true))',
@@ -325,7 +285,7 @@ $grid = $this->widget(
                 'filter' => false
             ),
             array(
-                'header' => 'Ставки',
+                'header' => Yii::t('basic', 'Bids'),
                 'type' => 'raw',
                 'name' => 'bid_count',
                 'value' => 'bidCellData($data)',
@@ -334,7 +294,7 @@ $grid = $this->widget(
                 'filter' => false
             ),
             array(
-                'header' => 'Просм.',
+                'header' => Yii::t('basic', 'Views'),
                 'type' => 'raw',
                 'name' => 'viewed',
                 'value' => 'getViewed_urls2($data)',
@@ -344,16 +304,16 @@ $grid = $this->widget(
             ),
             array(
                 'class' => 'frontend.components.ButtonColumn',
-                'header' => 'Действия',
+                'header' => Yii::t('basic', 'Actions'),
                 'headerHtmlOptions' => array('class' => 'th6'),
                 'htmlOptions' => array('class' => 'td6'),
                 'template' => '<div>{long_term_completed}</div><div>{remove_trading}</div><div>{edit}</div>',
                 'buttons' => array(
                     'long_term_completed' => array(
-                        'label' => 'Завершить досрочно',
+                        'label' => Yii::t('basic', 'Sell this item'),
                         'options' => array(
                             'class' => 'long_term_completed',
-                            'onclick' => 'return confirm("Вы действительно хотите завершить торги досрочно? Лот будет продан по последней наивысшей ставке.")'
+                            'onclick' => 'return confirm("'.Yii::t('basic', 'Do you really want to sell this item? The item will be sold at the last price.').'")'
                         ),
                         'visible' => function ($row, $data) {
                             return (empty($data['current_bid'])) ? false : true;
@@ -368,7 +328,7 @@ $grid = $this->widget(
                         }
                     ),
                     'edit' => array(
-                        'label' => 'Редактировать',
+                        'label' => Yii::t('basic', 'Edit item'),
                         'options' => array(
                             'class' => '',
                         ),
@@ -378,15 +338,11 @@ $grid = $this->widget(
                         'url' => 'getLinkEdit($data)'
                     ),
                     'remove_trading' => array(
-                        'label' => 'Cнять с торгов',
+                        'label' => Yii::t('basic', 'Remove from sell'),
                         'options' => array(
                             'class' => '',
-                            'onclick' => 'return confirm("Вы действительно хотите снять лот с торгов? Если  по лоту имеются ставки, Ваш рейтинг будет уменьшен на единицу.")'
-
+                            'onclick' => 'return confirm("'.Yii::t('basic', 'Do you really want to remove item from sell? If there are bids, your rating will be reduced').'")'
                         ),
-//                        'visible' => function ($row, $data) {
-//                            return (empty($data['current_bid']))?true:false;
-//                        },
                         'url' => 'getLinkRemoveTrading($data)'
                     ),
                 )

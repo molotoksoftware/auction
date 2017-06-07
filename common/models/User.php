@@ -512,13 +512,13 @@ class User extends CActiveRecord {
         $time_text = date('d.m.Y H:i', $visit);
 
         if ($visit >= $min5) {
-            $time_text = '<span class="label label-success">на сайте</span>';
+            $time_text = '<span class="label label-success">'.Yii::t('basic', 'Online').'</span>';
         }
         if ($visit >= $today && $visit < $min5) {
-            $time_text = 'сегодня в ' . date('H:i', $visit);
+            $time_text = Yii::t('basic', 'Today at').' ' . date('H:i', $visit);
         }
         if ($visit >= $yesterday && $visit < $today && $visit < $min5) {
-            $time_text = 'вчера в ' . date('H:i', $visit);
+            $time_text = Yii::t('basic', 'Yesterday at').' ' . date('H:i', $visit);
         }
 
         return $time_text;

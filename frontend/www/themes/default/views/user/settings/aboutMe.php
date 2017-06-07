@@ -31,7 +31,7 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/user/settings/common.js');
 ?>
 
-<h3>Страница "О продавце"</h3>
+<h3><?= Yii::t('basic', 'About me')?></h3>
 
 <?php if (Yii::app()->user->hasFlash('success-edit-profile')): ?>
     <div class="alert alert-success">
@@ -40,8 +40,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/user/setti
 <?php endif; ?>
 
 <p>
-    Опишите сферу Вашей деятельности, ассортимент товаров, особенности оплаты и доставки Ваших лотов. Эта информация будет
-    отображаться при просмотре <a href="/user/page/<?php echo $user->login; ?>">Вашего профиля</a>.
+    <?= Yii::t('basic', 'This information will publish in your profile page')?>.
+    <a href="/user/user/about_me/login/<?php echo $user->login; ?>">
+        <?= Yii::t('basic', 'Go to')?>
+    </a>
+
 </p>
 
 
@@ -81,6 +84,6 @@ $this->widget('ImperaviRedactorWidget', array(
 
 <?= $form->error($user, 'about') ?>
 
-                <input type="submit" name="name" class="btn btn-default margint_top_30" value="Сохранить"/>
+                <input type="submit" name="name" class="btn btn-default margint_top_30" value="<?= Yii::t('basic', 'Save')?>"/>
 
 <?php $this->endWidget(); ?>

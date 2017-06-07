@@ -39,14 +39,12 @@
     </div>
 <?php endif; ?>
 
-
 <div class="panel panel-default">
     <div class="panel-body">
         <h4><?= Yii::t('basic', 'Credit remaining')?>: <?= PriceHelper::formate(Getter::webUser()->getModel()->getBalance()) ?></h4>
         <a href=""><?= Yii::t('basic', 'Make a payment')?></a>
     </div>
 </div>
-
 
 <?php if (($textInfo = Setting::getByName('textInformationBalance')) != ''): ?>
     <div class="panel panel-default">
@@ -57,9 +55,8 @@
     </div>
 <?php endif; ?>
 
-
-
 <h4 class="margint_top_30"><?= Yii::t('basic', 'Transaction history')?></h4>
+
 <?php
 $this->renderPartial('//user/balance/_table_history_recharge_user', ['balance' => $balance,
     'pages' => $pages]);

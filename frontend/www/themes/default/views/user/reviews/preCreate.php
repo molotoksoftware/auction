@@ -27,14 +27,14 @@
  */
 
 ?>
-<h3>Выставление отзыва(ов). Шаг 2</h3>
+<h3><?= Yii::t('basic', 'Leave feedback. Step 2')?></h3>
 
 <?php if ($count >= 1): ?>
 
     <?php if ($count > 1): ?>
-    Вы собираетесь оставить отзывы по следующим лотам
+        <?= Yii::t('basic', 'Leave feedback for these items')?>
     <?php else: ?>
-    Вы собираетесь оставить отзыв по следующему лоту
+        <?= Yii::t('basic', 'Leave feedback for this item')?>
     <?php endif; ?>
 
     <?php $form = $this->beginWidget('CActiveForm',['id' => 'reviews-create','action' => '/user/reviews/create']); ?>
@@ -42,9 +42,9 @@
     <table class="table table-hover margint_top_30">
         <thead>
             <tr>
-                <th>ID Лота</th>
-                <th>Название</th>
-                <th><?=($role==2)?'Продавец':'Покупатель';?></th>
+                <th width="15%"><?= Yii::t('basic', '# item')?></th>
+                <th width="60%"><?= Yii::t('basic', 'Item title')?></th>
+                <th width="25%"><?=($role==2)?Yii::t('basic', 'Seller'):Yii::t('basic', 'Buyer');?></th>
             </tr>
         </thead>
         <tbody>
@@ -62,26 +62,26 @@
     </table>
     <div class="form-group">
         <label class="radio-inline">
-            Тип отзыва: 
+            <?= Yii::t('basic', 'Feedback type')?>:
         </label>
         <label class="radio-inline">
             <input type="radio" name="value" value="5" checked>
-            Положительный
+            <?= Yii::t('basic', 'Positive')?>
         </label>
         <label class="radio-inline">
             <input type="radio" name="value" value="1">
-            Отрицательный
+            <?= Yii::t('basic', 'Negative')?>
         </label>
     </div>
     <div class="form-group">
         <textarea class="form-control" name="text" rows="3"></textarea>
     </div>
       <div class="form-group">
-          <button id="btn-delete-fav" class="btn btn-info">Подтвердить</button>
+          <button id="btn-delete-fav" class="btn btn-info"><?= Yii::t('basic', 'Leave feedback')?></button>
       </div>
     <?php $this->endWidget(); ?>
 
 <?php else: ?>
-    <p>Нет лотов по которым не оставленны отзывы</p>
+    <p><?= Yii::t('basic', 'No items for feedback')?></p>
     
 <?php endif; ?>

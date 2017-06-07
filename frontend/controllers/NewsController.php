@@ -33,9 +33,7 @@ class NewsController extends FrontController
 
     const DEFAULT_PAGE_SIZE = 20;
     public $defaultAction = 'index';
-
-    //for static pages
-    // /page/page/static/view/contact
+    
     public function actions()
     {
         return array(
@@ -65,7 +63,6 @@ class NewsController extends FrontController
     {
         $this->layout = 'common';
 
-
         $model = News::model()->published()->find('alias=:alias', array(':alias' => $alias));
         if (!isset($model)) {
             throw new CHttpException(404);
@@ -78,7 +75,7 @@ class NewsController extends FrontController
     public function actionIndex()
     {
 
-        $this->pageTitle = 'Новости';
+        $this->pageTitle = Yii::t('basic', 'News');
         $this->layout = 'common';
         $data = new CActiveDataProvider('News', array(
             'pagination' => array(

@@ -61,7 +61,7 @@ class QuestionsController extends FrontController
     public function actionIndex()
     {
 
-        $this->pageTitle = 'Вопросы по лотам';
+        $this->pageTitle = Yii::t('basic', 'Questions about items');
 
         $dataProvider = new CActiveDataProvider(
             Questions::model()->byUserId(Yii::app()->user->id), array(
@@ -80,7 +80,7 @@ class QuestionsController extends FrontController
         foreach ($dataProvider->getData() as $key => $value) {
 
             $owner_name = $value->owner->nick?$value->owner->nick:$value->owner->login;
-            $owner_telephone = !empty($value->owner->telephone)?$value->owner->telephone:'нет';
+            $owner_telephone = !empty($value->owner->telephone)?$value->owner->telephone:Yii::t('basic', 'No');
 
             $jsonData[] = array(
                 'id' => $value->id,

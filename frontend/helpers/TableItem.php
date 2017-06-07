@@ -51,9 +51,9 @@ class TableItem
         if (!empty($params['showPeriod'])) {
             if (!empty($item['created'])) {
                 $res .= '<div style="color: gray; font-size: 80%;">';
-                $res .= 'с ' . date('d.m.Y H:i', strtotime($item['created']));
+                $res .= Yii::t('basic', 'from').' ' . date('d.m.Y H:i', strtotime($item['created']));
                 if (!empty($item['bidding_date'])) {
-                    $res .= '<br />по ' . date('d.m.Y H:i', strtotime($item['bidding_date']));
+                    $res .= '<br />'.Yii::t('basic', 'to').' ' . date('d.m.Y H:i', strtotime($item['bidding_date']));
                 }
                 $res .= '</div>';
             }
@@ -75,8 +75,8 @@ class TableItem
         $quantityAndSold = !empty($params['showQuantityAndSold']) ? self::getAuctionQuantityAndSold($item) : '';
 
         $res =  '<div class="fl_l">' . Item::getPreview($item, array('width' => 106, 'height' => 106)) . '</div>' .
-                '<div class="fl_r">' . Item::getLink($item) . self::getAuctionNumber($item) . $quantityAndSold;
-            '</div>';
+                '<div class="fl_r">' . Item::getLink($item) . self::getAuctionNumber($item) . $quantityAndSold .
+                '</div>';
 
         return $res;
     }

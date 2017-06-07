@@ -27,7 +27,7 @@
  */
 
 /**
- * купил лот
+ * Buy now
  *
  */
 class BidBlitzAction extends CAction
@@ -53,7 +53,7 @@ class BidBlitzAction extends CAction
         if (Auction::verifiedLot($lotId)) {
             if ($salesId = Auction::bidBlitz($lotId, Yii::app()->user->id, $quantity)) {
                 //events--------------------------------------------------------
-                Yii::log('купил лот (' . $lotId . ') кол ' . $quantity . ' покупатель ' . Yii::app()->user->id);
+                Yii::log('bought item (' . $lotId . ') quantity ' . $quantity . ' buyer ' . Yii::app()->user->id);
 
                 /** @var Auction $lot */
                 $lot = Auction::model()->findByPk($lotId);
@@ -63,9 +63,7 @@ class BidBlitzAction extends CAction
 
                 /**
                  * @notify
-                 *
-                 * послать уведомление покупателю
-                 * Поздравляем вы победили в аукционе
+                 * Send notify to buyer
                  */
                 $params = [
                     'linkItem'     => $lot->getLink(true),
@@ -82,8 +80,7 @@ class BidBlitzAction extends CAction
 
                 /**
                  * @notify
-                 *
-                 * послать уведомление продавцу
+                 * Send notify to seller
                  */
                 $params = [
                     'linkItem'     => $lot->getLink(true),
@@ -97,25 +94,19 @@ class BidBlitzAction extends CAction
                     $lot->owner, $params, Notification::TYPE_COMPLETED_WINNER_LOT);
                 $ntf->send();
 
-
-                //увеличить счетчик события "История покупок" покупателю
                 $ce = new HistoryShopping();
                 $ce->inc(Yii::app()->user->id, $lotId);
 
-
-                //увеличить счетчик события "Проданные лоты" продавцу
                 $ce = new HistorySales();
                 $ce->inc($lot->owner, $lotId);
 
-                // Возьмем комиссию если в настройках установлен флг
-                if (Yii::app()->params['comission'] == 1) {
+                if (Yii::app()->params['commission'] == 1) {
                     $commissionService = new CommissionService();
                     $commissionService->onLotSale($sellerModel, $lot, $lot->price * $quantity);
                 }
 
                 if ($lot->quantity <= 1) {
 
-                    //проверить были ли ставки на лот
                     $sql = <<<EOD
         SELECT *
 FROM (
@@ -138,15 +129,9 @@ EOD;
 
 
                     if (!empty($bids)) {
-                        //пройтись по участникам
                         foreach ($bids as $bid) {
-                            //увеличить счетчик события не Выигранные
                             $ce = new NotWonItems();
                             $ce->inc($bid['owner']);
-                            /**
-                             * послать уведомление о проигрыше
-                             * @notify
-                             */
                             $params = [
                                 'linkItem'     => $lot->getLink(true),
                                 'bidPrice'     => $bid['price'],
@@ -158,7 +143,6 @@ EOD;
                     }
 
                 }
-                //end if quantity
             }
 
             RAjax::success(array('salesId' => $salesId));

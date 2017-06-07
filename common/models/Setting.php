@@ -69,13 +69,13 @@ class Setting extends CActiveRecord
     public function rules()
     {
         return array(
-            array('name, value', 'required'),
-            array('type', 'numerical', 'integerOnly' => true),
-            ['comission', 'boolean'],
-            array('name, title, description', 'length', 'max' => 255),
-            array('value', 'length', 'max' => 512),
-            array('preload', 'length', 'max' => 1),
-            array('id, name, title, type, value, description, preload, update', 'safe', 'on' => 'search'),
+            ['name, value', 'required'],
+            ['type', 'numerical', 'integerOnly' => true],
+            ['commission', 'boolean'],
+            ['name, title, description', 'length', 'max' => 255],
+            ['value', 'length', 'max' => 512],
+            ['preload', 'length', 'max' => 1],
+            ['id, name, title, type, value, description, preload, update', 'safe', 'on' => 'search'],
         );
     }
 

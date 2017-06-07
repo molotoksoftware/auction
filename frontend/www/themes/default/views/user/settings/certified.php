@@ -32,12 +32,12 @@
 
 ?>
 
-<h3>Верификация аккаунта</h3>
+<h3><?= Yii::t('basic', 'Verification')?></h3>
 
 <?php if ($user->certified == 0): ?>
     <?php echo $text['text_certified']; ?>
 <?php else: ?>
-    <div class="alert alert-info">Поздравляем! Ваш аккаунт верифицирован</div>
+    <div class="alert alert-info"><?= Yii::t('basic', 'Congratulations! Your account is verified')?></div>
 <?php endif; ?>
 
 

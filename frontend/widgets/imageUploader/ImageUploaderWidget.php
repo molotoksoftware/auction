@@ -43,7 +43,7 @@ class ImageUploaderWidget extends CWidget
 
     public function run()
     {
-        // Если $type = 1, то фотографии для массового импорта лотов
+
         if (isset($this->type) && $this->type == 1)
         {
             $options = array(
@@ -62,8 +62,7 @@ class ImageUploaderWidget extends CWidget
             
             $type = 0;
         }
-        
-        // Индикатор ранее загруженных изображений
+
         $mass_upload = 0;
         if ($type == 1 && isset(Yii::app()->session['mass_upload']) && !empty(Yii::app()->session['mass_upload']))
         {
@@ -76,8 +75,7 @@ class ImageUploaderWidget extends CWidget
         }
         $options = CJavaScript::encode($options);
         $cs = Yii::app()->clientScript;
-        
-        // Если $type = 1, то фотографии для массового импорта лотов
+
         if (isset($this->type) && $this->type == 1)
         {
             $cs->registerCoreScript('jquery')

@@ -51,7 +51,7 @@ Yii::app()->clientScript->registerScript(
           if (pageCount<=0) {
             //fix for one show messages
             if ($('.error-message').size() <= 0) {
-                $(container).append('<div class=\"error-message\">Отсутствуют вопросы</div>');
+                $(container).append('<div class=\"error-message\">".Yii::t('basic', 'No questions')."</div>');
                 return;
             }
           }
@@ -74,7 +74,7 @@ Yii::app()->clientScript->registerScript(
             },
             success:function(data) {
                 if (data.data.length<=0){
-                     $(container).append('<div class=\"error-message\">Отсутствуют вопросы</div>');
+                     $(container).append('<div class=\"error-message\">".Yii::t('basic', 'No questions')."</div>');
                 } else {
                     it = 10;              
                     $.each(data.data, function(i, item){
@@ -158,43 +158,57 @@ $('.btn-action').click(function() {
             <input type="checkbox" class="checkbox_one" name="item" value="${id}">
 
             {{if read==true}}
-                <span class='label label-default'><span class='glyphicon glyphicon-ok'></span> Прочитан</span>
+                <span class='label label-default'><span class='glyphicon glyphicon-ok'></span> <?= Yii::t('basic', 'Read')?></span>
             {{else}}
-                <span class='label label-success'>Новый</span>
+                <span class='label label-success'><?= Yii::t('basic', 'New')?></span>
             {{/if}}
 
             <span class="small">${date}</span>
             <div class="clear"></div>
         </div>
         <div class="content">
-            <p><small>Пользователь <a target='_blank' href='/${owner_login}'>${owner_name}</a> задал вопрос по лоту № <a target='_blank' href='/auction/${item_id}'>${item_id}</a> "${item_name}".</small></p>
-            <div><strong>Вопрос:</strong> {{html text}}</div>
-            <p class='margint_top_30'><small>Контакты для связи: <br />
-                        E-mail: ${owner_email}, телефон: ${owner_telephone}</small></p>
+            <p>
+                 <small><?= Yii::t('basic', 'Question from')?>
+                    <a target='_blank' href='/${owner_login}'>${owner_name}</a>
+                    <?= Yii::t('basic', 'Item')?>:
+                    <a target='_blank' href='/auction/${item_id}'>${item_id}</a> "${item_name}".
+                </small>
+            </p>
+            <div><strong>
+
+            <?= Yii::t('basic', 'Question')?>:</strong>
+            {{html text}}</div>
+
+            <p class='margint_top_30'>
+                <small>
+                    <?= Yii::t('basic', 'Contacts')?>: <br />
+                    e-mail: ${owner_email}, <?= Yii::t('basic', 'Phone number')?>: ${owner_telephone}
+                </small>
+            </p>
         </div>
     </li>
 </script>
 
-<h3>Вопросы по лотам <?=UI::showQuantityTablHdr(CounterInfo::quantityQuestionsForMe()); ?></h3>
+<h3><?= Yii::t('basic', 'Questions about items')?> <?=UI::showQuantityTablHdr(CounterInfo::quantityQuestionsForMe()); ?></h3>
 
 
 <form id="form-notifications">
 <div class="form_head form-inline">
     <div class="checkbox uniq_check">
         <label>
-              <input id="items_checkbox_oll" type="checkbox"> Выбрать все
+              <input id="items_checkbox_oll" type="checkbox"> <?= Yii::t('basic', 'Select all')?>
         </label>
     </div>
     <div class="btn-group btn-group-sm">
-        <button type="button" class="btn btn-default btn-action" data-action="removes" id="btn-delete-fav">Удалить</button>
+        <button type="button" class="btn btn-default btn-action" data-action="removes" id="btn-delete-fav"><?= Yii::t('basic', 'Delete')?></button>
         <div class="btn-group btn-group-sm">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              Отметить как
+              <?= Yii::t('basic', 'Mark as')?>
               <span class="caret"></span>
             </button>
           <ul class="dropdown-menu">
-            <li><a class='btn-action' data-action='read' id="btn-open-fav" href="#">Прочитанное</a></li>
-            <li><a class='btn-action' data-action='unread' id="btn-close-fav" href="#">Непрочитанное</a></li>
+            <li><a class='btn-action' data-action='read' id="btn-open-fav" href="#"><?= Yii::t('basic', 'Read')?></a></li>
+            <li><a class='btn-action' data-action='unread' id="btn-close-fav" href="#"><?= Yii::t('basic', 'Unread')?></a></li>
           </ul>
         </div>
     </div>

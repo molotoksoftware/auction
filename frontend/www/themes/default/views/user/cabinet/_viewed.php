@@ -29,7 +29,7 @@
 
 
 
-$px_real = $px*$data['day_viewed']; // Длина полосы 
+$px_real = $px*$data['day_viewed']; // weight
 if ($px_real < 11) {$px_real = 11;}
 ?>
 

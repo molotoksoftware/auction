@@ -171,7 +171,7 @@ function getPriceCellData($data)
 {
     if ($data["s_quantity"] > 1) {
         $html = sprintf(
-            "%s <b>х</b> %s шт.<br><span>%s</span>",
+            "%s <b>х</b> %s <br><span>%s</span>",
             Item::getPriceFormat($data["s_price"]),
             $data["s_quantity"],
             TableItem::getPriceField($data["amount"])

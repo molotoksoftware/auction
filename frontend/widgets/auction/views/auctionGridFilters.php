@@ -76,7 +76,7 @@ $cs = Getter::clientScript();
                     <?php if ($showPeriodFilter): ?>
                         <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                            <strong><?= Yii::t('basic', 'Period')?>:</strong> <?= $datePeriodOptions[$activePeriodOption];?> <span class="caret"></span>
+                            <strong><?= Yii::t('basic', 'Period')?>:</strong> <?= Yii::t('basic', $datePeriodOptions[$activePeriodOption])?> <span class="caret"></span>
                          </button>
                         <?php
                         $items = [];

@@ -37,7 +37,7 @@ $request = Yii::app()->getRequest();
 
 ?>
 
-<h3>Массовые изменения</h3>
+<h3><?= Yii::t('basic', 'Bulk updates')?></h3>
 
 
 <?php if (Getter::webUser()->hasFlash('success_bulk_update')): ?>
@@ -48,7 +48,7 @@ $request = Yii::app()->getRequest();
 
 
 <div class="panel panel-default">
-  <div class="panel-heading">Автоматическое перевыставление лотов</div>
+  <div class="panel-heading"><?= Yii::t('basic', 'Items republish')?></div>
   <div class="panel-body">
       <p>При помощи этой функции можно массово назначить или отменить автоперевыставление для собственных лотов.</p>
         <?php echo CHtml::beginForm('', 'post', ['name' => 'form1']); ?>
@@ -58,7 +58,7 @@ $request = Yii::app()->getRequest();
                 $request->getPost('switch_auto_republish') == 'y',
                 ['value' => 'y', 'id' => 'switch_auto_republish_yes']
             ); ?>
-            <?php echo CHtml::label('Назначить автоматическое перевыставление всем лотам', 'switch_auto_republish_yes'); ?>
+            <?php echo CHtml::label(Yii::t('basic', 'Set automatic publish of items'), 'switch_auto_republish_yes'); ?>
         </div>
 
         <div class="control last">
@@ -67,15 +67,15 @@ $request = Yii::app()->getRequest();
                 $request->getPost('switch_auto_republish') == 'n',
                 ['value' => 'n', 'id' => 'switch_auto_republish_no']
             ); ?>
-            <?php echo CHtml::label('Отменить автоматическое перевыставление всех лотов', 'switch_auto_republish_no'); ?>
+            <?php echo CHtml::label(Yii::t('basic', 'Unset automatic publish of items'), 'switch_auto_republish_no'); ?>
         </div>
-        <?php echo CHtml::submitButton('Сохранить', ['class' => 'btn btn-default']); ?>
+        <?php echo CHtml::submitButton(Yii::t('basic', 'Confirm'), ['class' => 'btn btn-default']); ?>
         <?php echo CHtml::endForm(); ?>
   </div>
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Изменение стоимости лотов</div>
+  <div class="panel-heading"><?= Yii::t('basic', 'Change items price')?></div>
   <div class="panel-body">
     <p>Данная опция позволяет изменить цену сразу у всех собственных лотов. Будет изменена как начальная цена, так
     и блиц цена. Лоты имеющие ставки, а также лоты "с 1 рубля" будут пропущенны.</p>
@@ -95,7 +95,7 @@ $request = Yii::app()->getRequest();
                  'class' => 'form-control']
             ); ?>
         </div>
-    <?php echo CHtml::submitButton('Сохранить', ['class' => 'btn btn-default']); ?>
+    <?php echo CHtml::submitButton(Yii::t('basic', 'Confirm'), ['class' => 'btn btn-default']); ?>
     <?php echo CHtml::endForm(); ?>
   </div>
 </div>

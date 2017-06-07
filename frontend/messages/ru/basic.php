@@ -26,7 +26,7 @@ return [
     'Notifications' => 'Уведомления',
     'Question' => 'Вопрос',
     'Questions' => 'Вопросы',
-    'Create a lot' => 'Создать лот',
+    'Create item' => 'Создать лот',
     'Purchases' => 'Покупки',
     'Sales' => 'Продажи',
     'Favorite items' => 'Избранное',
@@ -46,7 +46,7 @@ return [
     'Category not found' => 'Категория не найдена',
 
     'Last news' => 'Последние новости',
-    'Verifed user' => 'Верифицированный участник',
+    'Verified user' => 'Верифицированный участник',
     
     // Search widget
     'Enter search keywords here' => 'Введите фразу для поиска',
@@ -86,6 +86,8 @@ return [
     'All items' => 'Все лоты',
     'Selected' => 'Выбрано',
 
+    'Search by {user} items' => 'Поиск по товарам пользователя <strong>{user}</strong>',
+
 
 
     // Footer
@@ -104,7 +106,7 @@ return [
     'Image file formats' => 'Расширения',
     'Add <br /> Photo' => 'Добавить <br /> фото',
     'Delete all photos' => 'Удалить все изображения',
-    'Item title' => 'Название лота',
+    'Item title' => 'Название товара',
     'Item description' => 'Описание лота',
     'Item description subtext' => 'Подробно опишите товар. Укажите преимущества и дополнительные характеристики.',
     'Category' => 'Категория',
@@ -137,6 +139,7 @@ return [
     'Submit Auction' => 'Опубликовать лот',
     'Errors' => 'Ошибки заполнения',
     ' - select period - ' => ' - выберите период - ',
+    'Period' => 'Период',
     'You must select an attribute value' => 'Необходимо выбрать значение атрибута',
     'For this category of parameters to be determined' => 'Для этой категории не определены параметры, продолжайте заполнение данных',
     'Enter the name of the item' => 'Введите название лота',
@@ -157,11 +160,12 @@ return [
     'Save' => 'Сохранить',
     'Edit' => 'Редактирование',
     '- select value -' => '- выберите значение',
+    '- select category -' => '- выберите категорию',
     'Enter an integer' => 'Введите целое число.',
     'Child element is not defined' => 'Не определен дочерний элемент',
     'Loading...' => 'идет загрузка...',
-    '' => '',
-    '' => '',
+    'from' => 'с',
+    'to' => 'по',
 
 
     // View lot
@@ -179,6 +183,7 @@ return [
     'Bid' => 'Ставка',
     'Attributes' => 'Аттрибуты',
     'photos' => 'фото',
+    'Photo' => 'Фото',
     'Time left' => 'Осталось времени',
     'Do you really want to remove bid?' => 'Вы уверены, что хотите удалить ставку?',
     'Bid has been removed' => 'Ставка была удалена',
@@ -190,6 +195,7 @@ return [
     'Do you really want to remove item from sell?' => 'Вы действительно хотите снять лот с торгов?',
     'Do you really want to remove item from sell? There are bids. Your rating will be reduced' => 'Вы действительно хотите снять лот с торгов? По лоту имеются ставки, Ваш рейтинг будет уменьшен на единицу.',
     'Republish item' => 'Перевыставить лот',
+    'Republish items' => 'Перевыставить лоты',
     'Publish similar' => 'Выставить похожий',
     'Follow this seller' => 'Подписаться на продавца',
     'Following this seller' => 'Подписаться на продавца',
@@ -205,6 +211,7 @@ return [
     'Status' => 'Статус',
     'You are leader' => 'Вы лидер торгов',
     'max. bid' => 'макс. ставка',
+    'Max. bid' => 'Макс. ставка',
     'Your bid' => 'Ваша ставка',
     'Your bid {bid} has been outbid' => 'Ваша ставка {bid} была перебита',
     'Your bid has been outbid' => 'Ваша ставка была перебита',
@@ -228,7 +235,8 @@ return [
     'Read' => 'Прочитанное',
     'Unread' => 'Непрочитанное',
     'System Notifications' => 'Системные уведомления',
-    '' => '',
+    'PRO account has been activated' => 'ПРО аккаунт активирован',
+    'PRO account has been renewed' => 'ПРО аккаунт продлен',
 
     'Your max. bid has been set' => 'Максимальная ставка переустановлена',
     'Your bid ({bid}) should be more then current price + minimal step ({need_bid})' => 'Ваша ставка ({bid}) должна быть больше текущей ставки + минимальный шаг ({need_bid})',
@@ -237,18 +245,23 @@ return [
     'Your bid should be more than current price or equal' => 'Ваша ставка должна быть больше или равна стартовой цене',
 
     // user module
-    '' => 'Удаление информации о сделках',
-    '' => 'Вы действительно хотите удалить информацию о выбранных сделках?',
     'Close' => 'Закрыть',
     'Confirm' => 'Подтвердить',
     'Delete purchase information' => 'Удаление информации об покупках',
     'Delete sale information' => 'Удаление информации об покупках',
     'Do you really want to remove purchase information?' => 'Вы действительно хотите удалить информацию о покупках?',
     'Do you really want to remove sale information?' => 'Вы действительно хотите удалить информацию о покупках?',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'Information' => 'Информация',
+    'You didn\'t add any sellers for track' => 'Вы еще не добавляли продавцов в список отслеживания',
+    'Contacts' => 'Контакты',
+    'Phone number' => 'Телефон',
+    'Online' => 'На сайте',
+    'Today at' => 'сегодня в',
+    'Yesterday at' => 'вчера в',
+    'User' => 'Пользователь',
+    'Items of' => 'Товары пользователя',
+    'This information will publish in your profile page' => 'Опишите сферу Вашей деятельности, ассортимент товаров, особенности оплаты и доставки Ваших лотов. Эта информация будет отображаться на странице просмотра Вашего профиля',
+    'Go to' => 'Перейти',
 
 
     // Settings
@@ -259,7 +272,8 @@ return [
     'Notifications e-mail' => 'E-mail уведомления',
     'Access control' => 'Доступ',
     'Selling' => 'Продавцу товаров',
-    'Verifycation' => 'Верификация аккаунта',
+    'Verification' => 'Верификация аккаунта',
+    'Congratulations! Your account is verified ' => 'Поздравляем. Ваш аккаунт верифицирован.',
     'PRO' => 'ПРО-аккаунт',
     'About Me' => 'Страница "Обо мне"',
     'Bulk updates' => 'Массовые действия с лотами',
@@ -291,8 +305,13 @@ return [
     'specify an integer' => 'введите целое число',
     'child element is not specified' => 'не определен дочерний элемент',
     'loading...' => 'идет загрузка...',
+    'City' => 'Город',
+    'Items republish' => 'Автоматическое перевыставление лотов',
+    'Set automatic publish of items' => 'Применить автоперевыставление ко всем лотам',
+    'Unset automatic publish of items' => 'Отменить автоперевыставление для всех лотов',
+    'Change items price' => 'Измененить стоимость лотов',
+    'About me' => 'Обо мне',
 
-    
     // Payments
     'Payment received!' => 'Платеж получен!',
     'Payment is not received!' => 'Платеж отклонен!',
@@ -304,6 +323,7 @@ return [
     'Amount' => 'Сумма',
     'Description' => 'Описание',
     'Commission on sold item #' => 'Комиссия за проданный лот №',
+    'Item #' => 'Товар №',
 
     //pagination
     'Older' => 'Поздние',
@@ -371,7 +391,8 @@ return [
     // cabinet
     'My auction' => 'Мой auction',
     'Favorite sellers' => 'Любимые продавцы',
-    'Bids' => 'Активные ставки',
+    'Bids' => 'Ставки',
+    'Active bids' => 'Активные ставки',
     'Didn\'t win' => 'Не выигранные',
     'Purchase history' => 'История покупок',
     'My purchases' => 'Мои покупки',
@@ -382,11 +403,51 @@ return [
     'Reviews' => 'Отзывы',
     'Reviews about' => 'Отзывы о',
     'About' => 'О пользователе',
+    'Welcome to your private area' => 'Добро пожаловать в личный кабинет!',
+    'Date of sale' => 'Дата продажи',
+    'You need to mark one or more items' => 'Необходимо отметить как минимум один лот',
+    'Do you really want to remove items from sell? If there are bids, your rating will be reduced' => 'Вы действительно хотите снять выбранные лоты с торгов? Если по лотам имеются ставки, Ваш рейтинг будет уменьшен',
+    'Do you really want to remove item from sell? If there are bids, your rating will be reduced' => 'Вы действительно хотите снять лот с торгов? Если по лоту имеются ставки, Ваш рейтинг будет уменьшен на единицу',
+
+    'You need to choose the period' => 'Необходимо выбрать период',
+    'Do you really want to remove marked items?' => 'Вы действительно хотите удалить отмеченные лоты?',
+    'Do you really want to delete this item?' => 'Вы действительно хотите удалить этот лот?',
+    'View statistics' => 'Статистика просмотров',
+    'No views' => 'Просмотры отсутствуют',
+    '# item' => '# товара',
+    'Positive' => 'Положительный',
+    'Negative' => 'Отрицательный',
+    'Feedback type' => 'Тип отзыва',
+    'Proceed' => 'Продолжить',
+    'No items for feedback' => 'Нет лотов по которым не оставленны отзывы',
+    'Items for sale' => 'Товары в продаже',
+    'See all reviews' => 'Смотреть все отзывы',
+    'See all items' => 'Смотреть все товары',
+    'Common' => 'Общее',
 
 
     'About me' => 'Отзывы обо мне',
     'From me' => 'Мои отзывы',
-    'No items' => '',
+    'No reviews' => 'Отзывы отсутствуют',
+    'No items' => 'Товары отсутствуют',
+    'Items' => 'Товары',
+    'About user' => 'О пользователе',
+    'All reviews' => 'Всего отзывов',
+    'from me' => 'От меня',
+    'about me' => 'обо мне',
+    'Feedback has been sent' => 'Отзывы успешно выставлены',
+
+    'Leave feedback. Step 2' => 'Выставление отзыва. Шаг 2',
+    'Leave feedback for these items' => '',
+    'Leave feedback for this item' => '',
+    'From sellers' => 'Отзывы от продавцов',
+    'From buyers' => 'Отзывы от покупателей',
+    'Only positive' => 'Все положительные',
+    'Only negative' => 'Все отрицательные',
+    'User has been banned' => 'Пользователь был заблокирован',
+    'Date of Signup' => 'Дата регистрации',
+    'Last visit' => 'Последнее посещение',
+
     'Price' => 'Цена',
     'Item' => 'Товар',
     'Leave feedback' => 'Оставить отзыв',
@@ -399,6 +460,12 @@ return [
 
     'Activate republish' => 'Назначить автоперевыставление',
     'Remove from sell' => 'Снять с торгов',
+
+    // questions about items
+    'Questions about items' => 'Вопросы по лотам',
+    'No questions' => 'Отсутствуют вопросы',
+    'Question from' => 'Вопрос от пользователя',
+    'Showed {start} to {end}. All {count}' => 'Показано с {start} по {end} из {count}',
 
     // News
     'Back to news feed' => 'Вернуться к новостной ленте',

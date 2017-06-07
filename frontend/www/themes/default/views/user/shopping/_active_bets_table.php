@@ -27,7 +27,7 @@
  */
 
 /**
- * Активные ставки таблица
+ * Active bids
  */
 if (is_null($limit)) {
   //  $template = "{items}\n{pager}";
@@ -70,36 +70,36 @@ $dataProvider = new CSqlDataProvider($sql->text, array(
 
 function getState($item)
 {
-    $res = "<div>Текущая цена: <span>".Item::getPriceFormat($item['current_price_bid']).'</span></div>';
+    $res = "<div>".Yii::t('basic', 'Current price').": <span>".Item::getPriceFormat($item['current_price_bid']).'</span></div>';
     $ab = AutoBid::model()->findByAttributes(array('user_id' => Yii::app()->user->id, 'auction_id' => $item['auction_id']));
 
     if($ab) {
-        $res .= '<div>Макс. ставка: <span class="max-bet">' . Item::getPriceFormat($ab->price) . '</span></div>';
+        $res .= '<div>'.Yii::t('basic', 'Max. bid').': <span class="max-bet">' . Item::getPriceFormat($ab->price) . '</span></div>';
     }
 
     if ($item['current_leader_bid'] == Yii::app()->user->id) {
-        $res .= '<div><b style="color:green;">Вы лидер торгов</div>';
+        $res .= '<div><b style="color:green;">'.Yii::t('basic', 'You are leader').'</div>';
     } else {
-        $res .= '<div><b style="color:red;">Ваша ставка перебита</div>';
+        $res .= '<div><b style="color:red;">'.Yii::t('basic', 'Your bid has been outbid').'</div>';
     }
 
     return $res;
 }
 
 ?> 
-    <h3>Активные ставки <?=UI::showQuantityTablHdr($count); ?></h3>
+    <h3><?= Yii::t('basic', 'Active bids')?> <?=UI::showQuantityTablHdr($count); ?></h3>
 <?php
 $this->widget(
     'zii.widgets.grid.CGridView',
     array(
         'dataProvider' => $dataProvider,
         'template' => $template,
-        'emptyText' => 'Активные ставки отсутствуют',
+        'emptyText' => Yii::t('basic', 'No items'),
         'htmlOptions' => array('class' => ''),
         'itemsCssClass' => 'table table-hover grid_cabinet',
         'columns' => array(
             array(
-                'header' => 'Товар',
+                'header' => Yii::t('basic', 'Item'),
                 'type' => 'raw',
                 'name' => 'name',
                 'value' => 'TableItem::getTovarField($data)',
@@ -107,7 +107,7 @@ $this->widget(
                 'htmlOptions' => array('class' => 'td1')
             ),
             array(
-                'header' => 'Состояние',
+                'header' => Yii::t('basic', 'Information'),
                 'type' => 'raw',
                 'name' => 'name',
                 'value' => 'getState($data)',
@@ -115,7 +115,7 @@ $this->widget(
                 'htmlOptions' => array('class' => 'td3')
             ),
             array(
-                'header' => 'Время до окончания',
+                'header' => Yii::t('basic', 'Time left'),
                 'type' => 'raw',
                 'name' => 'name',
                 'value' => 'Item::getTimeLeft($data)',
@@ -148,8 +148,8 @@ $this->widget(
             array(
                 'pages' => $dataProvider->getPagination(),
                 'maxButtonCount' => 5,
-                'firstPageLabel' => 'в начало',
-                'lastPageLabel' => 'в конец',
+                'firstPageLabel' => Yii::t('basic', 'First page'),
+                'lastPageLabel' => Yii::t('basic', 'Last page'),
                 'selectedPageCssClass' => 'active',
                 'prevPageLabel' => '&lt; ',
                 'nextPageLabel' => ' &gt;',

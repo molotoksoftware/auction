@@ -46,7 +46,7 @@
     </div>
     <div class="row end">
         <div class="col-xs-12 text-center">
-            <a href="http://molotoksoftware.com" title="Открытое программное обеспечение для создания интернет-аукциона">
+            <a href="http://molotoksoftware.com">
             Powered by molotoksoftware.com</a>
         </div>
     </div>

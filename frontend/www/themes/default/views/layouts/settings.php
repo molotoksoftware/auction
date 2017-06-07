@@ -79,7 +79,7 @@
                                 'itemOptions' => ['class' => 'list-group-item head_li'],
                             ],
                                 [
-                                    'label' => Yii::t('basic', 'Verifycation'),
+                                    'label' => Yii::t('basic', 'Verification'),
                                     'url' => ['/user/settings/certified'],
                                     'itemOptions' => ['class' => 'list-group-item'],
                                 ],

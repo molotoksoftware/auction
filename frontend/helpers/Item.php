@@ -55,7 +55,7 @@ class Item
      * @param array  $htmlOptions
      * @param string $prefix
      * @param array  $params
-     *  - false|array setDataImages Загружает в data атрубиты все фото кроме главной
+     *  - false|array setDataImages
      *
      * @return string
      */
@@ -82,7 +82,6 @@ class Item
 
             $imageSrc = AuctionHelper::getImageURL($item, $item['image'], $prefix);
 
-            // Если задали параметр, пишем в дата атрибуты URL картинок для дальнейшего использования в слайдере.
             if (is_array($params['setDataImages']) && count($params['setDataImages']) > 0) {
 
                 $imagesCount = isset($params['setDataImages']) ? count($params['setDataImages']) : 0;

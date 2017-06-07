@@ -29,28 +29,25 @@
 
 ?>
 
-<h3>Статистика просмотров</h3>
-<p>Лот: "<a href="<?php echo $url; ?>" target="_blank"><?php echo $model->name; ?></a>"</p>
+<h3><?= Yii::t('basic', 'View statistic')?></h3>
+<p><?= Yii::t('basic', 'Item')?>: "<a href="<?= $url; ?>" target="_blank"><?= $model->name; ?></a>"</p>
 
 
 <?php if (isset($max_viewed['day_viewed']) && !empty($max_viewed['day_viewed'])): ?>
 
 <?php 
-$px = round(500/$max_viewed['day_viewed']); // Сколько пикселей в 1 просмотре
+$px = round(500/$max_viewed['day_viewed']); // X px in 1 view
 $this->widget('zii.widgets.CListView', array(
     'dataProvider' => $dataProvider,
     'itemView' => '_viewed',
     'template'=>'{items}<div style="clear: both;"></div>{pager}',
-    'summaryText' => '{start}&ndash;{end} из {count}',
+    'summaryText' => '{start}&ndash;{end} '.Yii::t('basic', 'from').' {count}',
     'viewData' => array('px' => $px)
 ));
 ?>
 
 <?php else: ?>
 
-<div class="alert alert-info">Просмотры отсутствуют</div>
+<div class="alert alert-info"><?= Yii::t('basic', 'No views')?></div>
 
 <?php endif; ?>
-
-
-<?php // print_r(); ?>

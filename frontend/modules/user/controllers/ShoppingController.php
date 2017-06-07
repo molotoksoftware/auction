@@ -53,16 +53,13 @@ class ShoppingController extends FrontController
 
     public function actionIndex()
     {
-        $this->pageTitle = 'Покупки';
+        $this->pageTitle = Yii::t('basic', 'Purchases');
         $this->render('//user/shopping/index');
     }
 
-    /**
-     * История покупок
-     */
     public function actionHistoryShopping()
     {
-        $this->pageTitle = 'История покупок';
+        $this->pageTitle = Yii::t('basic', 'Purchase history');
 
         $request = Yii::app()->getRequest();
         $cookies = $request->getCookies();
@@ -84,8 +81,8 @@ class ShoppingController extends FrontController
                 'gridViewTemplate'   => "{items}\n<hr><div class='row'><div class='col-xs-2'>$gridPageSize</div><div class='col-xs-10 text-right'>{pager}</div></div><hr>",
                 'gridViewPager'      => ['class' => 'CLinkPager', 
                         'maxButtonCount' => 5,
-                        'firstPageLabel' => 'в начало',
-                        'lastPageLabel' => 'в конец',
+                        'firstPageLabel' => Yii::t('basic', 'First page'),
+                        'lastPageLabel' => Yii::t('basic', 'Last page'),
                         'selectedPageCssClass' => 'active',
                         'prevPageLabel' => '&lt; ',
                         'nextPageLabel' => ' &gt;',
@@ -97,12 +94,9 @@ class ShoppingController extends FrontController
         );
     }
 
-    /**
-     * Активные ставки
-     */
     public function actionActiveBets()
     {
-        $this->pageTitle = 'Активные ставки';
+        $this->pageTitle = Yii::t('basic', 'Active bids');
 
         $this->render(
             '//user/shopping/_active_bets_table',
@@ -110,17 +104,13 @@ class ShoppingController extends FrontController
                 'limit' => null
             )
         );
-        //обнуляем счетчик событий
         $counter = new ActiveBetsItem();
         $counter->dec(Yii::app()->user->id);
     }
 
-    /**
-     * Не выигранные
-     */
     public function actionNotWonItems()
     {
-        $this->pageTitle = 'Не выигранные';
+        $this->pageTitle = Yii::t('basic', 'Didn\'t win');
 
         $this->render(
             '//user/shopping/_not_won_items_table',
@@ -128,7 +118,6 @@ class ShoppingController extends FrontController
                 'limit' => null
             )
         );
-        //обнуляем счетчик событий
         $counter = new NotWonItems();
         $counter->dec(Yii::app()->user->id);
     }

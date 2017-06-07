@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,86 +21,89 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 if (empty($items)) {
-    echo CHtml::tag('p', array(), 'Отзывы отсутствуют');
+    echo CHtml::tag('p', array(), Yii::t('basic', 'No reviews'));
 
 } else {
-    $webUser = Getter::webUser();
+$webUser = Getter::webUser();
 
 ?>
-<h3>Отзывы <small> <?=($route=='from_me')?'от меня':'обо мне'?> (<?= $count; ?>)</small></h3>
+<h3><?= Yii::t('basic', 'Reviews') ?>
+    <small> <?= ($route == 'from_me') ? Yii::t('basic', 'from me') : Yii::t('basic', 'about me') ?> (<?= $count; ?>)
+    </small>
+</h3>
 
 <table class="table table-hover t_reviews" width="100%">
     <thead>
     <tr>
         <th width="5%">
         </th>
-        <th width="50%"><strong>Отзывы</strong>
+        <th width="50%"><strong><?= Yii::t('basic', 'Reviews') ?></strong>
         </th>
-        <th width="25%"><strong>От</strong>
+        <th width="25%"><strong><?= Yii::t('basic', 'From') ?></strong>
         </th>
-        <th width="20%"><strong>Дата</strong>
+        <th width="20%"><strong><?= Yii::t('basic', 'Date') ?></strong>
         </th>
     </tr>
     </thead>
-<?php foreach ($items as $item): ?>
+    <?php foreach ($items as $item): ?>
 
-<tr>
-    <td>
-        <img style="width:20px;" src="/img/rev<?=($item->value==5)?'up':'down'?>.png">
-     
-    </td>
-    <td>
-        <?= $item->text; ?>
-        <div style="position:relative">
-             <a class="auction-link" href="<?= Yii::app()->createUrl('/auction/view', array('id' => $item->entity->auction_id)); ?>"><?= $item->entity->name; ?></a>
-        </div>
-    </td>
-    <td><?= $item->role==2?'Покупатель:':'Продавец:'; ?>
+        <tr>
+            <td>
+                <img style="width:20px;" src="/img/rev<?= ($item->value == 5) ? 'up' : 'down' ?>.png">
 
-            <?php $this->widget(
-        'frontend.widgets.user.UserInfo',
-        ['userModel' => $item->userFrom, 'scope' => UserInfo::SCOPE_USER_SIMPLE]
-    );
-    ?>
+            </td>
+            <td>
+                <?= $item->text; ?>
+                <div style="position:relative">
+                    <a class="auction-link"
+                       href="<?= Yii::app()->createUrl('/auction/view', array('id' => $item->entity->auction_id)); ?>"><?= $item->entity->name; ?></a>
+                </div>
+            </td>
+            <td>
+                <?= $item->role == 2 ? Yii::t('basic', 'Buyer') . ':' : Yii::t('basic', 'Seller') . ':'; ?>
 
-        <br>
-        <?php if (!empty($item->sale->price)): ?>
-                <span class="span_cost">
-                <?=PriceHelper::formate($item->sale->price);?>
+                <?php $this->widget(
+                    'frontend.widgets.user.UserInfo',
+                    ['userModel' => $item->userFrom, 'scope' => UserInfo::SCOPE_USER_SIMPLE]
+                );
+                ?>
+
+                <br>
+                <?php if (!empty($item->sale->price)): ?>
+                    <span class="span_cost">
+                <?= PriceHelper::formate($item->sale->price); ?>
                 </span>
-        <?php endif;?>
-    </td>
-    <td>
-        <?= Yii::app()->dateFormatter->format("HH:mm, d MMMM y", strtotime($item->date)); ?>
-    </td>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?= Yii::app()->dateFormatter->format("HH:mm, d MMMM y", strtotime($item->date)); ?>
+            </td>
 
-</tr>
+        </tr>
 
-<?php endforeach; 
+    <?php endforeach;
 
-} // end else 
-?>
+    } // end else
+    ?>
 </table>
 
 <div class="text-right">
-            <?$this->widget('CLinkPager', array(
-                'pages' => $pages,
-                'maxButtonCount' => 5,
-                'firstPageLabel' => 'в начало',
-                'lastPageLabel' => 'в конец',
-                'selectedPageCssClass' => 'active',
-                'prevPageLabel' => '&lt; ',
-                'nextPageLabel' => ' &gt;',
-                'header' => '',
-                'footer' => '',
-                'cssFile' => false,
-                'htmlOptions' => ['class' => 'pagination'],
-                'selectedPageCssClass' => 'active',
-            ))?>
+    <? $this->widget('CLinkPager', array(
+        'pages' => $pages,
+        'maxButtonCount' => 5,
+        'firstPageLabel' => Yii::t('basic', 'First page'),
+        'lastPageLabel' => Yii::t('basic', 'Last page'),
+        'selectedPageCssClass' => 'active',
+        'prevPageLabel' => '&lt; ',
+        'nextPageLabel' => ' &gt;',
+        'header' => '',
+        'footer' => '',
+        'cssFile' => false,
+        'htmlOptions' => ['class' => 'pagination'],
+    )) ?>
 </div>

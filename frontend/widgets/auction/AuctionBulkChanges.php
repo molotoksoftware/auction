@@ -27,11 +27,6 @@
  */
 
 
-/**
- * Class AuctionBulkChanges
- *
- * Массовые изменения лотов.
- */
 class AuctionBulkChanges extends CWidget
 {
     public $actionUrl;

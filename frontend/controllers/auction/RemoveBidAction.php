@@ -27,7 +27,7 @@
  */
 
 /**
- * Удалить ставку на лот
+ * Remove bid
  */
 class RemoveBidAction extends CAction
 {

@@ -29,5 +29,5 @@
 
 ?>
 
-<h3>Добро пожаловать в личный кабинет!</h3>
+<h3><?= Yii::t('basic', 'Welcome to your private area')?></h3>
 

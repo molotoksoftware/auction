@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,12 +21,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 class SalesController extends FrontController
 {
 
@@ -54,15 +51,12 @@ class SalesController extends FrontController
                     'bulkCompleteDeal',
                     'markDeleted',
                 ],
-                'users'   => ['@'],
+                'users' => ['@'],
             ],
             ['deny'],
         ];
     }
 
-    /**
-     * (Продажи) Активные лоты
-     */
     public function actionActiveItems()
     {
         $request = Yii::app()->getRequest();
@@ -81,7 +75,7 @@ class SalesController extends FrontController
             }
         }
 
-        $this->pageTitle = 'Активные лоты';
+        $this->pageTitle = Yii::t('basic', 'Active items');
 
         $auction = new Auction;
         $auctionData = $request->getQuery('Auction');
@@ -115,34 +109,31 @@ class SalesController extends FrontController
         }}';
 
         $this->render('//user/sales/_active_lots_table', [
-            'limit'                    => GridView::getPageSize(),
-            'auction'                  => $auction,
-            'gridViewTemplate'         => "{items}\n<hr><div class='row'><div class='col-xs-2'>$gridPageSize</div><div class='col-xs-10 text-right'>{pager}</div></div><hr>",
-            'userCategoriesList'       => $userCategoriesList,
+            'limit' => GridView::getPageSize(),
+            'auction' => $auction,
+            'gridViewTemplate' => "{items}\n<hr><div class='row'><div class='col-xs-2'>$gridPageSize</div><div class='col-xs-10 text-right'>{pager}</div></div><hr>",
+            'userCategoriesList' => $userCategoriesList,
             'searchAuctionCategoryIds' => $searchAuctionCategoryIds,
-            'gridViewPager'            => ['class' => 'CLinkPager', 
-                                            'maxButtonCount' => 5,
-                                            'firstPageLabel' => 'в начало',
-                                            'lastPageLabel' => 'в конец',
-                                            'selectedPageCssClass' => 'active',
-                                            'prevPageLabel' => '&lt; ',
-                                            'nextPageLabel' => ' &gt;',
-                                            'header' => '',
-                                            'footer' => '',
-                                            'cssFile' => false,
-                                            'htmlOptions' => ['class' => 'pagination']],
-            'gridViewSummaryText'      => 'Показано с {start} по {end} из {count}',
-            'gridViewAfterAjaxUpdate'  => $gridViewAfterAjaxUpdate,
+            'gridViewPager' => ['class' => 'CLinkPager',
+                'maxButtonCount' => 5,
+                'firstPageLabel' => Yii::t('basic', 'First page'),
+                'lastPageLabel' => Yii::t('basic', 'Last page'),
+                'selectedPageCssClass' => 'active',
+                'prevPageLabel' => '&lt; ',
+                'nextPageLabel' => ' &gt;',
+                'header' => '',
+                'footer' => '',
+                'cssFile' => false,
+                'htmlOptions' => ['class' => 'pagination']],
+            'gridViewSummaryText' => Yii::t('basic', 'Showed {start} to {end}. All {count}'),
+            'gridViewAfterAjaxUpdate' => $gridViewAfterAjaxUpdate,
         ]);
 
-        //обнуляем счетчик событий "Активные лоты"
         $counter = new ActiveLots();
         $counter->dec(Yii::app()->user->id);
     }
 
-    /**
-     * (Продажи) Завершённые лоты
-     */
+
     public function actionCompletedItems()
     {
         /** @var CHttpRequest $request */
@@ -162,7 +153,7 @@ class SalesController extends FrontController
             }
         }
 
-        $this->pageTitle = 'Завершённые лоты';
+        $this->pageTitle = Yii::t('basic', 'Unsold');
 
         $auction = new Auction;
         $auctionData = $request->getQuery('Auction');
@@ -196,30 +187,27 @@ class SalesController extends FrontController
         }}';
 
         $this->render('//user/sales/_completed_items_table', [
-            'limit'                    => GridView::getPageSize(),
-            'auction'                  => $auction,
-            'gridViewTemplate'         => "{items}\n<hr><div class='row'><div class='col-xs-2'>$gridPageSize</div><div class='col-xs-10 text-right'>{pager}</div></div><hr>",
-            'userCategoriesList'       => $userCategoriesList,
+            'limit' => GridView::getPageSize(),
+            'auction' => $auction,
+            'gridViewTemplate' => "{items}\n<hr><div class='row'><div class='col-xs-2'>$gridPageSize</div><div class='col-xs-10 text-right'>{pager}</div></div><hr>",
+            'userCategoriesList' => $userCategoriesList,
             'searchAuctionCategoryIds' => $searchAuctionCategoryIds,
-            'gridViewPager'            => ['class' => 'CLinkPager', 
-                                            'maxButtonCount' => 5,
-                                            'firstPageLabel' => 'в начало',
-                                            'lastPageLabel' => 'в конец',
-                                            'selectedPageCssClass' => 'active',
-                                            'prevPageLabel' => '&lt; ',
-                                            'nextPageLabel' => ' &gt;',
-                                            'header' => '',
-                                            'footer' => '',
-                                            'cssFile' => false,
-                                            'htmlOptions' => ['class' => 'pagination']],
-            'gridViewSummaryText'      => 'Показано с {start} по {end} из {count}',
-            'gridViewAfterAjaxUpdate'  => $gridViewAfterAjaxUpdate,
+            'gridViewPager' => ['class' => 'CLinkPager',
+                'maxButtonCount' => 5,
+                'firstPageLabel' => Yii::t('basic', 'First page'),
+                'lastPageLabel' => Yii::t('basic', 'Last page'),
+                'selectedPageCssClass' => 'active',
+                'prevPageLabel' => '&lt; ',
+                'nextPageLabel' => ' &gt;',
+                'header' => '',
+                'footer' => '',
+                'cssFile' => false,
+                'htmlOptions' => ['class' => 'pagination']],
+            'gridViewSummaryText' => Yii::t('basic', 'Showed {start} to {end}. All {count}'),
+            'gridViewAfterAjaxUpdate' => $gridViewAfterAjaxUpdate,
         ]);
     }
 
-    /**
-     * (Продажи) Проданные лоты
-     */
     public function actionSoldItems()
     {
         $request = Yii::app()->getRequest();
@@ -241,32 +229,29 @@ class SalesController extends FrontController
             }
         }
 
-        $this->pageTitle = 'Проданные лоты';
+        $this->pageTitle = Yii::t('basic', 'Sold');
 
         $auction = $request->getParam('Auction');
         $gridPageSize = GridView::pageSizeDropDown();
 
         $this->render('_sold_items_table', [
-            'limit'              => GridView::getPageSize(),
-            'auction'            => CHtml::encode($auction['name']),
-            'gridViewTemplate'   => "{items}\n<hr><div class='row'><div class='col-xs-2'>$gridPageSize</div><div class='col-xs-10 text-right'>{pager}</div></div><hr>",
-            'gridViewPager'      => ['class' => 'CLinkPager', 
-                                    'maxButtonCount' => 5,
-                                    'firstPageLabel' => 'в начало',
-                                    'lastPageLabel' => 'в конец',
-                                    'selectedPageCssClass' => 'active',
-                                    'prevPageLabel' => '&lt; ',
-                                    'nextPageLabel' => ' &gt;',
-                                    'header' => '',
-                                    'footer' => '',
-                                    'cssFile' => false,
-                                    'htmlOptions' => ['class' => 'pagination']],
+            'limit' => GridView::getPageSize(),
+            'auction' => CHtml::encode($auction['name']),
+            'gridViewTemplate' => "{items}\n<hr><div class='row'><div class='col-xs-2'>$gridPageSize</div><div class='col-xs-10 text-right'>{pager}</div></div><hr>",
+            'gridViewPager' => ['class' => 'CLinkPager',
+                'maxButtonCount' => 5,
+                'firstPageLabel' => Yii::t('basic', 'First page'),
+                'lastPageLabel' => Yii::t('basic', 'Last page'),
+                'selectedPageCssClass' => 'active',
+                'prevPageLabel' => '&lt; ',
+                'nextPageLabel' => ' &gt;',
+                'header' => '',
+                'footer' => '',
+                'cssFile' => false,
+                'htmlOptions' => ['class' => 'pagination']],
         ]);
     }
 
-    /**
-     * Действия над лотами
-     */
     public function actionWorkWithLots()
     {
         /** @var CHttpRequest $request */
@@ -277,7 +262,7 @@ class SalesController extends FrontController
             $check_lots = $request->getParam('check_lots');
 
             switch ($select_action) {
-                case 1: // Перевыставить завершённые лоты
+                case 1: // republish items
 
                     $period = $request->getParam('period');
 
@@ -350,14 +335,13 @@ class SalesController extends FrontController
         $this->redirect($_SERVER['HTTP_REFERER']);
     }
 
-    // Удалить единичный лот
     public function actionDel_lot($id)
     {
         $count = Auction::model()->count('owner=:owner AND auction_id=:auction_id', [':owner' => Yii::app()->user->id, ':auction_id' => $id]);
 
         if ($count == 1) {
             $model = Auction::model()->findByPk($id);
-            $model->status = 10;
+            $model->status = Auction::ST_DELETED;
             $model->update();
         }
 
@@ -365,11 +349,6 @@ class SalesController extends FrontController
     }
 
 
-    /**
-     * Продажа отмечается как "удалена".
-     *
-     * @throws CHttpException
-     */
     public function actionMarkDeleted()
     {
 
@@ -395,23 +374,7 @@ class SalesController extends FrontController
 
     }
 
-    /**
-     * @throws CHttpException
-     */
 
-    /**
-     * Продажа отмечается как "удалена".
-     *
-     * @param int     $saleId
-     * @param int     $itemId
-     * @param int     $buyerId
-     * @param int     $sellerId
-     * @param boolean $forBuyer Удалить из покупок для покупателя.
-     *
-     * @return bool
-     * @throws CDbException
-     * @throws CHttpException
-     */
     private function markDeleted($saleId, $id_table)
     {
         /** @var Sales $sale */
@@ -438,7 +401,4 @@ class SalesController extends FrontController
             return $result;
         }
     }
-
-
-
 }

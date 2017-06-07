@@ -26,25 +26,6 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** @var $this Controller */
-/** @var $gridViewTemplate string */
-/** @var $gridViewPager array */
-/** @var Auction|null $auction */
-/** @var string $scope */
-/** @var string|null $gridViewAjaxUrl */
-/** @var string|null $gridViewSummaryText */
-/** @var string|null $gridViewAfterAjaxUpdate */
-/** @var null|bool $showRecommendedContainer */
-/** @var null|Filter $filter */
-/** @var null|Category $category */
-/** @var int $countForTitle */
-/** @var City[] $cities */
-/** @var ServicePromotion[] $servicePromotions */
-/** @var CActiveDataProvider $dataProvider */
-/** @var array $auctionAttributes */
-/** @var $ownerModel User */
-/** @var array $attributeOptions */
-/** @var array $auctionsImages */
 
 Yii::import('frontend.widgets.search.SortSelectorWidget');
 Yii::import('frontend.widgets.search.PeriodHtmlSelectorWidget');
@@ -77,8 +58,8 @@ $issetLot = UserDataHelper::issetLot($this->user->user_id);
             array(
                 'pages' => $dataProvider->getPagination(),
                 'maxButtonCount' => 1,
-                'firstPageLabel' => 'в начало',
-                'lastPageLabel' => 'в конец',
+                'firstPageLabel' => Yii::t('First page', 'Auction'),
+                'lastPageLabel' => Yii::t('Last page', 'Auction'),
                 'selectedPageCssClass' => 'active',
                 'prevPageLabel' => '&lt; ',
                 'nextPageLabel' => ' &gt;',
@@ -100,12 +81,11 @@ $issetLot = UserDataHelper::issetLot($this->user->user_id);
 
 <div class ="row top_auctions">
     <div class="col-xs-12">
-     <?php
-    $items = $dataProvider->getData();
-    if (count($items) <= 0) {
-        echo '<div class="alert alert-info">К сожалению, ничего не найдено</div>';
-    }
-    ?>
+     <?php $items = $dataProvider->getData(); ?>
+
+     <?php if (count($items) <= 0) : ?>
+         <div class="alert alert-info"><?= Yii::t('basic', 'There doesn\'t seem to be any items matching your search result') ?></div>
+     <?php endif; ?>
 
     </div>
 </div>
@@ -152,8 +132,8 @@ $issetLot = UserDataHelper::issetLot($this->user->user_id);
             array(
                 'pages' => $dataProvider->getPagination(),
                 'maxButtonCount' => 5,
-                'firstPageLabel' => 'в начало',
-                'lastPageLabel' => 'в конец',
+                'firstPageLabel' => Yii::t('First page', 'Auction'),
+                'lastPageLabel' => Yii::t('Last page', 'Auction'),
                 'selectedPageCssClass' => 'active',
                 'prevPageLabel' => '&lt; ',
                 'nextPageLabel' => ' &gt;',

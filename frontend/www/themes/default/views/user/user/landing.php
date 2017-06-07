@@ -27,7 +27,6 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** @var $model User */
 ?>
 
 <?php
@@ -66,15 +65,10 @@ $cs->registerScript(
             dataType : "json",
             success : function(data) 
             {
-                if (data.response.data.stat == 0)
-                {
-                    alert("Продавец успешно добавлен в список отслеживаемых");
-                    $(fav).text("Отписаться");
-                }
-                else
-                {
-                    alert("Продавец успешно удалён из списка отслеживаемых");
-                    $(fav).text("Подписаться");
+                if (data.response.data.stat == 0) {
+                   $(fav).text("'.Yii::t('basic', 'Following this seller').'");
+                } else {
+                    $(fav).text("'.Yii::t('basic', 'Follow this seller').'");
                 }
             }
         });
@@ -84,8 +78,6 @@ $cs->registerScript(
     ',
 	CClientScript::POS_READY
 );
-
-// рандомный отзыв
 
 $reviewRandom = Yii::app()->db
                 ->cache(3600)
@@ -97,7 +89,6 @@ $reviewRandom = Yii::app()->db
                 ->limit('1')
                 ->queryRow();
 
-// выберем 5 лотов
 $condition = new CDbCacheDependency('SELECT MAX(`update`) FROM auction WHERE owner='.$model->user_id);
 $auctionRandom = Yii::app()->db
                 ->cache(1000, $condition)
@@ -131,9 +122,8 @@ function getCurrentPrice ($item) {
     }
 }
 
-// статус подписки на продавца
 $tr = TrackOwners::model()->count('owner=:owner AND id_user=:id_user', array(':owner' => $model->user_id, ':id_user' => Yii::app()->user->id));
-if ($tr == 0) {$tr_text = 'Подписаться';} else {$tr_text = 'Отписаться';}
+if ($tr == 0) {$tr_text = Yii::t('basic', 'Follow this seller');} else {$tr_text = Yii::t('basic', 'Following this seller');}
 
 
 $webUser = Getter::webUser();
@@ -158,9 +148,9 @@ $webUser = Getter::webUser();
                     <div class="col-xs-12 top_line">
                         <div style="float:right;">
                             <a class="btn btn-link btn-sm" href="/user/page/<?=$model->login?>">
-                                <span class="glyphicon glyphicon-shopping-cart"></span> Товары в продаже</a>
-                            <a class="btn btn-link btn-sm" href="#">
-                                <span class="glyphicon glyphicon-envelope"></span> Связаться</a>
+                                <span class="glyphicon glyphicon-shopping-cart"></span> <?= Yii::t('basic', 'Items for sale')?>
+                            </a>
+
                         </div>
                         <?php $this->widget(
                                 'frontend.widgets.user.UserInfo',
@@ -168,7 +158,7 @@ $webUser = Getter::webUser();
                         ); ?>
                         <?php if ($model->ban == 1):  ?>
                             <span class="label label-warning">
-                               Пользователь заблокирован. Рассчетные операции невозможны
+                               <?= Yii::t('basic', 'User has been banned') ?>
                             </span>
                         <?php endif; ?>
                     </div>
@@ -180,8 +170,8 @@ $webUser = Getter::webUser();
                                 <?php endif; ?>
                             </div>
                             <div class="col-xs-8 span_town">
-                                Зарегистрировался на Auction: <?=Yii::app()->dateFormatter->format("d MMMM yyyy", strtotime($model->createtime));?> г.<br />
-                                Последний визит: <b><?=$model->getTimeLastVisit(); ?></b><br>
+                                <?= Yii::t('basic', 'Date of Signup') ?>: <?=Yii::app()->dateFormatter->format("d MMMM yyyy", strtotime($model->createtime));?> г.<br />
+                                <?= Yii::t('basic', 'Last visit') ?>: <b><?=$model->getTimeLastVisit(); ?></b><br>
                                 <i style="color:gray;">
                                 <?php
                                  if ($userPlace) {
@@ -196,23 +186,23 @@ $webUser = Getter::webUser();
         </div>
         <div class="part_down">
             <div class="row">
-                <div class="col-xs-8"><strong>Показатели отзывов</strong>
+                <div class="col-xs-8"><strong><?= Yii::t('basic', 'Reviews') ?></strong>
                     <div class="row margint_top_30">
                         <div class="col-xs-3 col-xs-offset-2 text-center">
                             <a href="/user/reviews/view/login/<?=$model->login?>/value/positive"><img src="/img/revup.png"></a>
                             <b><?=$reviews['positive']?></b>
-                            <div><small>Положительные</small></div>
+                            <div><small><?= Yii::t('basic', 'Positive') ?></small></div>
                         </div>
                         <div class="col-xs-4  text-center">
                             <a href="/user/reviews/view/login/<?=$model->login?>/value/negative"><img src="/img/revdown.png"></a>
                             <b><?=$reviews['negative']?></b>
  
-                            <div><small>Отрицательные</small></div>
+                            <div><small><?= Yii::t('basic', 'Negative') ?></small></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-4 text-right border_left_rev"><a class="btn btn-link btn-sm" href="/user/reviews/view/login/<?=$model->login?>">
-                    <span class="glyphicon glyphicon-stats"></span> Посмотреть все отзывы</a>
+                    <span class="glyphicon glyphicon-stats"></span> <?= Yii::t('basic', 'See all reviews') ?></a>
                     <?php if ($isserReviews): ?>
                     <div class="row">
                         <div class="col-xs-2">
@@ -239,7 +229,7 @@ $webUser = Getter::webUser();
 
 <div class="row main_h1">
     <div class="col-xs-12 margint_top_80">
-        <h1>Товары в продаже
+        <h1><?= Yii::t('basic', 'Items for sale') ?>
         <small>(<a href="/user/page/<?=$model->login?>"><?=UserDataHelper::countLot($model->user_id)?></a>)</small></h1>
     </div>
 </div>
@@ -282,14 +272,14 @@ $webUser = Getter::webUser();
                 </div> 
             </div>
         </div>
-        <?php        endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>
 
 <?php if(UserDataHelper::countLot($model->user_id)): ?>
 <div class="row">
     <div class="col-xs-12 text-center margint_top_80">
-        <a type="button" class="btn btn-default" href="/user/page/<?=$model->login?>"> Смотреть все лоты </a>
+        <a type="button" class="btn btn-default" href="/user/page/<?=$model->login?>"> <?= Yii::t('basic', 'See all items') ?> </a>
     </div>
    
 </div>

@@ -93,7 +93,7 @@ class UserController extends FrontController
         $pageSize = $this->getPageSize();
 
         $ownerUser = User::getByLogin($login);
-        $this->pageTitle = "Товары пользователя " . $ownerUser->getNickOrLogin();
+        $this->pageTitle = Yii::t('basic', 'Items of')." " . $ownerUser->getNickOrLogin();
         $this->layout = '//layouts/auction';
         $this->user = $ownerUser;
         $this->searchAction = '/user/page/'.$ownerUser->login;
@@ -109,7 +109,6 @@ class UserController extends FrontController
 
         $gridViewAjaxUrl = Yii::app()->createUrl('/'.$login);
 
-        // Выборка аукционов
         $params = [
             ':owner'  => $ownerUser->user_id,
             ':status' => Auction::ST_ACTIVE,
@@ -134,19 +133,11 @@ class UserController extends FrontController
             $params[':type_transaction'] = $auction->type_transaction;
         }
 
-        // Filter start {
 
         $filter = new Filter();
         if (isset($_GET['Filter'])) {
             $filter->filters = $_GET['Filter'];
         }
-
-       /* if (isset($_GET['search']) && !empty($_GET['search'])) {
-            $search = CHtml::encode($_GET['search']);
-            $sql->andWhere("a.name LIKE '%$search%'");
-            $sqlCount->andWhere("a.name LIKE '%$search%'");
-        }*/
-
 
             $search = isset($_GET['search'])?strip_tags($_GET['search']):'';
 
@@ -154,7 +145,6 @@ class UserController extends FrontController
 
             if (count($result) > 0) {
                 foreach ($result as $item) {
-                    // Составляем массив из идентификаторов найденных аукционов
                     $auc_id_arr[] = intval($item['auction_id']);
                 }
 
@@ -299,7 +289,6 @@ class UserController extends FrontController
             }
         }
 
-        // Фильр по Диапазонам
         if (isset($_GET['Filter']['option'][1]) && count($_GET['Filter']['option'][1]) > 0) {
             foreach ($_GET['Filter']['option'][1] as $key => $value) {
                 if (preg_match("/^[0-9]+$/", $key) && ((isset($value['from']) && $value['from'] > 0) || (isset($value['to']) && $value['to'] > 0))) {
@@ -337,9 +326,6 @@ class UserController extends FrontController
             }
         }
 
-        // Filter end }
-
-        /** @var Category|null $selectedCategoryModel */
         $selectedCategoryModel = null;
         $path = Yii::app()->request->getParam('path', null);
 
@@ -361,7 +347,6 @@ class UserController extends FrontController
         if ($selectedCategoryModel) {
             $_GET['path'] = $selectedCategoryModel->getPath();
             $d = $selectedCategoryModel->getAllDependents();
-            // Запрещаем интимные категории.
 
             if (count($d) == 0) {
                 $d[0] = 0;
@@ -411,7 +396,6 @@ class UserController extends FrontController
                 break;
         }
 
-
         $auctionCount = $sqlCount->queryScalar($params);
 
         $dataProvider = new CSqlDataProvider($sql->text, [
@@ -457,7 +441,6 @@ class UserController extends FrontController
         ]);
         $auctions = $dataProvider->getData();
 
-        // Выбираем все города для использования в представлении.
         $cityIds = array_filter(ArrayHelper::getColumn($auctions, 'id_city'));
         $cityIds[] = 0;
         $cities = ArrayHelper::index(
@@ -480,7 +463,7 @@ class UserController extends FrontController
                 'auction'                  => $auction,
                 'gridCssClass'             => 'lots_table_border_top_bottom table_with_filter',
                 'gridViewPager'            => ['class' => 'CLinkPager', 'header' => ''],
-                'gridViewSummaryText'      => 'Показано с {start} по {end} из {count}',
+                'gridViewSummaryText'      => Yii::t('basic', 'Showed {start} to {end}. All {count}'),
                 'scope'                    => 'user-page',
                 'gridViewAjaxUrl'          => $gridViewAjaxUrl,
                 'showRecommendedContainer' => empty($_GET['sort']),
@@ -502,7 +485,7 @@ class UserController extends FrontController
 
         $user_name = $user->getNickOrLogin();
 
-		$this->pageTitle = 'Информация о пользователе '.$user_name;
+		$this->pageTitle = Yii::t('basic', 'About').' '.$user_name;
 		$this->layout = '//layouts/userPageLayout';
 		$this->user = $user;
 
@@ -519,11 +502,10 @@ class UserController extends FrontController
 
         $this->searchAction = '/user/page/' . $user->login;
         $this->userNick = $user->getNickOrLogin();
-        $this->pageTitle = 'Пользователь ' . $this->userNick;
+        $this->pageTitle = Yii::t('basic', 'User').' ' . $this->userNick;
         $this->layout = '//layouts/auction';
         $this->user = $user;
 
-                // превью для соц. сетей
                 $imageLink = '/images/users/thumbs/avatar_'.$user->avatar;
                 $this->addMetaTag(['property' => 'og:image', 'content' => $imageLink]);
                 $this->addMetaTag(['itemprop' => 'image', 'content' => $imageLink]);
@@ -535,7 +517,7 @@ class UserController extends FrontController
 	{
 		if (!Favorite::hasFavorite($id, $type, Yii::app()->user->id)) {
 			if (Favorite::createFavorite($id, $type, Yii::app()->user->id)) {
-				RAjax::success(array('id' => Yii::app()->db->lastInsertID, 'stat' => 0)); // 0 - значит добавили в закладки
+				RAjax::success(array('id' => Yii::app()->db->lastInsertID, 'stat' => 0));
 			} else {
 				RAjax::error(array('message' => 'error save'));
 			}
@@ -543,7 +525,7 @@ class UserController extends FrontController
         else
         {
 			Favorite::deleteFavorite($id, $type, Yii::app()->user->id);
-            RAjax::success(array('stat' => 1)); // 1 - значит удалили из закладок
+            RAjax::success(array('stat' => 1));
         }
 	}
 

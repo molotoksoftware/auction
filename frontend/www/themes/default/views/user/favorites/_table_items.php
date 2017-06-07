@@ -69,7 +69,7 @@ $dataProvider = new CSqlDataProvider($sql_fav->text, array(
 
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'table-items',
-    'emptyText' => 'Избранные лоты отсутствуют',
+    'emptyText' => Yii::t('basic', 'No items'),
     'dataProvider' => $dataProvider,
     'template' => $template,
     'htmlOptions' => array('class' => ''),
@@ -82,7 +82,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'favorite_id',
         ),
         array(
-            'header' => 'Фото',
+            'header' => Yii::t('basic', 'Photo'),
             'type' => 'raw',
             'name' => 'auction_id',
             'value' => 'Item::getPreview($data, array("width" => 120, "height" => 120, "class" => "img-thumbnail"))',
@@ -90,7 +90,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'htmlOptions' => array('class' => '')
         ),
         array(
-            'header' => 'Информация',
+            'header' => Yii::t('basic', 'Information'),
             'type' => 'raw',
             'name' => 'auction_id',
             'value' => 'Table::getMainInfoRow($data)',
@@ -123,8 +123,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
             array(
                 'pages' => $dataProvider->getPagination(),
                 'maxButtonCount' => 5,
-                'firstPageLabel' => 'в начало',
-                'lastPageLabel' => 'в конец',
+                'firstPageLabel' => Yii::t('basic', 'First page'),
+                'lastPageLabel' => Yii::t('basic', 'Last page'),
                 'selectedPageCssClass' => 'active',
                 'prevPageLabel' => '&lt; ',
                 'nextPageLabel' => ' &gt;',

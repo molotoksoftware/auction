@@ -26,9 +26,6 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Не выигранные
- */
 $params = array(
     ':owner' => Yii::app()->user->id,
     ':buyer' => Yii::app()->user->id,
@@ -46,9 +43,7 @@ $sql = Yii::app()->db->createCommand()
     ->andWhere("s.date >= DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00') - INTERVAL 100 MONTH")
     ->group('a.auction_id');
 
-
 $count = CounterInfo::quantityNoWonItems();
-
 
 if (is_null($limit)) {
  //   $template = "{items}\n{pager}";
@@ -74,18 +69,18 @@ $dataProvider = new CSqlDataProvider($sql->text, array(
     ),
         ));
 ?>
-<h3>Не выигранные <?=UI::showQuantityTablHdr($count); ?></h3>
+<h3><?=Yii::t('basic', 'Didn\'t win');?> <?=UI::showQuantityTablHdr($count); ?></h3>
 
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider' => $dataProvider,
     'template' => $template,
-    'emptyText' => 'Не выигранные лоты отсутствуют',
+    'emptyText' => Yii::t('basic', 'No items'),
     'htmlOptions' => array('class' => ''),
     'itemsCssClass' => 'table table-hover grid_cabinet',
     'columns' => array(
         array(
-            'header' => 'Товар',
+            'header' => Yii::t('basic', 'Item'),
             'type' => 'raw',
             'name' => 'name',
             'value' => 'TableItem::getTovarField($data)',
@@ -93,14 +88,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'htmlOptions' => array('class' => 'td1')
         ),
         array(
-            'header' => 'Дата продажи',
+            'header' => Yii::t('basic', 'Date of sale'),
             'name' => 'date',
             'value' => 'TableItem::getDateField($data)',
             'headerHtmlOptions' => array('class' => 'th2'),
             'htmlOptions' => array('class' => 'td2')
         ),
         array(
-            'header' => 'Цена',
+            'header' => Yii::t('basic', 'Price'),
             'type' => 'raw',
             'name' => 'price',
             'value' => 'TableItem::getPriceField($data["s_price"])',
@@ -132,8 +127,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
             array(
                 'pages' => $dataProvider->getPagination(),
                 'maxButtonCount' => 5,
-                'firstPageLabel' => 'в начало',
-                'lastPageLabel' => 'в конец',
+                'firstPageLabel' => Yii::t('basic', 'First page'),
+                'lastPageLabel' => Yii::t('basic', 'Last page'),
                 'selectedPageCssClass' => 'active',
                 'prevPageLabel' => '&lt; ',
                 'nextPageLabel' => ' &gt;',

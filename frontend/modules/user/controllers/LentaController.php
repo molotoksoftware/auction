@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,12 +21,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 class LentaController extends FrontController
 {
     public $layout = '//layouts/cabinet';
@@ -53,21 +50,21 @@ class LentaController extends FrontController
 
     public function actionIndex()
     {
-        $this->pageTitle = 'Лента отслеживания';
+        $this->pageTitle = Yii::t('basic', 'Favorite sellers');
         $this->layout = '//layouts/cabinet';
 
-        // Запоминаем кол-во элементов на странице
         if (isset($_GET['size'])) {
             if (preg_match("/^[0-9]+$/", $_GET['size'])) {
                 $cookie = new CHttpCookie('item_on_page', $_GET['size']);
-                $cookie->expire = time()+3600*24*180; 
+                $cookie->expire = time() + 3600 * 24 * 180;
                 Yii::app()->request->cookies['item_on_page'] = $cookie;
             }
         }
 
-        // Узнаем выбранное кол-во элементов на странице
         if (isset(Yii::app()->request->cookies['item_on_page']->value)) {
-            if (preg_match("/^[0-9]+$/", Yii::app()->request->cookies['item_on_page']->value)) {$num_page_size = Yii::app()->request->cookies['item_on_page']->value;}
+            if (preg_match("/^[0-9]+$/", Yii::app()->request->cookies['item_on_page']->value)) {
+                $num_page_size = Yii::app()->request->cookies['item_on_page']->value;
+            }
         } else {
             $num_page_size = $this->defaultPage;
         }
@@ -77,10 +74,8 @@ class LentaController extends FrontController
             ':status' => Auction::ST_ACTIVE,
         );
 
-        // получаем список отслеживаемых продавцов
         $prod_all = TrackOwners::getListUserForOwner();
 
-        // считаем количество лотов у отслеживаемых продавцов
         $all_count = TrackOwners::getCountAuctionsFromTrackUsers($params);
 
         $this->render('index', [
@@ -90,9 +85,8 @@ class LentaController extends FrontController
             'params' => $params,
             'template' => '{items}',
             'sql_fav' => TrackOwners::getLotData(),
-            ]);
+        ]);
     }
-
 
     public function actionDel($owner)
     {

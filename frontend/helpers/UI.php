@@ -42,6 +42,16 @@ class UI
         return strtr($template, array('{number}' => $quantity));
     }
 
+    public static function  showSmallQuantity($quantity)
+    {
+
+        if (empty($quantity) || (int)$quantity <= 0) {
+            return false;
+        }
+
+        return "<small>$quantity</small>";
+    }
+
 
     public static function  showQuantityTablHdr($quantity, $class = 'qnt-large')
     {

@@ -30,23 +30,6 @@
 cs()->registerCssFile(bu() . '/js/libs/jquery_multiselect/bootstrap-multiselect.css');
 cs()->registerScriptFile(bu() . '/js/libs/jquery_multiselect/bootstrap-multiselect.js');
 
-/* cs()->registerScript(
-    'random',
-    '
-
-    $(".multiselect").multiselect({
-        buttonWidth: "200pх",
-        nonSelectedText: "Выберите значения",
-        numberDisplayed: 5,
-        enableCaseInsensitiveFiltering: true,
-        allSelectedText: "Выбрано",
-        filterPlaceholder: "Поиск",
-
-    });
-
-    ',
-    CClientScript::POS_READY
-); */
 
 cs()->registerScript(
     'random',
@@ -86,18 +69,15 @@ foreach ($options as $option) {
         echo CHtml::label($option['name'], $for);
         echo "<br>";
 
-        // Проверяем зависимый ли это атрибут или другой. В зависимости от результата, назначаем выпадающему списку определённый класс.
         switch ($option['type'])
         {
-            case 9: // Зависимый атрибут (parent_id_ - чтобы знать айди родителя, child_id_ - чтобы знать дочерний айди, multi_parent - определяем зависимые списки)
+            case 9:
                 $select_class = 'multiselect parent_id_'.$option['attribute_id'].' child_id_'.$option['child_id'].' multi_parent';
                 break;
             default:
                 $select_class = 'multiselect';
         }
 
-        // Если child пред. родителя равен нынешней опции, значит опция ясвляется дочерней, ищем значения по
-        // по данным родителя.
         $attributeValues = AttributeHelper::getAttributeValues($option['attribute_id']);
         if ($lastParentOption && $lastParentOption['child_id'] == $option['attribute_id']) {
             $parentAttributeIds = [-1];
@@ -133,15 +113,14 @@ foreach ($options as $option) {
         echo "<br/>";
     }
 
-    // Фильтр по Диапазонам
     if ($option['type'] == Attribute::TYPE_TEXT_RANGE)
     {
         if (isset($_GET['Filter']['option'][1][$option['attribute_id']]['from']) && preg_match("/^[0-9]+$/", $_GET['Filter']['option'][1][$option['attribute_id']]['from']) && $_GET['Filter']['option'][1][$option['attribute_id']]['from'] > 0) {$from = $_GET['Filter']['option'][1][$option['attribute_id']]['from'];} else {$from = null;}
         if (isset($_GET['Filter']['option'][1][$option['attribute_id']]['to']) && preg_match("/^[0-9]+$/", $_GET['Filter']['option'][1][$option['attribute_id']]['to']) && $_GET['Filter']['option'][1][$option['attribute_id']]['to'] > 0) {$to = $_GET['Filter']['option'][1][$option['attribute_id']]['to'];} else {$to = null;}
         echo CHtml::label($option['name'], '');
         echo "<div class='form-group form-inline'>".
-            CHtml::textField('Filter[option][1][' . $option['attribute_id'] . '][from]', $from, array('class' => 'form-control options_range', 'placeholder' => 'от', 'onkeyUp'=>'return type_text_range_check(this);')).' - '.
-            CHtml::textField('Filter[option][1][' . $option['attribute_id'] . '][to]', $to, array('class' => 'form-control options_range', 'placeholder' => 'до', 'onkeyUp'=>'return type_text_range_check(this);')).
+            CHtml::textField('Filter[option][1][' . $option['attribute_id'] . '][from]', $from, array('class' => 'form-control options_range', 'placeholder' => Yii::t('basic', 'From'), 'onkeyUp'=>'return type_text_range_check(this);')).' - '.
+            CHtml::textField('Filter[option][1][' . $option['attribute_id'] . '][to]', $to, array('class' => 'form-control options_range', 'placeholder' => Yii::t('basic', 'To'), 'onkeyUp'=>'return type_text_range_check(this);')).
             ' <input type="submit" value=">" class="btn btn-default">'.
             "</div>";
         echo "<br/>";

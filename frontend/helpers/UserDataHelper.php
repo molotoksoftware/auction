@@ -190,6 +190,6 @@ class UserDataHelper {
                     break;
         }
 
-        return '<span class="'.$class.'" title="'.Yii::t('basic', 'Verifed user').'"></span>';
+        return '<span class="'.$class.'" title="'.Yii::t('basic', 'Verified user').'"></span>';
     }
 }

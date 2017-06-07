@@ -177,9 +177,8 @@ if ($category == false) {
         <hr class="horizontal_line">
         <div class="row top_auctions">
             <div class="col-xs-12">
-                <?php
-                $items = $dataProvider->getData();
-                if (count($items) <= 0) : ?>
+                <?php $items = $dataProvider->getData(); ?>
+                <?php if (count($items) <= 0) : ?>
                     <div class="alert alert-info"><?= Yii::t('basic', 'There doesn\'t seem to be any items matching your search result') ?></div>
                 <?php endif; ?>
 

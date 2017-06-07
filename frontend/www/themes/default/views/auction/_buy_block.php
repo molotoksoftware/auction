@@ -247,8 +247,8 @@ if (!empty($sales)) {
                 <?php else: ?>
                     <dt><?= Yii::t('basic', 'Status') ?>:</dt>
                     <dd>
-                        <div class="pull-right" style="margin-right:30px;color:gray;">Лот
-                            № <?php echo $base['auction_id']; ?></div>
+                        <div class="pull-right" style="margin-right:30px;color:gray;">
+                            <?= Yii::t('basic', 'Item #')?><?php echo $base['auction_id']; ?></div>
                         <?php
                         $sales = Yii::app()->db->createCommand()
                             ->select('*')

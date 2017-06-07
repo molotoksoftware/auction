@@ -57,7 +57,7 @@ class AuctionGridFilters extends CWidget
         'last_week'      => 'Last week',
         'last_month'     => 'Last month',
         'last_half_year' => 'Last half year',
-        'last_year'      => 'Lat year',
+        'last_year'      => 'Last year',
         'all'            => 'All',
     ];
 

@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -36,27 +35,18 @@
 
 /** @var CHttpRequest $request */
 $request = Yii::app()->getRequest();
-?>
-<?php Yii::app()->clientScript->registerScriptFile(bu() . '/js/auction_view_owner.js');
 
-Yii::app()->clientScript->registerCoreScript('jquery');
+Yii::app()->clientScript->registerScriptFile(bu() . '/js/auction_view_owner.js');
 
 $gridId = 'unit-owner-grid';
-?>
 
-
-<? Yii::app()->clientScript->registerScript('windowHistoryPushState', '
+Yii::app()->clientScript->registerScript('windowHistoryPushState', '
 $(".yiiPager > li > a").on("click", function() {
     window.history.pushState({}, "", $(this).attr("href"));
 });
-') ?>
+');
 
-<?php
-/**
- * Завершенные лоты
- */
-
- $pageSize = $limit;
+$pageSize = $limit;
 
 if (!empty($gridViewTemplate)) {
     $template = $gridViewTemplate;
@@ -88,11 +78,11 @@ $count_sql = Yii::app()->db->createCommand()
 $userModel = Getter::userModel();
 $isPro = $userModel->getIsPro();
 
-if(isset($auction)) {
+if (isset($auction)) {
     if ($auction->name) {
         $sql->andWhere('a.name LIKE :name');
         $count_sql->andWhere('a.name LIKE :name');
-        $params[':name'] = '%'.$auction->name.'%';
+        $params[':name'] = '%' . $auction->name . '%';
     }
     if (!empty($searchAuctionCategoryIds)) {
         $sql->andWhere(array('in', 'category_id', $searchAuctionCategoryIds));
@@ -122,20 +112,19 @@ $dataProvider = new CSqlDataProvider($sql->text, array(
 
 function getLinkRePost($auction_id)
 {
-    return '/editor/lot/strepub/1/id/'.$auction_id;
+    return '/editor/lot/strepub/1/id/' . $auction_id;
 }
 
 function getLinkDel($data)
 {
-    return '/user/sales/del_lot/id/'.$data['auction_id'];
+    return '/user/sales/del_lot/id/' . $data['auction_id'];
 }
 
 $cs = Yii::app()->clientScript;
 
 $cs->registerScript(
-	'create-act', '
+    'create-act', '
 
-    // Перевыставить лоты
     $(".send_mass_reopen").click(function()
     {
         var period = $(".mass_select option:selected").val();
@@ -143,7 +132,7 @@ $cs->registerScript(
         
         if (count_ch == 0)
         {
-            alert("Необходимо отметить, как минимум, один завершённый лот");
+            alert("'.Yii::t('basic', 'You need to mark one or more items').'");
         }
         else
         {
@@ -163,19 +152,17 @@ $cs->registerScript(
                     }
                 });
             }
-            else {alert("Необходимо выбрать период");}
+            else {alert("'.Yii::t('basic', 'You need to choose the period').'");}
         }
     });
 
-
-    // Удалить лоты
     $("#action_sale_del").click(function()
     {
         var count_ch = $("input.ch_cl:checkbox:checked").length;
 
         if (count_ch == 0)
         {
-            alert("Необходимо отметить, как минимум, один завершённый лот");
+            alert("'.Yii::t('basic', 'You need to mark one or more items').'");
         }
         else
         {
@@ -184,7 +171,7 @@ $cs->registerScript(
                 i++; check_lots[i] = $(this).val();
             });
 
-            if (confirm("Вы действительно хотите удалить отмеченные лоты?"))
+            if (confirm("'.Yii::t('basic', 'Do you really want to remove marked items?').'"))
             {
                 $.ajax({
                     url      : "/user/sales/workwithlots",
@@ -202,7 +189,6 @@ $cs->registerScript(
 
     $("#unit-owner").hide();
 
-    // Всплывающее окно для массового перевыставления
     $("#action_sale").click(function(){ 
       return true;
     });
@@ -211,46 +197,37 @@ $cs->registerScript(
 
     });
 ',
-	CClientScript::POS_READY
+    CClientScript::POS_READY
 );
 
 ?>
 
-<h3>Завершенные лоты <?=UI::showQuantityTablHdr($count); ?></h3>
+    <h3><?= Yii::t('basic', 'Unsold')?> <?= UI::showQuantityTablHdr($count); ?></h3>
 
-<?  Yii::app()->clientScript->registerScript('active_lots_grid', '
+<? Yii::app()->clientScript->registerScript('active_lots_grid', '
     $(".yiiPager > li > a").on("click", function() {
         updateWindowUrl($(this).attr("href"));
     });
     $(document).on("change", "#Auction_category_id", function() {
         setParamToPageUrl("Auction[category_id]", $(this).val());
     });
-')  ?>
+') ?>
 
 <?php
 
 function show_date($data)
 {
-    switch ($data['status'])
-    {
-        case 2: 
-            $title = '<p style="color: green; margin: 0px;">Продан</p>';
-            break;
-        case 3: 
-            $title = '<p style="color: green; margin: 0px;">Продан</p>';
-            break;
-        case 4: 
-            $title = '<p style="color: red; margin: 0px;">Истек срок</p>';
-            break;
-    }
-    if (isset($data['login'])) {$user = '<a href="/'.$data['login'].'">'.$data['login'].'</a>';} else {$user = '';}
-    return '<div class="show_date_sold_items">'.$data['bidding_date'].$title.$user.'</div>';
+
+
+    return '<small class="show_date_sold_items">' . $data['bidding_date'] . '</small>';
 }
 
 function getViewed_urls($data)
 {
     $result = '';
-    if (isset($data['auction_id']) && isset($data['viewed'])) {$result = '<a href="/user/cabinet/viewed/type/0/id/'.$data['auction_id'].'">'.$data['viewed'].'</a>';}
+    if (isset($data['auction_id']) && isset($data['viewed'])) {
+        $result = '<a href="/user/cabinet/viewed/type/0/id/' . $data['auction_id'] . '">' . $data['viewed'] . '</a>';
+    }
     return $result;
 }
 
@@ -284,13 +261,13 @@ function getPrice($data, $params = [])
 
 $gridFiltersHtml = $this->widget(
     'application.widgets.auction.AuctionGridFilters', [
-    'gridId'            => $gridId,
-    'searchFieldName'   => 'Auction[name]',
-    'showSearchFilter'  => true,
-    'auction'           => $auction,
+    'gridId' => $gridId,
+    'searchFieldName' => 'Auction[name]',
+    'showSearchFilter' => true,
+    'auction' => $auction,
     'userCategoriesList' => $userCategoriesList,
     'showSortCategory' => true,
-], true); 
+], true);
 
 $template = $gridFiltersHtml . $template;
 
@@ -303,7 +280,7 @@ $grid = $this->widget(
         'dataProvider' => $dataProvider,
         'template' => $template,
         'enableSorting' => true,
-        'emptyText' => 'Завершённые лоты отсутствуют',
+        'emptyText' => Yii::t('basic', 'No items'),
         'htmlOptions' => array('class' => '', 'style' => 'margin: 0px;'),
         'itemsCssClass' => 'table table-hover grid_cabinet',
         'pager' => isset($gridViewPager) ? $gridViewPager : null,
@@ -317,7 +294,7 @@ $grid = $this->widget(
                 'checkBoxHtmlOptions' => array('class' => 'ch_cl'),
             ),
             array(
-                'header' => 'Товар',
+                'header' => Yii::t('basic', 'Item'),
                 'type' => 'raw',
                 'name' => 'name',
                 'value' => 'TableItem::getTovarField($data, array("showQuestions" => true))',
@@ -325,7 +302,7 @@ $grid = $this->widget(
                 'htmlOptions' => array('class' => 'td1')
             ),
             array(
-                'header' => 'Окончание',
+                'header' => Yii::t('basic', 'Time left'),
                 'type' => 'raw',
                 'name' => 'bidding_date',
                 'value' => 'show_date($data)',
@@ -333,7 +310,7 @@ $grid = $this->widget(
                 'htmlOptions' => array('class' => 'td3'),
             ),
             array(
-                'header' => 'Цена',
+                'header' => Yii::t('basic', 'Price'),
                 'type' => 'raw',
                 'name' => 'price',
                 'value' => 'getPrice($data)',
@@ -342,7 +319,7 @@ $grid = $this->widget(
                 'filter' => false
             ),
             array(
-                'header' => 'Просм.',
+                'header' => Yii::t('basic', 'Views'),
                 'type' => 'raw',
                 'name' => 'viewed',
                 'value' => 'getViewed_urls($data)',
@@ -352,7 +329,7 @@ $grid = $this->widget(
             ),
             array(
                 'class' => 'frontend.components.ButtonColumn',
-                'header' => 'Действия',
+                'header' => Yii::t('basic', 'Actions'),
                 'headerHtmlOptions' => array('class' => 'th6'),
                 'htmlOptions' => array('class' => 'td6'),
                 'template' => '    
@@ -360,20 +337,22 @@ $grid = $this->widget(
                 ',
                 'buttons' => array(
                     '_id' => array(
-                        'raw_text' => function($data) { return $data['auction_id']; }
+                        'raw_text' => function ($data) {
+                            return $data['auction_id'];
+                        }
                     ),
                     'repost' => array(
-                        'label' => 'Повторить торги',
+                        'label' => Yii::t('basic', 'Republish item'),
                         'options' => array(
                             'class' => 'trndf crtreop',
                         ),
                         'url' => 'getLinkRePost($data["auction_id"])'
                     ),
                     'del' => array(
-                        'label' => 'Удалить',
+                        'label' => Yii::t('basic', 'Delete'),
                         'options' => array(
                             'class' => 'trndf',
-                            'onclick' => 'return confirm("Вы действительно хотите удалить лот?")'
+                            'onclick' => 'return confirm("'.Yii::t('basic', 'Do you really want to delete this item?').'")'
                         ),
                         'url' => 'getLinkDel($data)'
                     )
@@ -385,29 +364,27 @@ $grid = $this->widget(
 ?>
 
 <?php if ($count > 0): ?>
-
-<!-- Блок с кнопками -->
-<div class="form-group">
-   <label>Действия с отмеченными:</label>
-   <div class="btn-group">
-   <a style="cursor: pointer" class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" id="action_sale">Перевыставить</a>
-       <div class="dropdown-menu padding15" id="drop_down_box">
-           <div class="input-group">
-                <?php echo CHtml::dropDownList('listname', '', Auction::getDurationList(), [
-                    'empty' => 'период', 
-                    'class' => 'form-control selectbox mass_select', 
-                    'style' => 'width: 120px;'
+    <div class="form-group">
+        <label><?= Yii::t('basic', 'Actions with marked')?>:</label>
+        <div class="btn-group">
+            <a style="cursor: pointer" class="btn btn-info dropdown-toggle" data-toggle="dropdown" href=""
+               id="action_sale"><?= Yii::t('basic', 'Republish items')?></a>
+            <div class="dropdown-menu padding15" id="drop_down_box">
+                <div class="input-group">
+                    <?php echo CHtml::dropDownList('listname', '', Auction::getDurationList(), [
+                        'empty' => Yii::t('basic', 'Period'),
+                        'class' => 'form-control selectbox mass_select',
+                        'style' => 'width: 120px;'
                     ]); ?>
-                  <span class="input-group-btn">
-                  <input type="button" name="name" value="ОК" class="send_mass_reopen btn btn-default" />
+                    <span class="input-group-btn">
+                  <input type="button" name="name" value="Ok" class="send_mass_reopen btn btn-default"/>
                   </span>
-           </div>
-     </div>
-   </div>
-   <a style="cursor: pointer" class="btn btn-danger" href="" id="action_sale_del">Удалить</a>
+                </div>
+            </div>
+        </div>
+        <a style="cursor: pointer" class="btn btn-danger" href="" id="action_sale_del"><?= Yii::t('basic', 'Delete')?></a>
 
-</div>
-
+    </div>
 
 
 <?php endif; ?>

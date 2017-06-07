@@ -92,5 +92,5 @@
     </div>
     </form>
 <?php if ($userNickInWidget): ?>
-<small>Поиск по товарам пользователя <strong><?= $userNickInWidget?></strong> <span style="color: #b3b3b3;" id="change-search-action" title="Сбросить" class="glyphicon glyphicon-remove"></span></small>
+<small><?= Yii::t('basic', 'Search by {user} items', ['{user}' => $userNickInWidget]) ?> <span style="color: #b3b3b3;" id="change-search-action"  class="glyphicon glyphicon-remove"></span></small>
 <?php endif;

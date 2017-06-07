@@ -33,9 +33,6 @@ class CategorySearchWidget extends CWidget
     public $auc_id_arr;
     public $userLogin = false;
 
-    /*
-     * Локализация, либо основной поиск, либо страница пользваотеля
-     */
     private $path;
     private $path_parent;
 

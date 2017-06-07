@@ -75,7 +75,7 @@ class FavoritesController extends FrontController
 
     public function actionItems()
     {
-        $this->pageTitle = 'Избранные лоты и объявления';
+        $this->pageTitle = Yii::t('basic', 'Favorite items');
         $this->render('items');
     }
 }

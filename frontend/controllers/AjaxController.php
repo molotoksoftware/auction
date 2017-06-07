@@ -28,11 +28,9 @@
 
 /**
  *  AjaxController class file
- * -----------------------------------------------------------------------------
- *
- * -----------------------------------------------------------------------------
  *
  */
+
 class AjaxController extends FrontController
 {
     public function filters()
@@ -62,19 +60,17 @@ class AjaxController extends FrontController
         ];
     }
 
-    // Получаем список value_id для дочерних атрибутов Фильтра аукциона, которые нужно добавить в селект
+
     public function actionFilterAttribute()
     {
         $request = Yii::app()->getRequest();
 
-        // Значения родительского атрибута
         $array_id = array_filter($request->getQuery('select_val', []), "Auction::id_validator");
         $list_id = implode(",", $array_id);
         if ($list_id == '') {
             $list_id = '-1';
         }
 
-        // Значения дочернего атрибута
         if (isset($_GET['select_child_val'])) {
             $array_child_id = array_filter($_GET['select_child_val'], "Auction::id_validator");
         }

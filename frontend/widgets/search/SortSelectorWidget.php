@@ -27,11 +27,6 @@
  */
 
 
-/**
- * Class SortSelectorWidget
- *
- * Генерит виджет - селект с HTML списком ссылок для сортировки dataProvider-а.
- */
 class SortSelectorWidget extends CWidget
 {
     const SCOPE_PAGE_AUCTION = 'page-auction';

@@ -43,7 +43,7 @@
             ?>
             </div>
             <div class="col-xs-6">
-                завершится через: 
+                <?= Yii::t('basic', 'Time left')?>:
                 <?= Item::getTimeLeft($data); ?>
             </div>
         </div>
