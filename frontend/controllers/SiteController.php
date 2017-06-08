@@ -134,7 +134,7 @@ class SiteController extends FrontController
 
                         }
 
-                        print "Файл: $file : тип: " . filetype($dir . $file) . "<br>";
+                        print "File: $file : type: " . filetype($dir . $file) . "<br>";
                     }
                 }
                 closedir($dh);

@@ -26,9 +26,7 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Class UserWebsiteNotification
- */
+
 class UserWebsiteNotification extends CComponent
 {
     const SESSION_USER_NTFS = 'user_notifications';

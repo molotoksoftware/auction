@@ -17,20 +17,7 @@
         var $loader = $('.loader-progresbar-wrp', $main);
 
         function updateAction() {
-            /*
-            size = $('.image-container .image-item').size();
-            if (size > 1) {
-                $('#image-upload-block .add-photo-top').html('<p>Основная фотография</p><p>Дополнительные фотографии</p>');
-            } else {
-                $('#image-upload-block .add-photo-top').html('<p>Основная фотография</p>');
-            }*/
-            
-            /*
-            $(".lot-photo-block:first").css({width: "110px", height: "125px"});
-            $(".lot-photo-block:first .lot-photo-inner").css({width: "107px", height: "103px"});
-            $(".lot-photo-block:first img").css({"max-width": "108px", "max-height": "103px"});
-            $(".lot-photo-block:first .lot-photo-wrp").css({"max-width": "108px", "max-height": "103px", width: "107px", height: "103px"});
-            */
+
         }
 
         function addPhoto(resp) {
@@ -232,9 +219,9 @@
         });*/
 
         $('#image-upload-block a.btn-remove').live('click', function () {
-            //if (confirm('Вы уверены, что хотите удалить изображения?')) {
+
                 deletePhoto($(this));
-            //}
+
             return false;
         });
 

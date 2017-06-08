@@ -91,7 +91,6 @@ class BuyController extends FrontController
         } catch (Exception $e) {
             $transaction->rollBack();
 
-            //недостаточно средств
             if ($e->getCode() == 12) {
                 Yii::app()->user->setFlash('failure_pay', $e->getMessage());
                 Yii::app()->controller->redirect('/user/balance/index');

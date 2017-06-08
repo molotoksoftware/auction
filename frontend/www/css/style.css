@@ -1,4 +1,4 @@
-/* масштабирование откл*/
+
 .container {
     width: 1170px !important;
     max-width: none !important;
@@ -13,6 +13,7 @@ html {
 
 body {
     margin-bottom: 60px;
+    font-family: Roboto,Helvetica,Arial,sans-serif !important;
 }
 
 main {
@@ -84,7 +85,7 @@ a {
     margin: 0px !important;
 }
 
-/* Форма поиска   НАЧАЛО                        */
+/* search form START                       */
 .search {
     position: relative;
     margin-bottom: 30px;
@@ -145,9 +146,9 @@ a {
     cursor: pointer;
 }
 
-/* Форма поиска   КОНЕЦ                         */
+/* search form END */
 
-/* Sidebar НАчало*/
+/* Sidebar START */
 .sidebar_left {
     position: relative;
     border-right: 1px solid #D6D6D6;
@@ -226,7 +227,7 @@ a {
     color: #353535;
 }
 
-/* Линия слайда  НАЧАЛО */
+/* Slides START*/
 .main_slider {
 
 }
@@ -256,7 +257,7 @@ a {
     border: 1px solid #d8d8d8;
 }
 
-/* Линия слайда  КОНЕЦ */
+/* Slides END*/
 
 .simple_img {
     width: 100%;
@@ -264,7 +265,7 @@ a {
     border: 1px solid #d8d8d8;
 }
 
-/* Формы НАЧАЛО*/
+/* Forms START*/
 .form-horizontal .control-label {
     text-align: left !important;
 }
@@ -274,9 +275,9 @@ a {
     color: #A60000;
 }
 
-/* Формы КОНЕЦ*/
+/* Forms END*/
 
-/* Витрина товаров главная НАЧАЛО*/
+/* Item on main page START*/
 .main_h1 h1 {
     margin: 10px 0 5px 0;
 }
@@ -329,7 +330,7 @@ a {
     font-size: 88%;
 }
 
-/* Витрина товаров главная КОНЕЦ*/
+/* Item on main page END*/
 
 .main_news {
     margin: 20px 0;
@@ -345,7 +346,7 @@ a {
     color: #757575;
 }
 
-/* Дерево категорий НАЧАЛО */
+/* Category tree START*/
 .main_cat .list-group-item {
     position: relative;
     display: block;
@@ -460,7 +461,7 @@ a {
     text-align: left !important;
 }
 
-/* Карточка товара на странице просмотра общего списка НАЧАЛО*/
+/* Item on category page START*/
 .div_bread_cat {
     font-size: 80%;
     color: gray !important;
@@ -552,7 +553,7 @@ span.price_2 span {
     font-size: 88%;
 }
 
-/* Страница просмотра лота */
+/* View item START*/
 .fotorama__stage {
     border: 1px solid rgb(217, 217, 217) !important;
 }
@@ -895,7 +896,7 @@ span.rew_yes_no.up_active {
     height: 105px;
 }
 
-/* Загрузка фотографий */
+/* Upload photos START*/
 
 .loader-progresbar-wrp {
     overflow: hidden;
@@ -929,7 +930,7 @@ span.rew_yes_no.up_active {
     width: 188px;
 }
 
-/* Страница создания лота*/
+/* Create item START*/
 
 .create_lot .row:first-child {
     padding-top: 0px;
@@ -1275,7 +1276,7 @@ span.rew_yes_no.up_active {
     color: gray;
 }
 
-/* Отзывы */
+/* Reviews*/
 .t_reviews tr {
     font-size: 88% !important;
 }
@@ -1402,7 +1403,7 @@ span.rew_yes_no.up_active {
     margin: 20px 0;
 }
 
-/* Поиск */
+/* Search*/
 .all-cat-item {
     color: #54A0FF !important;
     font-weight: bold !important;
@@ -1412,7 +1413,7 @@ span.rew_yes_no.up_active {
     font-size: 13px;
 }
 
-/* Системные уведомления */
+/* System notifications */
 .notf_item:nth-child(odd) {
 }
 
@@ -1420,14 +1421,14 @@ span.rew_yes_no.up_active {
     background-color: #f5f5f5;
 }
 
-/* Страница статистики просмотров лота*/
+/* Item statistic*/
 
 .align_left_p {
     text-align: left !important;
     padding-left: 10px !important;
 }
 
-/* Страница новостей */
+/* News page */
 .news_list_column .row {
     padding: 15px 0;
     margin-top: 15px;

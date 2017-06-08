@@ -54,6 +54,10 @@ class Setting extends CActiveRecord
     public $id_region;
     public $id_country;
 
+   /* public function getDbConnection(){
+        return Yii::app()->configDb;
+    }*/
+
     /**
      * @return string the associated database table name
      */

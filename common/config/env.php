@@ -18,6 +18,11 @@ return [
             'tablePrefix'           => '',
             'schemaCachingDuration' => 0,
         ],
+        'configDb'=>array(
+            'class'=>'CDbConnection',
+            'connectionString'=>'sqlite:'.dirname(__FILE__).'/../data/setting.db',
+            'tablePrefix'=>'',
+        ),
         'mail'              => [
             'class'            => 'common.extensions.mail.YiiMail',
             'viewPath'         => 'frontend.views.mail',

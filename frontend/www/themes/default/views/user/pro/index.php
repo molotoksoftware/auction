@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  *
@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -21,25 +21,22 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
-
 $prices = ProPrice::model()->findAll();
 
-$userModel = Getter::userModel(); 
-
+$userModel = Getter::userModel();
 
 ?>
 
-<h3>ПРО-аккаунт</h3>
+<h3><?= Yii::t('basic', 'PRO account')?></h3>
 
 <?php if (Yii::app()->user->hasFlash('successful')): ?>
     <div class='alert alert-success'>
-        <?=Yii::app()->user->getFlash('successful');?>
+        <?= Yii::app()->user->getFlash('successful'); ?>
     </div>
 <?php endif; ?>
 
@@ -59,36 +56,37 @@ $userModel = Getter::userModel();
         ->queryRow();
     ?>
     <div class="panel panel-default">
-        <div class="panel-heading">ПРО-аккаунт активен</div>
-           <div class="panel-body">
-               Дата истечения: <strong><?=$proAccount['completion_date'];?></strong>
+        <div class="panel-heading"><?= Yii::t('basic', 'PRO-account is active')?></div>
+        <div class="panel-body">
+            <?= Yii::t('basic', 'Time left')?>: <strong><?= $proAccount['completion_date']; ?></strong>
         </div>
     </div>
 <?php endif; ?>
 
 <?php if (!empty($text['text_pro_account'])): ?>
-<div class="panel panel-default">
-    <div class="panel-heading">Преимущества ПРО-аккаунта</div>
-       <div class="panel-body">
-           <?php echo $text['text_pro_account']; ?>
+    <div class="panel panel-default">
+        <div class="panel-heading"><?= Yii::t('basic', 'Information')?></div>
+        <div class="panel-body">
+            <?php echo $text['text_pro_account']; ?>
+        </div>
     </div>
-</div>
-<?php endif;?>
+<?php endif; ?>
 
-<h4 class=",margint_top_30">Пакеты</h4>
+<h4 class=",margint_top_30"><?= Yii::t('basic', 'Plans')?></h4>
 <div class="row">
     <?php foreach ($prices as $price): ?>
         <div class="col-xs-4">
             <div class="panel panel-default">
-                <div class="panel-heading"><?=$price->name;?></div>
-                   <div class="panel-body">
-                       Стоимость: <strong><?= PriceHelper::formate($price->price); ?></strong><br />
-                       <a class="btn btn-success margint_top_30" href="<?= Yii::app()->createAbsoluteUrl('/buy/pro', array('id' => $price->id)); ?>">
-                        <?php if ($userModel['pro'] != 1): ?>активировать<?php else: ?>продлить<?php endif; ?></a>
+                <div class="panel-heading"><?= $price->name; ?></div>
+                <div class="panel-body">
+                    <?= Yii::t('basic', 'Cost')?>: <strong><?= PriceHelper::formate($price->price); ?></strong><br/>
+                    <a class="btn btn-success margint_top_30"
+                       href="<?= Yii::app()->createAbsoluteUrl('/buy/pro', array('id' => $price->id)); ?>">
+                        <?php if ($userModel['pro'] != 1): ?><?= Yii::t('basic', 'Activate')?><?php else: ?><?= Yii::t('basic', 'Prolong')?><?php endif; ?></a>
                 </div>
             </div>
         </div>
-    <?php endforeach;?>
+    <?php endforeach; ?>
 </div>
 
     

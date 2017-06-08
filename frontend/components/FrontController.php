@@ -26,11 +26,7 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- *
- * Основной контроллер клиентской части приложения
- *
- */
+
 class FrontController extends BaseController
 {
 
@@ -63,7 +59,6 @@ class FrontController extends BaseController
 
     public function getPageSize()
     {
-        // Запоминаем кол-во элементов на странице
         if (isset($_GET['size'])) {
             if (preg_match("/^[0-9]+$/", $_GET['size'])) {
                 $cookie = new CHttpCookie('item_on_page', $_GET['size']);
@@ -72,7 +67,6 @@ class FrontController extends BaseController
             }
         }
 
-        // Узнаем выбранное кол-во элементов на странице
         if (isset(Yii::app()->request->cookies['item_on_page']->value)) {
             if (preg_match("/^[0-9]+$/", Yii::app()->request->cookies['item_on_page']->value)) {
                 $num_page_size = Yii::app()->request->cookies['item_on_page']->value;
@@ -100,7 +94,6 @@ class FrontController extends BaseController
         if ($isGetRequest) {
             $userModel = Getter::userModel();
             if ($userModel) {
-                // Проверяем и сохраняем IP юзера.
                 $webUser = Getter::webUser();
                 $lastSavedIpAddress = $webUser->getState('lastIpAddress');
                 $ip = Yii::app()->getRequest()->getUserHostAddress();
@@ -110,7 +103,6 @@ class FrontController extends BaseController
                     $webUser->setState('lastIpAddress', $ip);
                 }
 
-                // Бан.
                 if (isset($userModel->ban) && $userModel->ban == 1 && Yii::app()->controller->id != 'ban' && Yii::app()->controller->id != 'user') {
                     $this->redirect('/ban/index');
                 }
@@ -176,9 +168,7 @@ class FrontController extends BaseController
         if ($result = Item::searchHelper('', false, $user_id)) {
 
             foreach ($result as $item) {
-                // Составляем массив из идентификаторов найденных аукционов
                 $auc_id_arr[] = intval($item['auction_id']);
-
             }
 
              $this->auc_id_arr = $auc_id_arr;

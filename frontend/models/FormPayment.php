@@ -34,7 +34,7 @@ class FormPayment extends CFormModel
     public function rules()
     {
         return array(
-            array('amount', 'required', 'message' => 'Заполните поле')
+            array('amount', 'required')
         );
     }
 

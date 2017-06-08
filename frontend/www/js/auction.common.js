@@ -32,7 +32,7 @@ var SendReviews = {
                 });
                 $('#reviews-send').submit();
             } else {
-                alert('Нет выбранных элементов');
+                alert('You need to mark some items');
             }
 
         });
@@ -66,7 +66,6 @@ var DeletePurchase = {
                        '<input type=hidden name=data-id-table[] value=' + id_table + '>';
         }
 
-        // одиночное удаление
         $('.js-delete-purchase').click(function() {
 
             sale_id = $(this).attr('data-sale_id');
@@ -80,7 +79,6 @@ var DeletePurchase = {
 
         });
 
-        // массовое удаление
         $('#bulk_delete_purchases').click(function() {
 
             var selectBoxForDelete = $('.grid_cabinet tbody input:checkbox:checked');
@@ -98,7 +96,7 @@ var DeletePurchase = {
                 $PopUpDeleteSale.modal('show');
 
             } else {
-                alert('Нет выбранных элементов');
+                alert('You need to mark some items');
             }
         });
 

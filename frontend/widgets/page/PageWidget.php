@@ -29,13 +29,7 @@
 
 /**
  *  Page class file
- * -----------------------------------------------------------------------------
- * Виджет для отображения статических страниц страниц.
- *
- * Методы для работы с виджетом:
- * getTitle(); - возвращает названия страницы
- * getContent(); -возвращает содержимое страницы
- * -----------------------------------------------------------------------------
+
  *
  *
  * @name Page
@@ -51,14 +45,14 @@ class PageWidget extends CWidget {
 
     public function init() {
         if (is_null($this->alias)) {
-            throw new CException('Укажите в параметрах "alias" страницы');
+            throw new CException('Specify "alias" page');
         }
 
         $dependency = new CDbCacheDependency('SELECT MAX(`update`) FROM pages where alias="'.$this->alias.'"');
         $this->_model = Page::model()->cache(1000, $dependency)->find('alias=:alias',array(':alias' => $this->alias));
 
         if (is_null($this->_model)) {
-            throw new CHttpException(404, 'Страница не существует');
+            throw new CHttpException(404, 'Page net found');
         }
     }
 
@@ -66,8 +60,7 @@ class PageWidget extends CWidget {
     }
 
     /**
-     * возвращает названия страницы
-     * @param $width (int) количество символов в одной строке
+     * @param $width (int)
      * @return string
      */
     public function getTitle($width = 0) {

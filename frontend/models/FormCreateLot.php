@@ -87,15 +87,14 @@ class FormCreateLot extends CFormModel
 
     public function beforeValidate()
     {
-        /* Тип аукциона */
 
-        /* С 1 рубля */
+        /* From 1 */
         if ($this->type_transaction == Auction::TP_TR_START_ONE) {
             $this->starting_price = 1;
         }
 
 
-        /* Фиксированная цена */
+        /* Buy now */
         if ($this->type_transaction == Auction::TP_TR_SALE) {
             $this->starting_price = 0;
             if (((int)$this->price) <= 0 && $this->scenario != 'nomain') {
@@ -107,7 +106,6 @@ class FormCreateLot extends CFormModel
         if ($this->type_transaction == Auction::TP_TR_STANDART) {
 
             if (!$this->hasErrors()) {
-                /* Стандартный */
                 if (((int)$this->starting_price) <= 0 && $this->scenario != 'nomain') {
                     $this->addError('starting_price', Yii::t('basic', 'Specify the starting price'));
                 }

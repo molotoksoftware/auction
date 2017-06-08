@@ -56,7 +56,7 @@ class RecoveryAction extends CAction
 
                 $message = new YiiMailMessage();
                 $message->view = 'recovery-pass';
-                $message->setSubject('Восстановление пароля');
+                $message->setSubject(Yii::t('basic', 'Password recovery'));
                 $message->setBody(
                     array(
                         'login' => $user->login,
@@ -72,9 +72,11 @@ class RecoveryAction extends CAction
                 $mail = Yii::app()->getComponent('mail');
 
                 if ($mail->send($message)) {
-                    Yii::app()->user->setFlash('succes_sent', 'Новый пароль успешно отправлен на указанный E-mail');
+                    Yii::app()->user->setFlash('succes_sent', Yii::t('basic', 'New password has been sent to your e-mail')
+                    );
                 } else {
-                     Yii::app()->user->setFlash('failure_sent', 'Произошла ошибка, попробуйте позже либо обратитесь к администратору');
+                     Yii::app()->user->setFlash('failure_sent', Yii::t('basic', '')
+                     );
                 }
 
             }

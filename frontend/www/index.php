@@ -10,7 +10,7 @@
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 
-// часть url адреса локального сервера, чтобы определился как дев
+// part of url, for working with Debug mode
 $name_test_server = 'github';
 $isDev = strpos($_SERVER['HTTP_HOST'], $name_test_server) !== false;
 

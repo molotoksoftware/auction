@@ -68,7 +68,7 @@ class CategorySearchWidget extends CWidget
 
             $parent = $this->category->parent;
             $this->cat_alias = ($parent->alias == 'root') ? $this->path_parent . '?' . $this->getWithOutCatId : $this->path . $parent->alias . '?' . $this->getWithOutCatId;
-            $this->cat_name = ($parent->name == 'root') ? 'Все категории' : $parent->name;
+            $this->cat_name = ($parent->name == 'root') ? Yii::t('basic', 'All categories') : $parent->name;
 
             $this->descendants = $this->category->descendants()->findAll();
 
@@ -89,7 +89,7 @@ class CategorySearchWidget extends CWidget
             $this->category = Category::model()->findByPk(1);
             $this->category->level = $this->category->level + 1;
             $this->cat_alias = $this->path_parent . '?' . $this->getWithOutCatId;
-            $this->cat_name = 'Все категории';
+            $this->cat_name = Yii::t('basic', 'All categories');
         }
 
 

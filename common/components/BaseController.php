@@ -32,14 +32,9 @@ class BaseController extends CController
     public $breadcrumbs = [];
     public $pageDescription = '';
     public $pageKeywords = '';
-    /**
-     * Мета теги, будут вставлены в head.
-     *
-     * @var array Массив тегов, каждый содержит attribute => value значения.
-     */
     private $metaTags = [];
-
     private $hasOgImageMetaTag = false;
+
 
     protected function performAjaxValidation($model, $id)
     {

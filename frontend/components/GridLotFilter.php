@@ -26,16 +26,12 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Class GridLotFilter
- */
 class GridLotFilter
 {
     const DEFAULT_PERIOD_OPTION = 'all';
 
     public static function appendQueryToCommand(CDbCommand $command)
     {
-        // Фильтр по периоду.
         switch (self::getPeriod()) {
             case 'last_year':
                 $command->andWhere('s.date > DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR)');

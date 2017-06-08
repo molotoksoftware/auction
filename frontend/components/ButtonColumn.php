@@ -28,16 +28,12 @@
 
 
 Yii::import('zii.widgets.grid.CButtonColumn');
-/**
- * data-id 
- */
+
 class ButtonColumn extends CButtonColumn {
 
 
     protected function renderButton($id, $button, $row, $data) {
-        /*
-         * Если у нас есть свойство raw_text, то мы просто выводим это значение в template
-         */
+
         if(isset($button['raw_text'])) {
             echo $this->evaluateExpression($button['raw_text'], array('data' => $data, 'row' => $row));
             return;

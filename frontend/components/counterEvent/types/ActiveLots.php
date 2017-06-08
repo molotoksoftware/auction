@@ -30,9 +30,7 @@
 Yii::import('frontend.components.counterEvent.CounterEvent');
 
 /**
- * Активные лоты 
- * цифра в скобка символизирует об наличии новых ставок
- * к моим лотам. 
+ * Active lots
  *  
  */
 class ActiveLots extends CounterEvent

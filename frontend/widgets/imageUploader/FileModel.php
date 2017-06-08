@@ -37,8 +37,8 @@ class FileModel extends CFormModel
         return array(
             array('file', 'file', 'maxSize' =>  8 * 1280*1280,
                 'types' => 'jpg, jpeg, png, gif, bmp',
-                'tooLarge' => 'размер файла не должен превышать 512 КБ',
-                'wrongType' => 'Разрешена загрузка файлов только с расширениями  jpg, jpeg, png, gif, bmp'
+                'tooLarge' => '',
+                'wrongType' => 'jpg, jpeg, png, gif, bmp'
             )
         );
     }

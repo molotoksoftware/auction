@@ -97,7 +97,7 @@ class SystemNotificationController extends FrontController
 
     public function actionIndex()
     {
-        $this->pageTitle = 'Системные уведомления';
+        $this->pageTitle = Yii::t('basic', 'System Notifications');
 
         $dataProvider = new CActiveDataProvider(
             SystemNotification::model()->byUserId(Yii::app()->user->id), array(

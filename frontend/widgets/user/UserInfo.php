@@ -27,11 +27,6 @@
  */
 
 
-/**
- * Class UserInfo
- *
- * Виджет с инфой юзера.
- */
 class UserInfo extends CWidget
 {
     const SCOPE_GRID_LOT = 'grid-lot';

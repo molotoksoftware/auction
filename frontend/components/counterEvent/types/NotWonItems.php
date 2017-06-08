@@ -28,9 +28,7 @@
 
 
 Yii::import('frontend.components.counterEvent.CounterEvent');
-/**
- * не выигранные
- */
+
 class NotWonItems extends CounterEvent
 {
 

@@ -152,6 +152,9 @@ return [
     'Starting price can\'t be equal to the buy now price' => 'Начальная цена не может равняться блиц-цене',
     'Specify price' => 'Укажите цену',
     'Max. photo: {count}' => 'Максимальное количество фото: {count}',
+    'Main photo' => 'Основная фотография',
+    'Additional photos' => 'Дополнительные фотографии',
+    'Do you really want to delete these photos?' => 'Вы уверены, что хотите удалить все фотографии?',
 
     // Editor lot
 
@@ -262,6 +265,7 @@ return [
     'Items of' => 'Товары пользователя',
     'This information will publish in your profile page' => 'Опишите сферу Вашей деятельности, ассортимент товаров, особенности оплаты и доставки Ваших лотов. Эта информация будет отображаться на странице просмотра Вашего профиля',
     'Go to' => 'Перейти',
+    'You must enter the question'=> 'Необходимо ввести текст вопроса',
 
 
     // Settings
@@ -288,6 +292,7 @@ return [
     'First name' => 'Имя',
     'Last name' => 'Фамилия',
     'Telephone' => 'Телефон',
+    'Phone' => 'Телефон',
     'Update for all lots' => 'Обновить местоположение для всех лотов',
     'Additional tools' => 'Дополнительные инструменты',
     'Additional contact information' => 'Дополнительная контактная информация',
@@ -311,6 +316,14 @@ return [
     'Unset automatic publish of items' => 'Отменить автоперевыставление для всех лотов',
     'Change items price' => 'Измененить стоимость лотов',
     'About me' => 'Обо мне',
+
+    // Pro account
+    'PRO-account is active' => 'ПРО-аккаунт активен',
+    'Plans' => 'Пакеты',
+    'Cost' => 'Стоимость',
+    'Activate' => 'Активировать',
+    'Prolong' => 'Продлить',
+    '' => '',
 
     // Payments
     'Payment received!' => 'Платеж получен!',
@@ -357,6 +370,9 @@ return [
     'E-mail {email} is not available' => 'Email "{email}" недоступен',
     'Password recovery' => 'Восстановление пароля',
     'Reset password' => 'Сбросить пароль',
+    'New password has been sent to your e-mail' => 'Новый пароль успешно отправлен на указанный E-mail',
+    'E-mail send error' => 'Ошибка отправки письм',
+    'This NICK is already used' => 'Этот ник уже занят',
     'New password will be sent to your E-mail. It\'s generated automatically. We recommend you to change this password.' => 'На вашу электронную почту мы отправим новый пароль. Он генерируется автоматически и его сложно запомнить. Рекомендуем поменять пароль в настройках аккаунта. Если письмо не пришло, посмотрите в папке Нежелательная почта (спам), возможно оно там. Либо попробуйте восстановить пароль заново. Учтите, пароль будет изменён!',
 
 
@@ -364,8 +380,7 @@ return [
     'Receive e-mail notifications' => 'Получать уведомления на E-mail',
     'The system automatically sends you important notifications to the mailbox. Do not turn off this feature if you want to be informed about all events.' => 'Система автоматически присылает важные уведомления Вам на почтовый ящик. Не отключайте эту функцию, если хотите быть в курсе всех событий связанных с Вашим участием на торговой площадке.',
 
-    '' => '',
-    '' => '',
+
 
     //filters
     'Today' => 'Сегодня',

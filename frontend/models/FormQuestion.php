@@ -36,7 +36,7 @@ class FormQuestion extends CFormModel
     public function rules()
     {
         return array(
-            array('text', 'required', 'message' => 'Необходимо ввести текст вопроса')
+            array('text', 'required', 'message' => Yii::t('basic', 'You must enter the question'))
         );
     }
 

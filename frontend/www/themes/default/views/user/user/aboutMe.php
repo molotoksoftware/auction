@@ -36,3 +36,4 @@
 )); ?>
 
 <div class="about_me"><?= $model->about; ?></div>
+

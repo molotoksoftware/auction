@@ -1,5 +1,5 @@
 /**
- * Функционал фронтенда. Базовые настройки и функции.
+ * Frontend
  *
  * @type {{security: {csrf: {tokenName: null, token: null}}, init: frontend.init}}
  */
@@ -16,7 +16,6 @@ frontend = {
     },
 
     /**
-     * Показывать сообщения в попапе. Сообщения 3х типов: success, info и error.
      *
      * @type {{showSuccess: frontend.popupMessage.showSuccess, showError: frontend.popupMessage.showError, showInfo: frontend.popupMessage.showInfo, showMessage: frontend.popupMessage.showMessage}}
      */
@@ -30,9 +29,6 @@ frontend = {
         showInfo: function(text, params) {
             return this.showMessage(text, 'info', params);
         },
-        /**
-         * Без тайтла, кнопки закрытия.
-         */
         showHtml: function(html) {
             this.showMessage(html, 'html', {isHtml: true});
         },

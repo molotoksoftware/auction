@@ -83,7 +83,7 @@ class BalanceController extends FrontController {
     }
 
     public function actionPayment() {
-        $this->pageTitle = 'Баланс';
+        $this->pageTitle = Yii::t('basic', 'Payments');
         $this->layout = '//layouts/settings';
 
         $this->render('//user/balance/payment');

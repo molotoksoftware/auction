@@ -49,11 +49,11 @@ class LoginAction extends CAction
                 if ($identity->authenticate()) {
                     $exist = UsersService::model()->exists('service=:service AND service_id=:service_id', [':service' => $identity->service->serviceName, ':service_id' => $identity->service->id]);
 
-                    if ($exist) // Если привязан к сервису
+                    if ($exist)
                     {
                         Yii::app()->user->login($identity, 3600 * 24 * 30);
                         $this->controller->redirect('/');
-                    } else // Если не привязан к сервису
+                    } else
                     {
                         $login = self::get_in_translate_to_en($identity->service->name);
 
@@ -102,7 +102,7 @@ class LoginAction extends CAction
                 $this->controller->redirect('/');
             }
         } else {
-            //стандартная авторизация
+
             $model = new LoginForm();
 
             // if it is ajax validation request

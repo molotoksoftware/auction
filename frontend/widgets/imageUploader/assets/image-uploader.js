@@ -5,6 +5,8 @@
         uploadUrl: '',
         deleteUrl: '',
         arrangeUrl: '',
+        mainPhotoText: '',
+        additionalPhotoText: '',
         photos: []
     };
 
@@ -19,9 +21,9 @@
         function updateAction() {
             size = $('.image-container .image-item').size();
             if (size > 1) {
-                $('#image-upload-block .add-photo-top').html('<p>Основная фотография</p><p>Дополнительные фотографии</p>');
+                $('#image-upload-block .add-photo-top').html('<p>'+ settings.mainPhotoText +'</p><p>'+ settings.additionalPhotoText +'</p>');
             } else {
-                $('#image-upload-block .add-photo-top').html('<p>Основная фотография</p>');
+                $('#image-upload-block .add-photo-top').html('<p>'+ settings.mainPhotoText +'</p>');
             }
         }
 
@@ -207,13 +209,6 @@
         }
     };
 
-    $(document).ready(function() {
-        $('.del-all-photos').click(function() {
-            if(confirm('Вы уверены, что хотите удалить все фотографии?')) {
-                $('.del-lot-photo').click();
-            }
-        })
-    })
 })(jQuery);
 
 

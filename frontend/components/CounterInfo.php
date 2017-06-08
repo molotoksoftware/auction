@@ -85,7 +85,6 @@ class CounterInfo
         return self::$quantity_fav_items;
     }
 
-    // Кол-во отслеживаемых продавцов
     public static function quantityOtslItems()
     {
         if (empty(self::$quantity_my_otsl)) {
@@ -126,12 +125,7 @@ class CounterInfo
         return (self::$quantity_questions_for_me == false) ? 0 : self::$quantity_questions_for_me;
     }
 
-    /**
-     * Активные ставки
-     *
-     * @param integer $user_id id пользователя
-     * @return integer количество активных ставок пользователя
-     */
+
     public static function quantityActiveBets($user_id)
     {
         $params = array(
@@ -275,13 +269,6 @@ class CounterInfo
         return (self::$quantity_no_won_items == false) ? 0 : self::$quantity_no_won_items;
     }
 
-
-    /**
-     * Фильтр по покупателю.
-     *
-     * @param CDbCommand $command
-     * @param array      $params
-     */
     public static function applyFilterBuyer(CDbCommand $command, &$params = null)
     {
         $buyerId = Yii::app()->getRequest()->getQuery('buyer');
@@ -296,12 +283,6 @@ class CounterInfo
         }
     }
 
-    /**
-     * Фильтр по продавцу.
-     *
-     * @param CDbCommand $command
-     * @param array      $params
-     */
     public static function applyFilterSeller(CDbCommand $command, &$params = null)
     {
         $sellerId = Yii::app()->getRequest()->getQuery('seller');

@@ -58,9 +58,9 @@ class EditUserForm extends CFormModel
     public function rules()
     {
         return [
-            ['id_country, id_region, id_city', 'required', 'message' => 'Заполните поле "{attribute}"'],
+            ['id_country, id_region, id_city', 'required', 'message' => Yii::t('basic', 'You need specify field "{attribute}"')],
             ['login, nick, firstname, lastname, passwordNew, passwordOld, passwordRe, about', 'length'],
-            ['email', 'email', 'message' => 'Некорректный e-mail'],
+            ['email', 'email'],
             ['add_contact_info', 'length', 'max' => 512],
             ['terms_delivery', 'length', 'max' => 2048],
             ['show_telephone, consent_receive_notification', 'boolean'],
@@ -91,27 +91,26 @@ class EditUserForm extends CFormModel
         $user = User::model()->findByAttributes([$attribute => $this->{$attribute}]);
 
         if ($user) {
-            $this->addError($attribute, 'Этот ник уже занят');
+            $this->addError($attribute, Yii::t('basic', 'This NICK is already used'));
         } else {
             $user = User::model()->findByAttributes(['login' => $this->{$attribute}]);
 
             if ($user && $user->user_id != $this->user->user_id) {
-                $this->addError($attribute, 'Этот ник используется в качестве логина другого пользователя');
+                $this->addError($attribute, Yii::t('basic', 'This NICK is already used'));
             }
         }
     }
 
     public function afterValidate()
     {
-        //check change password
         if (!$this->hasErrors())
             if (!empty($this->passwordOld)) {
                 if (Yii::app()->user->getModel()->validatePassword($this->passwordOld)) {
                     if (empty($this->passwordNew)) {
-                        $this->addError('passwordNew', 'Укажите новый пароль');
+                        $this->addError('passwordNew', Yii::t('basic', 'Specify new password'));
                     }
                 } else {
-                    $this->addError('passwordOld', 'Неверный пароль');
+                    $this->addError('passwordOld', Yii::t('basic', 'Wrong password'));
                 }
             }
     }
@@ -119,13 +118,13 @@ class EditUserForm extends CFormModel
     public function attributeLabels()
     {
         return [
-            'nick'        => 'Ник',
-            'firstname'   => 'Имя',
-            'lastname'    => 'Фамилия',
+            'nick'        => Yii::t('basic', 'Nick'),
+            'firstname'   => Yii::t('basic', 'First name'),
+            'lastname'    => Yii::t('basic', 'Last name'),
             'email'       => 'E-mail',
-            'passwordRe'  => 'Запомнить меня',
-            'passwordNew' => 'Новый пароль',
-            'passwordOld' => 'Старый пароль',
+            'passwordRe'  => Yii::t('basic', 'Repeat password'),
+            'passwordNew' => Yii::t('basic', 'New password'),
+            'passwordOld' => Yii::t('basic', 'Current password'),
         ];
     }
 }
