@@ -26,93 +26,91 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @var BackendController $this
+ */
 
 $this->pageTitle = 'Авторизация';
-$this->layout = '//layouts/static';
+
+$this->layout = '//layouts/clean';
+$this->bodyAddClass = 'login-page';
+
+Yii::app()->clientScript->registerScriptFile(bu() . '/plugins/iCheck/icheck.min.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerCssFile('/plugins/iCheck/square/blue.css');
+
+Yii::app()->clientScript->registerScript('iCheck', "
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+", CClientScript::POS_END);
+
 ?>
 
-<div class="navbar navbar-top navbar-inverse">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="brand" href="<?php echo Yii::app()->createUrl(Yii::app()->params['adminUrl']); ?>"> Панель управления</a>
-            <ul class="nav pull-right">
-                <li class="toggle-primary-sidebar hidden-desktop" data-toggle="collapse" data-target=".nav-collapse-primary"><a><i class="icon-th-list"></i></a></li>
-                <li class="collapsed hidden-desktop" data-toggle="collapse" data-target=".nav-collapse-top"><a><i class="icon-align-justify"></i></a></li>
-            </ul>
-        </div>
+<div class="login-box">
+    <div class="login-logo">
+        <a href="">MOLOTOK</a>
     </div>
-</div>
-<div class="container">
-    <div class="span4 offset4">
-        <div class="padded">
-            <div class="login box" style="margin-top: 80px;">
-                <div class="box-header">
-                    <span class="title"><?= Yii::t('common', 'authorization'); ?></span>
-                </div>
-                <div class="box-content padded">
-                    <?php
-                    $form = $this->beginWidget('CActiveForm', array(
-                        'id' => 'form-login',
-                        'enableAjaxValidation' => true,
-                        'enableClientValidation' => true,
-                        'clientOptions' => array(
-                            'validateOnSubmit' => true,
-                            'validateOnChange' => false,
-                            'validateOnType' => false,
-                        ),
-                        'focus' => array($model, 'username'),
-                        'htmlOptions' => array(
-                            'class' => 'separate-sections'
-                        ),
-                    ));
-                    ?>
-                    <?php echo $form->error($model, 'password', array('class' => 'alert alert-error')); ?>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg"><?= Yii::t('common', 'authorization'); ?></p>
 
-                    <div class="input-prepend">
-                        <span class="add-on">
-                            <i class="icon-user"></i>
-                        </span>
-                        <?php echo $form->textField($model, 'username', array('placeholder' => $model->getAttributeLabel('username'))); ?>
-                        <?php $form->error($model, 'username'); ?>
-                    </div>
 
-                    <div class="input-prepend">
-                        <span class="add-on">
-                            <i class="icon-key"></i>
-                        </span>
-                        <?php echo $form->passwordField($model, 'password', array('placeholder' => $model->getAttributeLabel('password'))); ?>
-                        <?php $form->error($model, 'password'); ?>
-                    </div>
-                    <div class="input-prepend">
-                        <label for="LoginForm_rememberMe" class="checkbox">
-                            <?php echo $form->checkBox($model, 'rememberMe'); ?>
-                            <?php echo $model->getAttributeLabel('rememberMe'); ?>    
-                        </label>
-                    </div>
-                    <div>
-                        <?php
-                        $this->widget('bootstrap.widgets.TbButton', array(
-                            'label' => 'Войти',
-                            'icon' => 'icon-signin',
-                            'type' => null,
-                            'size' => null,
-                            'htmlOptions' => array(
-                                'class' => 'btn-blue btn-block',
-                                'id' => 'submit',
-                            )
-                        ));
-                        ?>
-                        <?php Yii::app()->clientScript->registerScript('loginSubmit', '
-                        $("#submit").click(function(){
-                            $("#form-login").submit();
-                        });    
+            <?php
+            $form = $this->beginWidget('CActiveForm', array(
+                'id' => 'form-login',
+                'enableAjaxValidation' => true,
+                'enableClientValidation' => false,
+                'clientOptions' => array(
+                    'validateOnSubmit' => true,
+                    'validateOnChange' => false,
+                    'validateOnType' => false,
+                ),
+                'focus' => array($model, 'username'),
+                'htmlOptions' => array(
+                    'class' => ''
+                ),
+            ));
+            ?>
 
-                        ', CClientScript::POS_LOAD); ?>
-                    </div>
-                    <?php $this->endWidget(); ?>
-                </div>
+
+        <div class="form-group has-feedback">
+                <?php echo $form->textField($model, 'username', ['class' => 'form-control', 'placeholder' => $model->getAttributeLabel('username')]); ?>
+                <?php $form->error($model, 'username'); ?>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <?php echo $form->passwordField($model, 'password', ['class' => 'form-control', 'placeholder' => $model->getAttributeLabel('password')]); ?>
+                <?php $form->error($model, 'password'); ?>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+
 
             </div>
-        </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label for="LoginForm_rememberMe">
+                            <?php echo $form->checkBox($model, 'rememberMe'); ?>
+                            <?php echo $model->getAttributeLabel('rememberMe'); ?>
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" id="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+
+        <?php echo $form->errorSummary($model,"",""); ?>
+
+
+
+        <?php $this->endWidget(); ?>
+
     </div>
+    <!-- /.login-box-body -->
 </div>
+<!-- /.login-box -->

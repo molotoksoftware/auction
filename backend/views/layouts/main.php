@@ -9,7 +9,7 @@
  */
 
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -49,35 +49,35 @@ $this->widget('ex-bootstrap.widgets.ENotify', array(
 
 <!DOCTYPE html>
 <html lang="<?= Yii::app()->getLanguage(); ?>">
-    <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-    <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-    <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
-            <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-            <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-            <noscript>
-            <?php
-            /**
-             * @todo сделать noscript
-             */
-            ?>
+    <noscript>
+        <?php
+        /**
+         * @todo сделать noscript
+         */
+        ?>
 
-            <meta http-equiv="refresh" content="0; URL=<?= $this->createAbsoluteUrl('/core/offline/noscript'); ?>" />
-            </noscript>
-            <link rel="shortcut icon" href="<?= bu(); ?>/favicon.ico" />
-        </head>
-        <body>
-            <?php $this->renderPartial('//layouts/navbar'); ?>
-            <?php $this->renderPartial('//layouts/sidebar'); ?>
+        <meta http-equiv="refresh" content="0; URL=<?= $this->createAbsoluteUrl('/core/offline/noscript'); ?>" />
+    </noscript>
+    <link rel="shortcut icon" href="<?= bu(); ?>/favicon.ico" />
+</head>
+<body>
+<?php $this->renderPartial('//layouts/navbar'); ?>
+<?php $this->renderPartial('//layouts/sidebar'); ?>
 
-            <div class="main-content">
-                <div class='notifications top-right'></div>
-                <?php $this->renderPartial('//layouts/header'); ?>
-                <?php echo $content; ?>
-            </div>
-        </body>
-    </html>
+<div class="main-content">
+    <div class='notifications top-right'></div>
+    <?php $this->renderPartial('//layouts/header'); ?>
+    <?php echo $content; ?>
+</div>
+</body>
+</html>

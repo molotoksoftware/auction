@@ -52,6 +52,6 @@ cs()->registerCssFile(bu() . '/css/global.css');
 
     </head>
     <body>
-        <?php echo $content; ?>
+        <?php  echo $content; ?>
     </body>
 </html>

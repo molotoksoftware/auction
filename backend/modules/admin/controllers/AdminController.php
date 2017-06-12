@@ -27,7 +27,7 @@
  */
 
 
-class AdminController extends BackController
+class AdminController extends BackendController
 {
 
     public function filters()
@@ -65,12 +65,9 @@ class AdminController extends BackController
                 $model->attributes = $_POST['LoginForm'];
 
                 if ($model->validate() && $model->login()) {
-                    if (Yii::app()->user->returnUrl) {
 
-                        $this->redirect(array(Yii::app()->params['adminUrl']));
-                    } else {
-                        $this->redirect(array(Yii::app()->params['adminUrl']));
-                    }
+                        $this->redirect(['/area/index']);
+
                 }//end if validate
             }//end if isset
 

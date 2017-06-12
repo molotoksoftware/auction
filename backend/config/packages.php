@@ -1,27 +1,39 @@
 <?php
 
 return array(
-    /*'jquery'=> array(
+    'jquery'=> array(
+        'basePath' => 'backend.www.plugins',
+        'js'=>array('jQuery/jquery-2.2.3.min.js')
+    ),
 
-        //'baseUrl' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2',
-        'js'=>array('jquery.min.js')
+   /* 'jquery'=> array(
+        'basePath' => 'frontend.www.js',
+        'js'=>array('jquery.js')
     ),*/
-    'fancybox' => array(
-        'basePath' => 'webroot.themes.fit-admin.libs.fancybox',
-        'js' => array('jquery.fancybox-1.3.4.pack.js','jquery.mousewheel-3.0.4.pack.js'),
-        'css' => array('jquery.fancybox-1.3.4.css')
+
+    'bootstrap' => array(
+        'basePath' => 'backend.www.bootstrap',
+        //'js' => array('js/bootstrap.min.js'),
+        'css' => array('css/bootstrap.min.css')
     ),
-    'dataTables' => array(
-        'basePath' => 'webroot.themes.fit-admin.libs.dataTables.media.js',
-        'js' => array('jquery.dataTables.js'),
-        'css' =>  array(),
+    'adminLTE' => array(
+        'basePath' => 'backend.www.dist',
+        'css' => array('css/AdminLTE.min.css', 'css/skins/_all-skins.min.css')
     ),
-    'Timepicker' => array(
-        'basePath' => 'webroot.themes.fit-admin.libs.Timepicker',
-        'js' => array('jquery-ui-timepicker-addon.js'),
-        'css' =>  array('jquery-ui-timepicker-addon.css'),
-        'depends'=>array('jquery.ui')
+    'jquery-jvectormap' => array(
+        'basePath' => 'backend.www.plugins',
+        'css' => array('jvectormap/jquery-jvectormap-1.2.2.css')
     ),
+    'font-awesome' => array(
+        'baseUrl' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css',
+        'css' =>  array('font-awesome.min.css'),
+    ),
+    'ionicons' => array(
+        'baseUrl' => 'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/',
+        'css' =>  array('ionicons.min.css'),
+    ),
+
+
 
 
 );

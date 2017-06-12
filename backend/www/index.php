@@ -20,8 +20,8 @@ ini_set('display_errors', true);
 ini_set('default_charset', 'utf-8');
 error_reporting(E_ALL);
 
-//defined('YII_DEBUG') or define('YII_DEBUG', true);
-//defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
 
 require('./../../common/lib/vendor/autoload.php');
 require('./../../common/lib/vendor/yiisoft/yii/framework/yii.php');

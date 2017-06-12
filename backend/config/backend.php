@@ -16,14 +16,14 @@ defined('APP_CONFIG_NAME') or define('APP_CONFIG_NAME', 'backend');
 return array(
     'name' => '',
     'basePath' => realPath(__DIR__ . '/..'),
-    'defaultController' => 'main',
-    'aliases' => array(
+    'defaultController' => 'area',
+   /* 'aliases' => array(
         'ex-bootstrap' => dirname(__FILE__) . '/../extensions/ex-bootstrap',
-    ),
-    'import' => array(
-        'backend.extensions.bootstrap.widgets.*',
+    ),*/
+   /* 'import' => array(
+    //    'backend.extensions.bootstrap.widgets.*',
         'backend.components.notification.Notification'
-    ),
+    ),*/
     'sourceLanguage' => 'en',
     'language' => 'ru',
     'preload' => array('bootstrap'),
@@ -69,7 +69,7 @@ return array(
             'class' => 'backend.modules.admin.components.PhpAuthManager',
             'defaultRoles' => array('guest')
         ),
-        'bootstrap' => array(
+      /*  'bootstrap' => array(
             'class' => 'application.extensions.bootstrap.components.Bootstrap',
             'responsiveCss' => true,
             'enableNotifierJS' => false,
@@ -78,14 +78,9 @@ return array(
             'fontAwesomeCss' => true,
             'yiiCss' => true,
             'jqueryCss' => true,
-        ),
+        ),*/
         'clientScript' => array(
-            'scriptMap' => array(
-              //'jquery.js' => false
-//				'bootstrap.min.css' => false,
-//				'bootstrap.min.js' => false,
-//				'bootstrap-yii.css' => false
-            )
+            'packages' => require(dirname(__FILE__) . '/packages.php')
         ),
         'urlManager' => array(
             // uncomment the following if you have enabled Apache's Rewrite module.
