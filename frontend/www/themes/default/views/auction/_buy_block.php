@@ -143,7 +143,7 @@ if (!empty($sales)) {
                             <?php endif; ?>
 
                         </script>
-                        <div class="info_auc_gr"><?php echo date('d.m.Y, H:i', strtotime($bidClosingDate)); ?></div>
+                        <div class="info_auc_gr"><?= date('d.m.Y, H:i', strtotime($bidClosingDate)); ?></div>
                     </dd>
                     <?php if ($base['type_transaction'] == Auction::TP_TR_STANDART || $base['type_transaction'] == Auction::TP_TR_START_ONE): ?>
                         <?php
@@ -279,9 +279,7 @@ if (!empty($sales)) {
                             <?php endif; ?>
                         </strong>
                         <div class="info_auc_gr">
-                            <?= date('j', $date_sales); ?>
-                            <?= HelperDate::getMonthName(date('n', $date_sales)); ?>
-                            <?= date('Y, H:i', $date_sales); ?>
+                            <?= date('d.m.Y, H:i', $date_sales); ?><br>
                         </div>
                     </dd>
                 <?php endif; ?>

@@ -7,7 +7,7 @@
  * @license GNU General Public License, version 3
  */
 /**
- * 
+ *
  * This file is part of MolotokSoftware.
  *
  * MolotokSoftware is free software: you can redistribute it and/or modify
@@ -19,13 +19,11 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
-/**
- * @var $this Controller
- */
+
+
 ?>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
@@ -40,7 +38,8 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/auction?filter=nulls"><?= Yii::t('basic', 'From'). ' ' . PriceHelper::formate(1) ?></a></li>
+                <li><a href="/auction?filter=nulls"><?= Yii::t('basic', 'From') . ' ' . PriceHelper::formate(1) ?></a>
+                </li>
                 <li><a href="/news"><?= Yii::t('basic', 'News') ?></a></li>
                 <li><a href="#contact"><?= Yii::t('basic', 'Community') ?></a></li>
                 <!--<li class="dropdown">
@@ -78,21 +77,37 @@
         </div>
         <div class="col-xs-9 search_box_form">
             <?php $this->widget('frontend.widgets.search.SearchWidget', [
-                                'searchActionInWidget' => $this->searchAction,
-                                'userNickInWidget' => $this->userNick,
-                           ]); ?>
+                'searchActionInWidget' => $this->searchAction,
+                'userNickInWidget' => $this->userNick,
+            ]); ?>
         </div>
     </div>
     <div class="top_menu">
         <div class="row">
-            <div class="header_cat but"><a href="/auctions/transport-197"><?= Yii::t('basic', 'Automotive {span}& Industrial{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>'])?></a></div>
-            <div class="header_cat but"><a href="/auctions/telefony-svyaz-i-navigaciya-1285"><?= Yii::t('basic', 'Digital {span}& Prime Music{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>'])?></a></div>
-            <div class="header_cat but"><a href="/auctions/kompyutery-orgtehnika-i-kanctovary-1175"><?= Yii::t('basic', 'Electronics {span}& Computers{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>'])?></a></div>
-            <div class="header_cat but"><a href="/auctions/kollekcionirovanie-970"><?= Yii::t('basic', 'Collectibles {span}& Art{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>'])?></a></div>
-            <div class="header_cat but"><a href="/auctions/antikvariat-971"><?= Yii::t('basic', 'Sports {span}& Outdoors{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>'])?></a></div>
-            <div class="header_cat but"><a href="/auctions/detskiy-mir-648"><?= Yii::t('basic', 'Toys, Kids {span}& Baby{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>'])?></a></div>
-            <div class="header_cat but"><a href="/auctions/krasota-i-zdorove-572"><?= Yii::t('basic', 'Beauty, Health {span}& Grocery{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>'])?></a></div>
-            <div class="header_cat but"><a href="/auction/"><?= Yii::t('basic', 'All {span}categories{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>'])?></a></div>
+            <div class="header_cat but"><a
+                        href="/auctions/transport-197"><?= Yii::t('basic', 'Automotive {span}& Industrial{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>']) ?></a>
+            </div>
+            <div class="header_cat but"><a
+                        href="/auctions/telefony-svyaz-i-navigaciya-1285"><?= Yii::t('basic', 'Digital {span}& Prime Music{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>']) ?></a>
+            </div>
+            <div class="header_cat but"><a
+                        href="/auctions/kompyutery-orgtehnika-i-kanctovary-1175"><?= Yii::t('basic', 'Electronics {span}& Computers{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>']) ?></a>
+            </div>
+            <div class="header_cat but"><a
+                        href="/auctions/kollekcionirovanie-970"><?= Yii::t('basic', 'Collectibles {span}& Art{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>']) ?></a>
+            </div>
+            <div class="header_cat but"><a
+                        href="/auctions/antikvariat-971"><?= Yii::t('basic', 'Sports {span}& Outdoors{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>']) ?></a>
+            </div>
+            <div class="header_cat but"><a
+                        href="/auctions/detskiy-mir-648"><?= Yii::t('basic', 'Toys, Kids {span}& Baby{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>']) ?></a>
+            </div>
+            <div class="header_cat but"><a
+                        href="/auctions/krasota-i-zdorove-572"><?= Yii::t('basic', 'Beauty, Health {span}& Grocery{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>']) ?></a>
+            </div>
+            <div class="header_cat but"><a
+                        href="/auction/"><?= Yii::t('basic', 'All {span}categories{span2}', ['{span}' => '<br /><span class="small_t">', '{span2}' => '</span>']) ?></a>
+            </div>
 
         </div>
     </div>

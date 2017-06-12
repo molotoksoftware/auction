@@ -182,11 +182,6 @@ class Attribute extends CActiveRecord
      * *************************************************************************
      */
 
-    /**
-     * Возвращает доступные типы атрибутов
-     *
-     * @return array
-     */
     public static function getAvailableType()
     {
         return array(

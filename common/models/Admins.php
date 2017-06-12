@@ -206,12 +206,15 @@ class Admins extends CActiveRecord
         //    return md5(time() . $this->email . uniqid());
     }
 
+    /*
+     * @return string
+     */
     public function getAvatar()
     {
         if (!empty($this->avatar_file)) {
             return $this->uploadedFile->getImage('preview');
         } else {
-            return 'http://www.placehold.it/50x50/EFEFEF/AAAAAA';
+            return '';
         }
     }
 
@@ -257,11 +260,13 @@ class Admins extends CActiveRecord
 
     public function getShortName()
     {
-        implode(' ', array(
+        return implode(' ', array(
             $this->first_name,
             $this->last_name,
             $this->father_name
         ));
+
+
     }
 
 }

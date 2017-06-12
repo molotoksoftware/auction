@@ -99,18 +99,8 @@ class Getter
         return Yii::app()->getComponent('emailQueue');
     }
 
-    /**
-     * Включены ли счетчики, алалитика на сайте.
-     *
-     * @return bool
-     */
-    public static function getIsEnabledCounters()
-    {
-        return empty(Yii::app()->params['disableCounters']);
-    }
 
     /**
-     * Разрешена ли реальная отправка емайлов.
      *
      * @return bool
      */
@@ -129,13 +119,6 @@ class Getter
         return Yii::app()->getComponent('accessManager');
     }
 
-    /**
-     * @return Billing
-     */
-    public static function billing()
-    {
-        return Yii::app()->getComponent('billing');
-    }
 
 
 }
