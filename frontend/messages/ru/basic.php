@@ -439,6 +439,12 @@ return [
     'See all reviews' => 'Смотреть все отзывы',
     'See all items' => 'Смотреть все товары',
     'Common' => 'Общее',
+    'You can activate (or cancel) function of automatically republishing of all your items.' => 'При помощи этой функции можно массово назначить или отменить автоперевыставление для собственных лотов.',
+    'Using this function you can change prices of all your items. Will be changed start price and "buy now" price. Lots with bids will be missed.' => 'Данная опция позволяет изменить цену сразу у всех собственных лотов. Будет изменена как начальная цена, так и блиц цена. Лоты имеющие ставки, а также лоты "с 1 рубля" будут пропущенны.',
+    'You should indicate how many percent you want to raise prices for your items. A value with a negative sign. "-" will reduce the cost of items.' => 'Укажите на сколько процентов Вы хотите поднять цены для своих лотов. Значение со знаком минус "-" снизит стоимость лотов.',
+    '' => '',
+    '' => '',
+    '' => '',
 
 
     'About me' => 'Отзывы обо мне',

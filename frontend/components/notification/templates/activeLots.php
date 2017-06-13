@@ -27,5 +27,5 @@
  */
 
 ?>
-Активные лоты. По вашему лоту <?= $linkItem; ?> появилась новая ставка <?= $bidPrice; ?><br/>
+По вашему лоту <?= $linkItem; ?> появилась новая ставка <?= $bidPrice; ?><br/>
 <?= CHtml::link('Перейти к моим лотам', Yii::app()->createAbsoluteUrl('/user/sales/activeItems')); ?>

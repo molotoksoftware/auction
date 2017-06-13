@@ -50,7 +50,9 @@ $request = Yii::app()->getRequest();
 <div class="panel panel-default">
   <div class="panel-heading"><?= Yii::t('basic', 'Items republish')?></div>
   <div class="panel-body">
-      <p>При помощи этой функции можно массово назначить или отменить автоперевыставление для собственных лотов.</p>
+      <p>
+          <?= Yii::t('basic', 'You can activate (or cancel) function of automatically republishing of all your items.')?>
+      </p>
         <?php echo CHtml::beginForm('', 'post', ['name' => 'form1']); ?>
         <div class="control">
             <?php echo CHtml::radioButton(
@@ -77,13 +79,14 @@ $request = Yii::app()->getRequest();
 <div class="panel panel-default">
   <div class="panel-heading"><?= Yii::t('basic', 'Change items price')?></div>
   <div class="panel-body">
-    <p>Данная опция позволяет изменить цену сразу у всех собственных лотов. Будет изменена как начальная цена, так
-    и блиц цена. Лоты имеющие ставки, а также лоты "с 1 рубля" будут пропущенны.</p>
+    <p>
+
+        <?= Yii::t('basic', 'Using this function you can change prices of all your items. Will be changed start price and "buy now" price. Lots with bids will be missed.')?>
+        </p>
 
     <?php echo CHtml::beginForm('', 'post', ['name' => 'form2', 'class' => 'form-inline']); ?>
         <div class="form-group">
-            <?php echo CHtml::label(
-                'Укажите на сколько процентов Вы хотите поднять цены для своих лотов. Значение со знаком минус "-" снизит стоимость лотов.',
+            <?php echo CHtml::label(Yii::t('basic', 'You should indicate how many percent you want to raise prices for your items. A value with a negative sign.'),
                 'price_update'
             ); ?>
         </div>
