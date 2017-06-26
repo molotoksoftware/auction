@@ -77,7 +77,7 @@ class RegistrationForm extends CFormModel
     {
         return [
             'email'                  => Yii::t('basic','E-mail'),
-            'login'                  => Yii::t('basic','Login'),
+            'login'                  => Yii::t('basic', 'Your login'),
             'password'               => Yii::t('basic','Password'),
             'confirmPassword'        => Yii::t('basic','Repeat password'),
             'agreeNotifier'          => Yii::t('basic','Receive e-mail notification'),
