@@ -180,6 +180,7 @@ return [
     'Unfollow' => 'Отписаться на обновлений',
     'You asked seller' => 'Вы задали вопрос. Продавец ответит на Ваш e-mail адрес',
     'Error sending request' => 'Ошибка при отправке запроса',
+    'Seller' => 'Продавец',
     'Views' => 'Просмотры',
     'Type your question here' => 'Введите текст Вашего вопроса',
     'Ask a Question' => 'Задать вопрос',

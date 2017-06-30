@@ -444,7 +444,7 @@ $type = get_class($model);
                                     'type_transaction',
                                     array(
                                         Auction::TP_TR_STANDART => 'Стандартный',
-                                        Auction::TP_TR_START_ONE => 'С 1 грн.',
+                                        Auction::TP_TR_START_ONE => 'От ' . PriceHelper::formate(1),
                                         Auction::TP_TR_SALE => 'Фиксированная цена'
                                     ),
                                     array(
