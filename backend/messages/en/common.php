@@ -29,15 +29,15 @@
 
 
 return [
-    'RUB' => 'р.',
-    'reply' => 'назад',
-    'Reply' => 'Назад',
-    'authorization' => 'Авторизация',
-    'return to the site' => 'Вернуться на сайт',
+    'RUB' => '$',
+    'reply' => 'reply',
+    'Reply' => 'Reply',
+    'authorization' => 'authorization',
+    'return to the site' => 'return to the site',
 
-    'Localization' => 'Локализация',
-    'PRO settings' => 'Настройки ПРО',
-    'Main settings' => 'Основные настройки',
+    'Localization' => 'Localization',
+    'PRO settings' => 'PRO Settings',
+    'Main settings' => 'Main Settings',
     '' => '',
     '' => '',
     '' => '',
