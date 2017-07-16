@@ -26,13 +26,25 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+* Russian to English:
+* Главная is Home
+* Главная is Home
+* Вкладка содержит список часто используемых модулей Frequently Used Modules
+* Пользователи Members List
+* Лоты (Lots - auction lots) Listings
+* Страницы Pages
+* Новости News
+* Платежи Payments
+* Настройки Settings
+*/
 
-$this->pageTitle = 'Главная';
+$this->pageTitle = 'Home';
 
 $this->header_info = array(
     'icon' => 'icon-home icon-2x',
-    'title' => 'Главная',
-    'description' => 'Вкладка содержит список часто используемых модулей'
+    'title' => 'Home',
+    'description' => 'Frequently Used Modules'
 );
 ?>
 <div class="container-fluid padded">
@@ -43,41 +55,41 @@ $this->header_info = array(
 
           <div class="row-fluid">
             <div class="span2 action-nav-button">
-                <a title="Пользователи" href="<?= Yii::app()->createUrl('/user/user/index'); ?>">
+                <a title="Members List" href="<?= Yii::app()->createUrl('/user/user/index'); ?>">
                 <i class="icon-user icon-2x"></i>
-                <span>Пользователи</span>
+                <span>Members List</span>
                 </a>
             </div>
 
             <div class="span2 action-nav-button">
-                <a title="Лоты" href="<?= Yii::app()->createUrl('/catalog/auction/index'); ?>">
+                <a title="Listings" href="<?= Yii::app()->createUrl('/catalog/auction/index'); ?>">
                 <i class="icon-legal icon-2x"></i>
-                <span>Лоты</span>
+                <span>Listings</span>
                 </a>
             </div>
 
             <div class="span2 action-nav-button">
-                <a title="Страницы" href="<?= Yii::app()->createUrl('/page/page/index'); ?>">
+                <a title="Pages" href="<?= Yii::app()->createUrl('/page/page/index'); ?>">
                 <i class="icon-file-alt icon-2x"></i>
-                <span>Страницы</span>
+                <span>Pages</span>
                 </a>
             </div>
             <div class="span2 action-nav-button">
-                <a title="Новости" href="<?= Yii::app()->createUrl('/news/news/index'); ?>">
+                <a title="News" href="<?= Yii::app()->createUrl('/news/news/index'); ?>">
                 <i class="icon-leaf icon-2x"></i>
-                <span>Новости</span>
+                <span>News</span>
                 </a>
             </div>
             <div class="span2 action-nav-button">
-                <a title="Платежи" href="<?= Yii::app()->createUrl('/money/history/recharge'); ?>">
+                <a title="Payments" href="<?= Yii::app()->createUrl('/money/history/recharge'); ?>">
                 <i class="icon-money icon-2x"></i>
-                <span>Платежи</span>
+                <span>Payments</span>
                 </a>
             </div>
             <div class="span2 action-nav-button">
-                <a title="Настройки" href="<?= Yii::app()->createUrl('/admin/settings/common'); ?>">
+                <a title="Settings" href="<?= Yii::app()->createUrl('/admin/settings/common'); ?>">
                 <i class="icon-cog icon-2x"></i>
-                <span>Настройки</span>
+                <span>Settings</span>
                 </a>
             </div>
           </div>

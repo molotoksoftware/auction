@@ -27,7 +27,18 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+/*
+*Неизвестный тип Unknown Type
+*отсутствует каталог Catalog Missing
+*Лот успешно сохранен Listing Succesfully Saved
+*выберите категорию Select Category
+*Ошыбка при удалении Error While Deleting
+*Лот успешно удален Succesfully Deleted Listing
+*Успешно удалено Succesfully Deleted
+*Ошыбка при удалении Error While Deleting
+*/
+ 
+ 
 class AuctionController extends BackController
 {
 
@@ -137,7 +148,7 @@ SQL;
                 )
             );
         } else {
-            throw new CException('Неизвестный тип');
+            throw new CException('Unknown Type');
         }
     }
 
@@ -229,7 +240,7 @@ SQL;
 
                     if (!is_dir($save_path . 'thumbs')) {
                         if ((@mkdir($save_path . 'thumbs')) == false) {
-                            throw new CException('отсутствует каталог Thumbs');
+                            throw new CException('Catalog Missing: Thumbs');
                         }
                     }
 
@@ -310,9 +321,9 @@ SQL;
                 $transaction = $model->dbConnection->beginTransaction();
                 try {
 
-                    //сохраняем параметры
+                    //сохраняем параметры saving parameters
                     if (isset($_POST['options'])) {
-                        //удаляем текущие атрибуты
+                        //удаляем текущие атрибуты deleting running or flowing attributes
                         if (!$model->isNewRecord) {
                             Yii::app()->db->createCommand()
                                 ->delete(
@@ -322,7 +333,7 @@ SQL;
                                 );
                         }
 
-                        //сохранить выбранные значения
+                        //сохранить выбранные значения save selected values
                         if (!empty($_POST['options'][0])) {
                             foreach ($_POST['options'][0] as $key => $value) {
                                 //checkbox list
@@ -356,7 +367,7 @@ SQL;
                             }
                         }
 
-                        //сохранить текстовые значения
+                        //сохранить текстовые значения save text values 
                         if (!empty($_POST['options'][1])) {
                             foreach ($_POST['options'][1] as $key => $value) {
                                 Yii::app()->db->createCommand()
@@ -377,7 +388,7 @@ SQL;
                     throw $e;
                 }
 
-                // Обновляем счетчик изображений
+                // Обновляем счетчик изображений update the image counter
                 $img_count = Yii::app()->db->createCommand()->select('COUNT(*)')->from('images')
 				    ->where('item_id=:item_id', array(':item_id' => $model->auction_id))->queryScalar();
                 Yii::app()->db->createCommand()
@@ -385,7 +396,7 @@ SQL;
 
 
                 //save
-                Yii::app()->user->setFlash('success', 'Лот успешно сохранен');
+                Yii::app()->user->setFlash('success', 'Listing Succesfully Saved');
                 if ($_POST['submit'] == 'index') {
                     $this->redirect(array('/catalog/auction/index'));
                 } else {
@@ -396,7 +407,8 @@ SQL;
     }
 
     /**
-     * возвращает подкатегории выбраной категории для select
+     * возвращает подкатегории выбраной категории для select 
+	 * this returns you up a level 
      * @param type $cat_id
      */
     public function actionDynamicCategoriesForSelect($cat_id, $where_show = 0)
@@ -406,7 +418,7 @@ SQL;
 
         if (count($categories) > 0) {
             $htmlOptions = array(
-                'empty' => '- выберите категорию -'
+                'empty' => '- Select Category -'
             );
             RAjax::data(
                 array(
@@ -456,9 +468,9 @@ SQL;
     {
         $deleted = $this->loadModel('Auction', $id)->delete();
         if ($deleted == 0) {
-            RAjax::error(array('messages' => 'Ошыбка при удалении'));
+            RAjax::error(array('messages' => 'Error While Deleting'));
         } else {
-            RAjax::success(array('messages' => 'Лот успешно удален'));
+            RAjax::success(array('messages' => 'Succesfully Deleted Listing'));
         }
     }
 
@@ -470,9 +482,9 @@ SQL;
     public function  actionRemoveBid($id)
     {
         if (Bid::remove($id)) {
-            RAjax::success(array('messages' => 'Успешно удалено'));
+            RAjax::success(array('messages' => 'Succesfully Deleted'));
         } else {
-            RAjax::error(array('messages' => 'Ошыбка при удалении'));
+            RAjax::error(array('messages' => 'Error While Deleting'));
         }
     }
 

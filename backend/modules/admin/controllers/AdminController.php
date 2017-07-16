@@ -26,6 +26,13 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+ /* 
+ *Пользователь успешно создан user succesfully created
+ *Изменения успешно применены success (succesfully saved changes)
+ *Пользователь не существует user does not exist
+ *Ошибка при удалении error while deleting
+ *Успешно удалено delete succesfully
+ */
 
 class AdminController extends BackController
 {
@@ -104,7 +111,7 @@ class AdminController extends BackController
                 ));
 
                 if ($model->save(false)) {
-                    Yii::app()->user->setFlash('success', 'Пользователь успешно создан');
+                    Yii::app()->user->setFlash('success', 'user succesfully created');
 
                     if ($_POST['submit'] == 'index') {
                         $this->redirect(array('/admin/admin/index'));
@@ -151,7 +158,7 @@ class AdminController extends BackController
             $model->attributes = $_POST['Admins'];
             if ($model->validate()) {
                 $model->save(false);
-                Yii::app()->user->setFlash('success', 'Изменения успешно применены');
+                Yii::app()->user->setFlash('success', 'success');
                 $this->redirect(array('/admin/admin/index'));
             }
         }
@@ -165,9 +172,9 @@ class AdminController extends BackController
     {
         if (!$model = Admins::model()->findByPk($id)) {
             if (Yii::app()->request->isAjaxRequest) {
-                RAjax::error(array('messages' => 'Пользователь не существует'));
+                RAjax::error(array('messages' => 'user does not exist'));
             } else {
-                throw new CHttpException(404, 'Пользователь не существует');
+                throw new CHttpException(404, 'user does not exist');
             }
         }
         return $model;
@@ -181,9 +188,9 @@ class AdminController extends BackController
 
 
         if ($deleted == 0) {
-            RAjax::error(array('messages' => 'Ошибка при удалении'));
+            RAjax::error(array('messages' => 'error while deleting'));
         } else {
-            RAjax::success(array('messages' => 'Успешно удалено'));
+            RAjax::success(array('messages' => 'delete succesfully'));
         }
     }
 

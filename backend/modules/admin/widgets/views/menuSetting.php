@@ -26,13 +26,18 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+ /*
+ *Основное Common Settings
+ *Тексты Privacy Policy
+ *Настройки ПРО Site Usage Agreement
+ */
 
 $this->widget(
     'zii.widgets.CMenu',
     array(
         'items' => array(
             [
-                'label' => 'Основное',
+                'label' => 'Common Settings',
                 'url'   => ['/admin/settings/common'],
               //  'itemOptions' => array('class' => Yii::app()->controller->action->id=='page'?'active':'')
             ],
@@ -44,13 +49,13 @@ $this->widget(
             ],
 
             [
-                'label'=>'Тексты',
+                'label'=>'Privacy Policy',
                 'url'   => ['/admin/settings/pagesPro'],
              //   'itemOptions' => array('class' => Yii::app()->controller->id=='reviews'?'active':'')
             ],
 
             [
-                'label' => 'Настройки ПРО',
+                'label' => 'Site Usage Agreement',
                 'url'   => ['/admin/settings/settingsPro'],
              //   'itemOptions' => array('class' => Yii::app()->controller->action->id=='about_me'?'active':'')
             ],

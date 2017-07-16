@@ -25,37 +25,45 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+ /* Russian to English
+ * создания пользователя create user
+ * обновления пользователя update user
+ * просмотреть список пользователей view user list
+ * удалить пользователя delete user
+ * Управления пользователями manage users
+ */
 
 
 return array(
     'createUser' => array(
         'type' => CAuthItem::TYPE_OPERATION,
-        'description' => 'создания пользователя',
+        'description' => 'create user',
         'bizRule' => null,
         'data' => null,
     ),
     'updateUser' => array(
         'type' => CAuthItem::TYPE_OPERATION,
-        'description' => 'обновления пользователя',
+        'description' => 'update user',
         'bizRule' => null,
         'data' => null,
     ),
     'listUser' => array(
         'type' => CAuthItem::TYPE_OPERATION,
-        'description' => 'просмотреть список пользователей',
+        'description' => 'list users',
         'bizRule' => null,
         'data' => null,
     ),
     'deleteUser' => array(
         'type' => CAuthItem::TYPE_OPERATION,
-        'description' => 'удалить пользователя',
+        'description' => 'delete user',
         'bizRule' => 'return !(Yii::app()->user->id==$params["user_id"]);',
         'data' => null,
     ),
 
     'managesUser' => array(
         'type' => CAuthItem::TYPE_TASK,
-        'description' => 'Управления пользователями',
+        'description' => 'manage users',
         'children' => array(
             'listUser',
             'deleteUser',

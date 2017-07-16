@@ -26,7 +26,10 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+/*
+*Не определен дочерний элемент undefined childe element
+*
+*/
 
 ?>
 
@@ -137,7 +140,7 @@ foreach ($options as $option) {
 
             $childAttr = Attribute::model()->findByPk($rootAttr->child_id);
             if (is_null($childAttr)) {
-                echo CHtml::tag('p', 'Не определен дочерний элемент');
+                echo CHtml::tag('p', 'undefined child element');
                 break;
             }
             $childAttrName = 'options_0_' . $childAttr->attribute_id;
@@ -156,7 +159,7 @@ foreach ($options as $option) {
                 getAttributeValues($option['attribute_id']),
                 array(
                     'class' => 'span8',
-                    'empty' => '- выберите значения -',
+                    'empty' => '- select values -',
                     'onchange' => new CJavaScriptExpression('
                        var select_id = $("#' . 'options_0_' . $option['attribute_id'] . '").find("option:selected").val();
                        $.ajax({
@@ -166,7 +169,7 @@ foreach ($options as $option) {
                         dataType: "json",
                         beforeSend: function() {
                                  $("#' . $childAttrName . '").val("");
-                                 $("#' . $childAttrName . '").find("option:selected").html("идет загрузка...");
+                                 $("#' . $childAttrName . '").find("option:selected").html("loading...");
                                  $("#' . $childAttrName . '").attr("disabled", true);
                         },
                         success: function(data) {
@@ -217,7 +220,7 @@ foreach ($options as $option) {
                 $depValues,
                 array(
                     'class' => 'span8',
-                    'empty' => '- выберите значения -'
+                    'empty' => '- select values -'
                 )
             );
 

@@ -24,22 +24,38 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+ /*
+ *Редактирование лота Edit a Listing
+ *Опубликовано auction began (published on)
+ *До окончания торгов auction closes
+ *завершенный лот completed auction
+ *датПеревыставить restart auction (reissue)
+ *Редактировать только информацию edit information only
+ *Перевыставить лот заново restart the auction again
+ *Состояние Auction Status
+ *активный active
+ *завершен completed
+ *Описание description
+ *идет загрузка категорий loading categories
+ *
+ */
 
-$this->pageTitle = 'Редактирование лота';
+$this->pageTitle = 'Edit a Listing';
 $this->breadcrumbs = array(
     array(
         'icon' => 'icon-folder-open',
-        'label' => 'Каталог',
+        'label' => 'catalog',
         'url' => array('/catalog/category/index'),
     ),
     array(
         'icon' => 'icon-legal',
-        'label' => 'Лоты',
+        'label' => 'listing',
         'url' => array('/catalog/auction/index'),
     ),
     array(
         'icon' => 'icon-pencil',
-        'label' => 'Редактирование лота',
+        'label' => 'edit a listing',
         'url' => '',
     ),
 );
@@ -53,10 +69,10 @@ $type = get_class($model);
         <div class="span12">
             <div class="box">
                 <div class="box-header">
-                    <span class="title"><i class="icon-pencil"></i> Редактирование лота</span>
+                    <span class="title"><i class="icon-pencil"></i> edit a listing</span>
                     <ul class="nav nav-tabs nav-tabs-right">
                         <li>
-                            <a rel="tooltip" data-original-title="Вернуться"
+                            <a rel="tooltip" data-original-title="back"
                                href="<?= Yii::app()->createUrl('/catalog/auction/index'); ?>"><i class="icon-reply"></i></a>
                         </li>
                     </ul>
@@ -98,14 +114,14 @@ $type = get_class($model);
                         $f = $interval->format('%R%');
                         ?>
                         <div class="alert <?= ($f == '-') ? 'alert-error' : 'alert-success'; ?>">
-                            <i class=" icon-calendar"></i>Опубликовано:
+                            <i class=" icon-calendar"></i>auction began on:
                             <?= ' ' . Yii::app()->dateFormatter->format('dd MMMM yyyy H:mm:ss', $model->created); ?>
                             <br/>
 
-                            <i class=" icon-time"></i>До окончания торгов:
+                            <i class=" icon-time"></i>auction closes:
                             <?php
                             if ($f == '-') {
-                                echo '<b>завершенный лот</b>, дата окончания: ' . Yii::app()->dateFormatter->format(
+                                echo '<b>completed auction</b>, auction close date: ' . Yii::app()->dateFormatter->format(
                                         'dd MMMM yyyy H:m:s',
                                         $model->bidding_date
                                     );
@@ -123,7 +139,7 @@ $type = get_class($model);
                             ?>
                             <br/>
                             <br/>
-                            Статус: <b><?= $model->getStatus(); ?></b>
+                            Status: <b><?= $model->getStatus(); ?></b>
                         </div>
 
                         <?php echo $form->errorSummary($model); ?>
@@ -131,15 +147,15 @@ $type = get_class($model);
                         <div class="well">
 
                             <div class="control-group ">
-                                <label for="duration" class="control-label">Перевыставить?</label>
+                                <label for="duration" class="control-label">Restart auction?</label>
                                 <div class="controls">
                                     <?php
                                     echo CHtml::dropDownList(
                                         'refresh',
                                         '',
                                         array(
-                                            0 => 'Редактировать только информацию',
-                                            1 => 'Перевыставить лот заново'
+                                            0 => 'edit information only',
+                                            1 => 'restart the auction again'
                                         )
                                     );
                                     ?>
@@ -147,14 +163,14 @@ $type = get_class($model);
                             </div>
 
                             <div class="control-group ">
-                                <label for="duration" class="control-label">Состояние</label>
+                                <label for="duration" class="control-label">Auction Status</label>
                                 <div class="controls">
                                     <?php echo $form->dropDownList(
                                         $model,
                                         'status',
                                         array(
-                                            1 => 'активный',
-                                            4 => 'завершен'
+                                            1 => 'active',
+                                            4 => 'completed'
                                         )
                                     ); ?>
                                 </div>
@@ -173,7 +189,7 @@ $type = get_class($model);
 
 
                         <div class="control-group">
-                            <label class="control-label required required" for="Auction_text">Описание <span
+                            <label class="control-label required required" for="Auction_text">description <span
                                     class="required">*</span></label>
                             <div class="controls">
                                 <div class="redactor_box">
@@ -183,7 +199,8 @@ $type = get_class($model);
                                         'model' => $model,
                                         'attribute' => 'text',
                                         'options' => array(
-                                            'lang' => 'ru',
+                                            'lang' => 'en',
+											//originally lang was set to 'ru'
                                             'convertVideoLinks' => 'true',
                                             'buttons' => array('formatting', '|', 'bold', 'italic', 'deleted', '|', 'image', 'video'),
                                             'iframe' => true,
@@ -197,7 +214,7 @@ $type = get_class($model);
 
                         <?php $form->error($model, 'category_id'); ?>
                         <?php echo $form->hiddenField($model, 'category_id'); ?>
-                        <!-- ........................... КАТЕГОРИИ ........................... -->
+                        <!-- ........................... КАТЕГОРИИ/Categories ........................... -->
                         <div id="cnt-categories">
                             <div class="row-fluid">
                                 <div class="span4">
@@ -228,7 +245,7 @@ $type = get_class($model);
                                                     '{"cat_id":$(this).find("option:selected").val(), "level":2}'),
                                                 'beforeSend' => 'js:function(){
                                                 $("#Auction_category_id").val("");
-                                                $("#Cat2").find("option:selected").html("идет загрузка категорий...");
+                                                $("#Cat2").find("option:selected").html("loading categories...");
                                                 $("#Cat2").attr("disabled", true);
                                                 $("#Cat3").hide();
 						$("#Cat4").hide();
@@ -254,7 +271,8 @@ $type = get_class($model);
                                             'onchange' => new CJavaScriptExpression('
                                             cat_id = $("#Cat1").find("option:selected").val();
                                             $("#' . $type . '_category_id").val(cat_id);'),
-                                            'empty' => '- выберите категорию -'
+                                            'empty' => '- select a category -'
+											//выберите категорию
                                         )
                                     );
                                     ?>
@@ -278,7 +296,7 @@ $type = get_class($model);
                                                 $("#Cat3").hide(); 
                                                 $("#Cat4").hide(); 
                                                 $("#Cat5").hide();
-                                                $("#Cat3").find("option:selected").html("идет загрузка категорий...");
+                                                $("#Cat3").find("option:selected").html("loading categories..."); 
                                                 $("#Cat3").attr("disabled", true);
                                                 $("#' . $type . '_category_id").val("");
                                                 hideOptions();
@@ -297,8 +315,8 @@ $type = get_class($model);
                                             ),
                                             'id' => 'Cat2',
                                             'style' => (count($cat_2_elements) > 0) ? 'display:block' : 'display:none',
-                                            'empty' => '- выберите категорию -'
-                                        )
+                                            'empty' => '- select a category -'
+                                        ) //идет загрузка категорий (loading categories), выберите категорию select a category
                                     );
                                     ?>
                                 </div>
@@ -319,7 +337,7 @@ $type = get_class($model);
                                                     '{"cat_id":$(this).find("option:selected").val(), "level":4}'),
                                                 'beforeSend' => 'js:function(){
                                                 $("#Cat4").hide(); $("#Cat5").hide();
-                                                $("#Cat4").find("option:selected").html("идет загрузка категорий...");
+                                                $("#Cat4").find("option:selected").html("loading categories...");
                                                 $("#Cat4").attr("disabled", true);
                                                 $("#' . $type . '_category_id").val("");
                                                 hideOptions();
@@ -338,7 +356,7 @@ $type = get_class($model);
                                             ),
                                             'id' => 'Cat3',
                                             'style' => (count($cat_3_elements) > 0) ? 'display:block' : 'display:none',
-                                            'empty' => '- выберите категорию -'
+                                            'empty' => '- select a category -'
                                         )
                                     );
                                     ?>
@@ -360,7 +378,7 @@ $type = get_class($model);
                                                     '{"cat_id":$(this).find("option:selected").val(), "level":5}'),
                                                 'beforeSend' => 'js:function(){
                                                 $("#Cat5").hide();
-                                                $("#Cat5").find("option:selected").html("идет загрузка категорий...");
+                                                $("#Cat5").find("option:selected").html("loading categories...");
                                                 $("#Cat5").attr("disabled", true);
                                                 $("#' . $type . '_category_id").val("");
                                                 hideOptions();
@@ -379,7 +397,7 @@ $type = get_class($model);
                                             ),
                                             'id' => 'Cat4',
                                             'style' => (count($cat_4_elements) > 0) ? 'display:block' : 'display:none',
-                                            'empty' => '- выберите категорию -'
+                                            'empty' => '- select a category -'
                                         )
                                     );
                                     ?>
@@ -395,7 +413,7 @@ $type = get_class($model);
                                             'id' => 'Cat5',
                                             'class' => 'span12',
                                             'style' => (count($cat_5_elements) > 0) ? 'display:block' : 'display:none',
-                                            'empty' => '- выберите категорию -',
+                                            'empty' => '- select a category -',
                                             'onchange' => new CJavaScriptExpression('
                                             cat_id = $("#Cat5").find("option:selected").val();
                                             $("#' . $type . '_category_id").val(cat_id);
@@ -406,7 +424,7 @@ $type = get_class($model);
                                 </div>
                             </div>
                         </div>
-                        <!-- ........................... КАТЕГОРИИ ........................... -->
+                        <!-- ........................... КАТЕГОРИИ/Categories ........................... -->
 
 
                         <div id="content-options"
@@ -428,24 +446,27 @@ $type = get_class($model);
                             'quantity',
                             array(
                                 'class' => '',
-                                'hint' => 'Количество товара в единицах (целое число)'
+                                'hint' => 'Quantity of Goods (number)'
+								//Количество товара в единицах (целое число) quantity of goods
+								//for our purposes this needs to be disabled or set at a fixed value
                             )
                         );
                         ?>
 
 
                         <div class="control-group ">
-                            <label for="type_transaction" class="control-label">Тип аукциона и цена</label>
+                            <label for="type_transaction" class="control-label">Auction Type and Price</label>
 
                             <div class="controls">
-                                <?php
+                                <?php 
+								//Тип аукциона и цена Auction Type and Price, Стандартный Standard, Фиксированная цена fixed price
                                 echo CHtml::activeRadioButtonList(
                                     $model,
                                     'type_transaction',
                                     array(
-                                        Auction::TP_TR_STANDART => 'Стандартный',
+                                        Auction::TP_TR_STANDART => 'standard',
                                         Auction::TP_TR_START_ONE => 'От ' . PriceHelper::formate(1),
-                                        Auction::TP_TR_SALE => 'Фиксированная цена'
+                                        Auction::TP_TR_SALE => 'Fixed Price'
                                     ),
                                     array(
                                         'id' => 'type_transaction',
@@ -459,14 +480,15 @@ $type = get_class($model);
                         <?php echo $form->textFieldRow($model, 'starting_price'); ?>
                         <?php echo $form->textFieldRow($model, 'price'); ?>
                         <div class="control-group ">
-                            <label for="duration" class="control-label">Продолжительность торгов</label>
+                            <label for="duration" class="control-label">Auction Length</label>
 
                             <div class="controls">
-                                <?php echo Chtml::activeDropDownList(
+                                <?php //Продолжительность торгов Auction Length, выберите период select period,  
+									echo Chtml::activeDropDownList(
                                     $model,
                                     'duration',
                                     Auction::getDurationList(),
-                                    array('empty' => ' - выберите период - ')
+                                    array('empty' => ' - select period - ')
                                 ); ?>
                                 <?php echo $form->error($model, 'duration'); ?>
                             </div>
@@ -492,7 +514,7 @@ $type = get_class($model);
 
                         <?php
 
-                        //таблица ставок
+                        //таблица ставок auction table
                         $this->renderPartial(
                             '_table_bids',
                             array(
@@ -504,7 +526,7 @@ $type = get_class($model);
 
                         <?php
                         /*
-                        //таблица вопросов
+                        //таблица вопросов select period
                         $this->renderPartial(
                             '_table_questions',
                             array(
@@ -522,7 +544,7 @@ $type = get_class($model);
                         <div class="pull-right">
                             <?php
                             echo CHtml::link(
-                                '<span class="icon-circle-arrow-left"></span> Вернуться',
+                                '<span class="icon-circle-arrow-left"></span> back',
                                 '/catalog/auction/index',
                                 array(
                                     'class' => 'link'
@@ -534,7 +556,7 @@ $type = get_class($model);
                                 'bootstrap.widgets.TbButton',
                                 array(
                                     'buttonType' => 'submit',
-                                    'label' => 'Сохранить',
+                                    'label' => 'submit',
                                     'type' => null,
                                     'htmlOptions' => array(
                                         'class' => 'btn btn-blue',

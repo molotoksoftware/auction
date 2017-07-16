@@ -26,6 +26,12 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+ /*
+ *Ставки Bids
+ *
+ *
+ *
+ */ 
 
 $sql = Yii::app()->db->createCommand()
     ->from('bids b')
@@ -51,7 +57,7 @@ function getLinkUser($id)
 ?>
 <div class="box">
     <div class="box-header">
-        <span class="title">Ставки (<?= count($dataProvider->getData()); ?>)</span>
+        <span class="title">Bids (<?= count($dataProvider->getData()); ?>)</span>
     </div>
     <div class="box-content">
         <?php
@@ -64,20 +70,20 @@ function getLinkUser($id)
                 //'itemsCssClass' => 'table-normal table-hover-row',
                 //'template' => "{items}",
                 'dataProvider' => $dataProvider,
-                'summaryText' => 'Ставки {start}—{end} из {count}.',
+                'summaryText' => 'bids {start}—{end} from {count}.',
                 'columns' => array(
                     array(
-                        'header' => 'Цена',
+                        'header' => 'price',
                         'name' => 'price',
                         'value' => '$data["price"]'
                     ),
                     array(
-                        'header' => 'Дата',
+                        'header' => 'date',
                         'name' => 'created',
                         'value' => 'Yii::app()->dateFormatter->format("dd MMMM yyyy H:mm:ss", $data["created"])'
                     ),
                     array(
-                        'header' => 'Учасник',
+                        'header' => 'user',
                         'name' => 'owner',
                         'type' => 'raw',
                         'value' => 'getLinkUser($data["owner"])'

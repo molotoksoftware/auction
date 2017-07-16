@@ -26,6 +26,15 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+ /*
+ *Удалить выбранные Delete Selected
+ *Вы действительно хотите удалить выбранные элементы Do you really want to delete the selected elements?
+ * Атрибуты Attributes
+ *Вы действительно хотите удалить выбранные вами страницы Do you really want to delete the selected pages?
+ *Показывает что атрибут обязателен для заполнения Make this attribute required
+ *Показывает что атрибут отображается на странице аукционов Indicates this attribute is shown on the listing page
+ *Показывает что атрибут будет отображаться в фильтре Indicates that the attribute will display in the filter
+ */
 
 
 $csrfTokenName = Yii::app()->request->csrfTokenName;
@@ -74,7 +83,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'ajaxUrl' => array('/catalog/attribute/index'),
-    'summaryText' => 'Атрибуты {start}—{end} из <span>{count}</span>.',
+    'summaryText' => 'Attributes {start}—{end} from <span>{count}</span>.',
     'bulkActions' => array(
         'actionButtons' => array(
             array(
@@ -82,9 +91,9 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
                 'buttonType' => 'button',
                 'type' => 'danger',
                 'size' => 'small',
-                'label' => 'Удалить выбранные',
-                'click' => 'js:function(values){if(confirm("Вы действительно хотите удалить выбранные элементы?")){multiDelete(values);} }'
-            //'click' => 'js:bootbox.confirm("<p class=\'lead\'>Вы действительно хотите удалить выбранные вами страницы?</p>",
+                'label' => 'Delete Selected',
+                'click' => 'js:function(values){if(confirm("Do you really want to delete the selected elements?")){multiDelete(values);} }'
+            //'click' => 'js:bootbox.confirm("<p class=\'lead\'>Do you really want to delete the selected pages?</p>",
             //function(value){console.log("Confirmed: "+value);})'
             ),
         ),
@@ -105,7 +114,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
             'sortable' => false,
             'header' => '<i class="icon-info-sign"></i>',
             'headerHtmlOptions' => array(
-                'title' => 'Показывает что атрибут обязателен для заполнения'
+                'title' => 'Make this attribute required'
             ),
             'htmlOptions' => array(
                 'width' => '25px',
@@ -117,7 +126,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
             'type' => 'raw',
             'value' => '$data->getDisplayPreviewAdminTable()',
             'headerHtmlOptions' => array(
-                'title' => 'Показывает что атрибут отображается на странице аукционов'
+                'title' => 'Indicates this attribute is shown on the listing page'
             ),
             'htmlOptions' => array(
                 'width' => '25px',
@@ -129,7 +138,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
             'type' => 'raw',
             'value' => '$data->getDisplayFilterAdminTable()',
             'headerHtmlOptions' => array(
-                'title' => 'Показывает что атрибут будет отображаться в фильтре'
+                'title' => 'Indicates that the attribute will display in the filter'
             ),
             'htmlOptions' => array(
                 'width' => '25px',

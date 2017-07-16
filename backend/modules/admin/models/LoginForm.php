@@ -25,7 +25,12 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+/*
+*Пожалуйста, укажите Ваш логин и пароль please enter username and password
+*Не выходить из системы remain logged in (do not exit the system)
+*Не удается войти login failure
+*Пожалуйста, проверьте правильность написания Please verify your username and password are correct
+*/
 
 
 class LoginForm extends CFormModel
@@ -39,7 +44,7 @@ class LoginForm extends CFormModel
     public function rules()
     {
         return array(
-            array('username, password', 'required', 'message' => 'Пожалуйста, укажите Ваш логин и пароль.'),
+            array('username, password', 'required', 'message' => 'Please enter username and password.'),
             array('rememberMe', 'boolean'),
             array('username, password', 'filter', 'filter' => 'trim'),
             array('password', 'authenticate'),
@@ -49,9 +54,9 @@ class LoginForm extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'rememberMe' => 'Не выходить из системы',
-            'username' => 'Логин',
-            'password' => 'Пароль',
+            'rememberMe' => 'remain logged in',
+            'username' => 'username',
+            'password' => 'password',
         );
     }
 
@@ -60,7 +65,7 @@ class LoginForm extends CFormModel
         if (!$this->hasErrors()) {
             $this->_identity = new UserIdentity($this->username, $this->password);
             if (!$this->_identity->authenticate()) {
-                $this->addError('password', '<b>Не удается войти.</b><br>Пожалуйста, проверьте правильность написания <b>логина</b> и <b>пароля</b>.');
+                $this->addError('password', '<b>Login failure.</b><br> <b>Please verify your username and password are correct.');
             }
         }
     }

@@ -26,49 +26,53 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+/*
+*создания пользователя create user
+*
+*
+*/
  
 return array(
     'postComments' => array(
         'type' => CAuthItem::TYPE_TASK,
-        'description' => '',
+        'description' => 'postComments',
         'bizRule' => null,
         'data' => null,
     ),
     'createUser' => array(
         'type' => CAuthItem::TYPE_OPERATION,
-        'description' => 'создания пользователя',
+        'description' => 'Create User',
         'bizRule' => null,
         'data' => null,
     ),
     'updateUser' => array(
         'type' => CAuthItem::TYPE_OPERATION,
-        'description' => 'обновления пользователя',
+        'description' => 'Update User',
         'bizRule' => null,
         'data' => null,
     ),
     'listUser' => array(
         'type' => CAuthItem::TYPE_OPERATION,
-        'description' => 'просмотреть список пользователей',
+        'description' => 'List Users',
         'bizRule' => null,
         'data' => null,
     ),
     'deleteUser' => array(
         'type' => CAuthItem::TYPE_OPERATION,
-        'description' => 'удалить пользователя',
+        'description' => 'Delete User',
         'bizRule' => null,
         'data' => null,
     ),
-    //запрет на удаение самого себя
+    //запрет на удаение самого себя / restrict the ability to delete yourself
     'editOwnUser' => array(
         'type' => CAuthItem::TYPE_TASK,
-        'description' => 'запрет на удаение самого себя',
+        'description' => 'Edit Own User',
         'bizRule' => 'return Yii::app()->user->id==$params["user"];',
         'data' => null,
     ),
     'managesUser' => array(
         'type' => CAuthItem::TYPE_TASK,
-        'description' => 'Управления пользователями',
+        'description' => 'Manage User',
         'children' => array(
             //'editOwnUser',
             'listUser',
@@ -81,7 +85,7 @@ return array(
     ),
     'user' => array(
         'type' => CAuthItem::TYPE_ROLE,
-        'description' => 'user',
+        'description' => 'User',
         'bizRule' => null,
         'data' => null,
     ),
