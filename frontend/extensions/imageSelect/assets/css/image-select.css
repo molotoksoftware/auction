@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.personal_account_avatar .change_photo{
+    -moz-border-radius:26px;-webkit-border-radius:26px;background-color:#fff;border-radius:26px;height:26px;left:50%;margin:-13px 0 0 -54px;padding:2px 0 0;position:absolute;text-align:center;top:50%;width:108px;z-index:10;
+}
+.personal_account_avatar .change_photo a{border-bottom:1px dotted #598be0;color:#598be0!important;font-size:12px;font-weight:700;text-decoration:none!important;}
+.personal_account_avatar .change_photo a:hover{border-bottom:1px dotted #dd2d00;color:#dd2d00!important;}
+
+.image-select-edit{
+    -moz-border-radius:26px;-webkit-border-radius:26px;background-color:#fff;border-radius:26px;height:26px;left:50%;margin:-13px 0 0 -54px;padding:2px 0 0;position:absolute;text-align:center;top:50%;width:108px;z-index:10;
+
+        /*background-image: url("../images/edit.png");*/
+	display: inline-block;
+	height: 20px;
+}
+
+.image-select-loading {
+	background-image: url(../images/ajax-loader.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	z-index: 999;
+	opacity: 0.5;
+	background-color: #000000;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+}

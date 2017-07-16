@@ -1,0 +1,1 @@
+<?phpclass FixtureGenerator extends CCodeGenerator{    public $codeModel='ext.gii.fixture.FixtureCode';}
