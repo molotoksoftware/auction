@@ -51,7 +51,7 @@ WBBLANG['ru']= CURLANG = {
 	modal_video_text: "Введите URL видео",
 	
 	close: "Закрыть",
-	save: "Сохранить",
+	save: "save",
 	cancel: "Отмена",
 	remove: "Удалить",
 	

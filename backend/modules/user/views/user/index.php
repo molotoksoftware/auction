@@ -27,17 +27,17 @@
  */
 
 
-$this->pageTitle = 'Пользователи';
+$this->pageTitle = 'Members';
 
 $this->header_info = array(
     'icon' => 'icon-user icon-2x',
-    'title' => 'Пользователи',
+    'title' => 'Members',
 );
 
 $this->breadcrumbs = array(
     array(
         'icon' => 'icon-user',
-        'label' => 'Пользователи',
+        'label' => 'Members',
         'url' => array('/user/user/index'),
     ),
     array(
@@ -50,7 +50,7 @@ $this->breadcrumbs = array(
 <div class="container-fluid padded">
     <div class="box">
         <div class="box-header">
-            <span class="title"> Пользователи</span>
+            <span class="title"> Members</span>
             <ul class="box-toolbar">
                 <li><span class="label label-blue"><?= $model->search()->getTotalItemCount(); ?></span></li>
                 <li><a  rel="tooltip" data-original-title="Создать" href="<?php echo Yii::app()->createUrl('/user/user/create'); ?>"><i class="icon-plus"></i></a></li>     

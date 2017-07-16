@@ -333,7 +333,7 @@ SQL;
                                 );
                         }
 
-                        //сохранить выбранные значения save selected values
+                        //save выбранные значения save selected values
                         if (!empty($_POST['options'][0])) {
                             foreach ($_POST['options'][0] as $key => $value) {
                                 //checkbox list
@@ -367,7 +367,7 @@ SQL;
                             }
                         }
 
-                        //сохранить текстовые значения save text values 
+                        //save текстовые значения save text values 
                         if (!empty($_POST['options'][1])) {
                             foreach ($_POST['options'][1] as $key => $value) {
                                 Yii::app()->db->createCommand()

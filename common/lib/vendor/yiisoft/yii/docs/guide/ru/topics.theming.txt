@@ -29,11 +29,11 @@
 Содержимое папки с темами должно быть организовано точно так же, как и содержимое [базовой директории приложения](/doc/guide/basics.application#application-base-directory), то есть, все файлы представлений
 должны находиться в папке `views`, макеты представлений в папке `views/layouts`, а файлы системных представлений
 в папке `views/system`. Например, если необходимо заменить представление `create` контроллера `PostController` на
-представление темы `classic`, нужно сохранить новый файл представления как `WebRoot/themes/classic/views/post/create.php`.
+представление темы `classic`, нужно save новый файл представления как `WebRoot/themes/classic/views/post/create.php`.
 
 Для представлений контроллеров в [модулях](/doc/guide/basics.module), соответствующие файлы оформленных представлений нужно
 также поместить в папку `views`. Например, если упомянутый выше контроллер `PostController` входит в модуль `forum`, необходимо
-сохранить файл представления `create` как `WebRoot/themes/classic/views/forum/post/create.php`. Если модуль `forum` является
+save файл представления `create` как `WebRoot/themes/classic/views/forum/post/create.php`. Если модуль `forum` является
 составной частью другого модуля `support`, то файл представления должен быть сохранен как `WebRoot/themes/classic/views/support/forum/post/create.php`.
 
 > Note|Примечание: Папка `views` может содержать данные чувствительные с точки зрения безопасности, поэтому необходимо

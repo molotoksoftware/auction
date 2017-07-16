@@ -31,7 +31,7 @@
 * Главная is Home
 * Главная is Home
 * Вкладка содержит список часто используемых модулей Frequently Used Modules
-* Пользователи Members List
+* Members Members List
 * Лоты (Lots - auction lots) Listings
 * Страницы Pages
 * Новости News

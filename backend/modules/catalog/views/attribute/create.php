@@ -32,7 +32,7 @@
  *Атрибуты Attributes
  *Создание атрибута Create Attribute
  * Options (line 125)
- *Вернуться Back
+ *back Back
  *Название которое отображается на сайте Listing Title
  *Полное имя  (отображения в админ. части ) Fully Name (displayed in admin site)
  *Должно быть уникальным на всю систему (только латинские символы) This should be unique. No duplicates allowed.
@@ -40,7 +40,7 @@
  *Добавить Upload
  *Удалить Delete
  *Создать submit (line 254)
- *Сохранить и выйти save and exit
+ *save и выйти save and exit
  */
  
 $this->pageTitle = 'Create New Attribute';
@@ -239,7 +239,7 @@ Yii::app()->clientScript
                         <div class="pull-right">
                             <?php
                             echo CHtml::link(
-                                '<span class="icon-circle-arrow-left"></span> Вернуться',
+                                '<span class="icon-circle-arrow-left"></span> back',
                                 '/catalog/attribute/index',
                                 array(
                                     'class' => 'link'

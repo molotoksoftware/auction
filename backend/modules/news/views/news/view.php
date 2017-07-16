@@ -75,7 +75,7 @@ var value = $("#context-comment").val();
 <div class="container-fluid padded">
     <div class="row-fluid">
         <div class="span12">
-            <?php echo CHtml::link('← Вернуться к новостям', array('/news/news/index'), array('class' => 'reply-news')); ?>
+            <?php echo CHtml::link('← back к новостям', array('/news/news/index'), array('class' => 'reply-news')); ?>
             <p><?php echo $model->content; ?></p>
         </div>
     </div><!-- row-fluid-->

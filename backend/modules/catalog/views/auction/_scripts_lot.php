@@ -40,7 +40,7 @@ $script = "
     function changeTransaction(e) {
         var val = $(\"input[name='Auction[type_transaction]']:checked\").val();
         switch(val){
-            case '0'://Стандартный
+            case '0'://Standard
                 $('label[for=\"Auction_starting_price\"]')
                     .html('Начальная цена')
                     .append(' <span class=\"required\">*</span>')
