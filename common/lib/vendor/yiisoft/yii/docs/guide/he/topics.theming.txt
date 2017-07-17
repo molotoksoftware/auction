@@ -103,7 +103,7 @@ return array(
                     'cssFile'=>false,
                 ),
                 'CJuiDatePicker'=>array(
-                    'language'=>'ru',
+                    'language'=>'en',
                 ),
             ),
         ),

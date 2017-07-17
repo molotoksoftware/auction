@@ -32,7 +32,7 @@
  *Атрибуты Attributes
  *Редактирование атрибута
  *Опции options
- *Вернуться back
+ *back back
  *Назва которая отображается на сайте name that will appear on the site
  * Полное имя  (отображения в админ. части ) full name will display in admin site
  *Должно быть уникальным на всю систему (только латинские символы) must be unique

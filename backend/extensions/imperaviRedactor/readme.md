@@ -29,7 +29,7 @@ $this->widget('ImperaviRedactorWidget', array(
 
 	// Some options, see http://imperavi.com/redactor/docs/
 	'options' => array(
-		'lang' => 'ru',
+		'lang' => 'en',
 		'toolbar' => false,
 		'iframe' => true,
 		'css' => 'wym.css',
@@ -54,7 +54,7 @@ The redactor plugins plugged in with packages of resources.
 $this->widget('ImperaviRedactorWidget', array(
 	'selector' => '.redactor',
 	'options' => array(
-		'lang' => 'ru',
+		'lang' => 'en',
 	),
 	'plugins' => array(
 		'fullscreen' => array(

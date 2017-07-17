@@ -160,7 +160,7 @@ return [
 
     'Actions' => 'Действия',
     'Put up for sale?' => 'Выставить на продажу?',
-    'Save' => 'Сохранить',
+    'Save' => 'save',
     'Edit' => 'Редактирование',
     '- select value -' => '- выберите значение',
     '- select category -' => '- выберите категорию',
@@ -297,7 +297,7 @@ return [
     'Update for all lots' => 'Обновить местоположение для всех лотов',
     'Additional tools' => 'Дополнительные инструменты',
     'Additional contact information' => 'Дополнительная контактная информация',
-    'Save change' => 'Сохранить',
+    'Save change' => 'save',
     'Location of items' => 'Местоположение лотов',
     'select a country' => 'выберите страну',
     'select a region' => 'выберите регион',
@@ -490,7 +490,7 @@ return [
     'Showed {start} to {end}. All {count}' => 'Показано с {start} по {end} из {count}',
 
     // News
-    'Back to news feed' => 'Вернуться к новостной ленте',
+    'Back to news feed' => 'back к новостной ленте',
     '' => '',
     '' => '',
     '' => '',

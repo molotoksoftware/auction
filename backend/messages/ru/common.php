@@ -33,11 +33,11 @@ return [
     'reply' => 'назад',
     'Reply' => 'Назад',
     'authorization' => 'Авторизация',
-    'return to the site' => 'Вернуться на сайт',
+    'return to the site' => 'back на сайт',
 
     'Localization' => 'Локализация',
     'PRO settings' => 'Настройки ПРО',
-    'Main settings' => 'Основные настройки',
+    'Main settings' => 'Basic Settings',
     '' => '',
     '' => '',
     '' => '',

@@ -279,7 +279,7 @@ Yii::app()->clientScript
                         <div class="pull-right">
                             <?php
                             echo CHtml::link(
-                                '<span class="icon-circle-arrow-left"></span> Вернуться',
+                                '<span class="icon-circle-arrow-left"></span> back',
                                 '/catalog/attribute/index',
                                 array(
                                     'class' => 'link'

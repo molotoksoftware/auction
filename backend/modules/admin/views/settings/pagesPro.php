@@ -45,7 +45,7 @@ $this->header_info = array(
                     <span class="title"><i class="icon-pencil"></i> <?=$title;?></span>
                     <ul class="nav nav-tabs nav-tabs-right">
                         <li>
-                            <a rel="tooltip" data-original-title="Вернуться"
+                            <a rel="tooltip" data-original-title="back"
                                href="<?= Yii::app()->createUrl('/catalog/auction/index'); ?>"><i class="icon-reply"></i></a>
                         </li>
                     </ul>
@@ -91,7 +91,7 @@ $this->header_info = array(
                         <div class="pull-right">
                             <?php
                             echo CHtml::link(
-                                '<span class="icon-circle-arrow-left"></span> Вернуться',
+                                '<span class="icon-circle-arrow-left"></span> back',
                                 '/main/index',
                                 array(
                                     'class' => 'link'
@@ -103,7 +103,7 @@ $this->header_info = array(
                                 'bootstrap.widgets.TbButton',
                                 array(
                                     'buttonType' => 'submit',
-                                    'label' => 'Сохранить',
+                                    'label' => 'save',
                                     'type' => null,
                                     'htmlOptions' => array(
                                         'class' => 'btn btn-blue',

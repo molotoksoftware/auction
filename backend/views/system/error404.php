@@ -23,9 +23,9 @@
             <div class="row-fluid">
                 <div class="span8 offset2">
                     <div class="error-box">
-                        <div class="message-small">Страница не найдена</div>
+                        <div class="message-small">Page Not Found</div>
                         <div class="message-big">404</div>
-                        <div class="message-small">К сожалению, такой страницы не существует.</div>
+                        <div class="message-small">This page does not exist..</div>
 
                         <div style="margin-top: 50px">
                             <a class="btn btn-blue" href="<?php echo Yii::app()->createUrl(Yii::app()->params['adminUrl']); ?>">

@@ -25,7 +25,7 @@ return array(
         'backend.components.notification.Notification'
     ),
     'sourceLanguage' => 'en',
-    'language' => 'ru',
+    'language' => 'en',
     'preload' => array('bootstrap'),
     'behaviors' => array(),
     'controllerMap' => array(),

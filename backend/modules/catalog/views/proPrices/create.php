@@ -56,7 +56,7 @@ $this->breadcrumbs = array(
                     <span class="title"><i class="icon-plus"></i> Создание </span>
                     <ul class="nav nav-tabs nav-tabs-right">
                         <li>
-                            <a rel="tooltip" data-original-title="Вернуться"
+                            <a rel="tooltip" data-original-title="back"
                                href="<?= Yii::app()->createUrl('/catalog/advertRates/index'); ?>"><i
                                     class="icon-reply"></i></a>
                         </li>
@@ -113,7 +113,7 @@ $this->breadcrumbs = array(
                         <div class="pull-right">
                             <?php
                             echo CHtml::link(
-                                '<span class="icon-circle-arrow-left"></span> Вернуться',
+                                '<span class="icon-circle-arrow-left"></span> back',
                                 '/catalog/advertRates/index',
                                 array(
                                     'class' => 'link'
@@ -141,7 +141,7 @@ $this->breadcrumbs = array(
                                 'bootstrap.widgets.TbButton',
                                 array(
                                     'buttonType' => 'submit',
-                                    'label' => 'Сохранить и выйти',
+                                    'label' => 'save и выйти',
                                     'type' => null,
                                     'htmlOptions' => array(
                                         'class' => 'btn btn-default',

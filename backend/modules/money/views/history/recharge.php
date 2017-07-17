@@ -27,18 +27,18 @@
  */
 
 
-$this->pageTitle = 'История пополнений и списаний';
+$this->pageTitle = 'Account Balances и списаний';
 
 $this->header_info = array(
     'icon' => 'icon-credit-card',
-    'title' => 'История пополнений',
+    'title' => 'Account Balances',
 );
 ?>
 
 <div class="container-fluid padded">
     <div class="box">
         <div class="box-header">
-            <span class="title"> История пополнений (+) и списаний (-) средств с баланса пользователей</span>
+            <span class="title"> Account Balances and History</span>
             <ul class="box-toolbar">
                 <li><span class="label label-blue"><?= $model->searchAdmin()->getTotalItemCount(); ?></span></li>
             </ul>

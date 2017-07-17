@@ -27,12 +27,12 @@
  */
 
 
-$this->pageTitle = 'Пользователи';
+$this->pageTitle = 'Members';
 
 $this->breadcrumbs = array(
     array(
         'icon' => 'icon-user',
-        'label' => 'Пользователи',
+        'label' => 'Members',
         'url' => array('/user/user/index'),
     ),
     array(
@@ -90,7 +90,7 @@ Yii::app()->clientScript->registerScript(
                     <span class="title"><i class="icon-plus"></i> Редактирование</span>
                     <ul class="box-toolbar">
                         <li>
-                            <a rel="tooltip" data-original-title="Вернуться"
+                            <a rel="tooltip" data-original-title="back"
                                href="<?= Yii::app()->createUrl('/user/user/index'); ?>"><i class="icon-reply"></i></a>
                         </li>
                     </ul>
@@ -209,7 +209,7 @@ Yii::app()->clientScript->registerScript(
                                             // 'showAnim'=>'fold',
                                             'dateFormat' => 'dd-mm-yy',
                                         ),
-                                        'language' => 'ru',
+                                        'language' => 'en',
                                         'value' => $date,
                                         'htmlOptions' => array(
                                             'style' => 'width:130px;',
@@ -230,7 +230,7 @@ Yii::app()->clientScript->registerScript(
                         <div class="pull-right">
                             <?php
                             echo CHtml::link(
-                                '<span class="icon-circle-arrow-left"></span> Вернуться',
+                                '<span class="icon-circle-arrow-left"></span> back',
                                 '/admin/user/index',
                                 array(
                                     'class' => 'link'
@@ -242,7 +242,7 @@ Yii::app()->clientScript->registerScript(
                                 'bootstrap.widgets.TbButton',
                                 array(
                                     'buttonType' => 'submit',
-                                    'label' => 'Сохранить',
+                                    'label' => 'save',
                                     'type' => null,
                                     'htmlOptions' => array(
                                         'class' => 'btn btn-blue',

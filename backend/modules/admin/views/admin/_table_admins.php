@@ -76,7 +76,7 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'pagerCssClass' => 'pagination pagination-centered',
-    'summaryText' => 'Администраторы {start}—{end} из {count}.',
+    'summaryText' => 'Administrators {start}—{end} из {count}.',
     'bulkActions' => array(
         'actionButtons' => array(
             array(

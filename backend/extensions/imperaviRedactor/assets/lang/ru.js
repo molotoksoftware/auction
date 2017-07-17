@@ -26,7 +26,7 @@ $.Redactor.opts.langs['ru'] = {
 	indent: 'Увеличить отступ',
 	cancel: 'Отменить',
 	insert: 'Вставить',
-	save: 'Сохранить',
+	save: 'save',
 	_delete: 'Удалить',
 	insert_table: 'Вставить таблицу',
 	insert_row_above: 'Добавить строку сверху',

@@ -459,7 +459,7 @@ $type = get_class($model);
 
                             <div class="controls">
                                 <?php 
-								//Тип аукциона и цена Auction Type and Price, Стандартный Standard, Фиксированная цена fixed price
+								//Тип аукциона и цена Auction Type and Price, Standard Standard, Фиксированная цена fixed price
                                 echo CHtml::activeRadioButtonList(
                                     $model,
                                     'type_transaction',
