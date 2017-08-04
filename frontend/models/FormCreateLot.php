@@ -106,7 +106,7 @@ class FormCreateLot extends CFormModel
         if ($this->type_transaction == Auction::TP_TR_STANDART) {
 
             if (!$this->hasErrors()) {
-                if (((int)$this->starting_price) <= 0 && $this->scenario != 'nomain') {
+                if (((float)$this->starting_price) <= 0 && $this->scenario != 'nomain') {
                     $this->addError('starting_price', Yii::t('basic', 'Specify the starting price'));
                 }
             }

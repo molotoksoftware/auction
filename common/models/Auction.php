@@ -218,7 +218,7 @@ class Auction extends BaseAuction
 
             if (!$this->hasErrors()) {
                 /* Стандартный */
-                if (((int)$this->starting_price) <= 0) {
+                if (((float)$this->starting_price) <= 0) {
                     $this->addError('starting_price', Yii::t('basic', 'Specify the starting price'));
                 }
             }
