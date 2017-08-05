@@ -51,7 +51,7 @@ $this->breadcrumbs = array(
                     <span class="title"><i class="icon-plus"></i> Редактирования</span>
                     <ul class="box-toolbar">
                         <li>                            
-                            <a rel="tooltip" data-original-title="Вернуться>" href="<?= Yii::app()->createUrl('/page/page/index'); ?>"><i class="icon-reply"></i></a>
+                            <a rel="tooltip" data-original-title="back>" href="<?= Yii::app()->createUrl('/page/page/index'); ?>"><i class="icon-reply"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -72,7 +72,7 @@ $this->breadcrumbs = array(
                             ));
                     ?>
                     <div class="padded">
-                        <?php echo CHtml::link('<b>Ссылка на страницу</b>', Yii::app()->params["siteUrl"].'/pages/'.$model->alias,array('target'=>"_blank"));?>
+                        <?php echo CHtml::link('<b>Link to</b>', Yii::app()->params["siteUrl"].'/pages/'.$model->alias,array('target'=>"_blank"));?>
 
                         <?php echo $form->textFieldRow($model, 'title', array('class' => 'span8')); ?>
                         <?php if (!$model->isNewRecord && $model->protected != 1): ?>
@@ -105,14 +105,14 @@ $this->breadcrumbs = array(
                     <div class="form-actions">
                         <div class="pull-right">
                             <?php
-                            echo CHtml::link('<span class="icon-circle-arrow-left"></span> Вернуться', '/page/page/index', array(
+                            echo CHtml::link('<span class="icon-circle-arrow-left"></span> back', '/page/page/index', array(
                                 'class' => 'link'
                             ));
                             ?>
                             <?php
                             $this->widget('bootstrap.widgets.TbButton', array(
                                 'buttonType' => 'submit',
-                                'label' => 'Сохранить',
+                                'label' => 'save',
                                 'type' => null,
                                 'htmlOptions' => array(
                                     'class' => 'btn btn-blue',

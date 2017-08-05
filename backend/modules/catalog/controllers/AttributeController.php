@@ -25,6 +25,17 @@
  * You should have received a copy of the GNU General Public License
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+ /*
+ *Некорректный запрос Invalid Request
+ *Атрибут успешно сохранен Attribute Succesfully Saved
+ *Атрибут успешно создан Attribute Succesfully Created
+ *Ошыбка при удалении Error While Deleting
+ *Атрибут успешно удален Attribute Succesfully Deleted
+ *выберите значения Select Values
+ *Атрибут не существует Attribute Does Not Exist
+ */
+ 
 
 
 class AttributeController extends BackController
@@ -65,9 +76,9 @@ class AttributeController extends BackController
     public function actionToggle($id, $attribute)
     {
         if (!Yii::app()->request->isPostRequest)
-            throw new CHttpException(400, 'Некорректный запрос');
+            throw new CHttpException(400, 'Invalid Request');
         if (!in_array($attribute, array('mandatory')))
-            throw new CHttpException(400, 'Некорректный запрос');
+            throw new CHttpException(400, 'Invalid Request');
 
         $model = $this->_loadModel($id);
         $model->$attribute = $model->$attribute ? 0 : 1;
@@ -109,6 +120,7 @@ class AttributeController extends BackController
      * @param $values array
      * @param $attrId int
      * удалят атрибуты из базы которые были удалены при редактировании
+	 * delete attributes from the database that were deleted during editing
      */
     protected function  deleteDiffValues($values, $attrId, $parentId = null)
     {
@@ -392,7 +404,7 @@ class AttributeController extends BackController
                     );
                 }
 
-                Yii::app()->user->setFlash('success', 'Атрибут успешно сохранен');
+                Yii::app()->user->setFlash('success', 'Attribute Succesfully Saved');
                 $this->redirect(array('/catalog/attribute/index'));
             }
         }
@@ -498,7 +510,7 @@ class AttributeController extends BackController
 
                 }
 
-                Yii::app()->user->setFlash('success', 'Атрибут успешно создан');
+                Yii::app()->user->setFlash('success', 'Attribute Succesfully Created');
                 if ($_POST['submit'] == 'index') {
                     $this->redirect(array('/catalog/attribute/index'));
                 } else {
@@ -525,9 +537,9 @@ class AttributeController extends BackController
     {
         $deleted = $this->loadModel('Attribute', $id)->delete();
         if ($deleted == 0) {
-            RAjax::error(array('messages' => 'Ошыбка при удалении'));
+            RAjax::error(array('messages' => 'Error While Deleting'));
         } else {
-            RAjax::success(array('messages' => 'Атрибут успешно удален'));
+            RAjax::success(array('messages' => 'Attribute Succesfully Deleted'));
         }
     }
 
@@ -537,7 +549,7 @@ class AttributeController extends BackController
             $data = array();
             RAjax::data(
                 array(
-                    'options' => '<option value="">- выберите значения -</option>'
+                    'options' => '<option value="">- Select Values -</option>'
                 )
             );
         }
@@ -551,7 +563,7 @@ class AttributeController extends BackController
 
         if (count($values) > 0) {
             $htmlOptions = array(
-                'empty' => '- выберите значения  -'
+                'empty' => '- Select Values  -'
             );
             $rawData = CHtml::listData($values, 'value_id', 'value');
 
@@ -574,9 +586,9 @@ class AttributeController extends BackController
     {
         if (!$model = Attribute::model()->findByPk($id)) {
             if (Yii::app()->request->isAjaxRequest) {
-                RAjax::error(array('messages' => 'Атрибут не существует'));
+                RAjax::error(array('messages' => 'Attribute Does Not Exist'));
             } else {
-                throw new CHttpException(404, 'Атрибут не существует');
+                throw new CHttpException(404, 'Attribute Does Not Exist');
             }
         }
         return $model;

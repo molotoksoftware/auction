@@ -26,23 +26,28 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+*Редактирование атрибута Editing an Attribute
+*
+*/
 
-$this->pageTitle = "Редактирование атрибута  \" {$model->name}\"";
+
+$this->pageTitle = "Editing an Attribute  \" {$model->name}\"";
 
 $this->breadcrumbs = array(
     array(
         'icon' => 'icon-folder-open',
-        'label' => 'Каталог',
+        'label' => 'Catalog',
         'url' => array('/catalog/category/index'),
     ),
     array(
         'icon' => 'icon-list-alt',
-        'label' => 'Атрибуты',
+        'label' => 'Attributes',
         'url' => array('/catalog/attribute/index'),
     ),
     array(
         'icon' => 'icon-edit',
-        'label' => 'Редактирование атрибута ',
+        'label' => 'edit attribute ',
         'url' => '',
     ),
 );
@@ -199,12 +204,12 @@ Yii::app()->clientScript
 <div class="span12">
 <div class="box">
 <div class="box-header">
-    <span class="title"><i class="icon-edit"></i> Редактирование атрибута  "<?= $model->name; ?>"</span>
+    <span class="title"><i class="icon-edit"></i> Editing an Attribute  "<?= $model->name; ?>"</span>
     <ul class="nav nav-tabs nav-tabs-right">
         <li class="active"><a data-toggle="tab" href="#common"><i class="icon-home"></i></a></li>
-        <li><a data-toggle="tab" href="#options"><i class="icon-cog"></i> <span>Опции</span></a></li>
+        <li><a data-toggle="tab" href="#options"><i class="icon-cog"></i> <span>options</span></a></li>
         <li>
-            <a rel="tooltip" data-original-title="Вернуться"
+            <a rel="tooltip" data-original-title="back"
                href="<?= Yii::app()->createUrl('/catalog/attribute/index'); ?>"><i
                     class="icon-reply"></i></a>
         </li>
@@ -240,7 +245,7 @@ $form = $this->beginWidget(
                 'name',
                 array(
                     'class' => 'span8',
-                    'hint' => 'Назва которая отображается на сайте'
+                    'hint' => 'Name to appear on site'
                 )
             );
             ?>
@@ -250,7 +255,7 @@ $form = $this->beginWidget(
                 'sys_name',
                 array(
                     'class' => 'span8',
-                    'hint' => 'Полное имя  (отображения в админ. части )'
+                    'hint' => 'Full name (will display in admin site)'
                 )
             );
             ?>
@@ -261,7 +266,7 @@ $form = $this->beginWidget(
                 'identifier',
                 array(
                     'class' => 'span8',
-                    'hint' => 'Должно быть уникальным на всю систему (только латинские символы)'
+                    'hint' => 'must be unique'
                 )
             );
             ?>
@@ -291,10 +296,10 @@ $form = $this->beginWidget(
                 <thead>
                 <tr>
                     <td></td>
-                    <td>Значения</td>
+                    <td>Values</td>
                     <td>
-                        <a class="plusOne" href="#"><i class="icon-plus-sign"></i> Добавить</a>
-                        <a class="toggle-show-oll-child" href="#"><i class="icon-chevron-down"></i> <span>Показать все дочерние</span></a>
+                        <a class="plusOne" href="#"><i class="icon-plus-sign"></i> upload</a>
+                        <a class="toggle-show-oll-child" href="#"><i class="icon-chevron-down"></i> <span>show all child objects</span></a>
                     </td>
                 </tr>
                 </thead>
@@ -311,7 +316,7 @@ $form = $this->beginWidget(
                         <div class="childrensBlok">
                             <div class="btn-tools">
                                 <a class="add-child" href="#"><i class="icon-plus-sign"></i>
-                                    Добавить</a>
+                                    add</a>
                             </div>
 
                             <div class="children-container">
@@ -327,7 +332,7 @@ $form = $this->beginWidget(
                     <td class='btn-column'>
                         <a class="btn-toggle-children-block" href="#"><i
                                 class="icon-chevron-down"></i></a>
-                        <a class="deleteRow" href="#"><i class="icon-trash"></i> Удалить</a>
+                        <a class="deleteRow" href="#"><i class="icon-trash"></i> delete</a>
                     </td>
                 </tr>
 
@@ -342,7 +347,7 @@ $form = $this->beginWidget(
                                 <div class="childrensBlok">
                                     <div class="btn-tools">
                                         <a class="add-child" href="#"><i class="icon-plus-sign"></i>
-                                            Добавить</a>
+                                            add</a>
                                     </div>
                                     <div class="children-container">
 
@@ -378,7 +383,7 @@ $form = $this->beginWidget(
                             <td class='btn-column'>
                                 <a class="btn-toggle-children-block" href="#"><i
                                         class="icon-chevron-down"></i></a>
-                                <a class="deleteRow" href="#"><i class="icon-trash"></i> Удалить</a>
+                                <a class="deleteRow" href="#"><i class="icon-trash"></i> delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -395,7 +400,7 @@ $form = $this->beginWidget(
     <div class="pull-right">
         <?php
         echo CHtml::link(
-            '<span class="icon-circle-arrow-left"></span> Вернуться',
+            '<span class="icon-circle-arrow-left"></span> back',
             '/catalog/attribute/index',
             array(
                 'class' => 'link'
@@ -407,7 +412,7 @@ $form = $this->beginWidget(
             'bootstrap.widgets.TbButton',
             array(
                 'buttonType' => 'submit',
-                'label' => 'Сохранить',
+                'label' => 'save',
                 'type' => null,
                 'htmlOptions' => array(
                     'class' => 'btn btn-blue',

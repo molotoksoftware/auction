@@ -39,7 +39,7 @@ class RedactorWidget extends ImperaviRedactorWidget
     {
         parent::__construct();
         $this->options = array(
-            'lang' => 'ru',
+            'lang' => 'en',
             'imageUpload' => Yii::app()->createAbsoluteUrl('/redactor/imageUpload'),
             'imageGetJson' => Yii::app()->createAbsoluteUrl('/redactor/uploadedImages')
         );

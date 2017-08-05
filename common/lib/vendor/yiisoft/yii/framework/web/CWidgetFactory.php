@@ -95,7 +95,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 	 *         'cssFile'=>false,
 	 *     ),
 	 *     'CJuiDatePicker'=>array(
-	 *         'language'=>'ru',
+	 *         'language'=>'en',
 	 *     ),
 	 * )
 	 * </pre>

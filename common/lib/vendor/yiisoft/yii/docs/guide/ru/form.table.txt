@@ -54,7 +54,7 @@ public function actionBatchUpdate()
 <?php endforeach; ?>
 </table>
 
-<?php echo CHtml::submitButton('Сохранить'); ?>
+<?php echo CHtml::submitButton('save'); ?>
 <?php echo CHtml::endForm(); ?>
 </div><!-- form -->
 ~~~

@@ -3,7 +3,7 @@ Molotok - php auction script
 
 Open source php/mysql fully featured auction script. Perfect for those who want to start their own auction site. The version we offer is meant for up to 20,000 users per day and can store up to 10,000,000 items.
 
-# Installation
+# Installation (also reference the Russian directions as they point out some important information) http://molotoksoftware.com/ru/documentation/part/main
 
 ### Step 1. File copying and permissions setting
 Download the file archive on this page and un-zip it to the root directory of the site, another way is to fork a repository from the Github by executing the following command:

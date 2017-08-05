@@ -27,6 +27,15 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+ /*
+ *Некорректный запрос Invalid Request
+ *Категория успешно сохранена Category Succesfully Saved
+ *Категория успешно создана Category Succesfully Created
+ *Ошыбка при удалении Error While Deleting
+ *Категория успешно удалена Category Succesfully Deleted
+ *Выбрание элементы успешно удалены Selected Elements Succesfully Deleted
+ *
+ */
 
 class CategoryController extends BackController
 {
@@ -84,9 +93,9 @@ class CategoryController extends BackController
     public function actionToggle($id, $attribute)
     {
         if (!Yii::app()->request->isPostRequest)
-            throw new CHttpException(400, 'Некорректный запрос');
+            throw new CHttpException(400, 'Invalid Request');
         if (!in_array($attribute, array('type')))
-            throw new CHttpException(400, 'Некорректный запрос');
+            throw new CHttpException(400, 'Invalid Request');
 
         $model = $this->_loadModel($id);
         $model->$attribute = $model->$attribute ? 0 : 1;
@@ -162,7 +171,7 @@ class CategoryController extends BackController
                     }
                 }
 
-                Yii::app()->user->setFlash('success', 'Категория успешно сохранена');
+                Yii::app()->user->setFlash('success', 'Category Succesfully Saved');
                 $this->redirect(array('/catalog/category/index'));
             } else {
                 die("Erorr save");
@@ -196,7 +205,7 @@ class CategoryController extends BackController
                     }
                 }
 
-                Yii::app()->user->setFlash('success', 'Категория успешно создана');
+                Yii::app()->user->setFlash('success', 'Category Succesfully Created');
                 if ($_POST['submit'] == 'index') {
                     $this->redirect(array('/catalog/category/index'));
                 } else {
@@ -214,9 +223,9 @@ class CategoryController extends BackController
     {
         $deleted = $this->loadModel('Category', $id)->deleteNode();
         if ($deleted == 0) {
-            RAjax::error(array('messages' => 'Ошыбка при удалении'));
+            RAjax::error(array('messages' => 'Error While Deleting'));
         } else {
-            RAjax::success(array('messages' => 'Категория успешно удалена'));
+            RAjax::success(array('messages' => 'Category Succesfully Deleted'));
         }
     }
 
@@ -238,7 +247,7 @@ class CategoryController extends BackController
                 RAjax::error(array('messages' => 'Error'));
             }
         }
-        RAjax::success(array('messages' => "Выбрание элементы успешно удалены"));
+        RAjax::success(array('messages' => "Selected Elements Succesfully Deleted"));
     }
 
 }

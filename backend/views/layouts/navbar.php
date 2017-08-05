@@ -26,14 +26,18 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+/**
+* original russian:
+* Панель управления is Control Panel
+* Выйти is Exit
+*/
 
 
 ?>
 <div class="navbar navbar-top navbar-inverse">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" href="<?php echo Yii::app()->createUrl('/main'); ?>">Панель управления</a>
+            <a class="brand" href="<?php echo Yii::app()->createUrl('/main'); ?>">Control Panel</a>
             <ul class="nav pull-right">
                 <li class="toggle-primary-sidebar hidden-desktop" data-toggle="collapse" data-target=".nav-collapse-primary"><a><i class="icon-th-list"></i></a></li>
                 <li class="collapsed hidden-desktop" data-toggle="collapse" data-target=".nav-collapse-top"><a><i class="icon-align-justify"></i></a></li>
@@ -56,7 +60,7 @@
                             </li>
                             <li class="divider"></li>
                             <li><a href="<?php echo Yii::app()->createUrl('/admin/admin/logout'); ?>"><i class="icon-off"></i> 
-                                    <span>Выйти</span>
+                                    <span>Exit</span>
                                 </a>
                             </li>
                         </ul>

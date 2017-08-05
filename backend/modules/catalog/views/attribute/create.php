@@ -26,23 +26,39 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-$this->pageTitle = 'Создание нового атрибута';
+ /*
+ *Создание нового атрибута Create New Attribute
+ *Каталог Catalog
+ *Атрибуты Attributes
+ *Создание атрибута Create Attribute
+ * Options (line 125)
+ *back Back
+ *Название которое отображается на сайте Listing Title
+ *Полное имя  (отображения в админ. части ) Fully Name (displayed in admin site)
+ *Должно быть уникальным на всю систему (только латинские символы) This should be unique. No duplicates allowed.
+ *Значения Values
+ *Добавить Upload
+ *Удалить Delete
+ *Создать submit (line 254)
+ *save и выйти save and exit
+ */
+ 
+$this->pageTitle = 'Create New Attribute';
 
 $this->breadcrumbs = array(
     array(
         'icon' => 'icon-folder-open',
-        'label' => 'Каталог',
+        'label' => 'Catalog',
         'url' => array('/catalog/category/index'),
     ),
     array(
         'icon' => 'icon-list-alt',
-        'label' => 'Атрибуты',
+        'label' => 'Attributes',
         'url' => array('/catalog/attribute/index'),
     ),
     array(
         'icon' => 'icon-plus',
-        'label' => 'Создание атрибута',
+        'label' => 'Create Attribute',
         'url' => '',
     ),
 );
@@ -109,12 +125,12 @@ Yii::app()->clientScript
         <div class="span12">
             <div class="box">
                 <div class="box-header">
-                    <span class="title"><i class="icon-plus"></i> Создание атрибута</span>
+                    <span class="title"><i class="icon-plus"></i> Create Attribute</span>
                     <ul class="nav nav-tabs nav-tabs-right">
                         <li class="active"><a data-toggle="tab" href="#common"><i class="icon-home"></i></a></li>
-                        <li><a data-toggle="tab" href="#options"><i class="icon-cog"></i> <span>Опции</span></a></li>
+                        <li><a data-toggle="tab" href="#options"><i class="icon-cog"></i> <span>Options</span></a></li>
                         <li>
-                            <a rel="tooltip" data-original-title="Вернуться"
+                            <a rel="tooltip" data-original-title="Back"
                                href="<?= Yii::app()->createUrl('/catalog/attribute/index'); ?>"><i
                                     class="icon-reply"></i></a>
                         </li>
@@ -150,7 +166,7 @@ Yii::app()->clientScript
                                     'name',
                                     array(
                                         'class' => 'span8',
-                                        'hint' => 'Название которое отображается на сайте'
+                                        'hint' => 'Listing Title'
                                     )
                                 );
                                 ?>
@@ -160,7 +176,7 @@ Yii::app()->clientScript
                                     'sys_name',
                                     array(
                                         'class' => 'span8',
-                                        'hint' => 'Полное имя  (отображения в админ. части )'
+                                        'hint' => 'Full Name (Displayed in Admin Section)'
                                     )
                                 );
                                 ?>
@@ -170,7 +186,7 @@ Yii::app()->clientScript
                                     'identifier',
                                     array(
                                         'class' => 'span8',
-                                        'hint' => 'Должно быть уникальным на всю систему (только латинские символы)'
+                                        'hint' => 'This should be unique. No duplicates permitted.'
                                     )
                                 );
                                 ?>
@@ -195,9 +211,9 @@ Yii::app()->clientScript
                                     <thead>
                                     <tr>
                                         <td></td>
-                                        <td>Значения</td>
+                                        <td>Values</td>
                                         <td>
-                                            <a class="plusOne" href="#"><i class="icon-plus-sign"></i> Добавить</a>
+                                            <a class="plusOne" href="#"><i class="icon-plus-sign"></i> Upload</a>
                                         </td>
                                     </tr>
                                     </thead>
@@ -208,7 +224,7 @@ Yii::app()->clientScript
                                             <input type="text" class="value" name="sample">
                                         </td>
                                         <td>
-                                            <a class="deleteRow" href="#"><i class="icon-trash"></i> Удалить</a>
+                                            <a class="deleteRow" href="#"><i class="icon-trash"></i> Delete</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -223,7 +239,7 @@ Yii::app()->clientScript
                         <div class="pull-right">
                             <?php
                             echo CHtml::link(
-                                '<span class="icon-circle-arrow-left"></span> Вернуться',
+                                '<span class="icon-circle-arrow-left"></span> back',
                                 '/catalog/attribute/index',
                                 array(
                                     'class' => 'link'
@@ -235,7 +251,7 @@ Yii::app()->clientScript
                                 'bootstrap.widgets.TbButton',
                                 array(
                                     'buttonType' => 'submit',
-                                    'label' => 'Создать',
+                                    'label' => 'submit',
                                     'type' => null,
                                     'htmlOptions' => array(
                                         'class' => 'btn btn-blue',
@@ -251,7 +267,7 @@ Yii::app()->clientScript
                                 'bootstrap.widgets.TbButton',
                                 array(
                                     'buttonType' => 'submit',
-                                    'label' => 'Сохранить и выйти',
+                                    'label' => 'save and exit',
                                     'type' => null,
                                     'htmlOptions' => array(
                                         'class' => 'btn btn-default',

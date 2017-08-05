@@ -27,12 +27,12 @@
  */
 
 
-$this->pageTitle = 'Администраторы';
+$this->pageTitle = 'Administrators';
 
 $this->breadcrumbs = array(
     array(
         'icon' => 'icon-user',
-        'label' => 'Администраторы',
+        'label' => 'Administrators',
         'url' => array('/admin/admin/index'),
     ),
     array(
@@ -53,7 +53,7 @@ $this->breadcrumbs = array(
 
                     <ul class="box-toolbar">
                         <li>
-                            <a rel="tooltip" data-original-title="Вернуться" href="<?= Yii::app()->createUrl('/admin/admin/index'); ?>"><i class="icon-reply"></i></a>
+                            <a rel="tooltip" data-original-title="back" href="<?= Yii::app()->createUrl('/admin/admin/index'); ?>"><i class="icon-reply"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -98,14 +98,14 @@ $this->breadcrumbs = array(
                     <div class="form-actions">
                         <div class="pull-right"> 
                             <?php
-                            echo CHtml::link('<span class="icon-circle-arrow-left"></span> Вернуться', '/admin/admin/index', array(
+                            echo CHtml::link('<span class="icon-circle-arrow-left"></span> back', '/admin/admin/index', array(
                                 'class' => 'link'
                             ));
                             ?>
                             <?php
                             $this->widget('bootstrap.widgets.TbButton', array(
                                 'buttonType' => 'submit',
-                                'label' => 'Сохранить',
+                                'label' => 'save',
                                 'type' => null,
                                 'htmlOptions' => array(
                                     'class' => 'btn btn-blue',

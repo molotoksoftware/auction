@@ -27,20 +27,8 @@
  */
 
 
-
-return [
-    'RUB' => 'р.',
-    'reply' => 'назад',
-    'Reply' => 'Назад',
-    'authorization' => 'Авторизация',
-    'return to the site' => 'back на сайт',
-
-    'Localization' => 'Локализация',
-    'PRO settings' => 'Настройки ПРО',
-    'Main settings' => 'Basic Settings',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-];
+return array(
+    'day|days' => 'day|days|days',
+    '{n} day|{n} days' => '{n} д'{n} day|{n} days',
+    '{n} money|{n} moneys' => '{n} dollar|{n} dollars|{n} dollars',
+);

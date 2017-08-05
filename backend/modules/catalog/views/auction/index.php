@@ -26,22 +26,29 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+*Лоты и объявления Listings and Announcements
+*Лоты и объявления 
+*
+*
+*/
 
-$this->pageTitle = 'Лоты и объявления';
+
+$this->pageTitle = 'Listings and Announcements';
 $this->header_info = array(
     'icon' => 'icon-legal icon-2x',
-    'title' => 'Лоты и объявления',
+    'title' => 'Listings and Announcements',
 );
 
 $this->breadcrumbs = array(
     array(
         'icon' => 'icon-folder-open',
-        'label' => 'Каталог',
+        'label' => 'catalog',
         'url' => array('/catalog/category/index'),
     ),
     array(
         'icon' => 'icon-legal',
-        'label' => 'Лоты и объявления',
+        'label' => 'Listings and Announcements',
         'url' => '',
     ),
 );
@@ -50,7 +57,7 @@ $this->breadcrumbs = array(
 <div class="container-fluid padded">
     <div class="box">
         <div class="box-header">
-            <span class="title">Лоты</span>
+            <span class="title">Listings</span>
         </div>
         <div class="box-content">
             <?php

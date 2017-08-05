@@ -58,7 +58,7 @@ $this->breadcrumbs = array(
                         <li class="active"><a data-toggle="tab" href="#common"><i class="icon-home"></i></a></li>
                         <li><a data-toggle="tab" href="#options"><i class="icon-cog"></i> <span>Параметры</span></a></li>
                         <li>                            
-                            <a rel="tooltip" data-original-title="Вернуться" href="<?= Yii::app()->createUrl('/catalog/category/index'); ?>"><i class="icon-reply"></i></a>
+                            <a rel="tooltip" data-original-title="back" href="<?= Yii::app()->createUrl('/catalog/category/index'); ?>"><i class="icon-reply"></i></a>
                         </li>
 
                     </ul>
@@ -134,14 +134,14 @@ $this->breadcrumbs = array(
                     <div class="form-actions">
                         <div class="pull-right">
                             <?php
-                            echo CHtml::link('<span class="icon-circle-arrow-left"></span> Вернуться', '/catalog/category/index', array(
+                            echo CHtml::link('<span class="icon-circle-arrow-left"></span> back', '/catalog/category/index', array(
                                 'class' => 'link'
                             ));
                             ?>
                             <?php
                             $this->widget('bootstrap.widgets.TbButton', array(
                                 'buttonType' => 'submit',
-                                'label' => 'Сохранить',
+                                'label' => 'save',
                                 'type' => null,
                                 'htmlOptions' => array(
                                     'class' => 'btn btn-blue',

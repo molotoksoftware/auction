@@ -26,7 +26,12 @@
  * along with MolotokSoftware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+/*
+*Удалить выбранные delete selected
+*Вы действительно хотите удалить выбранные элементы Are you sure you want to delete the selected items?
+*Вы действительно хотите удалить выбранные вами страницы Are you sure you want to delete the pages you selected?
+*
+*/
 
 $csrfTokenName = Yii::app()->request->csrfTokenName;
 $csrfToken = Yii::app()->request->csrfToken;
@@ -81,9 +86,9 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
                 'buttonType' => 'button',
                 'type' => 'danger',
                 'size' => 'small',
-                'label' => 'Удалить выбранные',
-                'click' => 'js:function(values){if(confirm("Вы действительно хотите удалить выбранные элементы?")){multiDelete(values);} }'
-            //'click' => 'js:bootbox.confirm("<p class=\'lead\'>Вы действительно хотите удалить выбранные вами страницы?</p>",
+                'label' => 'delete selected',
+                'click' => 'js:function(values){if(confirm("Are you sure you want to delete the selected items?")){multiDelete(values);} }'
+            //'click' => 'js:bootbox.confirm("<p class=\'lead\'>Are you sure you want to delete the pages you selected?</p>",
             //function(value){console.log("Confirmed: "+value);})'
             ),
         ),
@@ -109,26 +114,26 @@ $this->widget('ex-bootstrap.widgets.ETbExtendedGridView', array(
         ),
         /*
         array(
-            'header' => 'Ставки',
+            'header' => 'Number of Bids',
             'filter' => false,
             'name' => 'countBids',
             'value' => '$data->getCountBids()'
         ),*/
         array(
-            'header' => 'Д. созд.',
+            'header' => 'creation date',
             'filter' => false,
             'name' => 'created',
             'value' => '$data->getDateCreated()'
         ),
         array(
-            'header' => 'До завершения',
+            'header' => 'bidding date',
             'filter' => false,
             'type' => 'raw',
             'name' => 'bidding_date',
             'value' => '$data->getDateCompletion()'
         ),
         array(
-            'header' => 'Статус',
+            'header' => 'status',
             'filter' => Auction::getStatusList(),
             'type' => 'raw',
             'name' => 'status',

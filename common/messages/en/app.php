@@ -3,7 +3,7 @@
 /**
  *
  * @author Ivan Teleshun <teleshun.ivan@gmail.com>
- * @link http://www.molotoksoftware.com/
+ * @link http://molotoksoftware.com/
  * @copyright 2016 MolotokSoftware
  * @license GNU General Public License, version 3
  */
@@ -27,20 +27,6 @@
  */
 
 
-
 return [
-    'RUB' => 'р.',
-    'reply' => 'назад',
-    'Reply' => 'Назад',
-    'authorization' => 'Авторизация',
-    'return to the site' => 'back на сайт',
-
-    'Localization' => 'Локализация',
-    'PRO settings' => 'Настройки ПРО',
-    'Main settings' => 'Basic Settings',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'LABEL_RUBLES_NUMBER' => '{n} рубль|{n} рубля|{n} рублей',
 ];

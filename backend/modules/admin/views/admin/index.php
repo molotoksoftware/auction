@@ -27,11 +27,11 @@
  */
 
 
-$this->pageTitle = 'Администраторы';
+$this->pageTitle = 'Administrators';
 
 $this->header_info = array(
     'icon' => 'icon-user icon-2x',
-    'title' => 'Администраторы',
+    'title' => 'Administrators',
     'description' => 'Вкладка содержит информация про администраторов сайта'
 );
 
@@ -39,7 +39,7 @@ $this->header_info = array(
 $this->breadcrumbs = array(
     array(
         'icon' => 'icon-user',
-        'label' => 'Администраторы',
+        'label' => 'Administrators',
         'url' => array('/admin/admin/index'),
     ),
     array(
@@ -52,7 +52,7 @@ $this->breadcrumbs = array(
 <div class="container-fluid padded">
     <div class="box">
         <div class="box-header">
-            <span class="title"> Администраторы</span>
+            <span class="title"> Administrators</span>
             <ul class="box-toolbar">
                 <li><span class="label label-blue"><?= $model->search()->getTotalItemCount(); ?></span></li>
                 <li><a  rel="tooltip" data-original-title="Добавить" href="<?php echo Yii::app()->createUrl('/admin/admin/create'); ?>"><i class="icon-plus"></i></a></li>     

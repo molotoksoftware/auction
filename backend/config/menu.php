@@ -30,14 +30,14 @@
 
 return array(
     array('label' => 'Главная', 'url' => array('/main/index'), 'icon' => 'icon-home icon-2x'),
-    array('label' => 'Администраторы', 'url' => array('/admin/admin/index'), 'icon' => 'icon-group icon-2x'),
-    array('label' => 'Пользователи', 
+    array('label' => 'Administrators', 'url' => array('/admin/admin/index'), 'icon' => 'icon-group icon-2x'),
+    array('label' => 'Members', 
         'url' => array('#user'), 
         'icon' => 'icon-user icon-2x',
         'submenuOptions' => array('class' => 'collapse', 'id' => 'user'),
         'items' => [
             [
-                'label' => 'Пользователи',
+                'label' => 'Members',
                 'url' => array('/user/user/index'),
                 'icon' => 'icon-user',
             ],
@@ -76,7 +76,7 @@ return array(
         'submenuOptions' => array('class' => 'collapse', 'id' => 'monetary_transactions'),
         'items' => array(
             array(
-                'label' => 'История пополнений',
+                'label' => 'Account Balances',
                 'url' => array('/money/history/recharge'),
                 'icon' => 'icon-credit-card',
             ),
