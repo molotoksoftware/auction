@@ -103,7 +103,7 @@ abstract class CCache extends CApplicationComponent implements ICache, ArrayAcce
 	{
 		$value = $this->getValue($this->generateUniqueKey($id));
 		if($value===false || $this->serializer===false)	return $value;
-		if($this->serializer===null) $value=unserialize($value);
+		if($this->serializer===null) $value=unserialize(base64_decode($value));
 		else $value=call_user_func($this->serializer[1], $value);
 		if(is_array($value) && (!$value[1] instanceof ICacheDependency || !$value[1]->getHasChanged()))
 		{
